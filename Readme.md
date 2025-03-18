@@ -8,3 +8,17 @@ constituée et rejoue. Si les images sont différentes, il les repose faces cach
 où elles étaient et c'est au joueur suivant de jouer. La partie est terminée lorsque toutes
 les cartes ont été assemblées par paires.
 </pre>
+
+# Pour le contexte:
+
+Installation
+deroulement d'un tour
+conditions de victoire
+contenu du jeu (enumeration des pieces...)
+decompte des points
+Fonctionnalites -> 
+- Sauvegarde (nb de coups(plus petit/temps), nb parties gagnes, score, etc...) obligatoire aussi!!
+- Singleplayer/multiplayer
+- Grille ou pas(différentes types, tailles et formes de grille)
+- Choisir différentes cartes (fichier)
+- Affichage d'une liste (obligatoire!!)
