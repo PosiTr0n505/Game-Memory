@@ -11,13 +11,13 @@ les cartes ont été assemblées par paires.
 
 # Pour le contexte:
 
-Installation
-deroulement d'un tour
-conditions de victoire
-contenu du jeu (enumeration des pieces...)
-decompte des points
-Fonctionnalites -> 
-- Sauvegarde (nb de coups(plus petit/temps), nb parties gagnes, score, etc...) obligatoire aussi!!
+- Installation
+- Déroulement d'un tour
+- Conditions de victoire
+- Contenu du jeu (énumeration des pieces...)
+- Décompte des points.
+### Fonctionnalites -> 
+- Sauvegarde (nb de coups(plus petit/temps), nb parties gagnés, score, etc...) obligatoire aussi!!
 - Singleplayer/multiplayer
 - Grille ou pas(différentes types, tailles et formes de grille)
 - Choisir différentes cartes (fichier)
