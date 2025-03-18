@@ -1,6 +1,6 @@
 # HELLO
 
-Règles du jeu
+Règles du jeu : \n
 Le memory est un jeu de mémoire visuelle où il faut retrouver les paires identiques.
 Toutes les cartes sont étalées faces cachées.
 Le premier joueur retourne deux cartes. Si les images sont identiques, il gagne la paire
