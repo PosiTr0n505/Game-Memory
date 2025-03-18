@@ -22,3 +22,12 @@ les cartes ont été assemblées par paires.
 - Grille ou pas(différentes types, tailles et formes de grille)
 - Choisir différentes cartes (fichier)
 - Affichage d'une liste (obligatoire!!)
+
+### Pour le 30/03
+- Contexte
+- Règles du jeu
+- Personas
+- User stories
+- Sketches
+- Story board
+- Use cases
