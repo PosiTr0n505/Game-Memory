@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Leaderboard"
+             Title="Leaderboard">
+    <VerticalStackLayout>
+        <Label
+            Text="Memory"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            BackgroundColor="DarkSalmon"
+            FontSize="Header"/>  
+
+        <Label
+            Text="Leaderboard"
+            />
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            >
+            <Label
+                Text="Grid size: "/>
+
+            <Button
+                Text="4x4"/>
+
+            <Button
+                Text="4x5"/>
+
+            <Button
+                Text="4x6"/>
+
+            <Button
+                Text="5x6"/>
+
+            <Button
+                Text="6x6"/>
+
+            <Button
+                Text="6x8"/>
+               
+                
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
