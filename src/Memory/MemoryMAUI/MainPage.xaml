@@ -5,7 +5,7 @@
     
 <ContentPage.Resources>
     <Style TargetType="Button" >
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
     </Style>
 </ContentPage.Resources>
         
@@ -16,6 +16,7 @@
             
             <Label
              Text="Memory"
+             Margin="50"    
              FontSize="50"
              FontAttributes="Bold"
              HorizontalOptions="Center"/>
@@ -28,8 +29,8 @@
             WidthRequest="250">
 
              <Button
-             Text="Singleplayer"
-             SemanticProperties.Hint="Button which creates a game in singleplayer"/>
+                 Text="Singleplayer"
+                 SemanticProperties.Hint="Button which creates a game in singleplayer"/>
 
             <Button
                 Text="2 players"
