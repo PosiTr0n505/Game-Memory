@@ -5,10 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MemoryMAUI"
     Shell.FlyoutBehavior="Disabled"
-    Title="MemoryMAUI">
+    Title="MemoryMAUI"
+    Shell.NavBarIsVisible="False">
 
     <ShellContent
-        Title="Home"
+        Title="Memory"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
