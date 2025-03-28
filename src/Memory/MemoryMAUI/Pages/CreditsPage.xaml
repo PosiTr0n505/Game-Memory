@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:MemoryMAUI.Pages"
+             x:Class="MemoryMAUI.Pages.CreditsPage"
+             Title="CreditsPage">
+
+        <Grid
+            ColumnDefinitions="*,4*,*"
+            RowDefinitions="*,*,*,*,*,*">
+            
+            <Button
+                HeightRequest="80"
+                Padding="30"
+                Margin="30"
+                HorizontalOptions="Start"
+                FontAttributes="Bold"
+                Text=" &lt; -- Back to main page"
+                Grid.Row="0"/>
+
+            <Label
+                 Text="Memory"
+                 VerticalOptions="Center"
+                 FontSize="50"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 Grid.Column="1"
+                 Grid.Row="0"/>
+
+            <Label 
+                HorizontalOptions="Center"
+                FontSize="30"
+                FontAttributes="Bold"
+                Text="Credits"
+                Grid.Column="1"
+                Grid.Row="1"/>
+
+            <Border
+                Stroke="Black"
+                StrokeThickness="2"
+                
+                Grid.Column="1"
+                Grid.Row="2"
+                Grid.RowSpan="3"
+                >
+               
+                
+                <Label
+                    Text="Jeu réalise par notre groupe, composé de : &#10;
+                    HALILOU Sami, JABBOUR Ghassan, PERRIER Mylan &#10;
+                    Crédits vers le/les site(s) ou a potentiellement utilisé les images... &#10;
+                    Références et sources potentielles. "
+                    Margin="10 0 0 0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    />
+            </Border>
+    
+        </Grid>
+
+</ContentPage>
