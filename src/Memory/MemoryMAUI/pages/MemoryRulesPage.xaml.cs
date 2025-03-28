@@ -1,4 +1,4 @@
-namespace MemoryMAUI;
+namespace MemoryMAUI.Pages;
 
 public partial class MemoryRulesPage : ContentPage
 {
