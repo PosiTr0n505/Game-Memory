@@ -3,50 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MemoryMAUI.LeaderboardPage"
              Title="Leaderboard">
-    <VerticalStackLayout>
-        <Label
+
+    <ContentPage.Resources>
+        <Style>
+            
+        </Style>
+    </ContentPage.Resources>
+        <VerticalStackLayout>
+        <Grid
+            Padding="20,40,0,10">
+            <Button
+                Text="Back"
+                BorderColor="Black"
+                BackgroundColor="white"
+                TextColor="Black"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                BorderWidth="2"/>
+
+            <Label
             Text="Memory"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            BackgroundColor="DarkSalmon"
             FontSize="Header"
-            Padding="40 0 0 0 "/>
-
+            />
+        </Grid>
         <Label
             Text="Leaderboard"
-            BackgroundColor="LightSalmon"
             HorizontalOptions="Center"
-            Padding="100 0 50 0"
+            VerticalTextAlignment="Center"
+            Padding="100, 20, 80, 100"
             FontSize="Large"
-            />
+        />
 
         <HorizontalStackLayout
             HorizontalOptions="Center"
+            Spacing="10"
             >
             <Label
                 Text="Grid size: "
-                Padding="6 0 0 0"
+                Padding="0, 6, 0, 0"
                 FontSize="Medium"/>
 
-            <Button
-                Text="4x4"/>
-
-            <Button
-                Text="4x5"/>
-
-            <Button
-                Text="4x6"/>
-
-            <Button
-                Text="5x6"/>
-
-            <Button
-                Text="6x6"/>
-
-            <Button
-                Text="6x8"/>
+            <Button Text="4x4"/>
+            <Button Text="4x5"/>
+            <Button Text="4x6"/>
+            <Button Text="5x6"/>
+            <Button Text="6x6"/>
+            <Button Text="6x8"/>
                
+            
                 
         </HorizontalStackLayout>
+        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="2*, Auto, Auto, 2*" Padding="0, 50, 0, 0">
+
+            <Border StrokeThickness="4" Grid.Row="0" Grid.Column="1">
+                <Label Text="Player"  />
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="2" >
+                <Label Text="Score" />
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="1" >
+                <Label Text="Player 1 " />
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="2">
+                <Label Text="Score player 1"/>
+            </Border>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
