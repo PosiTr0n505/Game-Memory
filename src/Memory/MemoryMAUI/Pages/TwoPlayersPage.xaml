@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:MemoryMAUI.Pages"
+             x:Class="MemoryMAUI.Pages.TwoPlayersPage"
+             Title="TwoPlayersPage">
+    <ContentPage.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
+        </Style>
+        <Style TargetType="Button" x:Key="gridBtn">
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LabelUnderline" >
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+
+        <Grid
+            RowDefinitions="2*,5*,*"
+            ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+            
+            <Label
+             Text="Memory"
+             FontSize="50"
+             FontAttributes="Bold"
+             Grid.Row="0"
+             Grid.ColumnSpan="3"
+             Grid.Column="3"
+             HorizontalOptions="Center"/>
+
+            <VerticalStackLayout
+            Grid.Column="0"
+            Grid.Row="1"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Padding="30,0"
+            Spacing="25"
+            WidthRequest="250">
+
+                <Button
+                 Text="Singleplayer"
+                 SemanticProperties.Hint="Button which creates a game in singleplayer"/>
+
+                <Button
+                Text="2 players"
+                SemanticProperties.Hint="Button which creates a game for 2 players"/>
+
+                <Button
+                Text="Game rules"
+                SemanticProperties.Hint="Button which shows the game rules"/>
+
+                <Button
+                Text="Leaderboard"
+                SemanticProperties.Hint="Button which shows the leaderboard"/>
+
+                <Button
+                Text="Credits"
+                SemanticProperties.Hint="Button which shows the credits of the game"/>
+
+                <Button
+                Text="Quit Game" 
+                SemanticProperties.Hint="Button which leaves the game"
+                HorizontalOptions="Fill" />
+                
+            </VerticalStackLayout>
+            <Border
+                Stroke="#512BD4"
+                Grid.ColumnSpan="5"
+                Grid.Column="3"
+                Grid.Row="1">
+                <Grid
+                    Margin="30"
+                    RowDefinitions="*,*,*,2*,*"
+                    ColumnDefinitions="*,*,*,*,*">
+
+                    <Label Style="{StaticResource LabelUnderline}" 
+                        Grid.Row="0"
+                        VerticalOptions="Center"
+                        Text="Name tag 1 :"/>
+                    <Entry 
+                        WidthRequest="200"
+                        HeightRequest="10"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Column="1"
+                        x:Name="pseudoEntry"
+                        Placeholder="Entrez votre pseudo"/>
+                        <!--  TextChanged="OnTextChanged"/> -->
+                    <Label Style="{StaticResource LabelUnderline}"
+                        VerticalOptions="Center"
+                        Grid.Row="1"
+                        Text="Name tag 2 :"/>
+                    <Entry 
+                        WidthRequest="200"
+                        HeightRequest="10"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Column="1"
+                        Placeholder="Entrez votre pseudo"/>
+                    <!--  TextChanged="OnTextChanged"/>-->
+                    
+                    <Label Style="{StaticResource LabelUnderline}"
+                        VerticalOptions="Center"
+                        Grid.Row="2"
+                        Text="Grid Size :"/>
+                    <FlexLayout
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="4"
+                        AlignItems="Center"
+                        JustifyContent="Center">
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="4x4"></Button>
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="4x5"></Button>
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="4x6"></Button>
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="6x5"></Button>
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="6x6"></Button>
+                        <Button Style="{StaticResource gridBtn}"
+                                Text="6x8"></Button>
+                    </FlexLayout>
+                    <Label Style="{StaticResource LabelUnderline}"
+                        VerticalOptions="Center"
+                        Grid.Row="3"
+                        Text="Themes :"/>
+                    <Button 
+                        HeightRequest="40"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Text="Start Game"
+                        HorizontalOptions="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
