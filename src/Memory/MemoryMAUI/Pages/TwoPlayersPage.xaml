@@ -8,16 +8,24 @@
         <Style TargetType="Button" >
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
         </Style>
-        <Style TargetType="Button" x:Key="gridBtn">
+        <Style TargetType="Button" x:Key="GridBtn">
             <Setter Property="HeightRequest" Value="30"/>
             <Setter Property="WidthRequest" Value="60"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="Button" x:Key="ThemesBtn">
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="WidthRequest" Value="100"/>
+            <Setter Property="Margin" Value="20"/>
+        </Style>
         <Style TargetType="Label" x:Key="LabelUnderline" >
             <Setter Property="TextDecorations" Value="Underline"/>
         </Style>
+        <Style TargetType="Entry">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="10"/>
+        </Style>
     </ContentPage.Resources>
-
 
     <ScrollView>
 
@@ -44,8 +52,8 @@
             WidthRequest="250">
 
                 <Button
-                 Text="Singleplayer"
-                 SemanticProperties.Hint="Button which creates a game in singleplayer"/>
+                 Text="Single player"
+                 SemanticProperties.Hint="Button which creates a game in single player"/>
 
                 <Button
                 Text="2 players"
@@ -84,12 +92,9 @@
                         VerticalOptions="Center"
                         Text="Name tag 1 :"/>
                     <Entry 
-                        WidthRequest="200"
-                        HeightRequest="10"
                         Grid.Row="0"
                         Grid.ColumnSpan="2"
                         Grid.Column="1"
-                        x:Name="pseudoEntry"
                         Placeholder="Entrez votre pseudo"/>
                         <!--  TextChanged="OnTextChanged"/> -->
                     <Label Style="{StaticResource LabelUnderline}"
@@ -97,8 +102,6 @@
                         Grid.Row="1"
                         Text="Name tag 2 :"/>
                     <Entry 
-                        WidthRequest="200"
-                        HeightRequest="10"
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
                         Grid.Column="1"
@@ -115,23 +118,36 @@
                         Grid.ColumnSpan="4"
                         AlignItems="Center"
                         JustifyContent="Center">
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="4x4"></Button>
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="4x5"></Button>
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="4x6"></Button>
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="6x5"></Button>
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="6x6"></Button>
-                        <Button Style="{StaticResource gridBtn}"
+                        <Button Style="{StaticResource GridBtn}"
                                 Text="6x8"></Button>
                     </FlexLayout>
                     <Label Style="{StaticResource LabelUnderline}"
                         VerticalOptions="Center"
                         Grid.Row="3"
                         Text="Themes :"/>
+                    <FlexLayout
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="4"
+                        AlignItems="Center"
+                        JustifyContent="Center">
+                        <Button Style="{StaticResource ThemesBtn}"
+                            Text="Thème 1 :&#x0a; (Image)"></Button>
+                        <Button Style="{StaticResource ThemesBtn}"
+                            Text="Thème 2 :&#x0a; (Image)"></Button>
+                        <Button Style="{StaticResource ThemesBtn}"
+                            Text="Thème 3 :&#x0a; (Image)"></Button>
+                    </FlexLayout>
                     <Button 
                         HeightRequest="40"
                         Grid.Row="4"
