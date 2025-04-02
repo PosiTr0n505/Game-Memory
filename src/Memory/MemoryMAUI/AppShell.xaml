@@ -13,6 +13,12 @@
        ContentTemplate="{DataTemplate pages:CreditsPage}"
        Route="CreditsPage" />
     <ShellContent
+        Title="Memory"
+        ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
+        Route="SingleplayerGamePage" />
+
+    <ShellContent
+        Title="Memory"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
     <ShellContent
