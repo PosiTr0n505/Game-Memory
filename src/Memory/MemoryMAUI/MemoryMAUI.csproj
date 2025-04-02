@@ -83,5 +83,9 @@
 	  <MauiXaml Update="Pages\TwoPlayersPage.xaml">
 		<Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+
+	  <MauiXaml Update="Pages\SingleplayerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

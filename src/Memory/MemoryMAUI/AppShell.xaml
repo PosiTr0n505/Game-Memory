@@ -9,11 +9,17 @@
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
 
+
     <ShellContent
-       ContentTemplate="{DataTemplate pages:CreditsPage}"
-       Route="CreditsPage" />
+        ContentTemplate="{DataTemplate pages:SingleplayerPage}"
+        Route="SingleplayerGamePage" />
+    
     <ShellContent
-        Title="Memory"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"/>
+
+
+    <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
         Route="SingleplayerGamePage" />
 
@@ -22,14 +28,15 @@
         ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
         Route="TwoPlayersGamePage" />
 
-    <ShellContent
-        Title="Memory"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
+    
     <ShellContent
          ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
          Route="TwoPlayersPage" />
-    
+
+    <ShellContent
+       ContentTemplate="{DataTemplate pages:CreditsPage}"
+       Route="CreditsPage" />
+
     <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
         Route="LeaderboardPage" />
