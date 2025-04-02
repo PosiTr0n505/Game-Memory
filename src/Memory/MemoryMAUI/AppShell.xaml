@@ -3,22 +3,24 @@
     x:Class="MemoryMAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MemoryMAUI"
     xmlns:pages="clr-namespace:MemoryMAUI.Pages"
+    xmlns:local="clr-namespace:MemoryMAUI"
     Shell.FlyoutBehavior="Disabled"
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
 
     <ShellContent
-       Title="Credits"
        ContentTemplate="{DataTemplate pages:CreditsPage}"
        Route="CreditsPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"/>
+    <ShellContent
+         ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
+         Route="TwoPlayersPage" />
     
     <ShellContent
-        Title="Memory"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    
- 
+        ContentTemplate="{DataTemplate pages:LeaderboardPage}"
+        Route="LeaderboardPage" />
 
 </Shell>

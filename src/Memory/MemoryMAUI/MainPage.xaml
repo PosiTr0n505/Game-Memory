@@ -1,36 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MemoryMAUI.MainPage">
-    
-<ContentPage.Resources>
-    <Style TargetType="Button" >
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
-    </Style>
-</ContentPage.Resources>
-        
+             xmlns:pages="clr-namespace:MemoryMAUI"
+             x:Class="MemoryMAUI.MainPage"
+             Title="TwoPlayersPage">
+    <ContentPage.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
+        </Style>
+        <Style TargetType="Button" x:Key="GridBtn">
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button" x:Key="ThemesBtn">
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="WidthRequest" Value="100"/>
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LabelUnderline" >
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="10"/>
+        </Style>
+    </ContentPage.Resources>
 
-    <ScrollView>
-        
-        <Grid>
-            
-            <Label
+    <Grid
+            RowDefinitions="2*,5*,*"
+            ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+
+        <Label
              Text="Memory"
-             Margin="50"    
              FontSize="50"
              FontAttributes="Bold"
+             Grid.Row="0"
+             Grid.ColumnSpan="3"
+             Grid.Column="3"
              HorizontalOptions="Center"/>
-            
-            <VerticalStackLayout
+
+        <VerticalStackLayout
+            Grid.Column="0"
+            Grid.Row="1"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Padding="30,0"
             Spacing="25"
             WidthRequest="250">
 
-             <Button
-                 Text="Singleplayer"
-                 SemanticProperties.Hint="Button which creates a game in singleplayer"/>
+            <Button
+                 Text="Single player"
+                 SemanticProperties.Hint="Button which creates a game in single player"/>
 
             <Button
                 Text="2 players"
@@ -52,8 +73,10 @@
                 Text="Quit Game" 
                 SemanticProperties.Hint="Button which leaves the game"
                 HorizontalOptions="Fill" />
-            </VerticalStackLayout>
-        </Grid>
-    </ScrollView>
+
+        </VerticalStackLayout>
+
+
+    </Grid>
 
 </ContentPage>
