@@ -8,16 +8,16 @@
     Shell.FlyoutBehavior="Disabled"
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
-    
-    
+
     <ShellContent
-    Title="Memory"
-    ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
-    Route="TwoPlayersPage" />
-    
-    <ShellContent
-        Title="Memory"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage"/>
+    <ShellContent
+         ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
+         Route="TwoPlayersPage" />
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:LeaderboardPage}"
+        Route="LeaderboardPage" />
 
 </Shell>
