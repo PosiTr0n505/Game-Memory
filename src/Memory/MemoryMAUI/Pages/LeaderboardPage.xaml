@@ -5,7 +5,7 @@
              Title="Leaderboard">
 
     <ContentPage.Resources>
-        <Style>
+        <Style TargetType="Button" x:Key="GridButton">
             
         </Style>
     </ContentPage.Resources>
