@@ -50,8 +50,7 @@
                     HALILOU Sami, JABBOUR Ghassan, PERRIER Mylan &#10;
                     Crédits vers le/les site(s) ou a potentiellement utilisé les images... &#10;
                     Références et sources potentielles. "
-                    Margin="10 0 0 0"
-                    VerticalOptions="Start"
+                    VerticalOptions="Center"
                     HorizontalOptions="Center"
                     />
             </Border>
