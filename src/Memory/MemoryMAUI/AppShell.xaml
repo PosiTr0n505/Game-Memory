@@ -10,6 +10,9 @@
     Shell.NavBarIsVisible="False">
 
     <ShellContent
+       ContentTemplate="{DataTemplate pages:CreditsPage}"
+       Route="CreditsPage" />
+    <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
     <ShellContent
