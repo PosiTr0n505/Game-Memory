@@ -19,6 +19,11 @@
 
     <ShellContent
         Title="Memory"
+        ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
+        Route="TwoPlayersGamePage" />
+
+    <ShellContent
+        Title="Memory"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
     <ShellContent
