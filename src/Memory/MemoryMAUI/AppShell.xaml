@@ -9,10 +9,14 @@
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
 
+
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
 
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:MemoryRulesPage}"
+        Route="MainPage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
@@ -26,7 +30,6 @@
         ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
         Route="TwoPlayersGamePage" />
 
-    
     <ShellContent
          ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
          Route="TwoPlayersPage" />
