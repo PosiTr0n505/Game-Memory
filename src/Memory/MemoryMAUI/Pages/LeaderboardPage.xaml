@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MemoryMAUI.LeaderboardPage"
+             x:Class="MemoryMAUI.Pages.LeaderboardPage"
              Title="Leaderboard">
 
     <ContentPage.Resources>
         <Style TargetType="Button" x:Key="GridButton">
+            <Setter Property="BackgroundColor"  Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
             
+        </Style>
+        <Style TargetType="Border" x:Key="GridBorder">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="White"/>
         </Style>
     </ContentPage.Resources>
         <VerticalStackLayout>
@@ -45,33 +51,35 @@
                 Padding="0, 6, 0, 0"
                 FontSize="Medium"/>
 
-            <Button Text="4x4"/>
-            <Button Text="4x5"/>
-            <Button Text="4x6"/>
-            <Button Text="5x6"/>
-            <Button Text="6x6"/>
-            <Button Text="6x8"/>
+            <Button Text="4x4" Style="{StaticResource GridButton}"/>
+            <Button Text="4x5" Style="{StaticResource GridButton}"/>
+            <Button Text="4x6" Style="{StaticResource GridButton}"/>
+            <Button Text="5x6" Style="{StaticResource GridButton}"/>
+            <Button Text="6x6" Style="{StaticResource GridButton}"/>
+            <Button Text="6x8" Style="{StaticResource GridButton}"/>
                
             
                 
         </HorizontalStackLayout>
-        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="2*, Auto, Auto, 2*" Padding="0, 50, 0, 0">
+        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="2*, *, *, 2*" Padding="0, 50, 0, 0">
 
-            <Border StrokeThickness="4" Grid.Row="0" Grid.Column="1">
-                <Label Text="Player"  />
+            <Border Style="{StaticResource GridBorder}" Grid.Row="0" Grid.Column="1">
+                <Label Text="Player"  HorizontalTextAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="0" Grid.Column="2" >
-                <Label Text="Score" />
+            <Border Style="{StaticResource GridBorder}" Grid.Row="0" Grid.Column="2" >
+                <Label Text="Score" HorizontalTextAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="1" Grid.Column="1" >
-                <Label Text="Player 1 " />
+            <Border Style="{StaticResource GridBorder}" Grid.Row="1" Grid.Column="1" >
+                <Label Text="Player 1" HorizontalTextAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="1" Grid.Column="2">
-                <Label Text="Score player 1"/>
+            <Border Style="{StaticResource GridBorder}" Grid.Row="1" Grid.Column="2">
+                <Label Text="Score player 1" HorizontalTextAlignment="Center"/>
             </Border>
+
+            
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
