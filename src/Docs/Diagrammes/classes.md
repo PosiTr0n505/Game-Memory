@@ -61,8 +61,8 @@ class Game {
 ' Classe GameManager
 class GameManager {
 
-- card1: string
-- card2: string
+- card1: Card
+- card2: Card
 + flipCard(): void
 + startGame(): void
 + isGameFinished(): bool
