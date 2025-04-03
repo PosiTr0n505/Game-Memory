@@ -76,12 +76,6 @@ class ScoreManager {
 + saveScore(): void 
 }
 
-' Classe PlayerManager 
-class PlayerManager{
-
-
-}
-
 ' Classe PartieTwoPlayers héritant de Partie
 class TwoPlayersGame {
     
