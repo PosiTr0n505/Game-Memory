@@ -79,7 +79,6 @@ class ScoreManager {
 ' Classe PartieTwoPlayers héritant de Partie
 class TwoPlayersGame {
     
-- currentPlayer: Player
 + nextTurn(): void
 }
 
