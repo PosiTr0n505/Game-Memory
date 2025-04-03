@@ -54,7 +54,6 @@ class Game {
 + currentPlayer: Player
 - rounds: int
 - remainingCards: int
-+ playRound(): void
 + switchPlayer(): void
 }
 
@@ -66,6 +65,7 @@ class GameManager {
 + flipCard(): void
 + startGame(): void
 + isGameFinished(): bool
++ playRound(): void
 }
 
 ' Classe ScoreManager
