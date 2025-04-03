@@ -53,7 +53,7 @@ class Game {
 - player2: Player
 + currentPlayer: Player
 - rounds: int
-- remainingCards: int
+- remainingCardsCount: int
 + switchPlayer(): void
 }
 
