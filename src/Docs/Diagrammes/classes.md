@@ -51,9 +51,11 @@ class Game {
 - grid: Grid
 - player1: Player
 - player2: Player
-- currentPlayer: Player
-- rounds: unsigned int
++ currentPlayer: Player
+- rounds: int
 - remainingCards: int
++ playRound(): void
++ switchPlayer(): void
 }
 
 ' Classe GameManager
@@ -70,6 +72,12 @@ class ScoreManager {
 + getScore(): int
 + addScore(): void
 + saveScore(): void 
+}
+
+' Classe PlayerManager 
+class PlayerManager{
+
+
 }
 
 ' Classe PartieTwoPlayers héritant de Partie
