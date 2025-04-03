@@ -12,11 +12,11 @@ skinparam classFontName Tahoma
 ' Classe Player
 class Player {
     
-nameTag: string
-currentScore: int
-gamesPlayed: int
-bestScore: int
-movesCount: int
+- nameTag: string
+- currentScore: int
+- gamesPlayed: int
+- bestScore: int
+- movesCount: int
 + updateScore(score: int): void
 + incrementGamesPlayed(): void
 + incrementMoves(): void
@@ -25,7 +25,8 @@ movesCount: int
 ' Classe Score
 class Score {
     
-scoreValue: int+ calculateScore(): int
+scoreValue: int
++ calculateScore(): int
 }
 
 ' Classe Leaderboard
@@ -47,27 +48,40 @@ cards: List<Card>
 ' Classe Partie
 class Game {
     
-grid: Grid
-player1: Player
-player2: Player
-currentPlayer: Player
-rounds: unsigned int
-remainingCards: int
+- grid: Grid
+- player1: Player
+- player2: Player
+- currentPlayer: Player
+- rounds: unsigned int
+- remainingCards: int
+}
+
+' Classe GameManager
+class GameManager {
+
++ switchPlayer(): void
 + startGame(): void
-+ changePlayer(): void
-+ showGameState(): void
-+ checkGameOver(): bool
++ isGameFinished(): bool
+}
+
+' Classe ScoreManager
+class ScoreManager {
+
++ getScore(): int
++ addScore(): void
++ saveScore(): void 
 }
 
 ' Classe PartieTwoPlayers héritant de Partie
 class TwoPlayersGame {
     
-currentPlayer: Player+ nextTurn(): void
+- currentPlayer: Player
++ nextTurn(): void
 }
 
 ' Classe PartieSingleplayer héritant de Partie
 class SinglePlayerGame {
-    + aiPlay(): void
+
 }
 
 ' Classe Grille
@@ -81,10 +95,10 @@ cards: List<Card>
 ' Classe Carte
 class Card {
     
-id: int
-image: string
-isMatched: bool
-isFaceUp: bool
+- id: int
+- image: string
+- isMatched: bool
+- isFaceUp: bool
 + flipCard(): void
 + compareCard(card: Card): bool
 + matchCard(): void
