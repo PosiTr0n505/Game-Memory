@@ -4,7 +4,8 @@
              xmlns:pages="clr-namespace:MemoryMAUI.Pages"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.Pages.TwoPlayersPage"
-             Title="TwoPlayersPage">
+             Title="TwoPlayersPage"
+             BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
     <ContentPage.Resources>
         
     </ContentPage.Resources>

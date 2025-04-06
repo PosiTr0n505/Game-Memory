@@ -4,20 +4,17 @@
              x:Class="MemoryMAUI.Resources.Views.LeadeboardCell">
 
     <ContentView.Resources>
-        <Style TargetType="Button" x:Key="GridButton">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
-        </Style>
         <Style TargetType="Border" x:Key="GridBorder">
             <Setter Property="StrokeThickness" Value="2"/>
             <Setter Property="Stroke" Value="Black"/>
-            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='Black', Light='White'}"/>
+            <Setter Property="MinimumWidthRequest" Value="200"/>
         </Style>
     </ContentView.Resources>
 
     <Border Style="{StaticResource GridBorder}">
         <Label Text="Player" 
                HorizontalTextAlignment="Center"
-               TextColor="Red"
                Padding="10"/>
     </Border>
 
