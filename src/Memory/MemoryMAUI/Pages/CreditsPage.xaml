@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:MemoryMAUI.Pages"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.Pages.CreditsPage"
              Title="CreditsPage">
 
@@ -10,20 +11,15 @@
             RowDefinitions="*,*,*,*,*,*">
             
             <Button
-                HeightRequest="80"
-                Padding="30"
-                Margin="30"
+                HeightRequest="60"
+                WidthRequest="120"
+                Margin="50,0"
                 HorizontalOptions="Start"
                 FontAttributes="Bold"
-                Text=" &lt; -- Back to main page"
+                Text="Cancel"
                 Grid.Row="0"/>
 
-            <Label
-                 Text="Memory"
-                 VerticalOptions="Center"
-                 FontSize="50"
-                 FontAttributes="Bold"
-                 HorizontalOptions="Center"
+            <views:MemoryLabel
                  Grid.Column="1"
                  Grid.Row="0"/>
 
