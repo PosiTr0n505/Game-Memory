@@ -3,23 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.MainPage"
-             Title="TwoPlayersPage">
+             Title="TwoPlayersPage"
+             BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
     <ContentPage.Resources>
-        <Style TargetType="Button" >
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
-        </Style>
-        <Style TargetType="Button" x:Key="GridBtn">
-            <Setter Property="HeightRequest" Value="30"/>
-            <Setter Property="WidthRequest" Value="60"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="Button" x:Key="ThemesBtn">
-            <Setter Property="HeightRequest" Value="100"/>
-            <Setter Property="WidthRequest" Value="100"/>
-            <Setter Property="Margin" Value="20"/>
-        </Style>
-        <Style TargetType="Label" x:Key="LabelUnderline" >
-            <Setter Property="TextDecorations" Value="Underline"/>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
         </Style>
         <Style TargetType="Entry">
             <Setter Property="WidthRequest" Value="200"/>
@@ -46,28 +34,22 @@
             WidthRequest="250">
 
             <Button
-                 Text="Single player"
-                 SemanticProperties.Hint="Button which creates a game in single player"/>
+                 Text="Single player"/>
 
             <Button
-                Text="2 players"
-                SemanticProperties.Hint="Button which creates a game for 2 players"/>
+                Text="2 players"/>
 
             <Button
-                Text="Game rules"
-                SemanticProperties.Hint="Button which shows the game rules"/>
+                Text="Game rules"/>
 
             <Button
-                Text="Leaderboard"
-                SemanticProperties.Hint="Button which shows the leaderboard"/>
+                Text="Leaderboard"/>
 
             <Button
-                Text="Credits"
-                SemanticProperties.Hint="Button which shows the credits of the game"/>
+                Text="Credits"/>
 
             <Button
                 Text="Quit Game" 
-                SemanticProperties.Hint="Button which leaves the game"
                 HorizontalOptions="Fill" />
 
         </VerticalStackLayout>
