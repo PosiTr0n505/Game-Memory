@@ -10,7 +10,7 @@ package "Game Management" {
         +isGameFinished(): bool
         +playRound(): void
     }
-    
+
     class Game {
         -grid: Grid
         -player1: Player
@@ -88,5 +88,12 @@ package "Leaderboard Management" {
     }
 }
 
+' Relations entre les paquets
+"Game Management" ..> "Player Management" : uses
+"Game Management" ..> "Card and Grid Management" : accesses
+"Card and Grid Management" ..> "Leaderboard Management" : uses
+"Player Management" ..> "Leaderboard Management" : accesses
+
 @enduml
+
 ```
