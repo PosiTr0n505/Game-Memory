@@ -58,7 +58,7 @@ class Game {
 }
 
 ' Classe GameManager
-class GameManager {
+class IGameManager {
 
 - card1: Card
 - card2: Card
@@ -69,7 +69,7 @@ class GameManager {
 }
 
 ' Classe ScoreManager
-class ScoreManager {
+class IScoreManager {
 
 + getScore(): int
 + addScore(): void
