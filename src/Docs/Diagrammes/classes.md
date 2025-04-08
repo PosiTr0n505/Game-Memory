@@ -109,13 +109,13 @@ class Card {
 }
 
 ' Relations
-GameManager --> Game
+IGameManager --> Game
 Game --> Player
 Game --> Grid
 TwoPlayersGame -|> Game
 SinglePlayerGame -|> Game
 Grid --> Card
-ScoreManager --> Score
+IScoreManager --> Score
 Leaderboard --> Score
 Player --> Leaderboard
 Game --> Deck
