@@ -127,10 +127,11 @@ IScoreManager  ..|> Score
 Leaderboard --> Score
 Player --> Leaderboard
 Game --> Deck
-Deck --> Card
+Deck *-- Card
 ICardManager ..|> Card
 ICardManager ..|> Deck
 IGridManager ..|> Grid
 IDeckManager ..|> Deck
+
 @enduml
 ```
