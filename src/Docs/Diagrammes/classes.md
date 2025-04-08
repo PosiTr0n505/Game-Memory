@@ -138,7 +138,7 @@ IDeckManager ..|> Deck
 
 ' Cardinalités
 Deck "1" --> "*" Card : "contient"
-Game "1" --> "2" Player : "a"
+Game "1" --> "N" Player : "a"
 Game "1" --> "1" Grid : "contient"
 Grid "1" --> "*" Card : "contient"
 Leaderboard "1" --> "*" Score : "contient"
