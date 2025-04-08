@@ -71,13 +71,13 @@ interface IScoreManager {
     + saveScore(): void 
 }
 
+' Classe PartieSingleplayer héritant de Partie
+class SinglePlayerGame {
+}
+
 ' Classe PartieTwoPlayers héritant de Partie
 class TwoPlayersGame {
     + nextTurn(): void
-}
-
-' Classe PartieSingleplayer héritant de Partie
-class SinglePlayerGame {
 }
 
 ' Classe Grille
