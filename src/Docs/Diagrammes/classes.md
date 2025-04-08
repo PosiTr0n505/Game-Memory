@@ -36,6 +36,7 @@ class Leaderboard {
 
 ' Classe Deck (Paquet de cartes)
 class Deck {
+    - cards: List<Card>
     + initializeDeck(): void
     + shuffleDeck(): void
     + drawCard(): Card
@@ -50,12 +51,13 @@ class Game {
     - rounds: int
     - remainingCardsCount: int
     + switchPlayer(): void
+    + startGame(): void
+    + isGameFinished(): bool
+    + playRound(): void
 }
 
 ' Classe IGameManager
 interface IGameManager {
-    - card1: Card
-    - card2: Card
     + flipCard(): void
     + startGame(): void
     + isGameFinished(): bool
@@ -80,6 +82,7 @@ class SinglePlayerGame {
 
 ' Classe Grille
 class Grid {
+    - cards: List<Card>
     + initializeGrid(): void
     + showGrid(): void
 }
@@ -122,16 +125,22 @@ Game --> Player
 Game --> Grid
 TwoPlayersGame -|> Game
 SinglePlayerGame -|> Game
-Grid *--> "*" Card
+Grid --> Card
 IScoreManager  ..|> Score
 Leaderboard --> Score
 Player --> Leaderboard
 Game --> Deck
-Deck o--> "*" Card
+Deck --> Card
 ICardManager ..|> Card
 ICardManager ..|> Deck
 IGridManager ..|> Grid
 IDeckManager ..|> Deck
 
+' Cardinalités
+Deck "1" --> "*" Card : "contient"
+Game "1" --> "2" Player : "a"
+Game "1" --> "1" Grid : "contient"
+Grid "1" --> "*" Card : "contient"
+Leaderboard "1" --> "*" Score : "contient"
 @enduml
 ```
