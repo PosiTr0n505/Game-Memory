@@ -122,12 +122,12 @@ Game --> Player
 Game --> Grid
 TwoPlayersGame -|> Game
 SinglePlayerGame -|> Game
-Grid --> Card
+Grid *--> "*" Card
 IScoreManager  ..|> Score
 Leaderboard --> Score
 Player --> Leaderboard
 Game --> Deck
-Deck *-- Card
+Deck o--> "*" Card
 ICardManager ..|> Card
 ICardManager ..|> Deck
 IGridManager ..|> Grid
