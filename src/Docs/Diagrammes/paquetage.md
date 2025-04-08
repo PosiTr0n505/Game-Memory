@@ -1,5 +1,13 @@
 ```plantuml
 @startuml
+hide circle
+allowmixing
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #ffffb9
+skinparam classBorderColor #800000
+skinparam classArrowColor #800000
+skinparam classFontColor #black
+skinparam classFontName Tahoma
 
 package "Game Management" {
     class GameManager {
