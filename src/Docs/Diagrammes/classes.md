@@ -57,7 +57,7 @@ class Game {
 + switchPlayer(): void
 }
 
-' Classe GameManager
+' Classe IGameManager
 class IGameManager {
 
 - card1: Card
@@ -68,7 +68,7 @@ class IGameManager {
 + playRound(): void
 }
 
-' Classe ScoreManager
+' Classe IScoreManager
 class IScoreManager {
 
 + getScore(): int
