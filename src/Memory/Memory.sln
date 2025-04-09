@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryMAUI", "MemoryMAUI\MemoryMAUI.csproj", "{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryLib", "MeomoryLib\MemoryLib.csproj", "{D2728CFF-C79D-417C-A490-E4F23FF44C2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryLib", "MemoryLib\MemoryLib.csproj", "{D2728CFF-C79D-417C-A490-E4F23FF44C2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
