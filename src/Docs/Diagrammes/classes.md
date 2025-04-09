@@ -9,139 +9,104 @@ skinparam classArrowColor #800000
 skinparam classFontColor #black
 skinparam classFontName Tahoma
 
-' Classe Player
+' ---------------- CLASSES PRINCIPALES ----------------
+
 class Player {
     - nameTag: string
     - currentScore: int
-    - gamesPlayed: int
-    - bestScore: int
     - movesCount: int
-    + updateScore(score: int): void
-    + incrementGamesPlayed(): void
-    + incrementMoves(): void
 }
 
-' Classe Score
 class Score {
-    scoreValue: int
-    + calculateScore(): int
+	-/ player: Player
+    -/ scoreValue: int
+    - gridSize: int
+    - gamesPlayed: int
 }
 
-' Classe Leaderboard
+
+Score --> Player
+
 class Leaderboard {
-    bestScores: List<Score>
-    + addScore(player: Player, score: Score): void
-    + getTopScores(): List<Score>
+    + addScore(Score: score): void
+    + getTopScores(gridSize: int): List<Score>
 }
 
-' Classe Deck (Paquet de cartes)
-class Deck {
-    - cards: List<Card>
-    + initializeDeck(): void
-    + shuffleDeck(): void
-    + drawCard(): Card
-}
+Leaderboard o-- "0..*" Score : scores
 
-' Classe Partie
 class Game {
-    - grid: Grid
     - player1: Player
     - player2: Player
-    + currentPlayer: Player
+	- grid: Grid
+    +/ currentPlayer: Player
     - rounds: int
     - remainingCardsCount: int
     + switchPlayer(): void
     + startGame(): void
     + isGameFinished(): bool
-    + playRound(): void
 }
 
-' Classe IGameManager
-interface IGameManager {
-    + flipCard(): void
-    + startGame(): void
-    + isGameFinished(): bool
-    + playRound(): void
-}
+Game --> Player : 2
+Game --> Grid
 
-' Classe IScoreManager
-interface IScoreManager {
-    + getScore(): int
-    + addScore(): void
-    + saveScore(): void 
-}
-
-' Classe PartieSingleplayer héritant de Partie
-class SinglePlayerGame {
-}
-
-' Classe PartieTwoPlayers héritant de Partie
-class TwoPlayersGame {
-    + nextTurn(): void
-}
-
-' Classe Grille
 class Grid {
-    - cards: List<Card>
-    + initializeGrid(): void
     + showGrid(): void
 }
 
-' Classe Carte
+Grid --> "0..*" Card : contient
+
 class Card {
     - id: int
-    - image: string
-    - isMatched: bool
-    - isFaceUp: bool
-    + flipCard(): void
-    + compareCard(card: Card): bool
-    + matchCard(): void
-    + unflipCard(): void
+    -/ isFaceUp: bool
 }
 
-' Interface ICardManager
+' ---------------- INTERFACES ----------------
+
+interface IGameManager {
+    + incrementMoves(): void
+    + flipCard(x: int, y: int): void
+    + startGame(): void
+    + isGameFinished(): bool
+	+ updateScore(score: int): void
+    + switchPlayer(): void
+}
+
+interface IScoreManager {
+    + getScore(): int
+    + saveScore(): void 
+    + incrementGamesPlayed(score: Score): void
+    + changeBestScore(score: Score, int): void
+}
+
+interface IGridManager {
+    + initializeGrid(): void
+    + clearGrid(): void
+}
+
 interface ICardManager {
     + flipCard(card: Card): void
+	+ unflipCard(card: Card): void
     + compareCards(card1: Card, card2: Card): bool
     + matchCard(card: Card): void
 }
 
-' Interface IDeckManager
-interface IDeckManager {
-    + initializeDeck(): void
-    + shuffleDeck(): void
-    + drawCard(): Card
-}
+' ---------------- IMPLEMENTATIONS DES MANAGERS ----------------
 
-' Interface IGridManager
-interface IGridManager {
-    + initializeGrid(): void
-    + showGrid(): void
-}
+class GameManagerImpl
+GameManagerImpl ..|> IGameManager
+GameManagerImpl --> Game
 
-' Relations
-IGameManager  ..|> Game
-Game --> Player
-Game --> Grid
-TwoPlayersGame -|> Game
-SinglePlayerGame -|> Game
-Grid --> Card
-IScoreManager  ..|> Score
-Leaderboard --> Score
-Player --> Leaderboard
-Game --> Deck
-Deck --> Card
-```
-ICardManager ..|> Card
-ICardManager ..|> Deck
-IGridManager ..|> Grid
-IDeckManager ..|> Deck
+class ScoreManagerImpl
+ScoreManagerImpl ..|> IScoreManager
+ScoreManagerImpl --> Score
+ScoreManagerImpl --> Leaderboard
 
-' Cardinalités
-Deck "1" --> "*" Card : "contient"
-Game "1" --> "N" Player : "a"
-Game "1" --> "1" Grid : "contient"
-Grid "1" --> "*" Card : "contient"
-Leaderboard "1" --> "*" Score : "contient"
+class GridManagerImpl
+GridManagerImpl ..|> IGridManager
+GridManagerImpl --> Grid
+
+class CardManagerImpl
+CardManagerImpl ..|> ICardManager
+CardManagerImpl --> Card
 @enduml
 ```
