@@ -1,6 +1,6 @@
 ﻿namespace MemoryLib
 {
-    public class Class1
+    public class Game
     {
 
     }
