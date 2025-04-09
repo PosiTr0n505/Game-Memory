@@ -131,6 +131,7 @@ Leaderboard --> Score
 Player --> Leaderboard
 Game --> Deck
 Deck --> Card
+```
 ICardManager ..|> Card
 ICardManager ..|> Deck
 IGridManager ..|> Grid
