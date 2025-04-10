@@ -8,5 +8,8 @@ namespace MemoryLib.Models
 {
     internal class Player
     {
+        private string nameTag;
+        private int currentScore;
+        private int movesCount;
     }
 }

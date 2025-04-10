@@ -8,5 +8,8 @@ namespace MemoryLib.Models
 {
     internal class Card
     {
+        public int Id { get; set; }
+        public bool IsFaceUp { get; set; }
+
     }
 }
