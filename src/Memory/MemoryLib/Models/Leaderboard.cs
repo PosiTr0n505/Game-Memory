@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,19 @@ namespace MemoryLib.Models
         {
             scores.Add(score);
         }
-
-        public List<Score> GetTopScores(int gridSize)
+        
+        public IEnumerable<Score> GetTopScores(int gridSize)
         {
-            return scores
+            return new ReadOnlyCollection<Score>([.. scores
                 .Where(s => s.GridSize == gridSize) //Filtre les scores par GridSize
-                .OrderByDescending(s => s.ScoreValue)//Trie par ScoreValue décroissant
-                .ToList();// Transforme le résultat en liste
+                .OrderByDescending(s => s.ScoreValue)]); // Trie par scores décroissant
+
+        }
+
+        public IEnumerable<Score> GetScores(int gridSize,string playerName = null)
+        {
+            scores.Exists(s => s.Player.nameTag == playerName && s.GridSize == gridSize);
+            return new ReadOnlyCollection<Score>([.. scores]);
         }
     }
 }
