@@ -15,9 +15,15 @@ namespace MemoryLib.Models
             this.GridSize = GridSize;
         }
         public Player Player { get; init; }
-        internal int ScoreValue { get; set; } // internal accessible dans tout le projet
-        internal int GridSize { get; set; }// internal accessible dans tout le projet
-        private int GamesPlayed;
+
+        private int scoreValue;
+        internal int ScoreValue{
+            get => scoreValue;
+            set => this.scoreValue = Math.Max(value, scoreValue);
+        }
+        public int GridSize { get; set; }
+        private int gamesPlayed;
+        public int GamesPlayed { get => gamesPlayed; set => gamesPlayed++; }
 
     }
 }
