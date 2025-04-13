@@ -25,14 +25,14 @@ class Score {
 }
 
 
-Score --> Player
+Score o--> Player
 
 class Leaderboard {
     + addScore(Score: score): void
     + getTopScores(gridSize: int): List<Score>
 }
 
-Leaderboard o-- "0..*" Score : scores
+Leaderboard o--> "0..*" Score : scores
 
 class Game {
     - player1: Player
@@ -53,7 +53,7 @@ class Grid {
     + showGrid(): void
 }
 
-Grid --> "0..*" Card : contient
+Grid o--> "0..*" Card : contient
 
 class Card {
     - id: int
@@ -90,10 +90,20 @@ interface ICardManager {
     + matchCard(card: Card): void
 }
 
+class ISaveManager {
+    + saveGame(game: Game): void
+}
+
+class ILoadManager {
+    + loadGame(): Game
+}
+
 ' ---------------- IMPLEMENTATIONS DES MANAGERS ----------------
 
 class GameManager
 GameManager ..|> IGameManager
+GameManager ..|> ISaveManager
+GameManager ..|> ILoadManager
 GameManager --> Game
 
 class ScoreManager
