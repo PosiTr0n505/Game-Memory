@@ -2,11 +2,11 @@
 {
     public class Game
     {
-        private Player Player1 { get; set; } = new Player();
-        private Player Player2 { get; set; } = new Player();
+        private Player Player1 { get; set; } = new Player("");
+        private Player Player2 { get; set; } = new Player("");
         private Grid Grid { get; set; } = new Grid();
 
-        internal Player CurrentPlayer = null;
+        internal Player? CurrentPlayer = null;
 
         private int Round;
 

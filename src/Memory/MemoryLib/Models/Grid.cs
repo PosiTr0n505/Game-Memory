@@ -7,7 +7,7 @@ using static System.Console;
 
 namespace MemoryLib.Models
 {
-    internal class Grid
+    public class Grid
     {
         private List<Card> cards = new List<Card>();
 

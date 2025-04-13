@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    internal class Score
+    public class Score
     {
         public Score(Player p, int scoreValue, int GridSize) 
         { 

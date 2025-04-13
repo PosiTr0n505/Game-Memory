@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    internal class Leaderboard
+    public class Leaderboard
     {
         private List<Score> scores = new List<Score>();
 
@@ -24,9 +24,9 @@ namespace MemoryLib.Models
 
         }
 
-        public IEnumerable<Score> GetScores(int gridSize,string playerName = null)
+        public IEnumerable<Score> GetScores(int gridSize,string? playerName = null)
         {
-            scores.Exists(s => s.Player.nameTag == playerName && s.GridSize == gridSize);
+            scores.Exists(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
             return new ReadOnlyCollection<Score>([.. scores]);
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    internal class Player
+    public class Player
     {
         public Player(string? name)
         {
