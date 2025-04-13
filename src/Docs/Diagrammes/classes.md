@@ -46,8 +46,8 @@ class Game {
     + isGameFinished(): bool
 }
 
-Game --> Player : 2
-Game --> Grid
+Game o--> Player : 2
+Game *--> Grid
 
 class Grid {
     + showGrid(): void
