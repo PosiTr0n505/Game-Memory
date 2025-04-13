@@ -8,7 +8,13 @@ namespace MemoryLib.Models
 {
     public class Card
     {
-        public int Id { get; set; }
+        public Card(CardType id)
+        {
+            Id = id;
+            IsFaceUp = false;
+        }
+
+        public CardType Id { get; init; }
         public bool IsFaceUp { get; set; }
 
     }

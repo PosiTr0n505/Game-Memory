@@ -2,27 +2,28 @@
 {
     public class Game
     {
-        private Player Player1 { get; set; } = new Player("");
-        private Player Player2 { get; set; } = new Player("");
-        private Grid Grid { get; set; } = new Grid();
+        public Game(Player? player1, Player? player2)
+        {
+            Player1 = player1;
+            Player2 = player2;
+            RemainingCardsCount = 0;
+        }
 
-        internal Player? CurrentPlayer = null;
+        public Player? Player1 { get; init; }
+        public Player? Player2 { get; init; }
 
-        private int Round;
+        public Grid? Grid { get; set; } = new Grid();
+
+        public Player? CurrentPlayer { get; private set; }
+
+        private int Round = 1;
 
         int RemainingCardsCount { get; set; }
 
         public void SwitchPlayer()
         {
-            if (CurrentPlayer == Player1) CurrentPlayer = Player2;
+            if (ReferenceEquals(CurrentPlayer, Player1)) CurrentPlayer = Player2;
             else CurrentPlayer = Player1;
-        }
-
-        public void StartGame()
-        {
-            Round = 1;
-            Grid = new Grid();
-            CurrentPlayer = Player1;
         }
 
         public bool IsGameOver() { return RemainingCardsCount == 0; }
