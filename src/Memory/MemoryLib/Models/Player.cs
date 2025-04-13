@@ -15,7 +15,17 @@ namespace MemoryLib.Models
             this.CurrentScore = 0;
         }
         public string? NameTag { get; init; }
-        private int CurrentScore { get; }
-        private int MovesCount { get; }
+        public int CurrentScore { get; private set; }
+        public int MovesCount { get; private set; }
+
+        public void add1ToScore()
+        {
+            CurrentScore += 1;
+        }
+
+        public void add1ToMovesCount()
+        {
+            MovesCount += 1;
+        }
     }
 }
