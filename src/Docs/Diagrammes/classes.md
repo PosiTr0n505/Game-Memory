@@ -92,21 +92,21 @@ interface ICardManager {
 
 ' ---------------- IMPLEMENTATIONS DES MANAGERS ----------------
 
-class GameManagerImpl
-GameManagerImpl ..|> IGameManager
-GameManagerImpl --> Game
+class GameManager
+GameManager ..|> IGameManager
+GameManager --> Game
 
-class ScoreManagerImpl
-ScoreManagerImpl ..|> IScoreManager
-ScoreManagerImpl --> Score
-ScoreManagerImpl --> Leaderboard
+class ScoreManager
+ScoreManager ..|> IScoreManager
+ScoreManager --> Score
+ScoreManager --> Leaderboard
 
-class GridManagerImpl
-GridManagerImpl ..|> IGridManager
-GridManagerImpl --> Grid
+class GridManager
+GridManager ..|> IGridManager
+GridManager --> Grid
 
-class CardManagerImpl
-CardManagerImpl ..|> ICardManager
-CardManagerImpl --> Card
+class CardManager
+CardManager ..|> ICardManager
+CardManager --> Card
 @enduml
 ```
