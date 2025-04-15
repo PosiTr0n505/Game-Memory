@@ -104,7 +104,7 @@ class GameManager
 GameManager ..|> IGameManager
 GameManager --> ISaveManager
 GameManager --> ILoadManager
-GameManager o--> '-/Game' Game
+GameManager o--> "-/Game" Game
 
 class ScoreManager
 ScoreManager ..|> IScoreManager
