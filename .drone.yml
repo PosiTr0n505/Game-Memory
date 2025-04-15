@@ -12,7 +12,8 @@ steps:
     - name: build
       image: mcr.microsoft.com/dotnet/sdk:8.0
       commands:
-        - cd src
+        - cd src/
+        - cd Memory/
         - dotnet workload restore
         - dotnet restore Memory.sln
         - dotnet build Memory.sln
