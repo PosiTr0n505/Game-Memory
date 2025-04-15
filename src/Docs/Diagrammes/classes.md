@@ -102,9 +102,9 @@ class ILoadManager {
 
 class GameManager
 GameManager ..|> IGameManager
-GameManager ..|> ISaveManager
-GameManager ..|> ILoadManager
-GameManager --> Game
+GameManager --> ISaveManager
+GameManager --> ILoadManager
+GameManager o--> '-/Game' Game
 
 class ScoreManager
 ScoreManager ..|> IScoreManager
