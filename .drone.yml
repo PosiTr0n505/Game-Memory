@@ -4,10 +4,8 @@ name: CI_pipeline
 
 trigger:
   event:
-    - pull_request
+    - push
   branch:
-    include :
-      - master
     exclude :
       - doc*
 
