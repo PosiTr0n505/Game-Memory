@@ -7,7 +7,7 @@ trigger:
     - pull_request
   branch:
     include :
-      - master
+      - 56-CI
     exclude :
       - doc*
 
