@@ -46,3 +46,4 @@ steps:
      #- dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
       - dotnet sonarscanner end /d:sonar.login=$${sonar_token}
     depends_on: [build,tests]
+ 
