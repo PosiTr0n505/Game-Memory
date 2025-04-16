@@ -28,23 +28,23 @@ steps:
       - dotnet test Memory.sln --no-restore
     depends_on: [build]
 
-  - name: code-analysis
+  - name: code-inspection
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet9
-    secrets: [SECRET_SONAR_LOGIN]
-    environment: 
+    secrets: [ SONAR_TOKEN ]
+    settings:
       sonar_host: https://codefirst.iut.uca.fr/sonar/
       sonar_token:
-        from_secrets: SECRET_SONAR_LOGIN
-      project_key: SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory
+        from_secret: SONAR_TOKEN
     commands: 
       - cd src/
       - cd Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
-      - dotnet sonarscanner begin /k:$project_key /d:sonar.host.url=$sonar_host /d:sonar.login=$sonar_token /d:sonar.verbose=true
+      - dotnet sonarscanner begin /k:MyProjectKey /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
       - dotnet build Memory.sln -c Release --no-restore
-      - dotnet test Memory.sln -c Release --no-restore
-     #- dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
-      - dotnet sonarscanner end /d:sonar.login=$${sonar_token}
-    depends_on: [build, tests] 
+      - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
+      - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
+      #- dotnet publish Memory.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+    depends_on: [build, tests]
  
