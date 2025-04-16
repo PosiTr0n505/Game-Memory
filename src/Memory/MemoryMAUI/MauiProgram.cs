@@ -5,6 +5,9 @@ using MemoryMAUI;
 
 public static class MauiProgram
 {
+    static void Main(){
+        return;
+    }
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
