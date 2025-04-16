@@ -10,7 +10,7 @@ trigger:
 
 steps:
   - name: build
-    image: mcr.microsoft.com/dotnet/sdk:8.0
+    image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/
       - cd Memory/
