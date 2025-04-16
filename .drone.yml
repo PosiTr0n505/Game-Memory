@@ -21,7 +21,8 @@ steps:
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:7.0
     commands:
-      - cd Sources/
+      - cd src/
+      - cd Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
       - dotnet test Memory.sln --no-restore
