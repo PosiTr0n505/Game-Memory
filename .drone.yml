@@ -19,7 +19,7 @@ steps:
       - dotnet build Memory.sln -c Release --no-restore
     #- dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
   - name: tests
-    image: mcr.microsoft.com/dotnet/sdk:7.0
+    image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/
       - cd Memory/
