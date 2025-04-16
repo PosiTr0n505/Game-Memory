@@ -38,6 +38,7 @@ steps:
       project_key: SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory
     commands: 
       - cd src/
+      - cd Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
       - dotnet sonarscanner begin /k:$project_key /d:sonar.host.url=$sonar_host /d:sonar.login=$sonar_token /d:sonar.verbose=true
