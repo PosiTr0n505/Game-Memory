@@ -64,4 +64,10 @@ steps:
         path: /Documentation
     commands:
       - /entrypoint.sh
+      when:
+        branch:
+          - master
+        event:
+          - pull_request
+      depends_on: [build,tests]
  
