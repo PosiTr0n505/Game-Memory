@@ -3,18 +3,18 @@ type: docker
 name: CI_pipeline
 
 trigger:
-    event:
-        - push
-    branch:
-        - 56-CI
+  event:
+    - push
+  branch:
+    - 56-CI
 
 steps:
-    - name: build
-      image: mcr.microsoft.com/dotnet/sdk:8.0
-      commands:
-        - cd src/
-        - cd Memory/
-        - dotnet workload restore
-        - dotnet restore Memory.sln
-        - dotnet build Memory.sln -c Release --no-restore
-        - dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+  - name: build
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    commands:
+      - cd src/
+      - cd Memory/
+      - dotnet workload restore
+      - dotnet restore Memory.sln
+      - dotnet build Memory.sln -c Release --no-restore
+      - dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
