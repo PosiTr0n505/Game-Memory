@@ -24,7 +24,7 @@ steps:
 
     
   - name: tests
-    image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dotnet9-maui:latest
+    image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/
       - cd Memory/
