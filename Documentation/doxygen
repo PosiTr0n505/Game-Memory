@@ -2,11 +2,11 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "My Project"
+PROJECT_NAME           = "Memory"
 PROJECT_NUMBER         = 1.0.0
-PROJECT_BRIEF          = "A brief description of your project"
+PROJECT_BRIEF          = "Memory Game"
 PROJECT_LOGO           = images/mylogo.png
-OUTPUT_DIRECTORY       = /docs/doxygen
+OUTPUT_DIRECTORY       = /Documentation/doxygen
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
@@ -125,7 +125,7 @@ WARN_LOGFILE           =
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
 
-INPUT                  = ../../Sources
+INPUT                  = ../../src
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                         *.cc \
