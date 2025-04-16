@@ -57,4 +57,13 @@ steps:
       #- dotnet publish Memory.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     depends_on: [build, tests]
+
+  - name: generate-and-deploy-docs
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+    failure: ignore
+    volumes:
+      - name: docs
+        path: /docs
+    commands:
+      - /entrypoint.sh
  
