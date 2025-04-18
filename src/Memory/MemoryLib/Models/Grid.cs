@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Console;
+﻿using static System.Console;
 
 namespace MemoryLib.Models
 {
@@ -26,7 +21,7 @@ namespace MemoryLib.Models
             WriteLine("Current grid:");
             foreach (var card in cards)
             {
-                WriteLine($"Card ID: {card.Id}, FaceUp: {card.IsFaceUp}");
+                Console.WriteLine($"Card ID: {card.Id}, FaceUp: {card.IsFaceUp}");
             }
         }
         public void Clear()
