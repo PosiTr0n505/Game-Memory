@@ -8,7 +8,7 @@ namespace MemoryLib.Models
 {
     public class Card
     {
-        public Card(CardType id)
+        public Card(CardType id, Card c)
         {
             Id = id;
             IsFaceUp = false;
