@@ -8,11 +8,11 @@ namespace MemoryLib.Models
 {
     public enum GridSize
     {
-        g4x4,
-        g4x5, 
-        g4x6, 
-        g6x5, 
-        g6x7, 
-        g6x8
+        Size1,
+        Size2,
+        Size3,
+        Size4,
+        Size5,
+        Size6
     }
 }
