@@ -21,10 +21,15 @@ namespace MemoryLib.Models
 
         }
 
-        public IEnumerable<Score> GetScores(GridSize gridSize,string? playerName = null)
+        public IEnumerable<Score> GetScores(string? playerName, GridSize? gridSize = null)
         {
-            scores.Exists(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
-            return new ReadOnlyCollection<Score>([.. scores]);
+            if (string.IsNullOrWhiteSpace(playerName))
+                throw new ArgumentException("the playerName provided is not valid");
+
+            if (scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
+                return scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
+
+            return scores.Where(s => s.Player.NameTag == playerName);
         }
     }
 }
