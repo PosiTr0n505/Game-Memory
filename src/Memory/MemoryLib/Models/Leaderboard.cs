@@ -13,7 +13,7 @@ namespace MemoryLib.Models
             scores.Add(score);
         }
         
-        public IEnumerable<Score> GetTopScores(int gridSize)
+        public IEnumerable<Score> GetTopScores(GridSize gridSize)
         {
             return new ReadOnlyCollection<Score>([.. scores
                 .Where(s => s.GridSize == gridSize) //Filtre les scores par GridSize
@@ -21,7 +21,7 @@ namespace MemoryLib.Models
 
         }
 
-        public IEnumerable<Score> GetScores(int gridSize,string? playerName = null)
+        public IEnumerable<Score> GetScores(GridSize gridSize,string? playerName = null)
         {
             scores.Exists(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
             return new ReadOnlyCollection<Score>([.. scores]);
