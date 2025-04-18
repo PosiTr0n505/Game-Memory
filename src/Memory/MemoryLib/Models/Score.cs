@@ -8,11 +8,11 @@ namespace MemoryLib.Models
 {
     public class Score
     {
-        public Score(Player p, int scoreValue, int GridSize) 
+        public Score(Player p, int scoreValue, GridSize gs) 
         { 
             this.Player = p;
             this.ScoreValue = scoreValue;
-            this.GridSize = GridSize;
+            this.GridSize = gs;
         }
         public Player Player { get; init; }
 
@@ -21,7 +21,7 @@ namespace MemoryLib.Models
             get => scoreValue;
             set => this.scoreValue = Math.Max(value, scoreValue);
         }
-        public int GridSize { get; set; }
+        public GridSize GridSize { get; set; }
         private int gamesPlayed;
         public int GamesPlayed { get => gamesPlayed; set => gamesPlayed++; }
 
