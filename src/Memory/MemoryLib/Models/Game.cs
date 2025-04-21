@@ -8,7 +8,7 @@
 
         public Grid? Grid { get; set; } = new Grid();
 
-        private readonly int Round = 1;
+        private int Round = 1;
 
         int RemainingCardsCount { get; set; }
 

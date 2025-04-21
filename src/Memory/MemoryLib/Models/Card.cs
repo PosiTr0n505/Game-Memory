@@ -8,6 +8,13 @@ namespace MemoryLib.Models
 {
     public class Card
     {
+        private CardType a;
+
+        public Card(CardType a)
+        {
+            this.a = a;
+        }
+
         public Card(CardType id, Card c)
         {
             Id = id;

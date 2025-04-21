@@ -8,10 +8,10 @@ namespace MemoryLib.Models
 {
     public enum CardType
     {
-        a,
-        b,
-        c,
-        d,
-        e,
+        A,
+        B,
+        C,
+        D,
+        E,
     }
 }
