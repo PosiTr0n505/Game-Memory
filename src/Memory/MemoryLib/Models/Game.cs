@@ -4,7 +4,7 @@
     {
         public Player? Player1 { get; }
         public Player? Player2 { get; }
-        public Player? CurrentPlayer { get; set; }
+        public Player? CurrentPlayer { get; private set; }
 
         public Grid? Grid { get; set; } = new Grid();
 
@@ -22,10 +22,13 @@
 
         public void SwitchPlayer()
         {
-            if (CurrentPlayer == Player1) { CurrentPlayer = Player2; }
-            else { CurrentPlayer = Player1; }
+            if (CurrentPlayer == Player1) 
+                CurrentPlayer = Player2;
+
+            else 
+                CurrentPlayer = Player1; 
         }
 
-        public bool IsGameOver() { return RemainingCardsCount == 0; }
+        public bool IsGameOver() => RemainingCardsCount == 0;
     }
 }
