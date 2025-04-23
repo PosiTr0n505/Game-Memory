@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MemoryLib.Models;
+﻿using MemoryLib.Models;
 
 namespace Tests
 {
@@ -13,12 +8,60 @@ namespace Tests
         public void Add_A_Score_Into_The_Leaderboard_And_Check_If_It_Exists()
         {
             Leaderboard l = new();
-            Player p = new("");
+            Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
             l.AddScore(s);
 
-            Assert.Contains(s, l.GetScores(null, GridSize.Size6));
+            Assert.Contains(s, l.GetScores(GridSize.Size6));
+        }
+
+        [Fact]
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name()
+        {
+            Leaderboard l = new();
+            Player p = new("Test");
+            Score s = new(p, p.CurrentScore, GridSize.Size6);
+
+            l.AddScore(s);
+
+            Assert.Contains(s, l.GetScores("Test"));
+        }
+
+        [Fact]
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_GridSize()
+        {
+            Leaderboard l = new();
+            Player p = new("Test");
+            Score s = new(p, p.CurrentScore, GridSize.Size6);
+
+            l.AddScore(s);
+
+            Assert.Contains(s, l.GetScores("Test", GridSize.Size6));
+        }
+
+        [Fact]
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_Wrong_GridSize()
+        {
+            Leaderboard l = new();
+            Player p = new("Test");
+            Score s = new(p, p.CurrentScore, GridSize.Size6);
+
+            l.AddScore(s);
+
+            Assert.DoesNotContain(s, l.GetScores("Test", GridSize.Size4));
+        }
+
+        [Fact]
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Wrong_Name()
+        {
+            Leaderboard l = new();
+            Player p = new("Test");
+            Score s = new(p, p.CurrentScore, GridSize.Size6);
+
+            l.AddScore(s);
+
+            Assert.DoesNotContain(s, l.GetScores("qsdqdfhd"));
         }
     }
 }

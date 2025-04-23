@@ -13,7 +13,7 @@ namespace MemoryLib.Models
             scores.Add(score);
         }
         
-        public IEnumerable<Score> GetTopScores(GridSize gridSize)
+        public IEnumerable<Score> GetScores(GridSize gridSize)
         {
             return new ReadOnlyCollection<Score>([.. scores
                 .Where(s => s.GridSize == gridSize) //Filtre les scores par GridSize
@@ -21,7 +21,7 @@ namespace MemoryLib.Models
 
         }
 
-        public IEnumerable<Score> GetScores(string? playerName, GridSize? gridSize = null)
+        public IEnumerable<Score> GetScores(string playerName, GridSize? gridSize = null)
         {
             if (string.IsNullOrWhiteSpace(playerName))
                 throw new ArgumentException("the playerName provided is not valid");
