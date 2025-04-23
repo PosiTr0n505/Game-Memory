@@ -6,18 +6,20 @@
         public Player? Player2 { get; }
         public Player? CurrentPlayer { get; private set; }
 
-        public Grid? Grid { get; set; } = new Grid();
+        public Grid? Grid { get; set; }
 
         private int Round = 1;
 
-        int RemainingCardsCount { get; set; }
+        public int RemainingCardsCount { get; set; }
 
-        public Game(Player? player1, Player? player2)
+        public Game(Player? player1, Player? player2, byte x, byte y)
         {
             Player1 = player1;
             Player2 = player2;
+            Grid = new Grid(x, y);
             RemainingCardsCount = 0;
             CurrentPlayer = player1;
+            RemainingCardsCount = x * y;
         }
 
         public void SwitchPlayer()

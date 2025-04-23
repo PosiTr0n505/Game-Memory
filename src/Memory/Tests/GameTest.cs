@@ -9,11 +9,9 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2);
-            game.CurrentPlayer = player1;
+            Game? game = new(player1, player2, 2, 2);
             game.SwitchPlayer();
             Assert.Equal(player2, game.CurrentPlayer);
-            Console.WriteLine("Player 2 is the current player");
         }
 
         [Fact]
@@ -21,11 +19,10 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2);
-            game.CurrentPlayer = player2;
+            Game? game = new(player1, player2, 2, 2);
+            game.SwitchPlayer();
             game.SwitchPlayer();
             Assert.Equal(player1, game.CurrentPlayer);
-            Console.WriteLine("Player 1 is the current player");
         }
 
         [Fact]
@@ -33,10 +30,9 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2);
-            game.CurrentPlayer = player2;
+            Game? game = new(player1, player2, 2, 2);
+
             Assert.True(game.IsGameOver());
-            Console.WriteLine("Game is over");
         }
 
         [Fact]
@@ -44,10 +40,12 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2);
-            game.CurrentPlayer = player2;
+            Game? game = new(player1, player2, 2, 2);
+
+            if (game.Grid != null)
+                game.Grid.AddCard(new Card(CardType.A), 0, 0);
+
             Assert.False(game.IsGameOver());
-            Console.WriteLine("Game is not over");
         }
     }
 }
