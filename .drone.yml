@@ -19,7 +19,7 @@ steps:
       - dotnet sln MemoryMAUIsln.sln add MemoryMAUI/MemoryMAUI.csproj 
       - dotnet restore MemoryMAUIsln.sln
       - dotnet build MemoryMAUIsln.sln -c Release --no-restore /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT -property:Aapt2ToolPath=$ANDROID_SDK_ROOT/build-tools/33.0.0
-      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android /p:AndroidSdkDirectory=/usr/lib/android-sdk
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net8.0-android /p:AndroidSdkDirectory=/usr/lib/android-sdk
 
   - name: build_dotnet_lib
     image: mcr.microsoft.com/dotnet/sdk:9.0
@@ -27,21 +27,21 @@ steps:
       - cd src/Memory/
       - dotnet workload restore
       - dotnet new sln --name MemoryDotnet
-      - dotnet sln MemoryDotnet.sln add MemoryLib/MemoryLib.csproj
-      - dotnet restore MemoryDotnet.sln
-      - dotnet build MemoryDotnet.sln -c Release --no-restore
-      - dotnet publish MemoryDotnet.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+      - dotnet sln MemoryDotnetLib.sln add MemoryLib/MemoryLib.csproj
+      - dotnet restore MemoryDotnetLib.sln
+      - dotnet build MemoryDotnetLib.sln -c Release --no-restore
+      - dotnet publish MemoryDotnetLib.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
 
   - name: build_dotnet_console
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
       - dotnet workload restore
-      - dotnet new sln --name MemoryDotnet
-      - dotnet sln MemoryDotnet.sln add MemoryConsole/MemoryConsole.csproj 
-      - dotnet restore MemoryDotnet.sln
-      - dotnet build MemoryDotnet.sln -c Release --no-restore
-      - dotnet publish MemoryDotnet.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+      - dotnet new sln --name MemoryDotnetConsole
+      - dotnet sln MemoryDotnetConsole.sln add MemoryConsole/MemoryConsole.csproj 
+      - dotnet restore MemoryDotnetConsole.sln
+      - dotnet build MemoryDotnetConsole.sln -c Release --no-restore
+      - dotnet publish MemoryDotnetConsole.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
 
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:9.0
