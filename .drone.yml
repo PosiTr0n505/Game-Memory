@@ -26,7 +26,7 @@ steps:
     commands:
       - cd src/Memory/
       - dotnet workload restore
-      - dotnet new sln --name MemoryDotnet
+      - dotnet new sln --name MemoryDotnetLib
       - dotnet sln MemoryDotnetLib.sln add MemoryLib/MemoryLib.csproj
       - dotnet restore MemoryDotnetLib.sln
       - dotnet build MemoryDotnetLib.sln -c Release --no-restore
