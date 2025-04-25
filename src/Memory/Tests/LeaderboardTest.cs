@@ -5,7 +5,7 @@ namespace Tests
     public class LeaderboardTest
     {
         [Fact]
-        public void Add_A_Score_Into_The_Leaderboard_And_Check_If_It_Exists()
+        public void Add_A_Score_Into_The_Leaderboard_And_Check_If_It_Exists_GetScores()
         {
             Leaderboard l = new();
             Player p = new("Test");
@@ -17,7 +17,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name()
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_GetScores()
         {
             Leaderboard l = new();
             Player p = new("Test");
@@ -29,7 +29,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_GridSize()
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_GridSize_GetScores()
         {
             Leaderboard l = new();
             Player p = new("Test");
@@ -41,7 +41,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_Wrong_GridSize()
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_Wrong_GridSize_GetScores()
         {
             Leaderboard l = new();
             Player p = new("Test");
@@ -53,7 +53,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Add_A_Score_Into_The_Leaderboard_Search_With_Wrong_Name()
+        public void Add_A_Score_Into_The_Leaderboard_Search_With_Wrong_Name_GetScores()
         {
             Leaderboard l = new();
             Player p = new("Test");
