@@ -50,7 +50,7 @@ steps:
       - dotnet workload restore
       - dotnet restore Memory.sln
       - dotnet test Memory.sln --no-restore
-    depends_on: [buildMAUI, build_dotnet]
+    depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib]
 
   - name: code-inspection
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet9-maui
@@ -70,7 +70,7 @@ steps:
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
       - dotnet publish Memory.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
-    depends_on: [build, tests]
+    depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
 
   - name: generate-and-deploy-docs
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
@@ -83,5 +83,5 @@ steps:
     when:
       event:
         - pull_request
-    depends_on: [build,tests]
+    depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
  
