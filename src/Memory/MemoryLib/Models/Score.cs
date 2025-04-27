@@ -8,7 +8,7 @@ namespace MemoryLib.Models
 {
     public sealed class Score : IEquatable<Score>
     {
-        public Score(Player p, int scoreValue, int gp, GridSize gs) 
+        public Score(Player p, int scoreValue, GridSize gs, int gp = 0) 
         { 
             this.Player = p;
             this.ScoreValue = scoreValue;
@@ -24,7 +24,7 @@ namespace MemoryLib.Models
             set => this.scoreValue = Math.Max(value, scoreValue);
         }
         public GridSize GridSize { get; set; }
-        private int gamesPlayed;
+
         public int GamesPlayed { get; private set; }
 
         public int AddGamePlayed() => GamesPlayed++;
