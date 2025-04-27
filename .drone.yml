@@ -4,7 +4,7 @@ name: CI_pipeline
 
 trigger:
   event:
-    - push
+    - pull_request
   branch:
     exclude :
       - doc*
@@ -48,7 +48,7 @@ steps:
     commands:
       - cd src/Memory/
       - dotnet workload restore
-      - dotnet new sln --name DotnetTests
+      - dotnet new sln --name MemoryTests
       - dotnet sln MemoryTests.sln add Tests/Tests.csproj
       - dotnet restore MemoryTests.sln
       - dotnet test MemoryTests.sln --no-restore
@@ -85,5 +85,7 @@ steps:
     when:
       event:
         - pull_request
+      branch:
+        - master
     depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
  
