@@ -4,7 +4,7 @@ name: CI_pipeline
 
 trigger:
   event:
-    - push
+    - pull_request
   branch:
     exclude :
       - doc*
@@ -25,7 +25,6 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
-      - dotnet workload restore
       - dotnet new sln --name MemoryDotnetLib
       - dotnet sln MemoryDotnetLib.sln add MemoryLib/MemoryLib.csproj
       - dotnet restore MemoryDotnetLib.sln
@@ -36,7 +35,6 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
-      - dotnet workload restore
       - dotnet new sln --name MemoryDotnetConsole
       - dotnet sln MemoryDotnetConsole.sln add MemoryConsole/MemoryConsole.csproj 
       - dotnet restore MemoryDotnetConsole.sln
@@ -47,8 +45,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
-      - dotnet workload restore
-      - dotnet new sln --name DotnetTests
+      - dotnet new sln --name MemoryTests
       - dotnet sln MemoryTests.sln add Tests/Tests.csproj
       - dotnet restore MemoryTests.sln
       - dotnet test MemoryTests.sln --no-restore
@@ -58,19 +55,21 @@ steps:
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet9-maui
     secrets: [ SONAR_TOKEN ]
     settings:
+      project_key: MemoryDotnet
       sonar_host: https://codefirst.iut.uca.fr/sonar/
       sonar_token:
         from_secret: SONAR_TOKEN
     commands: 
-      - cd src/
-      - cd Memory/
+      - cd src/Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
-      - dotnet sonarscanner begin /k:MyProjectKey /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      - dotnet sonarscanner begin /k:$${PLUGIN_PROJECT_KEY} /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      
       - dotnet build Memory.sln -c Release --no-restore
       - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-      - dotnet publish Memory.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net8.0-android
+
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
 
@@ -85,5 +84,7 @@ steps:
     when:
       event:
         - pull_request
+      branch:
+        - master
     depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
  
