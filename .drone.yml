@@ -60,8 +60,7 @@ steps:
       sonar_token:
         from_secret: SONAR_TOKEN
     commands: 
-      - cd src/
-      - cd Memory/
+      - cd src/Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
       - dotnet sonarscanner begin /k:$${PLUGIN_PROJECT_KEY} /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
@@ -69,7 +68,7 @@ steps:
       - dotnet build Memory.sln -c Release --no-restore
       - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-      - dotnet publish Memory.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net8.0-android
 
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
