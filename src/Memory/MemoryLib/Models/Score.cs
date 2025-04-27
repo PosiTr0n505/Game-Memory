@@ -8,11 +8,12 @@ namespace MemoryLib.Models
 {
     public sealed class Score : IEquatable<Score>
     {
-        public Score(Player p, int scoreValue, GridSize gs) 
+        public Score(Player p, int scoreValue, int gp, GridSize gs) 
         { 
             this.Player = p;
             this.ScoreValue = scoreValue;
             this.GridSize = gs;
+            GamesPlayed = gp;
         }
         public Player Player { get; init; }
 
@@ -38,7 +39,7 @@ namespace MemoryLib.Models
 
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(this, null)) return false;
+            if (ReferenceEquals(obj, null)) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (obj != null && obj.GetType() != this.GetType()) return false;
             return this.Equals((Score?)obj);
