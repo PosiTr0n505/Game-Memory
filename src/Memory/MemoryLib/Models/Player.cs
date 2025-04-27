@@ -8,13 +8,14 @@ namespace MemoryLib.Models
 {
     public class Player
     {
-        public Player(string? name)
+        public Player(string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
             this.NameTag = name;
             this.MovesCount = 0;
             this.CurrentScore = 0;
         }
-        public string? NameTag { get; init; }
+        public string NameTag { get; init; }
         public int CurrentScore { get; private set; }
         public int MovesCount { get; private set; }
 

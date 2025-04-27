@@ -8,6 +8,8 @@ namespace MemoryLib.Models
         private byte Y { get; }
         public Grid(byte x, byte y) 
         {
+            X = x;
+            Y = y;
             Cards = new Card[x, y];
         }
 

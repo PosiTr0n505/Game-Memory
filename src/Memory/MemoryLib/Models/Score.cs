@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    public class Score : IEquatable<Score>
+    public sealed class Score : IEquatable<Score>
     {
         public Score(Player p, int scoreValue, GridSize gs) 
         { 
@@ -24,13 +24,29 @@ namespace MemoryLib.Models
         }
         public GridSize GridSize { get; set; }
         private int gamesPlayed;
-        public int GamesPlayed { get => gamesPlayed; set => gamesPlayed++; }
+        public int GamesPlayed { get; private set; }
+
+        public int AddGamePlayed() => GamesPlayed++;
 
         public bool Equals(Score? other) 
         {
+            if (ReferenceEquals(null, other)) return false;
             if (this.Player.NameTag != null && other != null)
                 return this.Player.NameTag.Equals(other.Player.NameTag); 
             return false;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(this, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (obj != null && obj.GetType() != this.GetType()) return false;
+            return this.Equals((Score?)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Player.NameTag.GetHashCode();
         }
     }
 }

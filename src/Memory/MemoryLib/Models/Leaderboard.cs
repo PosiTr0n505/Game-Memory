@@ -6,7 +6,7 @@ namespace MemoryLib.Models
 {
     public class Leaderboard
     {
-        private List<Score> scores = new List<Score>();
+        private readonly List<Score> scores = new List<Score>();
 
         public void AddScore(Score score)
         {
