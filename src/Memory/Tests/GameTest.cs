@@ -32,6 +32,9 @@ namespace Tests
             Player player2 = new("Player 2");
             Game? game = new(player1, player2, 2, 2);
 
+            for (int i=0; i<4; i++)
+                game.ReduceCardByOne();
+
             Assert.True(game.IsGameOver());
         }
 

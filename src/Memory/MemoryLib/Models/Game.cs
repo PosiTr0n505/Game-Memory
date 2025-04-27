@@ -8,7 +8,7 @@
 
         public Grid? Grid { get; set; }
 
-        private int Round = 1;
+        private int Round { get; set; }
 
         public int RemainingCardsCount { get; set; }
 
@@ -31,6 +31,10 @@
                 CurrentPlayer = Player1; 
         }
 
-        public bool IsGameOver() => RemainingCardsCount == 0;
+        public void AddRoundCount() => Round++;
+
+        public void ReduceCardByOne() => RemainingCardsCount--;
+
+        public bool IsGameOver() => RemainingCardsCount <= 0;
     }
 }

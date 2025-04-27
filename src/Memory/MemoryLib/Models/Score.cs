@@ -26,6 +26,11 @@ namespace MemoryLib.Models
         private int gamesPlayed;
         public int GamesPlayed { get => gamesPlayed; set => gamesPlayed++; }
 
-        public bool Equals(Score other) => this.Player.NameTag.Equals(other.Player.NameTag);
+        public bool Equals(Score? other) 
+        {
+            if (this.Player.NameTag != null && other != null)
+                return this.Player.NameTag.Equals(other.Player.NameTag); 
+            return false;
+        }
     }
 }
