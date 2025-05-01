@@ -8,5 +8,6 @@ namespace MemoryLib.Managers
 {
     internal interface IGameManager
     {
+        void Incrementmoves();
     }
 }
