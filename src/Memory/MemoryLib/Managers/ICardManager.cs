@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MemoryLib.Models;
 
 namespace MemoryLib
 {
     internal interface ICardManager
     {
+        void FlipCard(Card card);
+
+        void UnFlipCard(Card card);
+
+        bool CompareCards(Card card1, Card card2);
+
+        void MatchCard(Card card);
     }
 }

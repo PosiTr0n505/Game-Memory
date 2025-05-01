@@ -8,10 +8,9 @@ namespace MemoryLib.Managers
         private int currentscore = 0;
         private readonly Game? game;
 
-        public GameManager(Game gameInstance)
-        {
-            game = gameInstance;
-        }
+        public GameManager() => game = new Game();
+
+        public GameManager(Game gameInstance) => game = gameInstance;
         public void IncrementMoves()
         {
             moves++;
@@ -20,8 +19,16 @@ namespace MemoryLib.Managers
 
         public void FlipCard(int x, int y)
         {
-            
-            Console.WriteLine($"Flipping card at ({x}, {y})");
+            var card = game?.Grid.GetCard(x, y);
+
+            if (card == null)
+            {
+                Console.WriteLine($"No card found at ({x}, {y})");
+                return;
+            }
+
+            card.Flip();
+            Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
 
         public void StartGame()

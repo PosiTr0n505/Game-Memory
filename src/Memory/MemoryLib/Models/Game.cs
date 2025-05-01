@@ -8,6 +8,11 @@
 
         public Grid? Grid { get; set; }
 
+        public Game()
+        {
+            Grid = new Grid();
+        }
+
         private int Round { get; set; }
 
         public int RemainingCardsCount { get; set; }

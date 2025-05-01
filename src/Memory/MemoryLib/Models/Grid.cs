@@ -6,6 +6,7 @@ namespace MemoryLib.Models
     {
         private byte X { get; }
         private byte Y { get; }
+        private Card?[,] Cards { get; }
         public Grid(byte x, byte y) 
         {
             X = x;
@@ -13,7 +14,11 @@ namespace MemoryLib.Models
             Cards = new Card[x, y];
         }
 
-        private Card?[,] Cards { get; }
+        public Grid(){
+            X = 0;
+            Y = 0;
+            Cards = new Card[0, 0];
+        }
 
         public void AddCard(Card card, byte x, byte y)
         {
@@ -23,6 +28,13 @@ namespace MemoryLib.Models
         public Card?[,] GetCards()
         {
             return Cards;
+        }
+
+        public Card? GetCard(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= Cards.GetLength(0) || y >= Cards.GetLength(1))
+                return null;
+            return Cards[x, y];
         }
 
         public void ShowGrid()
