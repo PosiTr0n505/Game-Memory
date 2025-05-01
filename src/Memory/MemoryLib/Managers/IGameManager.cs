@@ -1,7 +1,7 @@
 ﻿
 namespace MemoryLib.Managers
 {
-    internal interface IGameManager
+    public interface IGameManager
     {
         void IncrementMoves();
         void FlipCard(int x, int y);

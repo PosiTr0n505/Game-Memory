@@ -1,10 +1,11 @@
-﻿namespace MemoryLib.Managers
+﻿using MemoryLib.Models;
+namespace MemoryLib.Managers
 {
     public class GridManager : IGridManager
     {
-        public void ClearGrid()
+        public void ClearGrid(Grid grid)
         {
-            throw new NotImplementedException();
+            grid.Clear();
         }
 
         public void InitializeGrid()

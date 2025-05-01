@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Managers
 {
-    internal interface IScoreManager
+    public interface IScoreManager
     {
         void ChangeScoreValue(int scoreValue);
         void IncrementGamesPlayed();

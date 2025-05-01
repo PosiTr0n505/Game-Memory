@@ -2,7 +2,7 @@
 
 namespace MemoryLib
 {
-    internal interface ICardManager
+    public interface ICardManager
     {
         void FlipCard(Card card);
 

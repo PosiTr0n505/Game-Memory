@@ -1,6 +1,6 @@
 ﻿namespace MemoryLib.Managers
 {
-    internal interface IDeckManager
+    public interface IDeckManager
     {
 
     }

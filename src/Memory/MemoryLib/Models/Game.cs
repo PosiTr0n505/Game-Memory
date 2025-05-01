@@ -27,6 +27,36 @@
             RemainingCardsCount = x * y;
         }
 
+        public void StartGame()
+        {
+            Console.WriteLine("Game started");
+            if (Grid == null)
+                return;
+            List<CardType> types = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+
+            Random rand = new Random();
+
+            int totalCartes = Grid.GetCards().Length; // Calculer nombre total d'emplacement dans la grille
+
+            List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(totalCartes / 2).ToList(); // C pour créer les paires
+            List<Card> allCards = new();
+
+            foreach (var type in typesSelected)
+            {
+                allCards.Add(new Card(type));   // Créer les deux cartes identiques (de meme type)
+                allCards.Add(new Card(type));
+            }
+            allCards = allCards.OrderBy(c => rand.Next()).ToList(); // Mélange
+            int index = 0;
+            for (int i = 0; i < Grid.GetCards().GetLength(0); i++)
+            {
+                for (int j = 0; j < Grid.GetCards().GetLength(1); j++)          
+                {
+                    Grid.AddCard(allCards[index++], (byte)i, (byte)j); // Parcourir toute la grille pour placer une cartte a chaque position
+                }
+            }
+        }
+
         public void SwitchPlayer()
         {
             if (CurrentPlayer == Player1) 

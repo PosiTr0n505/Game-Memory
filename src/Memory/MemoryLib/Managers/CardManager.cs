@@ -6,22 +6,24 @@ namespace MemoryLib.Managers
     {
         public bool CompareCards(Card card1, Card card2)
         {
-            throw new NotImplementedException();
+            return card1.Id == card2.Id;
         }
 
         public void FlipCard(Card card)
         {
-            throw new NotImplementedException();
+            if (!card.IsFaceUp)
+                card.Flip();
         }
 
         public void MatchCard(Card card)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Card {card.Id} matched.");
         }
 
         public void UnFlipCard(Card card)
         {
-            throw new NotImplementedException();
+            if (card.IsFaceUp)
+                card.Flip();
         }
     }
 }

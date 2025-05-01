@@ -1,10 +1,12 @@
 ﻿using System;
+using MemoryLib.Models;
+
 namespace MemoryLib.Managers
 {
-    internal interface IGridManager
+    public interface IGridManager
     {
         void InitializeGrid();
 
-        void ClearGrid();
+        void ClearGrid(Grid grid);
     }
 }

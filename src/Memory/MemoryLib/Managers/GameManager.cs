@@ -7,8 +7,13 @@ namespace MemoryLib.Managers
         private int moves = 0;
         private int currentscore = 0;
         private readonly Game? game;
+        private readonly CardManager? cardManager;
 
-        public GameManager() => game = new Game();
+        public GameManager()
+        {
+            game = new Game();
+            cardManager = new CardManager();
+        } 
 
         public GameManager(Game gameInstance) => game = gameInstance;
         public void IncrementMoves()
@@ -27,12 +32,13 @@ namespace MemoryLib.Managers
                 return;
             }
 
-            card.Flip();
+            cardManager.FlipCard(card);
             Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
 
         public void StartGame()
         {
+            game.StartGame();
             Console.WriteLine("Game started.");
         }
 
