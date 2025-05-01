@@ -66,7 +66,7 @@ interface IGameManager {
     + incrementMoves(): void
     + flipCard(x: int, y: int): void
     + startGame(): void
-    + isGameFinished(): bool
+    + isGameOver(): bool
 	+ updateScore(score: int): void
     + switchPlayer(): void
 }
