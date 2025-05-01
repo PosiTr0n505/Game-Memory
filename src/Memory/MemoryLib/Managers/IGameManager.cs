@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MemoryLib.Managers
 {
     internal interface IGameManager
     {
-        void Incrementmoves();
+        void IncrementMoves();
+        void FlipCard(int x, int y);
+        
+        void StartGame();
+
+        bool IsGameOver();
+
+        int UpdateScore(int score);
+
+        void SwitchPlayers();
     }
 }
