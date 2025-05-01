@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryLib.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    public sealed class Score : IEquatable<Score>
+    public sealed class Score : IEquatable<Score>, IScoreManager
     {
         public Score(Player p, int scoreValue, GridSize gs, int gp = 0) 
         { 
@@ -15,39 +16,39 @@ namespace MemoryLib.Models
             this.GridSize = gs;
             GamesPlayed = gp;
         }
-        public Player Player { get; init; }
-
-        private int scoreValue;
-        internal int ScoreValue
-        {
-            get => scoreValue;
-            set => this.scoreValue = Math.Max(value, scoreValue);
-        }
-        public GridSize GridSize { get; set; }
-
+        public Player Player { get; }
+        public int ScoreValue { get; private set; }
+        public GridSize GridSize { get; }
         public int GamesPlayed { get; private set; }
 
-        public int AddGamePlayed() => GamesPlayed++;
+        public void IncrementGamesPlayed() => GamesPlayed++;
+
+        public void ChangeScoreValue(int scoreValue) 
+        {
+            if (scoreValue < ScoreValue)
+                throw new ArgumentException("New score value cannot be less than the current score", nameof(scoreValue));
+            ScoreValue = scoreValue;
+        }
 
         public bool Equals(Score? other) 
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (this.Player.NameTag != null && other != null)
-                return this.Player.NameTag.Equals(other.Player.NameTag); 
-            return false;
+            if (ReferenceEquals(other, null)) return false;
+            return this.Player.NameTag.Equals(other.Player.NameTag) && this.GridSize==other.GridSize;
         }
 
         public override bool Equals(object? obj)
         {
             if (ReferenceEquals(obj, null)) return false;
             if (ReferenceEquals(obj, this)) return true;
-            if (obj != null && obj.GetType() != this.GetType()) return false;
-            return this.Equals((Score?)obj);
+            if (obj.GetType() != this.GetType()) return false;
+            return this.Equals((Score)obj);
         }
 
         public override int GetHashCode()
         {
             return Player.NameTag.GetHashCode();
         }
+
+
     }
 }

@@ -9,12 +9,7 @@ namespace MemoryLib.Managers
 {
     internal interface IScoreManager
     {
-        int GetScore();
-
-        void SaveScore();
-
-        void IncrementGamesPlayed(Score score);
-
-        void ChangeBestScore(Score score, int s);
+        void ChangeScoreValue(int scoreValue);
+        void IncrementGamesPlayed();
     }
 }
