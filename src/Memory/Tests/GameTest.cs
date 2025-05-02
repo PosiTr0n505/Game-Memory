@@ -34,7 +34,7 @@ namespace Tests
             Game? game = new(player1, player2, 2, 2);
 
             for (int i=0; i<4; i++)
-                game.ReduceCardByOne();
+                game.ReduceCountByOnePair();
 
             Assert.True(game.IsGameOver());
         }

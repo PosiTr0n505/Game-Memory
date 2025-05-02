@@ -46,7 +46,7 @@ namespace MemoryLib.Models
                 {
                     Card? c = Cards[x, y];
                     if (c == null) Console.Write("N ");
-                    if (c.IsFaceUp) Write($"! ");
+                    if (c != null && c.IsFaceUp) Write($"! ");
                     else Write($"{c} ");
                 }
             }
