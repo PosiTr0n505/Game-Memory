@@ -1,4 +1,5 @@
 ﻿
+using MemoryLib.Managers;
 using MemoryLib.Models;
 
 using static System.Console;
@@ -9,11 +10,8 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            Grid grid = new(2, 2);
-            var a = grid.GetCards().GetLength(1);
-            grid.ShowGrid();
-            int? test = null;
-            Console.WriteLine(test);
+            GameManager gameManager = new GameManager(new Game(new Player("test1"), new Player("test2"), 4, 4));
+            gameManager.StartGame();
         }
     }
 }

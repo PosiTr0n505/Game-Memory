@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Models;
+using System.Data;
 
 namespace MemoryLib.Managers
 {
@@ -21,6 +22,11 @@ namespace MemoryLib.Managers
             _cardManager = new CardManager();
         }
 
+        public void ShowGrid()
+        {
+            _game.Grid.ShowGrid();
+        }
+
         public void IncrementMoves()
         {
             moves++;
@@ -37,14 +43,88 @@ namespace MemoryLib.Managers
                 return;
             }
 
-            _cardManager.FlipCard(card);
+            card.Flip();
             Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
 
         public void StartGame()
         {
             _game.StartGame();
-            Console.WriteLine("Game started.");
+
+            Card card1;
+            Card card2;
+
+            while (_game.IsGameOver() != true)
+            {
+                ShowGrid();
+                Console.WriteLine($"Current Player: {_game.CurrentPlayer.NameTag}");
+                Console.WriteLine($"Score: {_game.CurrentPlayer.CurrentScore}");
+                try 
+                {
+                    card1 = AskCoordinates();
+                    card2 = AskCoordinates();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    continue;
+                }
+
+                if (card1.IsFaceUp)
+                {
+                    Console.WriteLine($"This Card at has already been found");
+                    continue;
+                }
+                if (card1 == card2)
+                {
+                    Console.WriteLine($"You have selected the same card. Try again.");
+                    continue;
+                }
+                if (Card.MatchCards(card1, card2))
+                {
+                    card1.Flip();
+                    card2.Flip();
+                    _game.CurrentPlayer.add1ToScore();
+                    _game.ReduceCountByOnePair();
+                }
+
+                else 
+                    _game.SwitchPlayer();
+
+                IncrementMoves();
+            }
+
+        }
+
+        public Card AskCoordinates()
+        {
+            int x, y;
+
+            var input = Console.ReadLine();
+
+            if (input == null)
+                throw new NoNullAllowedException();
+
+            var inputs = input.Split(' ');
+
+            if (inputs.Length != 2)
+                throw new ArgumentException("Invalid input. Please enter two coordinates separated by a space.");
+
+            if (!int.TryParse(inputs[0], out x) || !int.TryParse(inputs[1], out y))
+                throw new ArgumentException("Invalid input. Please enter two valid numbers separated by a space.");
+
+            try
+            {
+                var c = _game.Grid.GetCard(x, y);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw;
+            }
+
+            Card card = _game.Grid.GetCard(x, y);
+
+            return card;
         }
 
         public bool IsGameOver()

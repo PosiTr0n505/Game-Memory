@@ -2,22 +2,25 @@
 {
     public class Game
     {
-        public Player? Player1 { get; }
-        public Player? Player2 { get; }
-        public Player? CurrentPlayer { get; private set; }
+        public Player Player1 { get; }
+        public Player Player2 { get; }
+        public Player CurrentPlayer { get; private set; }
 
         public Grid Grid { get; set; }
 
         public Game()
         {
             Grid = new Grid();
+            Player1 = new Player("Player 1");
+            Player2 = new Player("Player 2");
+            CurrentPlayer = Player1;
         }
 
         private int Round { get; set; }
 
         public int RemainingCardsCount { get; set; }
 
-        public Game(Player? player1, Player? player2, byte x, byte y)
+        public Game(Player player1, Player player2, byte x, byte y)
         {
             Player1 = player1;
             Player2 = player2;
@@ -30,12 +33,11 @@
         public void StartGame()
         {
             InitializeGame();
-
+            Grid.ShowGrid();
         }
 
         private void InitializeGame()
         {
-            Console.WriteLine("Game started");
             if (Grid == null)
                 return;
 
@@ -75,7 +77,7 @@
 
         public void AddRoundCount() => Round++;
 
-        public void ReduceCardByOne() => RemainingCardsCount--;
+        public void ReduceCountByOnePair() => RemainingCardsCount -= 2;
 
         public bool IsGameOver() => RemainingCardsCount <= 0;
     }
