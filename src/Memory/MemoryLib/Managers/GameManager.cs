@@ -6,16 +6,21 @@ namespace MemoryLib.Managers
     {
         private int moves = 0;
         private int currentscore = 0;
-        private readonly Game? game;
-        private readonly CardManager? cardManager;
+        private readonly Game _game;
+        private readonly CardManager _cardManager;
 
         public GameManager()
         {
-            game = new Game();
-            cardManager = new CardManager();
-        } 
+            _game = new Game();
+            _cardManager = new CardManager();
+        }
 
-        public GameManager(Game gameInstance) => game = gameInstance;
+        public GameManager(Game game)
+        {
+            _game = game;
+            _cardManager = new CardManager();
+        }
+
         public void IncrementMoves()
         {
             moves++;
@@ -24,7 +29,7 @@ namespace MemoryLib.Managers
 
         public void FlipCard(int x, int y)
         {
-            var card = game?.Grid.GetCard(x, y);
+            var card = _game.Grid.GetCard(x, y);
 
             if (card == null)
             {
@@ -32,19 +37,19 @@ namespace MemoryLib.Managers
                 return;
             }
 
-            cardManager.FlipCard(card);
+            _cardManager.FlipCard(card);
             Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
 
         public void StartGame()
         {
-            game.StartGame();
+            _game.StartGame();
             Console.WriteLine("Game started.");
         }
 
         public bool IsGameOver()
         {
-            return game?.IsGameOver() ?? false;
+            return _game?.IsGameOver() ?? false;
         }
 
         public int UpdateScore(int score)
@@ -56,7 +61,7 @@ namespace MemoryLib.Managers
 
         public void SwitchPlayers()
         {
-            game?.SwitchPlayer();
+            _game?.SwitchPlayer();
             Console.WriteLine("Switched players.");
         }
     }

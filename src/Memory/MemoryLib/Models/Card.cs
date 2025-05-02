@@ -21,5 +21,10 @@ namespace MemoryLib.Models
             IsFaceUp = !IsFaceUp;
         }
 
+        public override string ToString()
+        { 
+            return Id.ToString();
+        }
+
     }
 }

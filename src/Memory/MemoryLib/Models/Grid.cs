@@ -4,8 +4,8 @@ namespace MemoryLib.Models
 {
     public class Grid
     {
-        private byte X { get; }
-        private byte Y { get; }
+        public byte X { get; }
+        public byte Y { get; }
         private Card?[,] Cards { get; }
         public Grid(byte x, byte y) 
         {
@@ -14,7 +14,8 @@ namespace MemoryLib.Models
             Cards = new Card[x, y];
         }
 
-        public Grid(){
+        public Grid()
+        {
             X = 0;
             Y = 0;
             Cards = new Card[0, 0];
@@ -40,11 +41,14 @@ namespace MemoryLib.Models
         public void ShowGrid()
         {
             WriteLine("Current grid:");
-            foreach (var card in Cards)
-            {
-                if (card != null)
+            for (int x = 0; x < X; x++)
+               { 
+                Console.WriteLine();
+                for (int y = 0; y < Y; y++)
                 {
-                    Console.WriteLine($"Card ID: {card.Id}, FaceUp: {card.IsFaceUp}");
+                    Card? c = Cards[x, y];
+                    if (c == null) Console.Write("N ");
+                    Console.Write(c);
                 }
             }
         }
