@@ -21,5 +21,7 @@ namespace Tests
             p.add1ToScore();
             Assert.Equal(1, p.CurrentScore);
         }
+
+
     }
 }

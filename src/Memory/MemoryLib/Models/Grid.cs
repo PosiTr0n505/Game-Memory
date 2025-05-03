@@ -23,18 +23,14 @@ namespace MemoryLib.Models
 
         public void AddCard(Card card, byte x, byte y)
         {
+            if (x >= X || y >= Y)
+                throw new IndexOutOfRangeException("The coordinates are outside of the grid range");
             Cards[x, y] = card;
         }
 
-        public Card?[,] GetCards()
-        {
-            return Cards;
-        }
+        public Card?[,] GetCards() => Cards;
 
-        public Card GetCard(int x, int y)
-        {
-            return Cards[x, y];
-        }
+        public Card GetCard(int x, int y) => Cards[x, y];
 
         public void ShowGrid()
         {
@@ -52,13 +48,12 @@ namespace MemoryLib.Models
             }
             WriteLine();
         }
-/*        public void Clear()
+        public void Clear()
         {
             for (var x = 0; x < X; x++)
                 for (var y = 0; y < Y; y++)
-                    Cards[x,y] = null;
+                    Cards[x, y] = null;
         }
-*/
     }
 
 }

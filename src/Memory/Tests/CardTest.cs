@@ -1,5 +1,4 @@
-﻿using MemoryLib;
-using MemoryLib.Managers;
+﻿using MemoryLib.Managers;
 using MemoryLib.Models;
 namespace Tests
 {

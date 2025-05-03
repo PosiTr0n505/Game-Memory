@@ -6,13 +6,10 @@ namespace MemoryLib.Models
 {
     public class Leaderboard
     {
-        private readonly List<Score> scores = new List<Score>();
+        private readonly List<Score> scores = [];
 
-        public void AddScore(Score score)
-        {
-            scores.Add(score);
-        }
-        
+        public void AddScore(Score score) => scores.Add(score);
+
         public IEnumerable<Score> GetScores(GridSize gridSize)
         {
             return new ReadOnlyCollection<Score>([.. scores

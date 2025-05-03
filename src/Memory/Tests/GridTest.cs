@@ -24,5 +24,43 @@ namespace Tests
                 Assert.NotNull(card);
             }
         }
+
+        [Fact]
+        public void AddCard_Should_Throw_Exception_When_Outside_Grid()
+        {
+            Grid g = new(2, 2);
+            Card c1 = new(CardType.A);
+
+            Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 3, 3));
+            Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 0, 3));
+            Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 3, 0));
+        }
+
+        [Fact]
+        public void Grid_Should_Initialize_With_Null_Cards()
+        {
+            Grid g = new(2, 2);
+
+            var cards = g.GetCards();
+            int count = cards.Cast<Card>().Count(card => card != null);
+
+            Assert.Equal(0, count);
+        }
+
+        [Fact]
+        public void GetCard_Should_Return_Correct_Card()
+        {
+            Grid g = new(2, 2);
+            Card c1 = new(CardType.A);
+            Card c2 = new(CardType.B);
+            g.AddCard(c1, 0, 0);
+            g.AddCard(c2, 1, 1);
+
+            Card retrievedCard = g.GetCard(0, 0);
+
+            Assert.Equal(c1, retrievedCard);
+        }
+
+
     }
 }

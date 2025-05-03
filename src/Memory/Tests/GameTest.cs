@@ -111,5 +111,43 @@ namespace Tests
 
             Assert.All(typeCount.Values, count => Assert.Equal(2, count)); // verifie qu'il existe 2 exemplaires de chaque type
         }
+
+        [Fact]
+        public void StartGame_with_larger_grid_fills_grid_correctly()
+        {
+            Player player1 = new("Player 1");
+            Player player2 = new("Player 2");
+            Game game = new Game(player1, player2, 4, 4);
+
+            game.StartGame();
+
+            int cardCount = 0;
+            foreach (var c in game.Grid.GetCards())
+            {
+                if (c != null) cardCount++;
+            }
+            Assert.Equal(16, cardCount);
+        }
+
+        [Fact]
+        public void Game_initialization_should_fail_with_null_players()
+        {
+            Game? game = null;
+
+            Assert.Throws<ArgumentNullException>(() => game = new Game(null!, null!, 2, 2));
+        }
+
+        [Fact]
+        public void StartGame_should_throw_error_when_incorrect_grid_size()
+        {
+            Player player1 = new("Player 1");
+            Player player2 = new("Player 2");
+            Game game = new(player1, player2, 3, 3);
+
+            Assert.Throws<InvalidOperationException>(game.StartGame);
+        }
+
+
+
     }
 }

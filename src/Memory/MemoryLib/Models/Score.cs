@@ -1,10 +1,4 @@
 ﻿using MemoryLib.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MemoryLib.Models
 {
     public sealed class Score : IEquatable<Score>, IScoreManager
@@ -32,7 +26,7 @@ namespace MemoryLib.Models
 
         public bool Equals(Score? other) 
         {
-            if (ReferenceEquals(other, null)) return false;
+            if (other is null) return false;
             return this.Player.NameTag.Equals(other.Player.NameTag) && this.GridSize==other.GridSize;
         }
 
@@ -44,11 +38,7 @@ namespace MemoryLib.Models
             return this.Equals((Score)obj);
         }
 
-        public override int GetHashCode()
-        {
-            return Player.NameTag.GetHashCode();
-        }
-
+        public override int GetHashCode() => Player.NameTag.GetHashCode();
 
     }
 }
