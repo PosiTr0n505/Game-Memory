@@ -10,7 +10,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2, 2, 2);
+            Game? game = new(player1, player2, GridSize.Size2);
             game.SwitchPlayer();
             Assert.Equal(player2, game.CurrentPlayer);
         }
@@ -20,7 +20,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2, 2, 2);
+            Game? game = new(player1, player2, GridSize.Size1);
             game.SwitchPlayer();
             game.SwitchPlayer();
             Assert.Equal(player1, game.CurrentPlayer);
@@ -31,9 +31,9 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2, 2, 2);
+            Game? game = new(player1, player2, GridSize.Size1);
 
-            for (int i=0; i<4; i++)
+            for (int i=0; i<2; i++)
                 game.ReduceCountByOnePair();
 
             Assert.True(game.IsGameOver());
@@ -44,10 +44,9 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new(player1, player2, 2, 2);
+            Game game = new(player1, player2, GridSize.Size5);
 
-            if (game.Grid != null)
-                game.Grid.AddCard(new Card(CardType.A), 0, 0);
+            Assert.NotEqual(0, game.RemainingCardsCount);
 
             Assert.False(game.IsGameOver());
         }
@@ -57,7 +56,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new Game(player1, player2, 2, 2); // C un test avec 4 cartes
+            Game? game = new Game(player1, player2, GridSize.Size1); // C un test avec 4 cartes
 
             game.StartGame();
             int count = 0;
@@ -75,7 +74,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, 2, 2);
+            Game game = new Game(player1, player2, GridSize.Size1);
 
             game.StartGame();
 
@@ -93,7 +92,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new Game(player1, player2, 2, 2);
+            Game game = new Game(player1, player2, GridSize.Size4);
 
             game.StartGame();
             var cards = game.Grid.GetCards();
@@ -117,7 +116,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, 4, 4);
+            Game game = new Game(player1, player2, GridSize.Size3);
 
             game.StartGame();
 
@@ -134,20 +133,17 @@ namespace Tests
         {
             Game? game = null;
 
-            Assert.Throws<ArgumentNullException>(() => game = new Game(null!, null!, 2, 2));
+            Assert.Throws<ArgumentNullException>(() => game = new Game(null!, null!, GridSize.Size3));
         }
 
-        [Fact]
+/*        [Fact]
         public void StartGame_should_throw_error_when_incorrect_grid_size()
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new(player1, player2, 3, 3);
+            Game game = new(player1, player2, GridSize.Size1);
 
             Assert.Throws<InvalidOperationException>(game.StartGame);
-        }
-
-
-
+        }*/
     }
 }

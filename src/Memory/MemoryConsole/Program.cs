@@ -10,7 +10,7 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            GameManager gameManager = new(new Game(new Player("test1"), new Player("test2"), 4, 4));
+            GameManager gameManager = new GameManager(new Game(new Player("test1"), new Player("test2"), GridSize.Size6));
             gameManager.StartGame();
         }
     }

@@ -1,4 +1,5 @@
-﻿namespace MemoryLib.Models
+﻿using MemoryLib.Managers;
+namespace MemoryLib.Models
 {
     public class Game
     {
@@ -16,19 +17,24 @@
             CurrentPlayer = Player1;
         }
 
-        private int Round { get; set; }
-
-        public int RemainingCardsCount { get; set; }
-
-        public Game(Player player1, Player player2, byte x, byte y)
+        public Game(Player player1, Player player2, GridSize g)
         {
+            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
+                throw new ArgumentNullException("Player cannot be null");
             Player1 = player1;
             Player2 = player2;
+            IGridSizeManager gridSizeManager = new GridSizeManager();
+            (int x, int y) = gridSizeManager.GetGridSizeValues(g);
             Grid = new Grid(x, y);
             RemainingCardsCount = 0;
+            Round = 0;
             CurrentPlayer = player1;
             RemainingCardsCount = x * y;
         }
+
+        private int Round { get; set; }
+
+        public int RemainingCardsCount { get; set; }
 
         public void StartGame()
         {

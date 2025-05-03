@@ -19,22 +19,26 @@ namespace Tests
         [Fact]
         public void ChangeScoreValue_Changes_ScoreValue_When_Valid()
         {
+            int oldScore = 100;
+            int newScore = 150;
             Player p = new("Test");
-            Score score = new(p, 100, GridSize.Size6);
+            Score score = new(p, oldScore, GridSize.Size6);
 
-            score.ChangeScoreValue(150);
+            score.ChangeScoreValueIfGreater(newScore);
 
-            Assert.Equal(150, score.ScoreValue);
+            Assert.Equal(newScore, score.ScoreValue);
         }
 
         [Fact]
-        public void ChangeScoreValue_Throws_Exception_When_NewScore_Is_Less_Than_Current()
+        public void ChangeScoreValue_Doesnt_Change_ScoreValue_When_NewScore_Is_Less_Than_Current()
         {
+            int oldScore = 100;
+            int newScore = 50;
             Player p = new("Test");
-            Score score = new(p, 100, GridSize.Size6);
+            Score score = new(p, oldScore, GridSize.Size6);
 
-            var exception = Assert.Throws<ArgumentException>(() => score.ChangeScoreValue(50));
-            Assert.Equal("New score cannot be lower than the current score", exception.Message);
+            score.ChangeScoreValueIfGreater(newScore);
+            Assert.Equal(score.ScoreValue, oldScore);
         }
 
         [Fact]

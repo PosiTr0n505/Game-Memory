@@ -9,7 +9,7 @@ namespace MemoryLib.Managers
 {
     public interface IScoreManager
     {
-        void ChangeScoreValue(int scoreValue);
+        void ChangeScoreValueIfGreater(int scoreValue);
         void IncrementGamesPlayed();
     }
 }

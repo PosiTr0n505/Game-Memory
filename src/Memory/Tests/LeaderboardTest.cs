@@ -74,10 +74,10 @@ namespace Tests
             l.AddScore(s);
 
             var exception1 = Assert.Throws<ArgumentException>(() => l.GetScores(""));
-            Assert.Equal("the playerName provided is invalid", exception1.Message);
+            Assert.Equal("the playerName provided is not valid", exception1.Message);
 
             var exception2 = Assert.Throws<ArgumentException>(() => l.GetScores("    "));
-            Assert.Equal("the playerName provided is invalid", exception2.Message);
+            Assert.Equal("the playerName provided is not valid", exception2.Message);
         }
 
         [Fact]

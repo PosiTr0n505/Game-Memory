@@ -5,8 +5,6 @@ namespace MemoryLib.Managers
 {
     public interface IGridManager
     {
-        void InitializeGrid();
-
-        void ClearGrid(Grid grid);
+        void Clear();
     }
 }

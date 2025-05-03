@@ -17,10 +17,10 @@ namespace MemoryLib.Models
 
         public void IncrementGamesPlayed() => GamesPlayed++;
 
-        public void ChangeScoreValue(int scoreValue) 
+        public void ChangeScoreValueIfGreater(int scoreValue) 
         {
             if (scoreValue < ScoreValue)
-                throw new ArgumentException("New score value cannot be less than the current score", nameof(scoreValue));
+                return;
             ScoreValue = scoreValue;
         }
 

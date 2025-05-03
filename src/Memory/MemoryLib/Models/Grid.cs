@@ -1,13 +1,14 @@
-﻿using static System.Console;
+﻿using MemoryLib.Managers;
+using static System.Console;
 
 namespace MemoryLib.Models
 {
-    public class Grid
+    public class Grid : IGridManager
     {
-        public byte X { get; }
-        public byte Y { get; }
+        public int X { get; }
+        public int Y { get; }
         private Card[,] Cards { get; }
-        public Grid(byte x, byte y) 
+        public Grid(int x, int y) 
         {
             X = x;
             Y = y;
@@ -21,7 +22,7 @@ namespace MemoryLib.Models
             Cards = new Card[0, 0];
         }
 
-        public void AddCard(Card card, byte x, byte y)
+        public void AddCard(Card card, int x, int y)
         {
             if (x >= X || y >= Y)
                 throw new IndexOutOfRangeException("The coordinates are outside of the grid range");
@@ -52,7 +53,12 @@ namespace MemoryLib.Models
         {
             for (var x = 0; x < X; x++)
                 for (var y = 0; y < Y; y++)
-                    Cards[x, y] = null;
+                    Cards[x, y] = null!;
+        }
+
+        public void ClearGrid(Grid grid)
+        {
+            throw new NotImplementedException();
         }
     }
 
