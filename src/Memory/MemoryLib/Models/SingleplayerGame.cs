@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
-    public class SingleplayerGame
+    public class SinglePlayerGame
     {
     }
 }

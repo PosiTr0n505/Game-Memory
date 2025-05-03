@@ -113,6 +113,11 @@ namespace MemoryLib.Managers
             if (!int.TryParse(inputs[0], out x) || !int.TryParse(inputs[1], out y))
                 throw new ArgumentException("Invalid input. Please enter two valid numbers separated by a space.");
 
+            x -= 1;
+            y -= 1;
+            if (x < 0 || y < 0 || x >= _game.Grid.X || y >= _game.Grid.Y)
+                throw new ArgumentOutOfRangeException("Coordinates are out of range. Please try again.");
+
             try
             {
                 var c = _game.Grid.GetCard(x, y);
