@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Models;
+//using MemoryConsole.SaveStub;
 using System.Data;
 
 namespace MemoryLib.Managers
@@ -149,5 +150,16 @@ namespace MemoryLib.Managers
             _game?.SwitchPlayer();
             Console.WriteLine("Switched players.");
         }
+
+        //public static void SaveGame()
+        //{
+        //    Console.WriteLine("Game saved.");
+        //}
+
+        //public Game LoadGame()
+        //{
+        //    this._game = Stub.StubGame1();
+        //    return _game;
+        //}
     }
 }

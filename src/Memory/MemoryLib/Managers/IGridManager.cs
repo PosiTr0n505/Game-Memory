@@ -1,7 +1,4 @@
-﻿using System;
-using MemoryLib.Models;
-
-namespace MemoryLib.Managers
+﻿namespace MemoryLib.Managers
 {
     public interface IGridManager
     {
