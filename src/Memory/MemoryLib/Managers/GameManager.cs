@@ -57,6 +57,7 @@ namespace MemoryLib.Managers
 
             while (_game.IsGameOver() != true)
             {
+                Console.Clear();
                 ShowGrid();
                 Console.WriteLine($"Current Player: {_game.CurrentPlayer.NameTag}");
                 Console.WriteLine($"Score: {_game.CurrentPlayer.CurrentScore}");
@@ -95,6 +96,7 @@ namespace MemoryLib.Managers
                 IncrementMoves();
             }
 
+            Console.WriteLine("Game Over!");
         }
 
         public Card AskCoordinates()
