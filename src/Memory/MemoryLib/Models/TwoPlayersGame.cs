@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MemoryLib.Models
 {
+    /// <summary>
+    /// Représente un jeu à un deux joueurs.
+    /// </summary>
     public class TwoPlayersGame
     {
     }

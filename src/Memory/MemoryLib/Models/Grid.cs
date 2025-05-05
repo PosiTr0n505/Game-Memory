@@ -3,17 +3,41 @@ using static System.Console;
 
 namespace MemoryLib.Models
 {
+    /// <summary>
+    /// Représente une grille de cartes dans le jeu, contenant une matrice de cartes et offrant des méthodes pour interagir avec celle-ci.
+    /// </summary>
     public class Grid : IGridManager
     {
+        /// <summary>
+        /// Obtient le nombre de lignes de la grille.
+        /// </summary>
         public int X { get; }
+
+        /// <summary>
+        /// Obtient le nombre de colonnes de la grille.
+        /// </summary>
         public int Y { get; }
+
+        /// <summary>
+        /// Matrice des cartes de la grille.
+        /// </summary>
         private Card[,] Cards { get; }
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
+        /// </summary>
+        /// <param name="x">Le nombre de lignes de la grille.</param>
+        /// <param name="y">Le nombre de colonnes de la grille.</param>
+        
         public Grid(int x, int y) 
         {
             X = x;
             Y = y;
             Cards = new Card[x, y];
         }
+        /// <summary>
+        /// Initialise une nouvelle instance d'une grille vide (0x0).
+        /// </summary>
 
         public Grid()
         {
@@ -22,6 +46,13 @@ namespace MemoryLib.Models
             Cards = new Card[0, 0];
         }
 
+        /// <summary>
+        /// Ajoute une carte à la grille à la position spécifiée.
+        /// </summary>
+        /// <param name="card">La carte à ajouter.</param>
+        /// <param name="x">La ligne de la grille.</param>
+        /// <param name="y">La colonne de la grille.</param>
+        /// <exception>Lève une exception si les coordonnées sont hors de portée de la grille.</exception>
         public void AddCard(Card card, int x, int y)
         {
             if (x >= X || y >= Y)
@@ -31,8 +62,17 @@ namespace MemoryLib.Models
 
         public Card?[,] GetCards() => Cards;
 
+        /// <summary>
+        /// Obtient la carte à la position spécifiée dans la grille.
+        /// </summary>
+        /// <param name="x">La ligne de la carte dans la grille.</param>
+        /// <param name="y">La colonne de la carte dans la grille.</param>
+        /// <returns>La carte située à la position spécifiée.</returns>
         public Card GetCard(int x, int y) => Cards[x, y];
 
+        /// <summary>
+        /// Affiche l'état actuel de la grille dans la console.
+        /// </summary>
         public void ShowGrid()
         {
             WriteLine("Current grid:");
@@ -49,6 +89,10 @@ namespace MemoryLib.Models
             }
             WriteLine();
         }
+
+        /// <summary>
+        /// Efface toutes les cartes de la grille en les remplaçant par des valeurs nulles.
+        /// </summary>
         public void Clear()
         {
             for (var x = 0; x < X; x++)
@@ -56,6 +100,11 @@ namespace MemoryLib.Models
                     Cards[x, y] = null!;
         }
 
+        /// <summary>
+        /// Efface la grille, mais cette méthode n'est pas encore implémentée.
+        /// </summary>
+        /// <param name="grid">La grille à effacer.</param>
+        /// <exception">A faire bientot</exception>
         public void ClearGrid(Grid grid)
         {
             throw new NotImplementedException();

@@ -10,13 +10,17 @@ namespace MemoryLib.Managers
         private int currentscore = 0;
         private readonly Game _game;
         private readonly CardManager _cardManager;
+        private readonly bool _enableConsoleOutput;
 
         public GameManager()
         {
             _game = new Game();
             _cardManager = new CardManager();
         }
-
+        public GameManager(bool enableConsoleOutput = true)
+        {
+            _enableConsoleOutput = enableConsoleOutput;
+        }
         public GameManager(Game game)
         {
             _game = game;
@@ -47,14 +51,18 @@ namespace MemoryLib.Managers
             card.Flip();
             Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
-
         public void StartGame()
         {
             _game.StartGame();
 
             Card card1;
             Card card2;
-            Console.Clear();
+            if (_enableConsoleOutput)
+            {
+                Console.Clear(); // Efface la console uniquement si activé
+                Console.WriteLine("Game started!");
+            }
+
 
             while (_game.IsGameOver() != true)
             {
