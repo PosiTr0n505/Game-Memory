@@ -20,6 +20,8 @@ namespace MemoryLib.Managers
         public GameManager(bool enableConsoleOutput = true)
         {
             _enableConsoleOutput = enableConsoleOutput;
+            _game = new Game();
+            _cardManager = new CardManager();
         }
         public GameManager(Game game)
         {
@@ -27,15 +29,12 @@ namespace MemoryLib.Managers
             _cardManager = new CardManager();
         }
 
-        public void ShowGrid()
-        {
-            _game.Grid.ShowGrid();
-        }
+        public void ShowGrid() => _game.Grid.ShowGrid();
 
         public void IncrementMoves()
         {
             moves++;
-            Console.WriteLine("Move count incremented.");
+            Console.WriteLine($"Move count incremented. Total moves: {moves}");
         }
 
         public void FlipCard(int x, int y)
@@ -48,7 +47,7 @@ namespace MemoryLib.Managers
                 return;
             }
 
-            card.Flip();
+            _cardManager.FlipCard(card);
             Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
         public void StartGame()
@@ -162,10 +161,8 @@ namespace MemoryLib.Managers
             Console.WriteLine("Switched players.");
         }
 
-        //public static void SaveGame()
-        //{
-        //    Console.WriteLine("Game saved.");
-        //}
+        //public static void SaveGame() => Console.WriteLine("Game saved.");
+
 
         //public Game LoadGame()
         //{

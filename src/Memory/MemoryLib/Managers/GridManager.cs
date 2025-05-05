@@ -3,11 +3,6 @@ namespace MemoryLib.Managers
 {
     public class GridManager 
     {
-        public void ClearGrid(Grid grid)
-        {
-            grid.Clear();
-        }
-
-        
+        public static void ClearGrid(Grid grid) => grid.Clear();
     }
 }

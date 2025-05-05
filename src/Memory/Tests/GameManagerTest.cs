@@ -24,11 +24,10 @@ namespace Tests
             var x = 1;
             var y = 1;
             var card = _gameManager.AskCoordinates();
-
+        
             
             _gameManager.FlipCard(x, y);
 
-            
             Assert.True(card.IsFaceUp);
         }
 
