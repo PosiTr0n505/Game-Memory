@@ -17,12 +17,6 @@ namespace MemoryLib.Managers
             _game = new Game();
             _cardManager = new CardManager();
         }
-        public GameManager(bool enableConsoleOutput = true)
-        {
-            _enableConsoleOutput = enableConsoleOutput;
-            _game = new Game();
-            _cardManager = new CardManager();
-        }
         public GameManager(Game game)
         {
             _game = game;
