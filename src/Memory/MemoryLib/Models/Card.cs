@@ -39,10 +39,7 @@ namespace MemoryLib.Models
         /// Renvoie une chaîne représentant l'identifiant de la carte.
         /// </summary>
         /// <returns>La chaîne de caractères représentant l'identifiant de la carte.</returns>
-        public override string ToString()
-        {
-            return Id.ToString();
-        }
+        public override string ToString() => Id.ToString();
 
         /// <summary>
         /// Compare deux cartes pour vérifier si elles sont identiques en termes de type.
@@ -63,10 +60,7 @@ namespace MemoryLib.Models
         /// <param name="card1">La première carte à comparer.</param>
         /// <param name="card2">La deuxième carte à comparer.</param>
         /// <returns>Retourne true si les cartes ont le même identifiant, sinon false.</returns>
-        public bool CompareCards(Card card1, Card card2)
-        {
-            return card1.Id == card2.Id;
-        }
+        public bool CompareCards(Card card1, Card card2) => card1.Id == card2.Id;
 
         /// <summary>
         /// Retourne une carte si elle est face cachée.
@@ -125,9 +119,6 @@ namespace MemoryLib.Models
         /// Calcule un code de hachage pour l'objet actuel.
         /// </summary>
         /// <returns>Le code de hachage de l'identifiant de la carte.</returns>
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => Id.GetHashCode();
     }
 }

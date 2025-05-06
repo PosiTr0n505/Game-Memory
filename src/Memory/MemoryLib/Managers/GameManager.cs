@@ -31,24 +31,15 @@ namespace MemoryLib.Managers
 
         public void ShowGrid() => _game.Grid.ShowGrid();
 
-        public void IncrementMoves()
-        {
-            moves++;
-            Console.WriteLine($"Move count incremented. Total moves: {moves}");
-        }
+        public void IncrementMoves() => moves++;
 
         public void FlipCard(int x, int y)
         {
             var card = _game.Grid.GetCard(x, y);
 
-            if (card == null)
-            {
-                Console.WriteLine($"No card found at ({x}, {y})");
-                return;
-            }
+            if (card == null) return;
 
             _cardManager.FlipCard(card);
-            Console.WriteLine($"Card at ({x}, {y}) flipped. Face up: {card.IsFaceUp}");
         }
         public void StartGame()
         {
@@ -58,8 +49,8 @@ namespace MemoryLib.Managers
             Card card2;
             if (_enableConsoleOutput)
             {
-                Console.Clear(); // Efface la console uniquement si activé
-                Console.WriteLine("Game started!");
+                Console.Clear();
+                //Console.WriteLine("Game started!");
             }
 
 
@@ -67,8 +58,8 @@ namespace MemoryLib.Managers
             {
                 
                 ShowGrid();
-                Console.WriteLine($"Current Player: {_game.CurrentPlayer.NameTag}");
-                Console.WriteLine($"Score: {_game.CurrentPlayer.CurrentScore}");
+                //Console.WriteLine($"Current Player: {_game.CurrentPlayer.NameTag}");
+                //Console.WriteLine($"Score: {_game.CurrentPlayer.CurrentScore}");
                 try 
                 {
                     card1 = AskCoordinates();
@@ -82,19 +73,19 @@ namespace MemoryLib.Managers
 
                 if (card1.IsFaceUp)
                 {
-                    Console.WriteLine($"This Card at has already been found");
+                    //Console.WriteLine($"This Card at has already been found");
                     continue;
                 }
                 if (card1 == card2)
                 {
-                    Console.WriteLine($"You have selected the same card. Try again.");
+                    //Console.WriteLine($"You have selected the same card. Try again.");
                     continue;
                 }
                 if (Card.MatchCards(card1, card2))
                 {
                     card1.Flip();
                     card2.Flip();
-                    _game.CurrentPlayer.add1ToScore();
+                    _game.CurrentPlayer.Add1ToScore();
                     _game.ReduceCountByOnePair();
                 }
 
@@ -104,7 +95,7 @@ namespace MemoryLib.Managers
                 IncrementMoves();
             }
 
-            Console.WriteLine("Game Over!");
+            //Console.WriteLine("Game Over!");
         }
 
         public Card AskCoordinates()

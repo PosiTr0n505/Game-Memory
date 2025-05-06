@@ -37,18 +37,12 @@
         /// Ajoute 1 au score actuel du joueur.
         /// </summary>
 
-        public void add1ToScore()
-        {
-            CurrentScore += 1;
-        }
+        public void Add1ToScore() => CurrentScore += 1;
 
         /// <summary>
         /// Ajoute 1 au nombre de mouvements effectués par le joueur.
         /// </summary>
-        public void add1ToMovesCount()
-        {
-            MovesCount += 1;
-        }
+        public void Add1ToMovesCount() => MovesCount += 1;
 
         /// <summary>
         /// Compare deux joueurs pour vérifier si leurs noms sont identiques.
@@ -79,9 +73,6 @@
         /// Calcule le code de hachage de l'objet actuel en fonction de son nom.
         /// </summary>
         /// <returns>Le code de hachage du nom du joueur.</returns>
-        public override int GetHashCode()
-        {
-            return NameTag.GetHashCode();
-        }
+        public override int GetHashCode() => NameTag.GetHashCode();
     }
 }

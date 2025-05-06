@@ -42,12 +42,12 @@ namespace MemoryLib.Models
         /// <exception>Lève une exception si le nom du joueur est invalide.</exception>
         public IEnumerable<Score> GetScores(string playerName, GridSize? gridSize = null)
         {
-            if (string.IsNullOrWhiteSpace(playerName))
-                throw new ArgumentException("the playerName provided is not valid");
+            //if (string.IsNullOrWhiteSpace(playerName))
+            //    throw new ArgumentException("the playerName provided is not valid");
 
             if (scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
                 return scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
-
+            
             return scores.Where(s => s.Player.NameTag == playerName);
         }
     }

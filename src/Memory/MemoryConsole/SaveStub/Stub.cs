@@ -12,10 +12,10 @@ public static class Stub
 
         Game game = new(player1, player2, GridSize.Size1);
         game.SwitchPlayer();
-        player1.add1ToScore();
-        player1.add1ToScore();
-        player1.add1ToScore();
-        player2.add1ToScore();
+        player1.Add1ToScore();
+        player1.Add1ToScore();
+        player1.Add1ToScore();
+        player2.Add1ToScore();
 
         player1.add1ToMovesCount();
         player2.add1ToMovesCount();
@@ -35,10 +35,10 @@ public static class Stub
         Game game = new(player1, player2, GridSize.Size1);
 
         game.SwitchPlayer();
-        player1.add1ToScore();
-        player2.add1ToScore();
-        player1.add1ToScore();
-        player2.add1ToScore();
+        player1.Add1ToScore();
+        player2.Add1ToScore();
+        player1.Add1ToScore();
+        player2.Add1ToScore();
 
         player1.add1ToMovesCount();
         player2.add1ToMovesCount();
