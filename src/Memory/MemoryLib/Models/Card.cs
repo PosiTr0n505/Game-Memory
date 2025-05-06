@@ -29,7 +29,6 @@ namespace MemoryLib.Models
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
         /// </summary>
-
         public void Flip()
         {
             IsFaceUp = !IsFaceUp;
