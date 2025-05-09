@@ -10,19 +10,7 @@ namespace MemoryLib.Managers
         private int currentscore = 0;
         private readonly Game _game;
         private readonly CardManager _cardManager;
-        private readonly bool _enableConsoleOutput;
 
-        public GameManager()
-        {
-            _game = new Game();
-            _cardManager = new CardManager();
-        }
-        public GameManager(bool enableConsoleOutput = true)
-        {
-            _enableConsoleOutput = enableConsoleOutput;
-            _game = new Game();
-            _cardManager = new CardManager();
-        }
         public GameManager(Game game)
         {
             _game = game;
@@ -47,12 +35,6 @@ namespace MemoryLib.Managers
 
             Card card1;
             Card card2;
-            if (_enableConsoleOutput)
-            {
-                Console.Clear();
-                //Console.WriteLine("Game started!");
-            }
-
 
             while (_game.IsGameOver() != true)
             {

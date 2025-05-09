@@ -9,7 +9,7 @@ namespace Tests
         [Fact]
         public void Increment_moves_should_increase_move_count()
         {
-            GameManager _gameManager = new GameManager();
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
             var initialMoves = 0;
 
             _gameManager.IncrementMoves();
@@ -57,7 +57,7 @@ namespace Tests
         [Fact]
         public void UpdateScore_should_update_score_correctly()
         {
-            GameManager _gameManager = new GameManager();
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
             var initialScore = 0;
 
             var updatedScore = _gameManager.UpdateScore(10);
@@ -80,7 +80,7 @@ namespace Tests
         [Fact]
         public void GameOver_should_return_true_when_game_is_over()
         {
-            GameManager _gameManager = new GameManager();
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
             _gameManager.StartGame();
 
             while (!_gameManager.IsGameOver())
@@ -94,7 +94,7 @@ namespace Tests
         [Fact]
         public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
         {
-            GameManager _gameManager = new GameManager();
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
 
             Assert.NotNull(_gameManager); 
         }

@@ -9,8 +9,8 @@ namespace Tests
         {
             Player p = new Player("Test");
 
-            p.add1ToMovesCount();
-
+            p.Add1ToMovesCount();
+                
             Assert.Equal(1, p.MovesCount);
         }
 
