@@ -9,7 +9,7 @@ namespace MemoryLib.Managers
         private int moves = 0;
         private int currentscore = 0;
         private readonly Game _game;
-        private readonly CardManager _cardManager;
+        private readonly ICardManager _cardManager = new CardManager();
 
         public GameManager(Game game)
         {
@@ -58,12 +58,14 @@ namespace MemoryLib.Managers
                     //Console.WriteLine($"This Card at has already been found");
                     continue;
                 }
+                
                 if (card1 == card2)
                 {
                     //Console.WriteLine($"You have selected the same card. Try again.");
                     continue;
                 }
-                if (Card.MatchCards(card1, card2))
+
+                if (_cardManager.CompareCards(card1, card2))
                 {
                     card1.Flip();
                     card2.Flip();
@@ -97,8 +99,6 @@ namespace MemoryLib.Managers
             if (!int.TryParse(inputs[0], out x) || !int.TryParse(inputs[1], out y))
                 throw new ArgumentException("Invalid input. Please enter two valid numbers separated by a space.");
 
-            x -= 1;
-            y -= 1;
             if (x < 0 || y < 0 || x >= _game.Grid.X || y >= _game.Grid.Y)
                 throw new ArgumentOutOfRangeException("Coordinates are out of range. Please try again.");
 
