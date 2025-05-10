@@ -30,11 +30,11 @@ namespace MemoryLib.Models
         /// <summary>
         /// Initialise une nouvelle instance du jeu avec une grille par défaut et deux joueurs.
         /// </summary>
-        public Game()
+        public Game(String p1, String p2)
         {
             Grid = new Grid();
-            Player1 = new Player("Player 1");
-            Player2 = new Player("Player 2");
+            Player1 = new(p1);
+            Player2 = new(p2);
             CurrentPlayer = Player1;
         }
 
@@ -101,7 +101,7 @@ namespace MemoryLib.Models
                 allCards.Add(new Card(type)); 
                 allCards.Add(new Card(type));
             }
-            allCards = allCards.OrderBy(c => rand.Next()).ToList(); // Mélange
+            allCards = allCards.OrderBy(c => rand.Next()).ToList();
             int index = 0;
             for (int i = 0; i < Grid.GetCards().GetLength(0); i++)
             {

@@ -9,47 +9,13 @@ namespace Tests
         [Fact]
         public void Increment_moves_should_increase_move_count()
         {
-            GameManager _gameManager = new GameManager();
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
             var initialMoves = 0;
 
             _gameManager.IncrementMoves();
 
             Assert.Equal(1, initialMoves + 1);
         }
-
-        [Fact]
-        public void UpdateScore_should_update_score_correctly()
-        {
-            GameManager _gameManager = new GameManager();
-            var initialScore = 0;
-
-            var updatedScore = _gameManager.UpdateScore(10);
-             
-            Assert.Equal(initialScore + 10, updatedScore);
-        }
-
-        [Fact]
-        public void GameOver_should_return_true_when_game_is_over()
-        {
-            GameManager _gameManager = new GameManager();
-            _gameManager.StartGame();
-
-            while (!_gameManager.IsGameOver())
-            {
-                _gameManager.SwitchPlayers();
-            }
-
-            Assert.True(_gameManager.IsGameOver());
-        }
-
-        [Fact]
-        public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
-        {
-            GameManager _gameManager = new GameManager();
-
-            Assert.NotNull(_gameManager); 
-        }
-
 
         /*[Fact]
         public void FlipCard_should_flip_card_successfully()
@@ -88,6 +54,17 @@ namespace Tests
             Assert.NotEqual(initialPlayer, _gameManager.IsGameOver());
         }*/
 
+        [Fact]
+        public void UpdateScore_should_update_score_correctly()
+        {
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
+            var initialScore = 0;
+
+            var updatedScore = _gameManager.UpdateScore(10);
+             
+            Assert.Equal(initialScore + 10, updatedScore);
+        }
+
         /*[Fact]
         public void FlipCard_should_not_flip_when_card_is_null()
         {
@@ -99,5 +76,40 @@ namespace Tests
             var exception = Assert.Throws<ArgumentOutOfRangeException>(() => _gameManager.FlipCard(x, y));
             Assert.Equal("Coordinates are out of range. Please try again.", exception.Message);
         }*/
+
+        [Fact]
+        public void GameOver_should_return_true_when_game_is_over()
+        {
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
+            _gameManager.StartGame();
+
+            while (!_gameManager.IsGameOver())
+            {
+                _gameManager.SwitchPlayers();
+            }
+
+            Assert.True(_gameManager.IsGameOver());
+        }
+
+        [Fact]
+        public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
+        {
+            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
+
+            Assert.NotNull(_gameManager); 
+        }
+
+        /*[Fact]
+        public void SwitchPlayers_ShouldHandleMultipleSwitches()
+        {
+            GameManager _gameManager = new GameManager();
+            var initialPlayer = _gameManager.IsGameOver();
+
+            _gameManager.SwitchPlayers();
+            _gameManager.SwitchPlayers();
+
+            Assert.NotEqual(initialPlayer, _gameManager.IsGameOver());
+        }*/
+
     }
 }

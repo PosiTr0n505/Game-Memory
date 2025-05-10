@@ -47,7 +47,7 @@ namespace MemoryLib.Models
 
             if (scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
                 return scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
-
+            
             return scores.Where(s => s.Player.NameTag == playerName);
         }
     }
