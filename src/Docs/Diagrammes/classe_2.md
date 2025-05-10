@@ -1,4 +1,4 @@
-```
+```plantuml
 @startuml
 hide circle
 allowmixing
