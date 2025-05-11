@@ -18,7 +18,7 @@ steps:
       - dotnet new sln --name MemoryMAUIsln
       - dotnet sln MemoryMAUIsln.sln add MemoryMAUI/MemoryMAUI.csproj 
       - dotnet restore MemoryMAUIsln.sln
-      - dotnet build MemoryMAUIsln.sln -c Release --no-restore /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT -property:Aapt2ToolPath=$ANDROID_SDK_ROOT/build-tools/33.0.0
+      - dotnet build MemoryMAUIsln.sln -c Release --no-restore /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT -property:Aapt2ToolPath=$ANDROID_SDK_ROOT/build-tools/35.0.0
       - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android /p:AndroidSdkDirectory=/usr/lib/android-sdk
 
   - name: build_dotnet_lib
@@ -68,7 +68,7 @@ steps:
       - dotnet build Memory.sln -c Release --no-restore
       - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net8.0-android
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net9.0-android
 
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     depends_on: [buildMAUI, build_dotnet_console, build_dotnet_lib, tests]
