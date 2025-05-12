@@ -19,7 +19,7 @@ namespace MyApp
                 WriteLine("3. Game Rules");
                 WriteLine("4. Leaderboard");
                 WriteLine("5. Credits");
-                WriteLine("6. Quit Game");
+                WriteLine("6. Quit Game\n");
                 Write("Select an option: ");
 
                 string? choice = ReadLine();
@@ -69,7 +69,7 @@ namespace MyApp
             WriteLine("Starting Two Players Game...\nEnter The Name of the 2 Players\n");
 
             AskTwoPlayersNames(out string? P1Name, out string? P2Name);
-
+            WriteLine();
             GridSize gridSize = AskGridSize();
 
             GameManager gameManager = new GameManager(new Game(new Player(P1Name), new Player(P2Name), gridSize));
@@ -112,7 +112,7 @@ namespace MyApp
                 WriteLine($"{i} : {size.Value}");
                 ++i;
             }
-            
+            Write("\nGrid Size : ");
             string? choice = ReadLine();
 
             int gsc = gridSizeManager.Values.Count;
