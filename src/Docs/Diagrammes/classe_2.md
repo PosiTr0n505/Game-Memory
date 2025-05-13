@@ -22,7 +22,7 @@ class Score {
     - gamesPlayed: int
 }
 
-Score o--> Player : "-/ player: Player"
+Score o--> "1" Player : "-/ player: Player"
 Score o--> GridSize : "+/ GridSize: GridSize"
 
 class Leaderboard {
@@ -41,14 +41,14 @@ class Game {
     + isGameFinished(): bool
 }
 
-Game  o--> Player : "+/Player1\n+/Player2"
+Game  o--> "1..2" Player : "+/Player1\n+/Player2"
 
 class Card {
     - id: int
     -/ isFaceUp: bool
 }
 
-Card *--> CardType : "+/ Type: CardType"
+Card *--> CardType : "+/CardType"
 
 class CardType <<enum>>
 
@@ -92,19 +92,18 @@ class GameManager
 GameManager ..|> IGameManager
 GameManager ..|> ISaveManager
 GameManager ..|> ILoadManager
-GameManager o--> Game : "-/Game: Game"
-GameManager *--> CardManager
-GameManager *--> ScoreManager
+GameManager o--> "1" Game : "-/game"
+GameManager *--> "1" CardManager
+GameManager *--> "1" ScoreManager
 
 class ScoreManager
 ScoreManager ..|> IScoreManager
-ScoreManager o--> Score
-ScoreManager *--> Leaderboard
+ScoreManager *--> "1" Leaderboard : +/Leaderboard
 
 class CardManager
 CardManager ..|> ICardManager
-CardManager *--> Card
-CardManager *--> GridSize : "+/ GridSize: GridSize"
+CardManager *--> "0..*" Card : "+/Cards"
+CardManager *--> GridSize : "+/GridSize"
 
 
 enum GridSize <<enum>>
