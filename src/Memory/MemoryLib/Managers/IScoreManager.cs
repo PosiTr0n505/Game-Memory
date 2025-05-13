@@ -11,5 +11,7 @@ namespace MemoryLib.Managers
     {
         void ChangeScoreValueIfGreater(int scoreValue);
         void IncrementGamesPlayed();
+        void SaveScore();
+        int GetScore();
     }
 }
