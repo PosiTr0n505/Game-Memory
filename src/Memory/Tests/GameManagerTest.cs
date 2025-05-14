@@ -96,7 +96,8 @@ namespace Tests
         [Fact]
         public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
         {
-            GameManager _gameManager = new GameManager(new Game("test1", "test2"));
+            Game game = new Game(new Player("test1"), new Player("test2"), GridSize.Size1);
+            GameManager _gameManager = new(game);
 
             Assert.NotNull(_gameManager); 
         }

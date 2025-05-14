@@ -9,7 +9,7 @@ namespace MemoryLib.Models
     public class Player : IEquatable<Player>
     {
         public delegate void OnScoreChangeNotify(Player player, int score);
-        public event OnScoreChangeNotify ScorePropertyChanged;
+        public event OnScoreChangeNotify? ScorePropertyChanged;
 
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.

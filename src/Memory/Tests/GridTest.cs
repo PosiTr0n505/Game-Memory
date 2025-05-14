@@ -19,7 +19,7 @@ namespace Tests
             g.AddCard(c3, 1, 0);
             g.AddCard(c4, 1, 1);
 
-            foreach (var card in g.GetCards())
+            foreach (var card in g.Cards)
             {
                 Assert.NotNull(card);
             }
@@ -41,7 +41,7 @@ namespace Tests
         {
             Grid g = new(2, 2);
 
-            var cards = g.GetCards();
+            var cards = g.Cards;
             int count = cards.Cast<Card>().Count(card => card != null);
 
             Assert.Equal(0, count);

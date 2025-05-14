@@ -4,8 +4,8 @@
              xmlns:pages="clr-namespace:MemoryMAUI.Pages"
              x:Class="MemoryMAUI.Pages.TwoPlayersGamePage"
              Title="TwoPlayersGamePage">
+    
     <Grid ColumnDefinitions="*" 
-          HeightRequest="{Binding Source={RelativeSource Self}, Path=Width}"
           BackgroundColor="{StaticResource Primary}">
     </Grid>
 </ContentPage>
