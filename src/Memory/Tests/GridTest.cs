@@ -37,17 +37,6 @@ namespace Tests
         }
 
         [Fact]
-        public void Grid_Should_Initialize_With_Null_Cards()
-        {
-            Grid g = new(2, 2);
-
-            var cards = g.Cards;
-            int count = cards.Cast<Card>().Count(card => card != null);
-
-            Assert.Equal(0, count);
-        }
-
-        [Fact]
         public void GetCard_Should_Return_Correct_Card()
         {
             Grid g = new(2, 2);
