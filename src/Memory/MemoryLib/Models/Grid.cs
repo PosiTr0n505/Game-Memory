@@ -75,17 +75,40 @@ namespace MemoryLib.Models
         /// </summary>
         public void ShowGrid()
         {
-            WriteLine("Current grid:");
+            Write("    ");
+            for (int y = 0; y < Y; y++)
+            {
+                Write($"{y,2} ");
+            }
+            WriteLine();
+
+            Write("   +");
+            for (int y = 0; y < Y; y++)
+            {
+                Write("---");
+            }
+            WriteLine();
+
             for (int x = 0; x < X; x++)
-               { 
-                Console.WriteLine();
+            {
+                Write($"{x,2} |");
                 for (int y = 0; y < Y; y++)
                 {
                     Card? c = Cards[x, y];
-                    if (c == null) Console.Write("N ");
-                    if (c != null && c.IsFaceUp) Write($"! ");
-                    else Write($"{c} ");
+                    if (c == null)
+                    {
+                        Write("   ");
+                    }
+                    else if (c.IsFound)
+                    {
+                        Write(" ! ");
+                    }
+                    else
+                    {
+                        Write($" {c.Id.ToString()[0]} ");
+                    }
                 }
+                WriteLine();
             }
             WriteLine();
         }

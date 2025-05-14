@@ -15,6 +15,7 @@ namespace MemoryLib.Models
         {
             Id = id;
             IsFaceUp = false;
+            IsFound = false;
         }
         /// <summary>
         /// Obtient l'identifiant unique de la carte.
@@ -25,6 +26,8 @@ namespace MemoryLib.Models
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
         public bool IsFaceUp { get; private set; }
+
+        public bool IsFound { get; set; }
 
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
@@ -119,5 +122,6 @@ namespace MemoryLib.Models
         /// </summary>
         /// <returns>Le code de hachage de l'identifiant de la carte.</returns>
         public override int GetHashCode() => Id.GetHashCode();
+
     }
 }

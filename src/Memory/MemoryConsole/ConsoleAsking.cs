@@ -11,7 +11,7 @@ namespace MemoryConsole
 
         public void AskOnePlayerName(out string playerName) 
         {
-            Write("Enter your name :");
+            Write("Enter your name :    ");
             playerName = ReadLine();
             while (string.IsNullOrWhiteSpace(playerName))
             {
