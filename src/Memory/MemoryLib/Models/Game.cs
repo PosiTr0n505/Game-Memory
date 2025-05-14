@@ -24,7 +24,6 @@ namespace MemoryLib.Models
         /// <summary>
         /// Représente la grille de cartes du jeu.
         /// </summary>
-
         public Grid Grid { get; set; }
 
         /// <summary>
@@ -91,7 +90,7 @@ namespace MemoryLib.Models
 
             Random rand = new Random();
 
-            int CardSlotCount = Grid.GetCards().GetLength(0) * Grid.GetCards().GetLength(1);
+            int CardSlotCount = Grid.X * Grid.Y;
 
             List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
             List<Card> allCards = new();
@@ -103,9 +102,9 @@ namespace MemoryLib.Models
             }
             allCards = allCards.OrderBy(c => rand.Next()).ToList();
             int index = 0;
-            for (int i = 0; i < Grid.GetCards().GetLength(0); i++)
+            for (int i = 0; i < Grid.X; i++)
             {
-                for (int j = 0; j < Grid.GetCards().GetLength(1); j++)
+                for (int j = 0; j < Grid.Y; j++)
                 {
                     Grid.AddCard(allCards[index++], (byte)i, (byte)j); 
                 }

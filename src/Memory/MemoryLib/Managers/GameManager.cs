@@ -1,12 +1,17 @@
 ﻿using MemoryLib.Models;
 //using MemoryConsole.SaveStub;
 using System.Data;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MemoryLib.Managers
 {
     public class GameManager : IGameManager
     {
-        public int moves = 0;
+        public delegate void OnBoardChange(IEnumerable<Card> cards);
+        public event OnBoardChange? BoardChange;
+
+        public int Moves { get; private set; }
         private int currentscore = 0;
         private readonly Game _game;
         private readonly ICardManager _cardManager = new CardManager();
@@ -14,12 +19,13 @@ namespace MemoryLib.Managers
         public GameManager(Game game)
         {
             _game = game;
+            Moves = 0;
             _cardManager = new CardManager();
         }
 
         public void ShowGrid() => _game.Grid.ShowGrid();
 
-        public void IncrementMoves() => moves++;
+        public void IncrementMoves() => Moves++;
 
         public void FlipCard(int x, int y)
         {
@@ -29,6 +35,12 @@ namespace MemoryLib.Managers
 
             _cardManager.FlipCard(card);
         }
+
+        public void PlayTurn(int x1, int y1, int x2, int y2)
+        {
+            BoardChange?.Invoke(_game.Grid.Cards);
+        }
+
         public void StartGame()
         {
             _game.StartGame();
