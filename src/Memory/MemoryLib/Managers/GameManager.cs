@@ -6,7 +6,7 @@ namespace MemoryLib.Managers
 {
     public class GameManager : IGameManager
     {
-        private int moves = 0;
+        public int moves = 0;
         private int currentscore = 0;
         private readonly Game _game;
         private readonly ICardManager _cardManager = new CardManager();

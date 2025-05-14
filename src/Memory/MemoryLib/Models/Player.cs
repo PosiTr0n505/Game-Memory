@@ -11,7 +11,7 @@
         /// </summary>
         /// <param name="name">Le nom du joueur. Ne peut pas être nul ou vide.</param>
         /// <exception>Lève une exception si le nom est nul ou vide.</exception>
-        public Player(string name)
+        public Player(string? name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
             this.NameTag = name;

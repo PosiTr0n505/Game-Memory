@@ -4,6 +4,6 @@ namespace MemoryLib.Managers
 {
     public interface ILoadManager
     {
-        Game LoadGame { get; }
+        public Game LoadGame();
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using MemoryConsole;
 using MemoryLib.Managers;
 using MemoryLib.Models;
 
@@ -19,7 +20,7 @@ namespace MyApp
                 WriteLine("3. Game Rules");
                 WriteLine("4. Leaderboard");
                 WriteLine("5. Credits");
-                WriteLine("6. Quit Game");
+                WriteLine("6. Quit Game\n");
                 Write("Select an option: ");
 
                 string? choice = ReadLine();
@@ -60,14 +61,20 @@ namespace MyApp
             WriteLine("Starting Singleplayer Game...");
             // A modifier pour faire le startgame 1 player :
             // GameManager gameManager = new GameManager(new Game(new Player("Player 1"),  GridSize.Size1)); 
-            //gameManager.StartGame();
+            // gameManager.StartGame();
         }
 
         static void StartTwoPlayersGame()
         {
+            ConsoleAsking consoleAsk = new();
             Clear();
-            WriteLine("Starting Two Players Game...");
-            GameManager gameManager = new GameManager(new Game(new Player("Player 1"), new Player("Player 2"), GridSize.Size1));
+            WriteLine("Starting Two Players Game...\nEnter The Name of the 2 Players\n");
+
+            consoleAsk.AskTwoPlayersNames(out string? P1Name, out string? P2Name);
+            WriteLine();
+            GridSize gridSize = consoleAsk.AskGridSize();
+
+            GameManager gameManager = new GameManager(new Game(new Player(P1Name), new Player(P2Name), gridSize));
             gameManager.StartGame();
         }
 
