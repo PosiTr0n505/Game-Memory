@@ -57,8 +57,12 @@ namespace MyApp
 
         static void StartSingleplayerGame()
         {
+            ConsoleAsking consoleAsk = new();
             Clear();
             WriteLine("Starting Singleplayer Game...");
+            consoleAsk.AskOnePlayerName(out string? playerName);
+            WriteLine();
+            GridSize gridSize = consoleAsk.AskGridSize();
             // A modifier pour faire le startgame 1 player :
             // GameManager gameManager = new GameManager(new Game(new Player("Player 1"),  GridSize.Size1)); 
             // gameManager.StartGame();
