@@ -8,33 +8,21 @@ namespace MemoryConsole
     {
         public ConsoleAsking() { }
 
-        public void AskTwoPlayersNames(out string? P1Name, out string? P2Name)
+        public static string AskPlayersName(string i)
         {
-            Write("Player 1 :   ");
-            P1Name = ReadLine();
+            Write($"Player {i}, Enter your name :   ");
+            string P1Name = ReadLine()!;
+
             while (string.IsNullOrWhiteSpace(P1Name))
             {
                 Write("Please enter a valid name.\nPlayer 1 :   ");
-                P1Name = ReadLine();
+                P1Name = ReadLine()!;
             }
 
-            Write("Player 2 :   ");
-            P2Name = ReadLine();
-
-            if (P2Name == P1Name)
-            {
-                WriteLine("The two players cannot have the same name.\n");
-                P2Name = null;
-            }
-
-            while (string.IsNullOrWhiteSpace(P2Name))
-            {
-                Write("Please enter a valid name.\nPlayer 2 :   ");
-                P2Name = ReadLine();
-            }
+            return P1Name;
         }
 
-        public GridSize AskGridSize()
+        public static GridSize AskGridSize()
         {
             GridSizeManager gridSizeManager = new GridSizeManager();
             WriteLine("Select the grid size:");

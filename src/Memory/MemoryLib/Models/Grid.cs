@@ -37,29 +37,45 @@ namespace MemoryLib.Models
         /// <param name="x">Le nombre de lignes de la grille.</param>
         /// <param name="y">Le nombre de colonnes de la grille.</param>
 
+        private void InitializeGrid()
+        {
+            List<CardType> types = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+
+            Random rand = new Random();
+
+            int CardSlotCount = X * Y;
+
+            List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
+            List<Card> allCards = new();
+
+            foreach (var type in typesSelected)
+            {
+                allCards.Add(new Card(type));
+                allCards.Add(new Card(type));
+            }
+            allCards = allCards.OrderBy(c => rand.Next()).ToList();
+            int index = 0;
+            for (int i = 0; i < X; i++)
+            {
+                for (int j = 0; j < Y; j++)
+                {
+                    AddCard(allCards[index++], (byte)i, (byte)j);
+                }
+            }
+        }
+
         public Grid(int x, int y) 
         {
             X = x;
             Y = y;
             _cards = new Card[x, y];
+            InitializeGrid();
             _cardsList = new List<Card>();
             foreach (Card card in _cards)
             {
                 _cardsList.Add(card);
             }
             Cards = new ReadOnlyCollection<Card>(_cardsList);
-        }
-        /// <summary>
-        /// Initialise une nouvelle instance d'une grille vide (0x0).
-        /// </summary>
-
-        public Grid()
-        {
-            X = 0;
-            Y = 0;
-            _cards = new Card[0, 0];
-            _cardsList = new List<Card>();
-
         }
 
         /// <summary>

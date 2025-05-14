@@ -1,13 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MemoryLib.Managers;
+using MemoryLib.Models;
+using static System.Console;
 
 namespace MemoryConsole.Display
 {
-    public class GridWriter
+    public static class GridWriter
     {
-        
+        public static void WriteGrid(GameManager sender, IEnumerable<Card> grid)
+        {
+            int i = 0;
+            foreach (var card in grid)
+            {
+                if (i % sender.Game.Grid.X == 0)
+                {
+                    Write("\n");
+                    i = 0;
+                }
+                Write(card + " ");
+                ++i;
+            }
+        }
     }
 }
