@@ -17,7 +17,7 @@ steps:
       - dotnet workload restore
       - dotnet restore Memory.sln
       - dotnet build Memory.sln -c Release --no-restore /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT -property:Aapt2ToolPath=$ANDROID_SDK_ROOT/build-tools/35.0.0
-      - dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android /p:AndroidSdkDirectory=/usr/lib/android-sdk
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android
 
   - name: build_dotnet
     image: mcr.microsoft.com/dotnet/sdk:9.0
@@ -25,7 +25,7 @@ steps:
       - cd src/Memory/
       - dotnet restore MemoryCI.sln
       - dotnet build MemoryCI.sln -c Release --no-restore
-      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android
+      - dotnet publish Memory.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android /p:AndroidSdkDirectory=/usr/lib/android-sdk
 
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:9.0
