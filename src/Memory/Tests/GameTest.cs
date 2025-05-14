@@ -56,7 +56,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new Game(player1, player2, GridSize.Size1); // C un test avec 4 cartes
+            Game? game = new(player1, player2, GridSize.Size1);
 
             game.StartGame();
             int count = 0;
@@ -74,7 +74,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size1);
+            Game game = new(player1, player2, GridSize.Size1);
 
             game.StartGame();
 
@@ -92,7 +92,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size4);
+            Game game = new(player1, player2, GridSize.Size4);
 
             game.StartGame();
             var cards = game.Grid.GetCards();
@@ -108,7 +108,7 @@ namespace Tests
                 }
             }
 
-            Assert.All(typeCount.Values, count => Assert.Equal(2, count)); // verifie qu'il existe 2 exemplaires de chaque type
+            Assert.All(typeCount.Values, count => Assert.Equal(2, count));
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size3);
+            Game game = new(player1, player2, GridSize.Size3);
 
             game.StartGame();
 

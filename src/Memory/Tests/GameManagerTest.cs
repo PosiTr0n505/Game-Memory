@@ -1,6 +1,5 @@
 ﻿using MemoryLib.Managers;
 using MemoryLib.Models;
-using System;
 
 namespace Tests
 {
@@ -11,7 +10,9 @@ namespace Tests
         {
             GameManager _gameManager = new(new Game("test1", "test2"));
             var initialMoves = 0;
+
             _gameManager.IncrementMoves();
+            
             Assert.Equal(1, initialMoves + 1);
         }
 
@@ -20,8 +21,10 @@ namespace Tests
         {
             GameManager _gameManager = new(new Game("test1", "test2"));
             Card card = new(CardType.A);
-            Grid grid = new(4, 4);
+            _ = new Grid(4, 4);
+
             _gameManager.FlipCard(0, 0);
+            
             Assert.True(card.IsFaceUp);
         }
 
@@ -31,7 +34,9 @@ namespace Tests
             GameManager _gameManager = new(new Game("test1", "test2"));
             Card card = new(CardType.A);
             _gameManager.FlipCard(0, 0);
+
             _gameManager.FlipCard(0, 0);
+            
             Assert.True(card.IsFaceUp);
         }
 
@@ -49,9 +54,7 @@ namespace Tests
             _gameManager.StartGame();
 
             while (!_gameManager.IsGameOver())
-            {
                 _gameManager.SwitchPlayers();
-            }
 
             Assert.True(_gameManager.IsGameOver());
         }
@@ -60,7 +63,9 @@ namespace Tests
         public void GameOver_should_return_false_when_game_is_not_over()
         {
             GameManager _gameManager = new(new Game("test1", "test2"));
+
             _gameManager.StartGame();
+
             Assert.False(_gameManager.IsGameOver());
         }
 

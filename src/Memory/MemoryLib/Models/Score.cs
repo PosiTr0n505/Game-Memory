@@ -5,42 +5,35 @@ namespace MemoryLib.Models
     /// Représente un score pour un joueur dans le jeu, avec des informations sur le joueur, la valeur du score, 
     /// la taille de la grille et le nombre de jeux joués.
     /// </summary>
-    public sealed class Score : IEquatable<Score>, IScoreManager
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe Score avec les valeurs spécifiées pour le joueur, le score, la taille de la grille et les jeux joués.
+    /// </remarks>
+    /// <param name="p">Le joueur associé à ce score.</param>
+    /// <param name="scoreValue">La valeur du score.</param>
+    /// <param name="gs">La taille de la grille associée au score.</param>
+    /// <param name="gp">Le nombre de jeux joués (par défaut à 0).</param>
+    public sealed class Score(Player p, int scoreValue, GridSize gs, int gp = 0) : IEquatable<Score>, IScoreManager
     {
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe Score avec les valeurs spécifiées pour le joueur, le score, la taille de la grille et les jeux joués.
-        /// </summary>
-        /// <param name="p">Le joueur associé à ce score.</param>
-        /// <param name="scoreValue">La valeur du score.</param>
-        /// <param name="gs">La taille de la grille associée au score.</param>
-        /// <param name="gp">Le nombre de jeux joués (par défaut à 0).</param>
-        public Score(Player p, int scoreValue, GridSize gs, int gp = 0) 
-        { 
-            this.Player = p;
-            this.ScoreValue = scoreValue;
-            this.GridSize = gs;
-            GamesPlayed = gp;
-        }
 
         /// <summary>
         /// Obtient le joueur associé à ce score.
         /// </summary>
-        public Player Player { get; }
+        public Player Player { get; } = p;
 
         /// <summary>
         /// Obtient ou définit la valeur du score.
         /// </summary>
-        public int ScoreValue { get; private set; }
+        public int ScoreValue { get; private set; } = scoreValue;
 
         /// <summary>
         /// Obtient la taille de la grille associée à ce score.
         /// </summary>
-        public GridSize GridSize { get; }
+        public GridSize GridSize { get; } = gs;
 
         /// <summary>
         /// Obtient ou définit le nombre de jeux joués par le joueur.
         /// </summary>
-        public int GamesPlayed { get; private set; }
+        public int GamesPlayed { get; private set; } = gp;
 
         /// <summary>
         /// Incrémente le nombre de jeux joués de 1.
@@ -78,7 +71,7 @@ namespace MemoryLib.Models
         /// <returns>true si les objets sont égaux, sinon false.</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(obj, null)) return false;
+            if (obj is null) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (obj.GetType() != this.GetType()) return false;
             return this.Equals((Score)obj);

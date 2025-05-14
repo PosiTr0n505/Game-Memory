@@ -6,16 +6,16 @@ namespace MemoryLib.Managers
     {
         public (int, int) GetGridSizeValues(GridSize g)
         {
-            switch (g)
+            return g switch
             {
-                case GridSize.Size1: return (2, 2);
-                case GridSize.Size2: return (3, 4);
-                case GridSize.Size3: return (4, 4);
-                case GridSize.Size4: return (5, 4);
-                case GridSize.Size5: return (6, 5);
-                case GridSize.Size6: return (7, 6);
-                default: throw new ArgumentException("Invalid GridSize value");
-            }
+                GridSize.Size1 => (2, 2),
+                GridSize.Size2 => (3, 4),
+                GridSize.Size3 => (4, 4),
+                GridSize.Size4 => (5, 4),
+                GridSize.Size5 => (6, 5),
+                GridSize.Size6 => (7, 6),
+                _ => throw new ArgumentException("Invalid GridSize value"),
+            };
         }
     }
 }

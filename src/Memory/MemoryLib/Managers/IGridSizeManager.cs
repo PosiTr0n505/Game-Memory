@@ -4,6 +4,6 @@ namespace MemoryLib.Managers
 {
     public interface IGridSizeManager
     {
-        (int, int) GetGridSizeValues(GridSize g);
+        public (int, int) GetGridSizeValues(GridSize g);
     }
 }

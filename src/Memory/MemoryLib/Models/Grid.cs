@@ -6,7 +6,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente une grille de cartes dans le jeu, contenant une matrice de cartes et offrant des méthodes pour interagir avec celle-ci.
     /// </summary>
-    public class Grid : IGridManager
+    public class Grid
     {
         /// <summary>
         /// Obtient le nombre de lignes de la grille.
@@ -99,15 +99,16 @@ namespace MemoryLib.Models
                 for (var y = 0; y < Y; y++)
                     Cards[x, y] = null!;
         }
-
         /// <summary>
-        /// Efface la grille, mais cette méthode n'est pas encore implémentée.
+        /// Indique si la grille est vide (toutes les cases sont nulles).
         /// </summary>
-        /// <param name="grid">La grille à effacer.</param>
-        /// <exception">A faire bientot</exception>
-        public void ClearGrid(Grid grid)
+        public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            for (int x = 0; x < X; x++)
+                for (int y = 0; y < Y; y++)
+                    if (Cards[x, y] != null)
+                        return false;
+            return true;
         }
     }
 
