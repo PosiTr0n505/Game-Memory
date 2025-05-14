@@ -23,9 +23,11 @@ namespace MemoryLib.Managers
 
         public void IncrementGamesPlayed()
         {
-            score.GamesPlayed += 1;
+            throw new NotImplementedException();
         }
 
-        public void SaveScore() => leaderboard.AddScore(score);
+        //public void IncrementGamesPlayed() => score.GamesPlayed += 1;
+
+        public void SaveScore() => leaderboard.AddScore(score: score);
     }
 }

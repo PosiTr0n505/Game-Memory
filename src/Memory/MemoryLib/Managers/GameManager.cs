@@ -26,8 +26,8 @@ namespace MemoryLib.Managers
             var card = _game.Grid.GetCard(x, y);
 
             if (card == null) return;
-
-            _cardManager.FlipCard(card);
+            if (card.IsFaceUp == true) _cardManager.UnFlipCard(card);
+            else _cardManager.FlipCard(card);
         }
         public void StartGame()
         {
@@ -116,31 +116,10 @@ namespace MemoryLib.Managers
             return card;
         }
 
-        public bool IsGameOver()
-        {
-            return _game?.IsGameOver() ?? false;
-        }
+        public bool IsGameOver() => _game?.IsGameOver() ?? false;
 
-        public int UpdateScore(int score)
-        {
-            currentscore += score;
-            Console.WriteLine($"Score updated: {currentscore}");
-            return currentscore;
-        }
+        public int UpdateScore(int score) => currentscore += score;
 
-        public void SwitchPlayers()
-        {
-            _game?.SwitchPlayer();
-            Console.WriteLine("Switched players.");
-        }
-
-        //public static void SaveGame() => Console.WriteLine("Game saved.");
-
-
-        //public Game LoadGame()
-        //{
-        //    this._game = Stub.StubGame1();
-        //    return _game;
-        //}
+        public void SwitchPlayers() => _game?.SwitchPlayer();
     }
 }

@@ -9,7 +9,5 @@ namespace MemoryLib
         void UnFlipCard(Card card);
 
         bool CompareCards(Card card1, Card card2);
-
-        void MatchCard(Card card);
     }
 }

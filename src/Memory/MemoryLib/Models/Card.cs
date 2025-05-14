@@ -5,7 +5,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente une carte dans un jeu de cartes, avec un identifiant de type CardType et un état face visible ou cachée.
     /// </summary>
-    public class Card : ICardManager, IEquatable<Card>
+    public class Card : IEquatable<Card>
     {
         /// <summary>
         /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
@@ -19,7 +19,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Obtient l'identifiant unique de la carte.
         /// </summary>
-        public CardType Id { get; private init; }
+        public CardType Id { get; }
 
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
