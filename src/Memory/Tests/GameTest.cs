@@ -60,7 +60,7 @@ namespace Tests
 
             game.StartGame();
             int count = 0;
-            var cards = game.Grid.GetCards();
+            var cards = game.Grid.Cards;
             foreach (var card in cards)
             {
                 if (card != null) count++;
@@ -79,7 +79,7 @@ namespace Tests
             game.StartGame();
 
             int cardCount = 0;
-            foreach (var c in game.Grid.GetCards())
+            foreach (var c in game.Grid.Cards)
             {
                 if (c != null) cardCount++;
             }
@@ -95,7 +95,7 @@ namespace Tests
             Game game = new Game(player1, player2, GridSize.Size4);
 
             game.StartGame();
-            var cards = game.Grid.GetCards();
+            var cards = game.Grid.Cards;
             var typeCount = new Dictionary<CardType, int>();
 
             foreach (var card in cards)
@@ -121,7 +121,7 @@ namespace Tests
             game.StartGame();
 
             int cardCount = 0;
-            foreach (var c in game.Grid.GetCards())
+            foreach (var c in game.Grid.Cards)
             {
                 if (c != null) cardCount++;
             }

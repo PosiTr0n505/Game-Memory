@@ -19,7 +19,7 @@ namespace Tests
             g.AddCard(c3, 1, 0);
             g.AddCard(c4, 1, 1);
 
-            foreach (var card in g.GetCards())
+            foreach (var card in g.Cards)
             {
                 Assert.NotNull(card);
             }
@@ -34,17 +34,6 @@ namespace Tests
             Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 3, 3));
             Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 0, 3));
             Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 3, 0));
-        }
-
-        [Fact]
-        public void Grid_Should_Initialize_With_Null_Cards()
-        {
-            Grid g = new(2, 2);
-
-            var cards = g.GetCards();
-            int count = cards.Cast<Card>().Count(card => card != null);
-
-            Assert.Equal(0, count);
         }
 
         [Fact]

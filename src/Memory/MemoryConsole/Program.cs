@@ -1,5 +1,6 @@
 ﻿
 using MemoryConsole;
+using MemoryConsole.Display;
 using MemoryLib.Managers;
 using MemoryLib.Models;
 
@@ -50,7 +51,7 @@ namespace MyApp
                         break;
                 }
 
-                WriteLine("\nPress any key to return to the main menu...");
+                WriteLine("\n\nPress any key to return to the main menu...");
                 ReadKey();
             }
         }
@@ -58,23 +59,48 @@ namespace MyApp
         static void StartSingleplayerGame()
         {
             Clear();
-            WriteLine("Starting Singleplayer Game...");
-            // A modifier pour faire le startgame 1 player :
-            // GameManager gameManager = new GameManager(new Game(new Player("Player 1"),  GridSize.Size1)); 
-            // gameManager.StartGame();
+
+            ConsoleAsking.AskOnePlayerName(out string playerName);
+            
+            WriteLine();
+
+            Player player = new Player(playerName);
+
+            GridSize gridSize = ConsoleAsking.AskGridSize();
+
+            Game g = new Game(player, player, gridSize);
+
+            GameManager gameManager = new GameManager(g);
+
+            gameManager.Game.StartGame();
+
+            GridWriter.WriteGrid(gameManager, g.Grid.Cards);
         }
 
         static void StartTwoPlayersGame()
         {
-            ConsoleAsking consoleAsk = new();
             Clear();
             WriteLine("Starting Two Players Game...\nEnter The Name of the 2 Players\n");
 
-            consoleAsk.AskTwoPlayersNames(out string? P1Name, out string? P2Name);
-            WriteLine();
-            GridSize gridSize = consoleAsk.AskGridSize();
+            ConsoleAsking.AskPlayersName("1", out string Player1Name);
 
-            GameManager gameManager = new GameManager(new Game(new Player(P1Name), new Player(P2Name), gridSize));
+            ConsoleAsking.AskPlayersName("2", out string Player2Name);
+
+            while (Player1Name == Player2Name)
+            {
+                WriteLine("Please enter a different name for Player 2.");
+                ConsoleAsking.AskPlayersName("2", out Player2Name);
+            }
+
+            WriteLine();
+            GridSize gridSize = ConsoleAsking.AskGridSize();
+
+            Player player1 = new(Player1Name);
+            Player player2 = new(Player2Name);
+
+            Game game = new(player1, player2, gridSize);
+
+            GameManager gameManager = new(game);
             gameManager.StartGame();
         }
 
