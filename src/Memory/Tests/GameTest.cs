@@ -60,7 +60,7 @@ namespace Tests
 
             game.StartGame();
             int count = 0;
-            var cards = game.Grid.GetCards();
+            var cards = game.Grid.Cards);
             foreach (var card in cards)
             {
                 if (card != null) count++;

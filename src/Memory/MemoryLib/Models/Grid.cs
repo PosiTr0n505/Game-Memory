@@ -1,4 +1,5 @@
-﻿using MemoryLib.Managers;
+﻿using System.Collections.ObjectModel;
+using MemoryLib.Managers;
 using static System.Console;
 
 namespace MemoryLib.Models
@@ -13,6 +14,11 @@ namespace MemoryLib.Models
         /// </summary>
         public int X { get; }
 
+        public Card GetCard(int x, int y)
+        {
+            return _cards[x, y];
+        }
+
         /// <summary>
         /// Obtient le nombre de colonnes de la grille.
         /// </summary>
@@ -21,29 +27,55 @@ namespace MemoryLib.Models
         /// <summary>
         /// Matrice des cartes de la grille.
         /// </summary>
-        private Card[,] Cards { get; }
+        private Card[,] _cards;
+
+        private List<Card> _cardsList;
 
         /// <summary>
         /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
         /// </summary>
         /// <param name="x">Le nombre de lignes de la grille.</param>
         /// <param name="y">Le nombre de colonnes de la grille.</param>
-        
+
+        private void InitializeGrid()
+        {
+            List<CardType> types = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+
+            Random rand = new Random();
+
+            int CardSlotCount = X * Y;
+
+            List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
+            List<Card> allCards = new();
+
+            foreach (var type in typesSelected)
+            {
+                allCards.Add(new Card(type));
+                allCards.Add(new Card(type));
+            }
+            allCards = allCards.OrderBy(c => rand.Next()).ToList();
+            int index = 0;
+            for (int i = 0; i < X; i++)
+            {
+                for (int j = 0; j < Y; j++)
+                {
+                    AddCard(allCards[index++], (byte)i, (byte)j);
+                }
+            }
+        }
+
         public Grid(int x, int y) 
         {
             X = x;
             Y = y;
-            Cards = new Card[x, y];
-        }
-        /// <summary>
-        /// Initialise une nouvelle instance d'une grille vide (0x0).
-        /// </summary>
-
-        public Grid()
-        {
-            X = 0;
-            Y = 0;
-            Cards = new Card[0, 0];
+            _cards = new Card[x, y];
+            InitializeGrid();
+            _cardsList = new List<Card>();
+            foreach (Card card in _cards)
+            {
+                _cardsList.Add(card);
+            }
+            Cards = new ReadOnlyCollection<Card>(_cardsList);
         }
 
         /// <summary>
@@ -57,18 +89,10 @@ namespace MemoryLib.Models
         {
             if (x >= X || y >= Y)
                 throw new IndexOutOfRangeException("The coordinates are outside of the grid range");
-            Cards[x, y] = card;
+            _cards[x, y] = card;
         }
 
-        public Card?[,] GetCards() => Cards;
-
-        /// <summary>
-        /// Obtient la carte à la position spécifiée dans la grille.
-        /// </summary>
-        /// <param name="x">La ligne de la carte dans la grille.</param>
-        /// <param name="y">La colonne de la carte dans la grille.</param>
-        /// <returns>La carte située à la position spécifiée.</returns>
-        public Card GetCard(int x, int y) => Cards[x, y];
+        public IEnumerable<Card> Cards { get; }
 
         /// <summary>
         /// Affiche l'état actuel de la grille dans la console.
@@ -94,7 +118,7 @@ namespace MemoryLib.Models
                 Write($"{x,2} |");
                 for (int y = 0; y < Y; y++)
                 {
-                    Card? c = Cards[x, y];
+                    Card? c = _cards[x, y];
                     if (c == null)
                     {
                         Write("   ");
@@ -120,7 +144,7 @@ namespace MemoryLib.Models
         {
             for (var x = 0; x < X; x++)
                 for (var y = 0; y < Y; y++)
-                    Cards[x, y] = null!;
+                    _cards[x, y] = null!;
         }
 
         /// <summary>

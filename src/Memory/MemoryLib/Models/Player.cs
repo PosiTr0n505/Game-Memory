@@ -1,10 +1,15 @@
-﻿namespace MemoryLib.Models
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace MemoryLib.Models
 {
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
     public class Player : IEquatable<Player>
     {
+        public delegate void OnScoreChangeNotify(Player player, int score);
+        public event OnScoreChangeNotify ScorePropertyChanged;
 
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.
@@ -36,8 +41,11 @@
         /// <summary>
         /// Ajoute 1 au score actuel du joueur.
         /// </summary>
-
-        public void Add1ToScore() => CurrentScore += 1;
+        public void Add1ToScore()
+        {
+            CurrentScore++;
+            ScorePropertyChanged?.Invoke(this, CurrentScore);
+        }
 
         /// <summary>
         /// Ajoute 1 au nombre de mouvements effectués par le joueur.

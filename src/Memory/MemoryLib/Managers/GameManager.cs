@@ -1,47 +1,52 @@
 ﻿using MemoryLib.Models;
-//using MemoryConsole.SaveStub;
 using System.Data;
 
 namespace MemoryLib.Managers
 {
     public class GameManager : IGameManager
     {
-        public int moves = 0;
+        public delegate void OnBoardChange(GameManager sender, IEnumerable<Card> cards);
+        public event OnBoardChange? BoardChange;
+
+        public int Moves { get; private set; }
         private int currentscore = 0;
-        private readonly Game _game;
+        public readonly Game Game;
         private readonly ICardManager _cardManager = new CardManager();
 
         public GameManager(Game game)
         {
-            _game = game;
+            Game = game;
+            Moves = 0;
             _cardManager = new CardManager();
         }
 
-        public void ShowGrid() => _game.Grid.ShowGrid();
+        public void ShowGrid() => Game.Grid.ShowGrid();
 
-        public void IncrementMoves() => moves++;
+        public void IncrementMoves() => Moves++;
 
         public void FlipCard(int x, int y)
         {
-            var card = _game.Grid.GetCard(x, y);
+            var card = Game.Grid.GetCard(x, y);
 
             if (card == null) return;
 
             _cardManager.FlipCard(card);
         }
+
+        public void PlayTurn(int x1, int y1, int x2, int y2)
+        {
+            BoardChange?.Invoke(this, Game.Grid.Cards);
+        }
+
         public void StartGame()
         {
-            _game.StartGame();
+            Game.StartGame();
 
             Card card1;
             Card card2;
 
-            while (_game.IsGameOver() != true)
+            while (Game.IsGameOver() != true)
             {
-                
-                ShowGrid();
-                //Console.WriteLine($"Current Player: {_game.CurrentPlayer.NameTag}");
-                //Console.WriteLine($"Score: {_game.CurrentPlayer.CurrentScore}");
                 try 
                 {
                     card1 = AskCoordinates();
@@ -69,12 +74,12 @@ namespace MemoryLib.Managers
                 {
                     card1.Flip();
                     card2.Flip();
-                    _game.CurrentPlayer.Add1ToScore();
-                    _game.ReduceCountByOnePair();
+                    Game.CurrentPlayer.Add1ToScore();
+                    Game.ReduceCountByOnePair();
                 }
 
                 else 
-                    _game.SwitchPlayer();
+                    Game.SwitchPlayer();
 
                 IncrementMoves();
             }
@@ -99,26 +104,26 @@ namespace MemoryLib.Managers
             if (!int.TryParse(inputs[0], out x) || !int.TryParse(inputs[1], out y))
                 throw new ArgumentException("Invalid input. Please enter two valid numbers separated by a space.");
 
-            if (x < 0 || y < 0 || x >= _game.Grid.X || y >= _game.Grid.Y)
+            if (x < 0 || y < 0 || x >= Game.Grid.X || y >= Game.Grid.Y)
                 throw new ArgumentOutOfRangeException("Coordinates are out of range. Please try again.");
 
             try
             {
-                var c = _game.Grid.GetCard(x, y);
+                var c = Game.Grid.GetCard(x, y);
             }
             catch (IndexOutOfRangeException)
             {
                 throw;
             }
 
-            Card card = _game.Grid.GetCard(x, y);
+            Card card = Game.Grid.GetCard(x, y);
 
             return card;
         }
 
         public bool IsGameOver()
         {
-            return _game?.IsGameOver() ?? false;
+            return Game?.IsGameOver() ?? false;
         }
 
         public int UpdateScore(int score)
@@ -130,7 +135,7 @@ namespace MemoryLib.Managers
 
         public void SwitchPlayers()
         {
-            _game?.SwitchPlayer();
+            Game?.SwitchPlayer();
             Console.WriteLine("Switched players.");
         }
 
