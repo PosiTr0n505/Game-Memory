@@ -60,7 +60,9 @@ namespace MyApp
         {
             Clear();
 
-            string playerName = ConsoleAsking.AskPlayersName("1");
+            ConsoleAsking.AskOnePlayerName(out string playerName);
+            
+            WriteLine();
 
             Player player = new Player(playerName);
 
@@ -73,7 +75,6 @@ namespace MyApp
             gameManager.Game.StartGame();
 
             GridWriter.WriteGrid(gameManager, g.Grid.Cards);
-
         }
 
         static void StartTwoPlayersGame()
@@ -81,25 +82,25 @@ namespace MyApp
             Clear();
             WriteLine("Starting Two Players Game...\nEnter The Name of the 2 Players\n");
 
-            string P1Name = ConsoleAsking.AskPlayersName("1");
+            ConsoleAsking.AskPlayersName("1", out string Player1Name);
 
-            string P2Name = ConsoleAsking.AskPlayersName("2");
+            ConsoleAsking.AskPlayersName("2", out string Player2Name);
 
-            while (P1Name == P2Name)
+            while (Player1Name == Player2Name)
             {
                 WriteLine("Please enter a different name for Player 2.");
-                P2Name = ConsoleAsking.AskPlayersName("2");
+                ConsoleAsking.AskPlayersName("2", out Player2Name);
             }
 
             WriteLine();
             GridSize gridSize = ConsoleAsking.AskGridSize();
 
-            Player player1 = new Player(P1Name);
-            Player player2 = new Player(P2Name);
+            Player player1 = new(Player1Name);
+            Player player2 = new(Player2Name);
 
-            Game game = new Game(player1, player2, gridSize);
+            Game game = new(player1, player2, gridSize);
 
-            GameManager gameManager = new GameManager(game);
+            GameManager gameManager = new(game);
             gameManager.StartGame();
         }
 

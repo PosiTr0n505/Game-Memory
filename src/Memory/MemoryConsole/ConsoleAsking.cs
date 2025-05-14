@@ -1,25 +1,35 @@
 ﻿using static System.Console;
 using MemoryLib.Managers;
 using MemoryLib.Models;
+using System.Xml.Linq;
 
 namespace MemoryConsole
 {
     public class ConsoleAsking
     {
         public ConsoleAsking() { }
+        public static void AskOnePlayerName(out string playerName) 
+        {
+            Write("Enter your name :    ");
+            playerName = ReadLine()!;
+            while (string.IsNullOrWhiteSpace(playerName))
+            {
+                Write("Please enter a valid name.\nEnter your name :   ");
+                playerName = ReadLine()!;
+            }
+        }
 
-        public static string AskPlayersName(string i)
+        public static void AskPlayersName(string i, out string PName)
         {
             Write($"Player {i}, Enter your name :   ");
-            string P1Name = ReadLine()!;
+            PName = ReadLine()!;
 
-            while (string.IsNullOrWhiteSpace(P1Name))
+            while (string.IsNullOrWhiteSpace(PName))
             {
                 Write("Please enter a valid name.\nPlayer 1 :   ");
-                P1Name = ReadLine()!;
+                PName = ReadLine()!;
             }
 
-            return P1Name;
         }
 
         public static GridSize AskGridSize()
