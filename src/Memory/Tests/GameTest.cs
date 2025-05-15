@@ -58,7 +58,6 @@ namespace Tests
             Player player2 = new("Player 2");
             Game? game = new Game(player1, player2, GridSize.Size1); // C un test avec 4 cartes
 
-            game.StartGame();
             int count = 0;
             var cards = game.Grid.Cards;
             foreach (var card in cards)
@@ -76,8 +75,6 @@ namespace Tests
             Player player2 = new("Player 2");
             Game game = new Game(player1, player2, GridSize.Size1);
 
-            game.StartGame();
-
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
             {
@@ -94,7 +91,6 @@ namespace Tests
             Player player2 = new("Player 2");
             Game game = new Game(player1, player2, GridSize.Size4);
 
-            game.StartGame();
             var cards = game.Grid.Cards;
             var typeCount = new Dictionary<CardType, int>();
 
@@ -117,8 +113,6 @@ namespace Tests
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
             Game game = new Game(player1, player2, GridSize.Size3);
-
-            game.StartGame();
 
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
