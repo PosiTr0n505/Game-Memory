@@ -20,8 +20,6 @@ namespace MemoryLib.Managers
             _cardManager = new CardManager();
         }
 
-        public void ShowGrid() => Game.Grid.ShowGrid();
-
         public void IncrementMoves() => Moves++;
 
         public void FlipCard(int x, int y)
@@ -60,13 +58,11 @@ namespace MemoryLib.Managers
 
                 if (card1.IsFaceUp)
                 {
-                    //Console.WriteLine($"This Card at has already been found");
                     continue;
                 }
                 
                 if (card1 == card2)
                 {
-                    //Console.WriteLine($"You have selected the same card. Try again.");
                     continue;
                 }
 
