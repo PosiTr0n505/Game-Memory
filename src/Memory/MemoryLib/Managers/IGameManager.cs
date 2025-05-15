@@ -14,18 +14,6 @@ namespace MemoryLib.Managers
         void IncrementMoves();
 
         /// <summary>
-        /// Flips a card at the specified coordinates.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the card to flip.</param>
-        /// <param name="y">The y-coordinate of the card to flip.</param>
-        void FlipCard(int x, int y);
-
-        /// <summary>
-        /// Starts the game and initializes necessary components.
-        /// </summary>
-        void StartGame();
-
-        /// <summary>
         /// Checks if the game is over.
         /// </summary>
         /// <returns>True if the game is over; otherwise, false.</returns>
@@ -42,11 +30,5 @@ namespace MemoryLib.Managers
         /// Switches the turn to the next player.
         /// </summary>
         void SwitchPlayers();
-
-        /// <summary>
-        /// Asks the player for card coordinates.
-        /// </summary>
-        /// <returns>A <see cref="Card"/> object representing the selected card.</returns>
-        Card AskCoordinates();
     }
 }

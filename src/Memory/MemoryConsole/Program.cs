@@ -14,7 +14,7 @@ namespace MyApp
         {
             while (true)
             {
-                Clear();
+                System.Console.Clear();
                 WriteLine("=== Memory Game ===");
                 WriteLine("1. Singleplayer Game");
                 WriteLine("2. Two Players Game");
@@ -59,22 +59,98 @@ namespace MyApp
         static void StartSingleplayerGame()
         {
             Clear();
+            WriteLine("Starting Single Player Game...\nEnter your Name\n");
 
-            ConsoleAsking.AskOnePlayerName(out string playerName);
-            
+            ConsoleAsking.AskPlayersName("1", out string Player1Name);
+
             WriteLine();
-
-            Player player = new Player(playerName);
 
             GridSize gridSize = ConsoleAsking.AskGridSize();
 
-            Game g = new Game(player, player, gridSize);
+            Player player1 = new(Player1Name);
 
-            GameManager gameManager = new GameManager(g);
+            Game game = new(player1, player1, gridSize);
 
-            gameManager.Game.StartGame();
+            GameManager gameManager = new(game);
 
-            GridWriter.WriteGrid(gameManager, g.Grid.Cards);
+            (int, int) card1coordinates;
+            (int, int) card2coordinates;
+
+            gameManager.BoardChange += GridWriter.WriteGrid;
+
+            System.Console.Clear();
+
+            GridWriter.WriteGrid(gameManager, game.Grid.Cards);
+
+            while (!gameManager.IsGameOver())
+            {
+                WriteLine($"{gameManager.Game.CurrentPlayer} : \n\n");
+
+                while (true)
+                {
+                    try
+                    {
+                        card1coordinates = ConsoleAsking.AskCoordinates("1", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+
+                        if (gameManager.Game.Grid.IsCardFound(card1coordinates.Item1, card1coordinates.Item2))
+                        {
+                            WriteLine("You cannot select a card that is already found");
+                            continue;
+                        }
+
+                        break;
+
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine(e.Message);
+                        continue;
+                    }
+                }
+
+                while (true)
+                {
+                    try
+                    {
+                        card2coordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+
+                        if (card1coordinates == card2coordinates)
+                        {
+                            WriteLine("You cannot select the same card twice. Please select a different card.");
+                            continue;
+                        }
+
+                        if (gameManager.Game.Grid.IsCardFound(card2coordinates.Item1, card2coordinates.Item2))
+                        {
+                            WriteLine("You cannot select a card that is already found");
+                            continue;
+                        }
+
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine(e.Message);
+                        continue;
+                    }
+                }
+
+                gameManager.playRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
+
+                WriteLine("Appuyez sur entrée pour continuer...");
+                ReadLine();
+
+                gameManager.HideCards();
+
+                GridWriter.WriteGrid(gameManager, gameManager.Game.Grid.Cards);
+
+            }
+
+            gameManager.BoardChange -= GridWriter.WriteGrid;
+
         }
 
         static void StartTwoPlayersGame()
@@ -101,7 +177,70 @@ namespace MyApp
             Game game = new(player1, player2, gridSize);
 
             GameManager gameManager = new(game);
-            gameManager.StartGame();
+
+            (int, int) card1coordinates;
+            (int, int) card2coordiantes;
+
+            gameManager.BoardChange += GridWriter.WriteGrid;
+            
+            System.Console.Clear();
+
+            GridWriter.WriteGrid(gameManager, game.Grid.Cards);
+
+            while (!gameManager.IsGameOver())
+            {
+                WriteLine($"{gameManager.Game.CurrentPlayer} : \n\n");
+
+                while (true)
+                {
+                    try
+                    {
+                        card1coordinates = ConsoleAsking.AskCoordinates("1", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+                        break;
+
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine(e.Message);
+                        continue;
+                    }
+                }
+
+                while (true)
+                {
+                    try
+                    {
+                        card2coordiantes = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+                        if (card1coordinates == card2coordiantes)
+                        {
+                            WriteLine("You cannot select the same card twice. Please select a different card.");
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine(e.Message);
+                        continue;
+                    }
+                }
+
+                gameManager.playRound(card1coordinates.Item1, card1coordinates.Item2, card2coordiantes.Item1, card2coordiantes.Item2);
+
+                WriteLine("Appuyez sur entrée pour continuer...");
+                ReadLine();
+
+                gameManager.HideCards();
+
+                GridWriter.WriteGrid(gameManager, gameManager.Game.Grid.Cards);
+
+            }
+            
+            gameManager.BoardChange -= GridWriter.WriteGrid;
+
         }
 
         static void ShowGameRules()

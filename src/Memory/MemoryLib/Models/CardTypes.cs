@@ -34,7 +34,6 @@ namespace MemoryLib.Models
         U,
         V,
         W,
-        X,
         Y,
         Z
     }
