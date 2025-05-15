@@ -25,7 +25,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
-        public bool IsFaceUp { get; private set; }
+        public bool IsFaceUp { get; set; }
 
         public bool IsFound { get; set; }
 
@@ -122,6 +122,5 @@ namespace MemoryLib.Models
         /// </summary>
         /// <returns>Le code de hachage de l'identifiant de la carte.</returns>
         public override int GetHashCode() => Id.GetHashCode();
-
     }
 }

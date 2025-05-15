@@ -82,5 +82,10 @@ namespace MemoryLib.Models
         /// </summary>
         /// <returns>Le code de hachage du nom du joueur.</returns>
         public override int GetHashCode() => NameTag.GetHashCode();
+
+        public override string ToString()
+        {
+            return NameTag + $" (score : {CurrentScore}, moves : {MovesCount})" ;
+        }
     }
 }

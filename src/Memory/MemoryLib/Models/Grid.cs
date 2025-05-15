@@ -19,6 +19,8 @@ namespace MemoryLib.Models
             return _cards[x, y];
         }
 
+        public bool IsCardFound(int x, int y) => _cards[x, y].IsFound;
+
         /// <summary>
         /// Obtient le nombre de colonnes de la grille.
         /// </summary>
@@ -95,49 +97,6 @@ namespace MemoryLib.Models
         public IEnumerable<Card> Cards { get; }
 
         /// <summary>
-        /// Affiche l'état actuel de la grille dans la console.
-        /// </summary>
-        public void ShowGrid()
-        {
-            Write("    ");
-            for (int y = 0; y < Y; y++)
-            {
-                Write($"{y,2} ");
-            }
-            WriteLine();
-
-            Write("   +");
-            for (int y = 0; y < Y; y++)
-            {
-                Write("---");
-            }
-            WriteLine();
-
-            for (int x = 0; x < X; x++)
-            {
-                Write($"{x,2} |");
-                for (int y = 0; y < Y; y++)
-                {
-                    Card? c = _cards[x, y];
-                    if (c == null)
-                    {
-                        Write("   ");
-                    }
-                    else if (c.IsFound)
-                    {
-                        Write(" ! ");
-                    }
-                    else
-                    {
-                        Write($" {c.Id.ToString()[0]} ");
-                    }
-                }
-                WriteLine();
-            }
-            WriteLine();
-        }
-
-        /// <summary>
         /// Efface toutes les cartes de la grille en les remplaçant par des valeurs nulles.
         /// </summary>
         public void Clear()
@@ -155,6 +114,14 @@ namespace MemoryLib.Models
         public void ClearGrid(Grid grid)
         {
             throw new NotImplementedException();
+        }
+
+        internal void HideCards()
+        {
+            foreach(var card in _cards)
+            {
+                card.IsFaceUp = false;
+            }
         }
     }
 

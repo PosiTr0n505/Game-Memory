@@ -11,7 +11,7 @@ namespace MemoryLib.Managers
         public int Moves { get; private set; }
         private int currentscore = 0;
         public readonly Game Game;
-        private readonly ICardManager _cardManager = new CardManager();
+        private readonly ICardManager _cardManager;
 
         public GameManager(Game game)
         {
@@ -20,9 +20,11 @@ namespace MemoryLib.Managers
             _cardManager = new CardManager();
         }
 
-        public void ShowGrid() => Game.Grid.ShowGrid();
-
-        public void IncrementMoves() => Moves++;
+        public void IncrementMoves()
+        {
+            Moves++;
+            Game.CurrentPlayer.Add1ToMovesCount();
+        }
 
         public void FlipCard(int x, int y)
         {
@@ -33,92 +35,31 @@ namespace MemoryLib.Managers
             _cardManager.FlipCard(card);
         }
 
-        public void PlayTurn(int x1, int y1, int x2, int y2)
+        public void playRound(int x1, int y1, int x2, int y2)
         {
-            BoardChange?.Invoke(this, Game.Grid.Cards);
-        }
+            Card c1, c2;
 
-        public void StartGame()
-        {
-            Game.StartGame();
+            c1 = Game.Grid.GetCard(x1, y1);
+            c2 = Game.Grid.GetCard(x2, y2);
 
-            Card card1;
-            Card card2;
+            c1.Flip();
+            c2.Flip();
 
-            while (Game.IsGameOver() != true)
+            if (_cardManager.CompareCards(c1, c2))
             {
-                try 
-                {
-                    card1 = AskCoordinates();
-                    card2 = AskCoordinates();
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    continue;
-                }
-
-                if (card1.IsFaceUp)
-                {
-                    //Console.WriteLine($"This Card at has already been found");
-                    continue;
-                }
-                
-                if (card1 == card2)
-                {
-                    //Console.WriteLine($"You have selected the same card. Try again.");
-                    continue;
-                }
-
-                if (_cardManager.CompareCards(card1, card2))
-                {
-                    card1.Flip();
-                    card2.Flip();
-                    Game.CurrentPlayer.Add1ToScore();
-                    Game.ReduceCountByOnePair();
-                }
-
-                else 
-                    Game.SwitchPlayer();
-
+                c1.IsFound = true;
+                c2.IsFound = true;
+                Game.CurrentPlayer.Add1ToScore();
                 IncrementMoves();
+                Game.ReduceCountByOnePair();
             }
-
-            //Console.WriteLine("Game Over!");
-        }
-
-        public Card AskCoordinates()
-        {
-            int x, y;
-
-            var input = Console.ReadLine();
-
-            if (input == null)
-                throw new NoNullAllowedException();
-
-            var inputs = input.Split(' ');
-
-            if (inputs.Length != 2)
-                throw new ArgumentException("Invalid input. Please enter two coordinates separated by a space.");
-
-            if (!int.TryParse(inputs[0], out x) || !int.TryParse(inputs[1], out y))
-                throw new ArgumentException("Invalid input. Please enter two valid numbers separated by a space.");
-
-            if (x < 0 || y < 0 || x >= Game.Grid.X || y >= Game.Grid.Y)
-                throw new ArgumentOutOfRangeException("Coordinates are out of range. Please try again.");
-
-            try
+            else
             {
-                var c = Game.Grid.GetCard(x, y);
-            }
-            catch (IndexOutOfRangeException)
-            {
-                throw;
+                IncrementMoves();
+                Game.SwitchPlayer();
             }
 
-            Card card = Game.Grid.GetCard(x, y);
-
-            return card;
+            BoardChange?.Invoke(this, Game.Grid.Cards);
         }
 
         public bool IsGameOver()
@@ -139,13 +80,9 @@ namespace MemoryLib.Managers
             Console.WriteLine("Switched players.");
         }
 
-        //public static void SaveGame() => Console.WriteLine("Game saved.");
-
-
-        //public Game LoadGame()
-        //{
-        //    this._game = Stub.StubGame1();
-        //    return _game;
-        //}
+        public void HideCards()
+        {
+            Game.Grid.HideCards();
+        }
     }
 }

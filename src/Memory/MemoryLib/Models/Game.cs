@@ -61,16 +61,6 @@ namespace MemoryLib.Models
         public int RemainingCardsCount { get; set; }
 
         /// <summary>
-        /// Démarre le jeu en initialisant la grille et affichant l'état actuel du jeu.
-        /// </summary>
-
-        public void StartGame()
-        {
-
-        }
-
-
-        /// <summary>
         /// Change le joueur actif et passe au joueur suivant.
         /// </summary>
 
