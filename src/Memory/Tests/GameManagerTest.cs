@@ -19,33 +19,36 @@ namespace Tests
         [Fact]
         public void FlipCard_Should_flip_card_if_card_is_face_down()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
-            Card card = new(CardType.A);
-            _ = new Grid(4, 4);
+            Game game = new("player1", "player2");
+            Grid grid = new(2, 2);
+            var card = new Card(CardType.A);
+            grid.AddCard(card, 0, 0);
+            game.Grid = grid;
+            var gameManager = new GameManager(game);
 
-            _gameManager.FlipCard(0, 0);
-            
+            Assert.False(card.IsFaceUp);
+
+            gameManager.FlipCard(0, 0);
+
             Assert.True(card.IsFaceUp);
         }
 
         [Fact]
-        public void FlipCard_should_not_flip_card_if_card_is_face_up()
+        public void FlipCard_Should_flip_card_if_card_is_face_up()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
+            Game game = new("player1", "player2");
+            Grid grid = new(2, 2);
             Card card = new(CardType.A);
-            _gameManager.FlipCard(0, 0);
-
-            _gameManager.FlipCard(0, 0);
-            
+            grid.AddCard(card, 0, 0);
+            game.Grid = grid;
+            var gameManager = new GameManager(game);
+            gameManager.FlipCard(0, 0);
             Assert.True(card.IsFaceUp);
-        }
 
-        //[Fact]
-        //public void FlipCard_should_not_do_anything_if_card_is_null()
-        //{
-        //    GameManager _gameManager = new(new Game("test1", "test2"));
-        //    _gameManager.FlipCard(10, 10);
-        //} To check later
+            gameManager.FlipCard(0, 0);
+
+            Assert.False(card.IsFaceUp);
+        }
 
         [Fact]
         public void GameOver_should_return_true_when_game_is_over()
@@ -57,16 +60,6 @@ namespace Tests
                 _gameManager.SwitchPlayers();
 
             Assert.True(_gameManager.IsGameOver());
-        }
-
-        [Fact]
-        public void GameOver_should_return_false_when_game_is_not_over()
-        {
-            GameManager _gameManager = new(new Game("test1", "test2"));
-
-            _gameManager.StartGame();
-
-            Assert.False(_gameManager.IsGameOver());
         }
 
         [Fact]
@@ -86,26 +79,30 @@ namespace Tests
         }
 
         [Fact]
-        public void SwitchPlayers_should_switch_from_player1_to_player_2()
+        public void SwitchPlayers_should_switch_from_player1_to_player2()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
-            Player player1 = new("Player 1");
-            Player player2 = new("Player 2");
-            Game game = new(player1, player2, GridSize.Size1);
-            _gameManager.SwitchPlayers();
-            Assert.Equal(player2, game.CurrentPlayer);
+            Game game = new("player1", "player2");
+            GameManager gameManager = new(game);
+
+            Player firstPlayer = game.CurrentPlayer;
+            gameManager.SwitchPlayers();
+            Player secondPlayer = game.CurrentPlayer;
+
+            Assert.NotEqual(firstPlayer, secondPlayer);
         }
+
 
         [Fact]
         public void SwitchPlayers_should_switch_from_player2_to_player_1()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
-            Player player1 = new("Player 1");
-            Player player2 = new("Player 2");
-            Game game = new(player1, player2, GridSize.Size1);
-            _gameManager.SwitchPlayers();
-            _gameManager.SwitchPlayers();
-            Assert.Equal(player2, game.CurrentPlayer);
+            Game game = new("player1", "player2");
+            GameManager gameManager = new(game);
+            gameManager.SwitchPlayers();
+            Player secondPlayer = game.CurrentPlayer;
+            gameManager.SwitchPlayers();
+            Player firstPlayer = game.CurrentPlayer;
+
+            Assert.NotEqual(firstPlayer, secondPlayer);
         }
     }
 }

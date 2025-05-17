@@ -48,11 +48,11 @@ namespace MemoryLib.Models
 
         public Game(Player player1, Player player2, GridSize g)
         {
-            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
+            if (player1 is null || player2 is null)
                 throw new ArgumentNullException("Player cannot be null");
             Player1 = player1;
             Player2 = player2;
-            IGridSizeManager gridSizeManager = new GridSizeManager();
+            GridSizeManager gridSizeManager = new();
             (int x, int y) = gridSizeManager.GetGridSizeValues(g);
             Grid = new Grid(x, y);
             RemainingCardsCount = 0;
@@ -87,14 +87,14 @@ namespace MemoryLib.Models
             if (Grid == null)
                 return;
 
-            List<CardType> types = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+            List<CardType> types = Enum.GetValues<CardType>().Cast<CardType>().ToList();
 
-            Random rand = new Random();
+            Random rand = new();
 
             int CardSlotCount = Grid.GetCards().GetLength(0) * Grid.GetCards().GetLength(1);
 
             List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
-            List<Card> allCards = new();
+            List<Card> allCards = [];
 
             foreach (var type in typesSelected)
             {
