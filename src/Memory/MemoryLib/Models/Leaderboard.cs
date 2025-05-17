@@ -1,4 +1,4 @@
-﻿
+﻿using MemoryLib.Managers.Interface;
 using System.Collections.ObjectModel;
 
 
@@ -12,13 +12,30 @@ namespace MemoryLib.Models
         /// <summary>
         /// Liste interne des scores enregistrés.
         /// </summary>
-        private readonly List<Score> scores = [];
+        private List<Score> _scores = [];
+
+        public IEnumerable<Score> Scores => _scores.AsReadOnly();
+
+        private ILoadManager _loader;
+        private ISaveManager _saver;
+
+        public Leaderboard(ILoadManager loader, ISaveManager saver)
+        {
+            _loader = loader;
+            _saver = saver;
+            _scores = _loader.LoadScores();
+        }
+
+        ~Leaderboard() 
+        {
+            _saver.SaveScores(_scores);
+        }
 
         /// <summary>
         /// Ajoute un score à la liste des scores du tableau.
         /// </summary>
         /// <param name="score">Le score à ajouter au tableau.</param>
-        public void AddScore(Score score) => scores.Add(score);
+        public void AddScore(Score score) => _scores.Add(score);
 
         /// <summary>
         /// Récupère les scores associés à une taille de grille spécifique, triés par valeur de score en ordre décroissant.
@@ -27,7 +44,7 @@ namespace MemoryLib.Models
         /// <returns>Une collection en lecture seule des scores pour la taille de la grille spécifiée.</returns>
         public IEnumerable<Score> GetScores(GridSize gridSize)
         {
-            return new ReadOnlyCollection<Score>([.. scores
+            return new ReadOnlyCollection<Score>([.. _scores
                 .Where(s => s.GridSize == gridSize)
                 .OrderByDescending(s => s.ScoreValue)]);
 
@@ -45,10 +62,10 @@ namespace MemoryLib.Models
             if (string.IsNullOrWhiteSpace(playerName))
                 throw new ArgumentException("the playerName provided is not valid");
 
-            if (scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
-                return scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize);
-            
-            return scores.Where(s => s.Player.NameTag == playerName);
+            if (_scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
+                return new ReadOnlyCollection<Score>([.. _scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize)]);
+
+            return new ReadOnlyCollection<Score>( [.. _scores.Where(s => s.Player.NameTag == playerName) ]);
         }
     }
 }
