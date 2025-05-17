@@ -6,37 +6,28 @@ namespace MemoryLib.Models
     /// </summary>
     public class Game
     {
+        private readonly string? v1;
+        private readonly string? v2;
+
         /// <summary>
         /// Obtient le premier joueur du jeu.
         /// </summary>
-        public Player Player1 { get; }
+        public Player? Player1 { get; }
 
         /// <summary>
         /// Obtient le deuxième joueur du jeu.
         /// </summary>
-        public Player Player2 { get; }
+        public Player? Player2 { get; }
 
         /// <summary>
         /// Obtient ou définit le joueur actuellement actif dans le jeu.
         /// </summary>
-        public Player CurrentPlayer { get; private set; }
+        public Player? CurrentPlayer { get; private set; }
 
         /// <summary>
         /// Représente la grille de cartes du jeu.
         /// </summary>
-
-        public Grid Grid { get; set; }
-
-        /// <summary>
-        /// Initialise une nouvelle instance du jeu avec une grille par défaut et deux joueurs.
-        /// </summary>
-        public Game(String p1, String p2)
-        {
-            Grid = new Grid();
-            Player1 = new(p1);
-            Player2 = new(p2);
-            CurrentPlayer = Player1;
-        }
+        public Grid? Grid { get; set; }
 
         /// <summary>
         /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
@@ -50,15 +41,24 @@ namespace MemoryLib.Models
         {
             if (player1 is null || player2 is null)
                 throw new ArgumentNullException("Player cannot be null");
+
             Player1 = player1;
             Player2 = player2;
             GridSizeManager gridSizeManager = new();
+
             (int x, int y) = gridSizeManager.GetGridSizeValues(g);
+
             Grid = new Grid(x, y);
             RemainingCardsCount = 0;
             Round = 0;
             CurrentPlayer = player1;
             RemainingCardsCount = x * y;
+        }
+
+        public Game(string v1, string v2)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
         }
 
         private int Round { get; set; }
@@ -72,11 +72,7 @@ namespace MemoryLib.Models
         /// Démarre le jeu en initialisant la grille et affichant l'état actuel du jeu.
         /// </summary>
 
-        public void StartGame()
-        {
-            InitializeGame();
-            Grid.ShowGrid();
-        }
+        public void StartGame() => InitializeGame();
 
 
         /// <summary>
@@ -87,13 +83,13 @@ namespace MemoryLib.Models
             if (Grid == null)
                 return;
 
-            List<CardType> types = Enum.GetValues<CardType>().Cast<CardType>().ToList();
+            List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
 
             Random rand = new();
 
-            int CardSlotCount = Grid.GetCards().GetLength(0) * Grid.GetCards().GetLength(1);
+            int CardSlotCount = Grid.X * Grid.Y;
 
-            List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
+            List<CardType> typesSelected = [.. types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2)];
             List<Card> allCards = [];
 
             foreach (var type in typesSelected)
@@ -101,15 +97,17 @@ namespace MemoryLib.Models
                 allCards.Add(new Card(type)); 
                 allCards.Add(new Card(type));
             }
-            allCards = allCards.OrderBy(c => rand.Next()).ToList();
+            allCards = [.. allCards.OrderBy(c => rand.Next())];
             int index = 0;
-            for (int i = 0; i < Grid.GetCards().GetLength(0); i++)
+
+            for (int i = 0; i < Grid.X; i++)
             {
-                for (int j = 0; j < Grid.GetCards().GetLength(1); j++)
+                for (int j = 0; j < Grid.Y; j++)
                 {
-                    Grid.AddCard(allCards[index++], (byte)i, (byte)j); 
+                    Grid.AddCard(allCards[index++], i, j);
                 }
             }
+
         }
 
         /// <summary>

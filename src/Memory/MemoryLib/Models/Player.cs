@@ -1,17 +1,22 @@
-﻿namespace MemoryLib.Models
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace MemoryLib.Models
 {
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
     public class Player : IEquatable<Player>
     {
+        public delegate void OnScoreChangeNotify(Player player, int score);
+        public event OnScoreChangeNotify? ScorePropertyChanged;
 
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.
         /// </summary>
         /// <param name="name">Le nom du joueur. Ne peut pas être nul ou vide.</param>
         /// <exception>Lève une exception si le nom est nul ou vide.</exception>
-        public Player(string name)
+        public Player(string? name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
             this.NameTag = name;
@@ -36,8 +41,11 @@
         /// <summary>
         /// Ajoute 1 au score actuel du joueur.
         /// </summary>
-
-        public void Add1ToScore() => CurrentScore += 1;
+        public void Add1ToScore()
+        {
+            CurrentScore++;
+            ScorePropertyChanged?.Invoke(this, CurrentScore);
+        }
 
         /// <summary>
         /// Ajoute 1 au nombre de mouvements effectués par le joueur.
@@ -74,5 +82,10 @@
         /// </summary>
         /// <returns>Le code de hachage du nom du joueur.</returns>
         public override int GetHashCode() => NameTag.GetHashCode();
+
+        public override string ToString()
+        {
+            return NameTag + $" (score : {CurrentScore}, moves : {MovesCount})" ;
+        }
     }
 }

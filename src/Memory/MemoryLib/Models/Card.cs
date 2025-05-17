@@ -21,6 +21,8 @@ namespace MemoryLib.Models
         /// </summary>
         public bool IsFaceUp { get; private set; } = false;
 
+        public bool IsFound { get; set; }
+
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
         /// </summary>

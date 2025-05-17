@@ -8,7 +8,7 @@ namespace Tests
         [Fact]
         public void Clear_should_clear_grid()
         {
-            var grid = new Grid(5, 5);
+            var grid = new Grid(4, 4);
             var gridManager = new GridManager();
 
             gridManager.Clear(grid);
