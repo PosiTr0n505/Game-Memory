@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 namespace MemoryLib.Models
 {
     /// <summary>
@@ -6,6 +7,8 @@ namespace MemoryLib.Models
     /// </summary>
     public class Game
     {
+        public GridSize GridSize { get; init; }
+
         /// <summary>
         /// Obtient le premier joueur du jeu.
         /// </summary>
@@ -24,7 +27,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Représente la grille de cartes du jeu.
         /// </summary>
-        public Grid Grid { get; set; }
+        public GridManager Grid { get; set; }
 
         /// <summary>
         /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
@@ -42,11 +45,13 @@ namespace MemoryLib.Models
             Player1 = player1;
             Player2 = player2;
 
+            GridSize = g;
+
             IGridSizeManager gridSizeManager = new GridSizeManager();
 
             (int x, int y) = gridSizeManager.GetGridSizeValues(g);
 
-            Grid = new Grid(x, y);
+            Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
             Round = 0;
             CurrentPlayer = player1;

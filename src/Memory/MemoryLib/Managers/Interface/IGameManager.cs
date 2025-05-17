@@ -1,7 +1,6 @@
-﻿
-using MemoryLib.Models;
+﻿using MemoryLib.Models;
 
-namespace MemoryLib.Managers
+namespace MemoryLib.Managers.Interface
 {
     /// <summary>
     /// Interface for managing the game logic and operations.
