@@ -1,4 +1,4 @@
-```plantuml
+``` plantuml
 @startuml
 hide circle
 allowmixing
@@ -6,107 +6,52 @@ skinparam classAttributeIconSize 0
 skinparam classBackgroundColor #ffffb9
 skinparam classBorderColor #800000
 skinparam classArrowColor #800000
-skinparam classFontColor #black
+skinparam classFontColor black
 skinparam classFontName Tahoma
 
-' ---------------- CLASSES PRINCIPALES ----------------
-
-class Player {
-    - nameTag: string
-    - currentScore: int
-    - movesCount: int
+package "GameCore" {
+    class GameManager
+    class Game
+    interface IGameManager
 }
 
-class Score {
-    +/ ScoreValue: int
-    - gamesPlayed: int
+package "PlayerSystem" {
+    class Player
+    class Score
+    class Leaderboard
+    interface IScoreManager
 }
 
-Score o--> "1" Player : "-/ player: Player"
-Score o--> GridSize : "+/ GridSize: GridSize"
-
-class Leaderboard {
-    + addScore(Score: score)
-    + getTopScores(gridSize: int): List<Score>
+package "CardSystem" {
+    class Card
+    enum CardType
+    enum GridSize
+    interface ICardManager
 }
 
-Leaderboard o--> "0..*" Score : "+/ Scores"
-
-class Game {
-    +/ currentPlayer: Player
-    - rounds: int
-    - remainingCardsCount: int
-    + switchPlayer()
-    + startGame()
-    + isGameFinished(): bool
+package "Persistence" {
+    interface ISaveManager
+    interface ILoadManager
 }
 
-Game  o--> "1..2" Player : "+/Player1\n+/Player2"
+' Dépendances (exactes selon le diagramme de classes fourni)
+GameManager --> Game
+GameManager ..> IGameManager
+GameManager --> CardManager
+GameManager --> ScoreManager
+GameManager ..> ISaveManager
+GameManager ..> ILoadManager
 
-class Card {
-    - id: int
-    -/ isFaceUp: bool
-}
+Game --> Player
+Game --> IScoreManager
 
-Card *--> CardType : "+/CardType"
+ScoreManager --> Leaderboard
+Leaderboard --> Score
+Score --> Player
 
-class CardType <<enum>>
-
-' ---------------- INTERFACES ----------------
-
-interface IGameManager  <<interface>> {
-    + incrementMoves()
-    + flipCard(x: int, y: int)
-    + startGame()
-    + isGameOver(): bool
-	+ updateScore(score: int)
-    + switchPlayer()
-}
-
-interface IScoreManager  <<interface>> {
-    + getScore(): int
-    + saveScore()
-    + incrementGamesPlayed(score: Score)
-    + changeBestScore(score: Score, int)
-}
-
-
-interface ICardManager  <<interface>> {
-    + flipCard(card: Card)
-	+ unflipCard(card: Card)
-    + compareCards(card1: Card, card2: Card): bool
-    + matchCard(card: Card)
-}
-
-interface ISaveManager  <<interface>> {
-    + saveGame(game: Game)
-}
-
-interface ILoadManager <<interface>> {
-    + loadGame(): Game
-}
-
-' ---------------- IMPLEMENTATIONS DES MANAGERS ----------------
-
-class GameManager
-GameManager ..|> IGameManager
-GameManager ..|> ISaveManager
-GameManager ..|> ILoadManager
-GameManager o--> "1" Game : "-/game"
-GameManager *--> "1" CardManager
-GameManager *--> "1" ScoreManager
-
-class ScoreManager
-ScoreManager ..|> IScoreManager
-ScoreManager *--> "1" Leaderboard : +/Leaderboard
-
-class CardManager
-CardManager ..|> ICardManager
-CardManager *--> "0..*" Card : "+/Cards"
-CardManager *--> GridSize : "+/GridSize"
-
-
-enum GridSize <<enum>>
+CardManager ..> ICardManager
+Card --> GridSize
+Card --> CardType
 
 @enduml
 ```
