@@ -60,6 +60,13 @@ namespace MemoryLib.Models
             RemainingCardsCount = x * y;
         }
 
+        /// <summary>
+        /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
+        /// </summary>
+        /// <param name="player1">Le premier joueur.</param>
+        /// <param name="player2">Le deuxième joueur.</param>
+        /// <param name="g">La taille de la grille à utiliser dans le jeu.</param>
+        /// <exception >Lève une exception si l'un des joueurs est null.</exception>
         public Game(string player1, string player2, GridSize g)
         {
             if (player1 is null)

@@ -7,7 +7,7 @@ using static System.Console;
 namespace MemoryLib.Managers
 {
     /// <summary>
-    /// Représente une grille de cartes dans le jeu, contenant une matrice de cartes et offrant des méthodes pour interagir avec celle-ci.
+    /// Représente une grille de cartes dans le jeu, contenant une grille de cartes et offrant des méthodes pour interagir avec celle-ci.
     /// </summary>
     public class GridManager : ICardManager
     {
@@ -16,6 +16,12 @@ namespace MemoryLib.Managers
         /// </summary>
         public int X { get; }
 
+        /// <summary>
+        /// Obtient la carte à la position spécifiée dans la grille.
+        /// </summary>
+        /// <param name="x">La ligne de la carte.</param>
+        /// <param name="y">La colonne de la carte.</param>
+        /// <returns>La carte située aux coordonnées (x, y).</returns>
         public Card GetCard(int x, int y)
         {
             return _cards[x, y];
@@ -67,7 +73,12 @@ namespace MemoryLib.Managers
                 }
             }
         }
-
+        /// <summary>
+        /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
+        /// La grille est automatiquement remplie avec des paires de cartes mélangées.
+        /// </summary>
+        /// <param name="x">Le nombre de lignes de la grille.</param>
+        /// <param name="y">Le nombre de colonnes de la grille.</param>
         public GridManager(int x, int y) 
         {
             X = x;
@@ -114,6 +125,9 @@ namespace MemoryLib.Managers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Cache toutes les cartes de la grille (retourne toutes les cartes face cachée).
+        /// </summary>
         internal void HideCards()
         {
             foreach(var card in _cards)
@@ -122,6 +136,10 @@ namespace MemoryLib.Managers
             }
         }
 
+        /// <summary>
+        /// Retourne la carte spécifiée si elle est face cachée.
+        /// </summary>
+        /// <param name="card">La carte à retourner.</param>
         public void FlipCard(Card card)
         {
             foreach (var c in _cards)
@@ -134,6 +152,12 @@ namespace MemoryLib.Managers
                 }
             }
         }
+
+
+        /// <summary>
+        /// Retourne la carte spécifiée face cachée si elle est face visible.
+        /// </summary>
+        /// <param name="card">La carte à retourner face cachée.</param>
 
         public void UnFlipCard(Card card)
         {
@@ -148,6 +172,12 @@ namespace MemoryLib.Managers
             }
         }
 
+        /// <summary>
+        /// Compare deux cartes pour déterminer si ce sont la même instance.
+        /// </summary>
+        /// <param name="card1">La première carte à comparer.</param>
+        /// <param name="card2">La deuxième carte à comparer.</param>
+        /// <returns>True si les deux cartes sont la même instance, sinon false.</returns>
         public bool CompareCards(Card card1, Card card2)
         {
             return card1 == card2;
