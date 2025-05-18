@@ -96,7 +96,6 @@ GameManager o--> "1" Game : "-/game"
 GameManager *--> "1" CardManager
 GameManager *--> "1" ScoreManager
 
-' DEPENDANCES AJOUTEES
 GameManager ..> Player
 GameManager ..> Score
 GameManager ..> Card
@@ -105,7 +104,6 @@ class ScoreManager
 ScoreManager ..|> IScoreManager
 ScoreManager *--> "1" Leaderboard : +/Leaderboard
 
-' DEPENDANCE
 ScoreManager ..> Player
 ScoreManager ..> Score
 
@@ -119,7 +117,6 @@ CardManager ..> GridSize
 
 enum GridSize <<enum>>
 
-' DEPENDANCES SUPPLEMENTAIRES
 Game ..> Score
 Leaderboard ..> Player
 IGameManager ..> Player
@@ -135,7 +132,8 @@ Le point central de notre diagramme de classe est le GameManager, qui permet de 
 
 Nous avons utilisé un manager pour séparer notre jeu en plusieurs entités (Card, Game...) pour éviter que Game ait trop de responsabilités dans le jeu. <br>
 ( ---> ) Il est lié à Game, CardManager, ScoreManager pour accéder aux différents états et comportements. <br>
-( ...> ) Il est en dépendance avec ISaveManager, ILoadManager et IGameManager car il permet d'injecter la persistance... <br><br>
+( ...> ) Il est en dépendance avec ISaveManager, ILoadManager et IGameManager car il permet d'injecter la persistance... <br>
+GameManager utilise Player donc est également en dépendance avec. <br><br>
 
 
 - Game : <br><br>
@@ -144,25 +142,29 @@ Composé de deux joueurs (player1 et player2), des attributs rounds (nombre de t
 Son rôle est de représenter une partie en cours. <br>
 Liens : <br>
 Cardinalités 1...2 avec Player, car nous voulons exactement 1 ou 2 joueurs dans une partie.<br>
-Lien avec IScoreManager pour se déléguer de la gestion du score.<br><br>
+Lien avec IScoreManager pour se déléguer de la gestion du score.<br>
+Game dépénd de Score pour gérer le score dans la partie.<br><br>
 
 - CardManager :<br><br>
 
 Son rôle est d'encapsuler toute la logique des cartes : les retourner, les associer, les comparer.<br>
 Elle implémente l'interface ICardManager.<br>
-Nous avons utilisé un Manager, car manipuler différentes cartes ne doit pas être de la responsabilité du GameManager mais d'un CardManager.<br><br>
+Nous avons utilisé un Manager, car manipuler différentes cartes ne doit pas être de la responsabilité du GameManager mais d'un CardManager.<br>
+CardManager dépend de GridSize pour pouvoir gérer la taille de la grille <br>
 
 - ScoreManager :<br><br>
 
 Son rôle est de gérer l'actualisation et les récupération des scores pour plus tard, les transférer au Leaderboard.<br>
 Elle implémente l'interface IScoreManager.<br>
-Nous avons décidé de ne pas mettre son contenu dans Player, car le Player recoit les scores grâce à currentScore mais Player ne les calcule pas et ne les stocke pas.<br><br>
+Nous avons décidé de ne pas mettre son contenu dans Player, car le Player recoit les scores grâce à currentScore mais Player ne les calcule pas et ne les stocke pas.<br>
+ScoreManager dépend de Player pour pouvoir récupérer ou mettre à jour les scores liés à un joueur, dépend aussi de Score mais c'est déja implicite grâce à l'hériage de IScoreManager.<br><br>
 
 - Leaderboard :<br><br>
 
 Son rôle est d'afficher les scores des différents joueurs par taille de grille.<br>
 Contient une List<Score>, car nous devons ordonner les scores ou les parcourir pour les afficher dans le classement<br>
-Leaderboard est liée à GridSize qui permet de filtrer le leaderboard par différentes tailles de grilles. (4x4...)<br><br>
+Leaderboard est liée à GridSize qui permet de filtrer le leaderboard par différentes tailles de grilles. (4x4...)<br>
+Leaderboard dépend de Player pour afficher les scores de ceux-ci.<br><br>
 
 - Score : <br><br>
 
@@ -175,4 +177,5 @@ Association vers CardType pour comparer les cartes et les faire matcher.<br>
 enum pour CardType, pour éviter de dupliquer les valeurs<br>
 Association vers GridSize pour savoir comment placer une carte dans une grille.<br>
 enum pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.<br>
+Card dépénd de CardType <br>
 
