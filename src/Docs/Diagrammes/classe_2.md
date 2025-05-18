@@ -1,4 +1,4 @@
-```plantuml
+``` plantuml
 @startuml
 hide circle
 allowmixing
@@ -96,17 +96,35 @@ GameManager o--> "1" Game : "-/game"
 GameManager *--> "1" CardManager
 GameManager *--> "1" ScoreManager
 
+' DEPENDANCES AJOUTEES
+GameManager ..> Player
+GameManager ..> Score
+GameManager ..> Card
+
 class ScoreManager
 ScoreManager ..|> IScoreManager
 ScoreManager *--> "1" Leaderboard : +/Leaderboard
+
+' DEPENDANCE
+ScoreManager ..> Player
+ScoreManager ..> Score
 
 class CardManager
 CardManager ..|> ICardManager
 CardManager *--> "0..*" Card : "+/Cards"
 CardManager *--> GridSize : "+/GridSize"
 
+' DEPENDANCE
+CardManager ..> GridSize
 
 enum GridSize <<enum>>
+
+' DEPENDANCES SUPPLEMENTAIRES
+Game ..> Score
+Leaderboard ..> Player
+IGameManager ..> Player
+IGameManager ..> Score
+IGameManager ..> Card
 
 @enduml
 ```
