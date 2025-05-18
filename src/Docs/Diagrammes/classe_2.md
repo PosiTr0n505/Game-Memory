@@ -110,3 +110,4 @@ enum GridSize <<enum>>
 
 @enduml
 ```
+Le diagramme présente
