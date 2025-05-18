@@ -23,6 +23,10 @@ namespace MemoryLib.Models
         /// </summary>
         public bool IsFaceUp { get; set; } = false;
 
+        /// <summary>
+        /// Obtient ou définit un indicateur indiquant si la carte a été trouvée.
+        /// </summary>
+
         public bool IsFound { get; set; } = false;
 
         /// <summary>

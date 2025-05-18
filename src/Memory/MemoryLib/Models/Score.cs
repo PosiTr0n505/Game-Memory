@@ -83,11 +83,20 @@ namespace MemoryLib.Models
         /// <returns>Le code de hachage du nom du joueur.</returns>
         public override int GetHashCode() => Player.NameTag.GetHashCode();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception> "NotImplementedException"></exception>
         public void SaveScore()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception> "NotImplementedException"></exception>
         public int GetScore()
         {
             throw new NotImplementedException();

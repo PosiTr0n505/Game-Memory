@@ -8,7 +8,18 @@ namespace MemoryLib.Models
     /// </summary>
     public class Player : IEquatable<Player>
     {
+        /// <summary>
+        /// Délégué pour notifier les changements de score.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="score"></param>
+        /// 
         public delegate void OnScoreChangeNotify(Player player, int score);
+
+        /// <summary>
+        /// Événement déclenché lorsque le score du joueur change.
+        /// </summary>
+        
         public event OnScoreChangeNotify? ScorePropertyChanged;
 
         /// <summary>
@@ -83,6 +94,10 @@ namespace MemoryLib.Models
         /// <returns>Le code de hachage du nom du joueur.</returns>
         public override int GetHashCode() => NameTag.GetHashCode();
 
+        /// <summary>
+        /// Retourne une chaîne de caractères représentant le joueur, y compris son nom, son score actuel et le nombre de mouvements.
+        /// </summary>
+        /// <returns>score et moves du joueur</returns>
         public override string ToString()
         {
             return NameTag + $" (score : {CurrentScore}, moves : {MovesCount})" ;
