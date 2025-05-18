@@ -7,29 +7,23 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente une carte dans un jeu de cartes, avec un identifiant de type CardType et un état face visible ou cachée.
     /// </summary>
-    public class Card : IEquatable<Card>
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
+    /// </remarks>
+    /// <param name="id"></param>
+    public class Card(CardType id) : IEquatable<Card>
     {
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
-        /// </summary>
-        /// <param name="id"></param>
-        public Card(CardType id)
-        {
-            Id = id;
-            IsFaceUp = false;
-            IsFound = false;
-        }
         /// <summary>
         /// Obtient l'identifiant unique de la carte.
         /// </summary>
-        public CardType Id { get; private init; }
+        public CardType Id { get; private init; } = id;
 
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
         public bool IsFaceUp { get; set; } = false;
 
-        public bool IsFound { get; set; }
+        public bool IsFound { get; set; } = false;
 
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
@@ -50,7 +44,7 @@ namespace MemoryLib.Models
         /// Retourne une carte si elle est face cachée.
         /// </summary>
         /// <param name="card">La carte à retourner.</param>
-        public void FlipCard(Card card)
+        public static void FlipCard(Card card)
         {
             if (!card.IsFaceUp)
                 card.Flip();
@@ -60,7 +54,7 @@ namespace MemoryLib.Models
         /// Affiche un message dans la console lorsque deux cartes sont matchées.
         /// </summary>
         /// <param name="card">La carte associée qui a été trouvée.</param>
-        public void MatchCard(Card card)
+        public static void MatchCard(Card card)
         {
             Console.WriteLine($"Card {card.Id} matched.");
         }
@@ -69,7 +63,7 @@ namespace MemoryLib.Models
         /// Retourne une carte si elle est face visible.
         /// </summary>
         /// <param name="card">La carte à remettre face cachée.</param>
-        public void UnFlipCard(Card card)
+        public static void UnFlipCard(Card card)
         {
             if (card.IsFaceUp)
                 card.Flip();
@@ -82,7 +76,7 @@ namespace MemoryLib.Models
         /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false<.</returns>
         public bool Equals(Card? other)
         {
-            return ReferenceEquals(other, null) ? false : ReferenceEquals(this, other);
+            return other is not null && ReferenceEquals(this, other);
         }
 
         /// <summary>

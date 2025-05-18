@@ -59,7 +59,7 @@ namespace MemoryLib.Models
         /// <returns>true si les joueurs ont le même nom, sinon false.</returns>
         public bool Equals(Player? other)
         {
-            if (ReferenceEquals(other, null)) return false;
+            if (other is null) return false;
             return NameTag.Equals(other.NameTag);
         }
 
@@ -70,7 +70,7 @@ namespace MemoryLib.Models
         /// <returns>true si les deux objets sont égaux, sinon false.</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(obj, null)) return false;
+            if (obj is null) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (obj.GetType() != this.GetType()) return false;
             return this.Equals((Player)obj);
