@@ -1,3 +1,4 @@
+```
 @startuml
 hide circle
 allowmixing
@@ -131,3 +132,4 @@ package "Persistence" {
 "Player Management" ..> "Leaderboard Management" : Leaderboard
 
 @enduml
+```
