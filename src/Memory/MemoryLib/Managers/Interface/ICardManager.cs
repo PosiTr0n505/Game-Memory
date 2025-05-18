@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Models;
 
-namespace MemoryLib
+namespace MemoryLib.Managers.Interface
 {
     /// <summary>
     /// Interface for managing card operations in the Memory game.

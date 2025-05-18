@@ -38,7 +38,7 @@ namespace MemoryConsole
             GridSizeManager gridSizeManager = new GridSizeManager();
             WriteLine("Select the grid size:");
             int i = 1;
-            foreach (var size in gridSizeManager.Values)
+            foreach (var size in GridSizeManager.Values)
             {
                 WriteLine($"{i} : {size.Value}");
                 ++i;
@@ -46,7 +46,7 @@ namespace MemoryConsole
             Write("\nGrid Size : ");
             string? choice = ReadLine();
 
-            int gsc = gridSizeManager.Values.Count;
+            int gsc = GridSizeManager.Values.Count;
 
             int gridSize;
 

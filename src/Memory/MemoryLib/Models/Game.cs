@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 namespace MemoryLib.Models
 {
     /// <summary>
@@ -6,28 +7,27 @@ namespace MemoryLib.Models
     /// </summary>
     public class Game
     {
-        private readonly string? v1;
-        private readonly string? v2;
+        public GridSize GridSize { get; init; }
 
         /// <summary>
         /// Obtient le premier joueur du jeu.
         /// </summary>
-        public Player? Player1 { get; }
+        public Player Player1 { get; }
 
         /// <summary>
         /// Obtient le deuxième joueur du jeu.
         /// </summary>
-        public Player? Player2 { get; }
+        public Player Player2 { get; }
 
         /// <summary>
         /// Obtient ou définit le joueur actuellement actif dans le jeu.
         /// </summary>
-        public Player? CurrentPlayer { get; private set; }
+        public Player CurrentPlayer { get; private set; }
 
         /// <summary>
         /// Représente la grille de cartes du jeu.
         /// </summary>
-        public Grid? Grid { get; set; }
+        public GridManager Grid { get; set; }
 
         /// <summary>
         /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
@@ -39,26 +39,23 @@ namespace MemoryLib.Models
 
         public Game(Player player1, Player player2, GridSize g)
         {
-            if (player1 is null || player2 is null)
+            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
                 throw new ArgumentNullException("Player cannot be null");
 
             Player1 = player1;
             Player2 = player2;
-            GridSizeManager gridSizeManager = new();
+
+            GridSize = g;
+
+            IGridSizeManager gridSizeManager = new GridSizeManager();
 
             (int x, int y) = gridSizeManager.GetGridSizeValues(g);
 
-            Grid = new Grid(x, y);
+            Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
             Round = 0;
             CurrentPlayer = player1;
             RemainingCardsCount = x * y;
-        }
-
-        public Game(string v1, string v2)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
         }
 
         private int Round { get; set; }
@@ -67,48 +64,6 @@ namespace MemoryLib.Models
         /// Nombre de cartes restantes à découvrir dans le jeu.
         /// </summary>
         public int RemainingCardsCount { get; set; }
-
-        /// <summary>
-        /// Démarre le jeu en initialisant la grille et affichant l'état actuel du jeu.
-        /// </summary>
-
-        public void StartGame() => InitializeGame();
-
-
-        /// <summary>
-        /// Initialise le jeu en remplissant la grille avec des cartes aléatoires.
-        /// </summary>
-        private void InitializeGame()
-        {
-            if (Grid == null)
-                return;
-
-            List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
-
-            Random rand = new();
-
-            int CardSlotCount = Grid.X * Grid.Y;
-
-            List<CardType> typesSelected = [.. types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2)];
-            List<Card> allCards = [];
-
-            foreach (var type in typesSelected)
-            {
-                allCards.Add(new Card(type)); 
-                allCards.Add(new Card(type));
-            }
-            allCards = [.. allCards.OrderBy(c => rand.Next())];
-            int index = 0;
-
-            for (int i = 0; i < Grid.X; i++)
-            {
-                for (int j = 0; j < Grid.Y; j++)
-                {
-                    Grid.AddCard(allCards[index++], i, j);
-                }
-            }
-
-        }
 
         /// <summary>
         /// Change le joueur actif et passe au joueur suivant.

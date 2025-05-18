@@ -1,4 +1,4 @@
-﻿using MemoryLib.Managers;
+﻿using MemoryLib.Managers.Interface;
 namespace MemoryLib.Models
 {
     /// <summary>

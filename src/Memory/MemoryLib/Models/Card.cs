@@ -1,20 +1,28 @@
 ﻿
+using MemoryLib.Managers.Interface;
+
 namespace MemoryLib.Models
 
 {
     /// <summary>
     /// Représente une carte dans un jeu de cartes, avec un identifiant de type CardType et un état face visible ou cachée.
     /// </summary>
-    /// <remarks>
-    /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
-    /// </remarks>
-    /// <param name="id"></param>
-    public class Card(CardType id) : IEquatable<Card>
+    public class Card : IEquatable<Card>
     {
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
+        /// </summary>
+        /// <param name="id"></param>
+        public Card(CardType id)
+        {
+            Id = id;
+            IsFaceUp = false;
+            IsFound = false;
+        }
         /// <summary>
         /// Obtient l'identifiant unique de la carte.
         /// </summary>
-        public CardType Id { get; } = id;
+        public CardType Id { get; private init; }
 
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
@@ -26,32 +34,46 @@ namespace MemoryLib.Models
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
         /// </summary>
-        public void Flip() => IsFaceUp = !IsFaceUp;
+        public void Flip()
+        {
+            IsFaceUp = !IsFaceUp;
+        }
 
         /// <summary>
-        /// Compare deux cartes et retourne true si elles sont identiques.
+        /// Renvoie une chaîne représentant l'identifiant de la carte.
         /// </summary>
-        /// <param name="card1">La première carte à comparer.</param>
-        /// <param name="card2">La deuxième carte à comparer.</param>
-        /// <returns>Retourne true si les cartes ont le même identifiant, sinon false.</returns>
-        public static bool CompareCards(Card card1, Card card2) => card1.Id == card2.Id;
+        /// <returns>La chaîne de caractères représentant l'identifiant de la carte.</returns>
+        public override string ToString() => Id.ToString();
 
+        /// <summary>
         /// <summary>
         /// Retourne une carte si elle est face cachée.
         /// </summary>
         /// <param name="card">La carte à retourner.</param>
-
-        public static void FlipCard(Card card)
+        public bool Equals(Card? other)
+        {
+            return ReferenceEquals(other, null) ? false : ReferenceEquals(this, other);
+        }
+        public void FlipCard(Card card)
         {
             if (!card.IsFaceUp)
                 card.Flip();
         }
 
         /// <summary>
+        /// Affiche un message dans la console lorsque deux cartes sont matchées.
+        /// </summary>
+        /// <param name="card">La carte associée qui a été trouvée.</param>
+        public void MatchCard(Card card)
+        {
+            Console.WriteLine($"Card {card.Id} matched.");
+        }
+
+        /// <summary>
         /// Retourne une carte si elle est face visible.
         /// </summary>
         /// <param name="card">La carte à remettre face cachée.</param>
-        public static void UnFlipCard(Card card)
+        public void UnFlipCard(Card card)
         {
             if (card.IsFaceUp)
                 card.Flip();

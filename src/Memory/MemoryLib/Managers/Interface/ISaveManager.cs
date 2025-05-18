@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Models;
 
-namespace MemoryLib.Managers
+namespace MemoryLib.Managers.Interface
 {
     public interface ISaveManager
     {
@@ -8,6 +8,6 @@ namespace MemoryLib.Managers
         /// Saves the current state of the game.
         /// </summary>
         /// <param name="game">The game instance to be saved.</param>
-        void SaveGame(Game game);
+        void SaveScores(List<Score> scores);
     }
 }
