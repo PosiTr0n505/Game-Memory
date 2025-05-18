@@ -1,4 +1,5 @@
-﻿using MemoryLib.Models;
+﻿using MemoryLib.Managers;
+using MemoryLib.Models;
 
 namespace Tests
 {
@@ -7,7 +8,7 @@ namespace Tests
         [Fact]
         public void Add_Card_In_Grid_And_Grid_Not_Null()
         {
-            Grid g = new(2, 2);
+            GridManager g = new(2, 2);
 
             Card c1 = new(CardType.A);
             Card c2 = new(CardType.B);
@@ -28,7 +29,7 @@ namespace Tests
         [Fact]
         public void AddCard_Should_Throw_Exception_When_Outside_Grid()
         {
-            Grid g = new(2, 2);
+            GridManager g = new(2, 2);
             Card c1 = new(CardType.A);
 
             Assert.Throws<IndexOutOfRangeException>(() => g.AddCard(c1, 3, 3));
@@ -39,7 +40,7 @@ namespace Tests
         [Fact]
         public void GetCard_Should_Return_Correct_Card()
         {
-            Grid g = new(2, 2);
+            GridManager g = new(2, 2);
             Card c1 = new(CardType.A);
             Card c2 = new(CardType.B);
             g.AddCard(c1, 0, 0);

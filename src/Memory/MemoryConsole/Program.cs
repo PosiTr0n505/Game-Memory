@@ -3,6 +3,7 @@ using MemoryConsole;
 using MemoryConsole.Display;
 using MemoryLib.Managers;
 using MemoryLib.Models;
+using Persistence;
 
 using static System.Console;
 
@@ -20,7 +21,7 @@ namespace MyApp
         "Leaderboard",
         "Credits",
         "Quit Game"
-    };
+            };
 
             ConsoleColor defaultColor = ConsoleColor.White;
             ConsoleColor highlightColor = ConsoleColor.Green;
@@ -122,27 +123,31 @@ namespace MyApp
                                 break;
                             case 2:
                                 ShowGameRules();
+                                ReadAndEnter();
                                 break;
                             case 3:
                                 ShowLeaderboard();
+                                ReadAndEnter();
                                 break;
                             case 4:
                                 ShowCredits();
+                                ReadAndEnter();
                                 break;
                             case 5:
                                 Console.Clear();
                                 return;
                         }
-
-                        Console.Write("\nPress any key...");
-                        Console.ReadKey(true);
                         break;
 
                 }
             }
         }
 
-
+        public static void ReadAndEnter()
+        {
+            Write("Press any key...");
+            ReadLine();
+        }
 
         static void StartSingleplayerGame()
         {
@@ -239,6 +244,16 @@ namespace MyApp
 
             gameManager.BoardChange -= GridWriter.WriteGrid;
 
+            var score = new Score(gameManager.Game.CurrentPlayer, gameManager.Game.CurrentPlayer.CurrentScore, gameManager.Game.GridSize);
+
+            Leaderboard leaderboard = new(new StubLoadManager(), new StubSaveManager()); //j'ai mis la définition du STUB dans le constructeur pour eviter la dependance circulaire, je ne savais pas comment faire autrement
+
+            leaderboard.AddScore(score);
+
+            EndScreen.DisplayEndScreen(score);
+
+            ReadAndEnter();
+
         }
 
         static void StartTwoPlayersGame()
@@ -270,7 +285,7 @@ namespace MyApp
             (int, int) card2coordiantes;
 
             gameManager.BoardChange += GridWriter.WriteGrid;
-            
+
             System.Console.Clear();
 
             GridWriter.WriteGrid(gameManager, game.Grid.Cards);
@@ -326,9 +341,12 @@ namespace MyApp
                 GridWriter.WriteGrid(gameManager, gameManager.Game.Grid.Cards);
 
             }
-            
-            gameManager.BoardChange -= GridWriter.WriteGrid;
 
+            EndScreen.DisplayEndScreen(new Score(gameManager.Game.CurrentPlayer, gameManager.Game.CurrentPlayer.CurrentScore, gameManager.Game.GridSize));
+
+            ReadAndEnter();
+
+            gameManager.BoardChange -= GridWriter.WriteGrid;
         }
 
         static void ShowGameRules()
@@ -372,14 +390,55 @@ namespace MyApp
             WriteLine(Center("Good luck!"));
         }
 
-
-
         static void ShowLeaderboard()
         {
             Clear();
-            WriteLine("=== Leaderboard ===\n");
-            WriteLine("Not done yet");
+            Leaderboard leaderboard = new(new StubLoadManager(), new StubSaveManager());
+
+            LeaderboardWriter.WriteLeaderboard(leaderboard.Scores);
+
+            var filterDisplay = "\nFiltrer par taille de grille : ";
+            WriteLine(filterDisplay);
+
+            int i = 1;
+
+            string gridSizeDisplay = "";
+
+            foreach (var size in GridSizeManager.Values)
+            {
+                gridSizeDisplay += $"{i}. {size.Value}   ";
+                ++i;
+            }
+
+            WriteLine(gridSizeDisplay);
+
+            var select = "\nSélection (Entrée pour quitter) : ";
+
+            Write(select);
+
+            while (true)
+            {
+                string? choice = ReadLine();
+
+                if (string.IsNullOrWhiteSpace(choice))
+                    break;
+
+                if (int.TryParse(choice, out int selected) && selected > 0 && selected <= GridSizeManager.Values.Count)
+                {
+                    Clear();
+                    LeaderboardWriter.WriteLeaderboard(leaderboard.Scores, GridSizeManager.Values.Keys.ToList()[selected - 1]);
+                    WriteLine(filterDisplay);
+                    WriteLine(gridSizeDisplay);
+                    Write(select);
+                    continue;
+                }
+                else
+                {
+                    Write("Entrée invalide, réessaie : ");
+                }
+            }
         }
+
 
         static void ShowCredits()
         {
@@ -391,17 +450,17 @@ namespace MyApp
 
             string[] creditsText = new[]
             {
-        "CREDITS",
-        "",
-        "This game was proudly crafted by:",
-        "Sami HALILOU",
-        "Ghassan JABBOUR",
-        "Mylan PERRIER",
-        "",
-        "Built with ❤️ using C# and .NET MAUI",
-        "",
-        "Thanks for playing!"
-    };
+    "CREDITS",
+    "",
+    "This game was proudly crafted by:",
+    "Sami HALILOU",
+    "Ghassan JABBOUR",
+    "Mylan PERRIER",
+    "",
+    "Built with ❤️ using C# and .NET MAUI",
+    "",
+    "Thanks for playing!"
+};
 
             Console.WriteLine("\n" + new string('─', width) + "\n");
             foreach (string line in creditsText)
@@ -411,7 +470,5 @@ namespace MyApp
             Console.WriteLine("\n" + new string('─', width) + "\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
-
-
     }
 }

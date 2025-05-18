@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Models;
 
-namespace MemoryLib.Managers
+namespace MemoryLib.Managers.Interface
 {
     public interface ILoadManager
     {
@@ -10,6 +10,6 @@ namespace MemoryLib.Managers
         /// <returns>
         /// A <see cref="Game"/> object representing the loaded game state.
         /// </returns>
-        public Game LoadGame();
+        public List<Score> LoadScores();
     }
 }

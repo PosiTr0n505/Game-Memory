@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Models;
 
-namespace MemoryLib
+namespace MemoryLib.Managers.Interface
 {
     /// <summary>
     /// Interface for managing card operations in the Memory game.
@@ -26,11 +26,5 @@ namespace MemoryLib
         /// <param name="card2">The second card to compare.</param>
         /// <returns>True if the cards match; otherwise, false.</returns>
         bool CompareCards(Card card1, Card card2);
-
-        /// <summary>
-        /// Marks the specified card as matched.
-        /// </summary>
-        /// <param name="card">The card to be marked as matched.</param>
-        void MatchCard(Card card);
     }
 }

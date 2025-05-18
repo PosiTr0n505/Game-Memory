@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Models;
 
-namespace MemoryLib.Managers
+namespace MemoryLib.Managers.Interface
 {
     public interface IGridSizeManager
     {

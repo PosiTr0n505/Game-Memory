@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Models;
+using Persistence;
 
 namespace Tests
 {
@@ -7,7 +8,7 @@ namespace Tests
         [Fact]
         public void Add_A_Score_Into_The_Leaderboard_And_Check_If_It_Exists_GetScores()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -19,7 +20,7 @@ namespace Tests
         [Fact]
         public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_GetScores()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -31,7 +32,7 @@ namespace Tests
         [Fact]
         public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_GridSize_GetScores()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -43,7 +44,7 @@ namespace Tests
         [Fact]
         public void Add_A_Score_Into_The_Leaderboard_Search_With_Name_And_Wrong_GridSize_GetScores()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -55,7 +56,7 @@ namespace Tests
         [Fact]
         public void Add_A_Score_Into_The_Leaderboard_Search_With_Wrong_Name_GetScores()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -67,7 +68,7 @@ namespace Tests
         [Fact]
         public void GetScores_Throws_Exception_When_PlayerName_Is_Empty_Or_Whitespace()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
             Score s = new(p, p.CurrentScore, GridSize.Size6);
 
@@ -83,7 +84,7 @@ namespace Tests
         [Fact]
         public void GetScores_Returns_Empty_Collection_When_No_Scores_Exist()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             var scores = l.GetScores("Test");
             Assert.Empty(scores);
         }
@@ -91,7 +92,7 @@ namespace Tests
         [Fact]
         public void GetScores_Sorts_Scores_By_Descending_Order()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p1 = new("Player1");
             Player p2 = new("Player2");
             Player p3 = new("Player3");
@@ -117,7 +118,7 @@ namespace Tests
         [Fact]
         public void GetScores_Returns_Correct_Scores_For_Different_GridSizes()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p1 = new("Player1");
             Player p2 = new("Player2");
 
@@ -147,7 +148,7 @@ namespace Tests
         [Fact]
         public void GetScores_Returns_Multiple_Scores_For_Same_Player()
         {
-            Leaderboard l = new();
+            Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p = new("Test");
 
             Score s1 = new(p, 100, GridSize.Size6);

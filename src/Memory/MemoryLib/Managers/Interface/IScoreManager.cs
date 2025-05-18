@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryLib.Managers
+namespace MemoryLib.Managers.Interface
 {
     /// <summary>
     /// Interface for managing score-related operations.
