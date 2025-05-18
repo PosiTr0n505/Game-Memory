@@ -6,128 +6,52 @@ skinparam classAttributeIconSize 0
 skinparam classBackgroundColor #ffffb9
 skinparam classBorderColor #800000
 skinparam classArrowColor #800000
-skinparam classFontColor #black
+skinparam classFontColor black
 skinparam classFontName Tahoma
 
-package "Game Management" {
-    interface IGameManager {
-        +incrementMoves(): void
-        +flipCard(x: int, y: int): void
-        +startGame(): void
-        +isGameOver(): bool
-        +updateScore(score: int): void
-        +switchPlayer(): void
-    }
-
-    class GameManager {
-        +flipCard(): void
-        +startGame(): void
-        +isGameFinished(): bool
-        +playRound(): void
-    }
-
-    class Game {
-        +currentPlayer: Player
-        +rounds: int
-        +remainingCardsCount: int
-        +switchPlayer(): void
-    }
-
-    class TwoPlayersGame {
-        +nextTurn(): void
-    }
-
-    class SinglePlayerGame {
-        +nextTurn(): void
-    }
+package "GameCore" {
+    class GameManager
+    class Game
+    interface IGameManager
 }
 
-package "Player Management" {
-    interface IScoreManager {
-        +getScore(): int
-        +saveScore(): void
-        +incrementGamesPlayed(score: Score): void
-        +changeBestScore(score: Score, best: int): void
-    }
-
-    class Player {
-        -nameTag: string
-        -currentScore: int
-        -gamesPlayed: int
-        -bestScore: int
-        -movesCount: int
-        +updateScore(score: int): void
-        +incrementGamesPlayed(): void
-        +incrementMoves(): void
-    }
-
-    class Score {
-        +ScoreValue: int
-        +gamesPlayed: int
-    }
-
-    class ScoreManager {
-        +getScore(): int
-        +addScore(score: Score): void
-        +saveScore(): void
-    }
-
-    class Leaderboard {
-        +addScore(player: Player, score: Score): void
-        +getTopScores(gridSize: int): List<Score>
-    }
+package "PlayerSystem" {
+    class Player
+    class Score
+    class Leaderboard
+    interface IScoreManager
 }
 
-package "Card and Grid Management" {
-    interface ICardManager {
-        +flipCard(card: Card): void
-        +unflipCard(card: Card): void
-        +compareCards(card1: Card, card2: Card): bool
-        +matchCard(card: Card): void
-    }
-
-    class CardManager {
-    }
-
-    class Card {
-        -id: int
-        -isFaceUp: bool
-        +flipCard(): void
-        +compareCard(card: Card): bool
-        +matchCard(): void
-        +unflipCard(): void
-    }
-
-    enum GridSize
+package "CardSystem" {
+    class Card
     enum CardType
-
-    class Grid {
-        +initializeGrid(): void
-        +showGrid(): void
-    }
-
-    class Deck {
-        +initializeDeck(): void
-        +shuffleDeck(): void
-        +drawCard(): Card
-    }
+    enum GridSize
+    interface ICardManager
 }
 
 package "Persistence" {
-    interface ISaveManager {
-        +saveGame(game: Game): void
-    }
-
-    interface ILoadManager {
-        +loadGame(): Game
-    }
+    interface ISaveManager
+    interface ILoadManager
 }
 
-"Game Management" ..> "Player Management" : use
-"Game Management" ..> "Card and Grid Management" : use
-"Game Management" ..> "Persistence" : Save/Load
-"Player Management" ..> "Card and Grid Management" : use
-"Card and Grid Management" ..> "Player Management" : Score vers Player
+' Dépendances (exactes selon le diagramme de classes fourni)
+GameManager --> Game
+GameManager ..> IGameManager
+GameManager --> CardManager
+GameManager --> ScoreManager
+GameManager ..> ISaveManager
+GameManager ..> ILoadManager
+
+Game --> Player
+Game --> IScoreManager
+
+ScoreManager --> Leaderboard
+Leaderboard --> Score
+Score --> Player
+
+CardManager ..> ICardManager
+Card --> GridSize
+Card --> CardType
 
 @enduml
 ```
