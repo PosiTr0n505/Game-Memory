@@ -9,11 +9,11 @@ Be careful! The larger the grid you choose, the more difficult it will be.<br>
 Install our project with :<br>
 ...
 
-### Technologies used
+## Technologies Used
 
 XAML, .NET MAUI, C#
 
-### Features 
+## Features 
 
 - Save function to record each player's move count in a game and add it to the leaderboard when the game is over.<br>
 - Possibility to play a game with one or two players.<br>
@@ -21,7 +21,7 @@ XAML, .NET MAUI, C#
 - Choose different themes for cards or import your owns.<br>
 - View the fewest moves madeon each grid, with the ability to search for your name to find your best scores.<br>
 
-#### Authors 
+## Authors 
 
 HALILOU Sami<br>
 JABBOUR Ghassan<br>
