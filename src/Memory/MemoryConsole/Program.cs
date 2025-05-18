@@ -222,7 +222,6 @@ namespace MemoryConsole
                         WriteLine("You cannot select a card that is already found");
                         continue;
                     }
-
                     break;
 
                 }
