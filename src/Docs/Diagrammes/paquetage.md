@@ -1,3 +1,4 @@
+``` plantuml
 @startuml
 hide circle
 allowmixing
@@ -60,3 +61,4 @@ Card --> CardType
 "Player Management" ..> "Card Management" : <<use>>
 
 @enduml
+```
