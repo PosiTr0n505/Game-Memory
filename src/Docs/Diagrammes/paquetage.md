@@ -60,5 +60,5 @@ Card --> CardType
 "Game Management" ..> "Player Management" : <<use>>
 "Game Management" ..> "Card Management" : <<use>>
 "Game Management" ..> "Persistence" : <<use>>
-"Player Management" ..> "Card
+"Player Management" ..> "Card Management" : <<use>>
 ```
