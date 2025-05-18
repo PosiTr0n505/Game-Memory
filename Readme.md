@@ -1,30 +1,65 @@
-# Memory
+Voici une version retravaillée et plus moderne de ton `README.md`, avec une belle présentation, des emojis, une mise en page claire et un anglais plus fluide. Tu peux copier-coller ce code directement dans ton fichier `README.md` :
 
-A grid filled with face-down pairs awaits your discovery.<br>
-Use your memory to remember their positions.<br>
-Be careful! The larger the grid you choose, the more difficult it will be.<br>
+````markdown
+# 🧠 Memory Game
 
-## Installation
+A grid filled with face-down card pairs awaits your discovery.  
+Use your memory to match them up!  
+⚠️ The larger the grid, the harder the challenge!
 
-Install our project with :<br>
-...
+---
 
-## Technologies Used
+## 🚀 Installation
 
-XAML, .NET MAUI, C#, Git
+Install our project with:
 
-## Features
+```bash
+````
 
-- Save function to record each player's move count in a game and add it to the leaderboard when the game is over.<br>
-- Possibility to play a game with one or two players.<br>
-- Ability to choose different grid sizes to make a game easier or more challenging.<br>
-- Choose different themes for cards or import your owns.<br>
-- View the fewest moves madeon each grid, with the ability to search for your name to find your best scores.<br>
+> 🛠 Make sure .NET MAUI is properly installed and configured on your system.
 
-## Authors
+---
 
-HALILOU Sami<br>
-JABBOUR Ghassan<br>
-PERRIER Mylan<br>
+## 🛠️ Technologies Used
 
-#### Issues
+* 💻 **C#**
+* 🧱 **.NET MAUI**
+* 🎨 **XAML**
+* 🔧 **Git**
+
+---
+
+## ✨ Features
+
+* 💾 **Save System**
+  Records each player’s move count and adds it to the leaderboard when the game ends.
+
+* 👥 **One or Two Players**
+  Play solo or challenge a friend.
+
+* 🧩 **Custom Grid Sizes**
+  Choose the size of the board to adjust the difficulty.
+
+* 🎭 **Themes & Custom Cards**
+  Pick from predefined themes or import your own card designs.
+
+* 📊 **Leaderboard**
+  Track the fewest moves per grid size. Filter by name to find your personal best scores.
+
+---
+
+## 👨‍💻 Authors
+
+* 🧑‍💻 HALILOU Sami
+* 👨‍💻 JABBOUR Ghassan
+* 👨‍💻 PERRIER Mylan
+
+---
+
+## 🐞 Known Issues
+
+* ⚙️ **Doxygen**: The documentation is present throughout the codebase, but there are issues generating Doxygen output.
+* 📉 **Sonar**: Code coverage is below 95%, and there are still more than 5 code smells to address.
+
+---
+
