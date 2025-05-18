@@ -11,7 +11,7 @@ Install our project with :<br>
 
 ## Technologies Used
 
-XAML, .NET MAUI, C#
+XAML, .NET MAUI, C#, Git
 
 ## Features 
 
@@ -26,3 +26,5 @@ XAML, .NET MAUI, C#
 HALILOU Sami<br>
 JABBOUR Ghassan<br>
 PERRIER Mylan<br>
+
+#### Issues
