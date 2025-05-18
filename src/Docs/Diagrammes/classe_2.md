@@ -154,7 +154,7 @@ Son rôle est de stocker le score d'un joueur via ScoreValue et le nombre de par
 
 Contient les attributs id (identifiant d'une carte) et isFaceUp (état de la carte).<br>
 Association vers CardType pour comparer les cartes et les faire matcher.<br>
-<<enum>> pour CardType, pour éviter de dupliquer les valeurs<br>
+enum pour CardType, pour éviter de dupliquer les valeurs<br>
 Association vers GridSize pour savoir comment placer une carte dans une grille.<br>
-<<enum>> pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.<br>
+enum pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.<br>
 
