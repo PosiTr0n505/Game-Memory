@@ -7,21 +7,21 @@ using Persistence;
 
 using static System.Console;
 
-namespace MyApp
+namespace MemoryConsole
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             int selectedIndex = 0;
-            string[] options = {
+            string[] options = [
         "Single Player Game",
         "Two Players Game",
         "Game Rules",
         "Leaderboard",
         "Credits",
         "Quit Game"
-            };
+            ];
 
             ConsoleColor defaultColor = ConsoleColor.White;
             ConsoleColor highlightColor = ConsoleColor.Green;
@@ -31,18 +31,18 @@ namespace MyApp
                 Console.Clear();
                 int width = Console.WindowWidth;
 
-                string Center(string text, int w)
+                static string Center(string text, int w)
                 {
                     int padding = Math.Max((w - text.Length) / 2, 0);
                     return new string(' ', padding) + text;
                 }
 
-                string[] asciiArt = new[]
-                {
+                string[] asciiArt =
+                [
             "╔╦╗╔═╗╔╦╗╔═╗╦═╗╦ ╦  ╔═╗╔═╗╔╦╗╔═╗",
             "║║║║╣ ║║║║ ║╠╦╝╚╦╝  ║ ╦╠═╣║║║║╣ ",
             "╩ ╩╚═╝╩ ╩╚═╝╩╚═ ╩   ╚═╝╩ ╩╩ ╩╚═╝"
-        };
+        ];
 
                 WriteLine();
 
@@ -447,8 +447,8 @@ namespace MyApp
             string Center(string text) =>
                 new string(' ', Math.Max((width - text.Length) / 2, 0)) + text;
 
-            string[] creditsText = new[]
-            {
+            string[] creditsText =
+        [    
     "CREDITS",
     "",
     "This game was proudly crafted by:",
@@ -459,7 +459,7 @@ namespace MyApp
     "Built with ❤️ using C# and .NET MAUI",
     "",
     "Thanks for playing!"
-};
+];
 
             Console.WriteLine("\n" + new string('─', width) + "\n");
             foreach (string line in creditsText)
