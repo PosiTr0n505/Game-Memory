@@ -1,6 +1,4 @@
-Voici une version retravaillée et plus moderne de ton `README.md`, avec une belle présentation, des emojis, une mise en page claire et un anglais plus fluide. Tu peux copier-coller ce code directement dans ton fichier `README.md` :
 
-````markdown
 # 🧠 Memory Game
 
 A grid filled with face-down card pairs awaits your discovery.  
@@ -13,8 +11,7 @@ Use your memory to match them up!
 
 Install our project with:
 
-```bash
-````
+...
 
 > 🛠 Make sure .NET MAUI is properly installed and configured on your system.
 
