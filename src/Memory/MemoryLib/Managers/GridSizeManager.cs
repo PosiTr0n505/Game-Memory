@@ -8,7 +8,7 @@ namespace MemoryLib.Managers
 
     public class GridSizeManager : IGridSizeManager
     {
-        private static Dictionary<GridSize, (int, int)> _gridSizeValues = new Dictionary<GridSize, (int, int)>
+        private readonly static Dictionary<GridSize, (int, int)> _gridSizeValues = new()
             {
                 { GridSize.Size1, (2, 2) },
                 { GridSize.Size2, (3, 4) },

@@ -409,6 +409,8 @@ namespace MemoryConsole
                 ++i;
             }
 
+            gridSizeDisplay += "\n7. Search by NameTag";
+
             WriteLine(gridSizeDisplay);
 
             var select = "\nSélection (Entrée pour quitter) : ";
@@ -422,9 +424,25 @@ namespace MemoryConsole
                 if (string.IsNullOrWhiteSpace(choice))
                     break;
 
-                if (int.TryParse(choice, out int selected) && selected > 0 && selected <= GridSizeManager.Values.Count)
+                if (int.TryParse(choice, out int selected) && selected > 0 && selected <= GridSizeManager.Values.Count + 1)
                 {
                     Clear();
+
+                    if (selected == GridSizeManager.Values.Count + 1)
+                    {
+                        Write("\nEnter the Name of the Player, Press Enter to Cancel : ");
+                        string? name = ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(name))
+                            break;
+
+                        LeaderboardWriter.WriteLeaderboard(leaderboard.Scores, null, 15, name);
+                        WriteLine(filterDisplay);
+                        WriteLine(gridSizeDisplay);
+                        Write(select);
+                        continue;
+                    }
+
                     LeaderboardWriter.WriteLeaderboard(leaderboard.Scores, GridSizeManager.Values.Keys.ToList()[selected - 1]);
                     WriteLine(filterDisplay);
                     WriteLine(gridSizeDisplay);

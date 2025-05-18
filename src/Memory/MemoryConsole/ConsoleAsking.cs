@@ -18,6 +18,7 @@ namespace MemoryConsole
                 Write("Please enter a valid name.\nEnter your name :   ");
                 playerName = ReadLine()!;
             }
+            playerName = playerName.Trim();
         }
 
         public static void AskPlayersName(string i, out string PName)
@@ -30,12 +31,11 @@ namespace MemoryConsole
                 Write($"Please enter a valid name.\nPlayer {i} :   ");
                 PName = ReadLine()!;
             }
-
+            PName = PName.Trim();
         }
 
         public static GridSize AskGridSize()
         {
-            GridSizeManager gridSizeManager = new GridSizeManager();
             WriteLine("Select the grid size:");
             int i = 1;
             foreach (var size in GridSizeManager.Values)
@@ -45,6 +45,8 @@ namespace MemoryConsole
             }
             Write("\nGrid Size : ");
             string? choice = ReadLine();
+
+            choice = choice?.Trim() ?? "";
 
             int gsc = GridSizeManager.Values.Count;
 
@@ -73,10 +75,12 @@ namespace MemoryConsole
             Write($"Card {i} : ");
             var input = ReadLine();
 
-            if (input == null)
+            if (string.IsNullOrWhiteSpace(input))
                 throw new NoNullAllowedException();
 
-            var inputs = input.Split(' ');
+            input = input.Trim();
+
+            var inputs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             if (inputs.Length != 2)
                 throw new ArgumentException("Invalid input. Please enter two coordinates separated by a space.");
@@ -86,7 +90,6 @@ namespace MemoryConsole
 
             if (x < 0 || y < 0 || x >= X || y >= Y)
                 throw new ArgumentException($"Coordinates out of range. Please enter valid coordinates.");
-
 
             return (x, y);
         }
