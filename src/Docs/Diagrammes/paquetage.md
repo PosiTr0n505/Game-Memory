@@ -20,11 +20,13 @@ package "Player Management" {
     class Player
     class Score
     class Leaderboard
+    class ScoreManager
     interface IScoreManager
 }
 
 package "Card Management" {
     class Card
+    class CardManager
     enum CardType
     enum GridSize
     interface ICardManager
@@ -58,7 +60,5 @@ Card --> CardType
 "Game Management" ..> "Player Management" : <<use>>
 "Game Management" ..> "Card Management" : <<use>>
 "Game Management" ..> "Persistence" : <<use>>
-"Player Management" ..> "Card Management" : <<use>>
-
-@enduml
+"Player Management" ..> "Card
 ```
