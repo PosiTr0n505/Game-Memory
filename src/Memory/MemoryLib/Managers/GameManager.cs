@@ -11,7 +11,7 @@ namespace MemoryLib.Managers
 
         public int Moves { get; private set; } = 0;
         private int currentscore = 0;
-        public readonly Game? Game = game;
+        public readonly Game Game = game;
         private readonly CardManager _cardManager = new();
 
         public void IncrementMoves()

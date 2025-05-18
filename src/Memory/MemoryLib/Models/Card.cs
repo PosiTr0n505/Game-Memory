@@ -27,7 +27,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
-        public bool IsFaceUp { get; private set; } = false;
+        public bool IsFaceUp { get; set; } = false;
 
         public bool IsFound { get; set; }
 
@@ -50,10 +50,6 @@ namespace MemoryLib.Models
         /// Retourne une carte si elle est face cachée.
         /// </summary>
         /// <param name="card">La carte à retourner.</param>
-        public bool Equals(Card? other)
-        {
-            return ReferenceEquals(other, null) ? false : ReferenceEquals(this, other);
-        }
         public void FlipCard(Card card)
         {
             if (!card.IsFaceUp)
@@ -84,7 +80,10 @@ namespace MemoryLib.Models
         /// </summary>
         /// <param name="other">L'autre carte à comparer.</param>
         /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false<.</returns>
-        public bool Equals(Card? other) => other is not null && ReferenceEquals(this, other);
+        public bool Equals(Card? other)
+        {
+            return ReferenceEquals(other, null) ? false : ReferenceEquals(this, other);
+        }
 
         /// <summary>
         /// Vérifie si l'objet spécifié est égal à l'instance actuelle.

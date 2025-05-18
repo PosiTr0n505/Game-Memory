@@ -77,6 +77,5 @@ namespace Tests
             Assert.False(p.Equals(null));
             Assert.False(p.Equals("string"));
         }
-
     }
 }

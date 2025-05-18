@@ -1,4 +1,9 @@
-﻿using MemoryLib.Models;
+
+using System.Collections.ObjectModel;
+using MemoryLib.Managers.Interface;
+using MemoryLib.Models;
+using static System.Console;
+
 namespace MemoryLib.Managers
 {
     /// <summary>
@@ -152,4 +157,5 @@ namespace MemoryLib.Managers
             return card1 == card2;
         }
     }
+
 }

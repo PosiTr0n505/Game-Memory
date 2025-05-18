@@ -127,7 +127,6 @@ namespace MyApp
                                 break;
                             case 3:
                                 ShowLeaderboard();
-                                ReadAndEnter();
                                 break;
                             case 4:
                                 ShowCredits();

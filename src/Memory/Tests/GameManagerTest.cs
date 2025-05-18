@@ -23,8 +23,8 @@ namespace Tests
         [Fact]
         public void FlipCard_Should_flip_card_if_card_is_face_down()
         {
-            Game game = new("player1", "player2");
-            Grid grid = new(2, 2);
+            Game game = new("player1", "player2", GridSize.Size3);
+            GridManager grid = new(2, 2);
             var card = new Card(CardType.A);
             grid.AddCard(card, 0, 0);
             game.Grid = grid;
@@ -40,8 +40,8 @@ namespace Tests
         [Fact]
         public void FlipCard_Should_flip_card_if_card_is_face_up()
         {
-            Game game = new("player1", "player2");
-            Grid grid = new(2, 2);
+            Game game = new("player1", "player2", GridSize.Size6);
+            GridManager grid = new(2, 2);
             Card card = new(CardType.A);
             grid.AddCard(card, 0, 0);
             game.Grid = grid;
@@ -69,14 +69,14 @@ namespace Tests
         [Fact]
         public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
+            GameManager _gameManager = new(new Game("test1", "test2", GridSize.Size4));
             Assert.NotNull(_gameManager); 
         }
 
         [Fact]
         public void UpdateScore_should_update_score_correctly()
         {
-            GameManager _gameManager = new(new Game("test1", "test2"));
+            GameManager _gameManager = new(new Game("test1", "test2", GridSize.Size4));
             var initialScore = 0;
             var updatedScore = _gameManager.UpdateScore(10);
             Assert.Equal(initialScore + 10, updatedScore);

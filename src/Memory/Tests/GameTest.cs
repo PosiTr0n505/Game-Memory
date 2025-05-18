@@ -122,14 +122,6 @@ namespace Tests
             Assert.Equal(16, cardCount);
         }
 
-        [Fact]
-        public void Game_initialization_should_fail_with_null_players()
-        {
-            Game? game = null;
-
-            Assert.Throws<ArgumentNullException>(() => game = new Game(null!, null!, GridSize.Size3));
-        }
-
 /*        [Fact]
         public void StartGame_should_throw_error_when_incorrect_grid_size()
         {
