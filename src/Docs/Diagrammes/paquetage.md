@@ -1,4 +1,3 @@
-``` plantuml
 @startuml
 hide circle
 allowmixing
@@ -9,6 +8,7 @@ skinparam classArrowColor #800000
 skinparam classFontColor black
 skinparam classFontName Tahoma
 
+' Déclaration des paquets
 package "Game Management" {
     class GameManager
     class Game
@@ -34,7 +34,7 @@ package "Persistence" {
     interface ILoadManager
 }
 
-
+' Dépendances internes aux classes
 GameManager --> Game
 GameManager ..> IGameManager
 GameManager --> CardManager
@@ -53,5 +53,10 @@ CardManager ..> ICardManager
 Card --> GridSize
 Card --> CardType
 
+' Dépendances entre paquetages
+"Game Management" ..> "Player Management" : <<use>>
+"Game Management" ..> "Card Management" : <<use>>
+"Game Management" ..> "Persistence" : <<use>>
+"Player Management" ..> "Card Management" : <<use>>
+
 @enduml
-```
