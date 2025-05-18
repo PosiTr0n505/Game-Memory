@@ -14,18 +14,33 @@ namespace MemoryLib.Models
         /// </summary>
         private readonly List<Score> _scores = [];
 
+
+        /// <summary>
+        /// Obtient une collection en lecture seule des scores enregistrés.
+        /// </summary>
         public IEnumerable<Score> Scores => _scores.AsReadOnly();
 
+        /// <summary>
+        ///  Gestionnaire de chargement et de sauvegarde des scores.
+        /// </summary>
         private readonly ILoadManager _loader;
         private readonly ISaveManager _saver;
 
+
+        /// <summary>
+        /// Constructeur de la classe Leaderboard.
+        /// </summary>
+        /// <param name="loader"></param>
+        /// <param name="saver"></param>
         public Leaderboard(ILoadManager loader, ISaveManager saver)
         {
             _loader = loader;
             _saver = saver;
             _scores = _loader.LoadScores();
         }
-
+        /// <summary>
+        /// Destructeur de la classe Leaderboard.
+        /// </summary>
         ~Leaderboard() 
         {
             _saver.SaveScores(_scores);
@@ -67,19 +82,31 @@ namespace MemoryLib.Models
 
             return new ReadOnlyCollection<Score>( [.. _scores.Where(s => s.Player.NameTag == playerName) ]);
         }
-
+        /// <summary>
+        /// Récupère les scores associés à un joueur spécifique.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="gs"></param>
+        /// <param name="scoreValue"></param>
         public void ChangeScoreValueIfGreater(Player p, GridSize gs, int scoreValue)
         {
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
             score?.ChangeScoreValueIfGreater(scoreValue);
         }
-
+        /// <summary>
+        /// Incrémente le nombre de jeux joués pour un joueur spécifique et une taille de grille donnée.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="gs"></param>
         public void IncrementGamesPlayed(Player p, GridSize gs)
         {
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
             score?.IncrementGamesPlayed();
         }
-
+        /// <summary>
+        /// Ajoute un score à la liste des scores.
+        /// </summary>
+        /// <param name="score"></param>
         public void SaveScore(Score score)
         {
             _scores.Add(score);
