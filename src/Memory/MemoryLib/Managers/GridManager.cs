@@ -33,6 +33,8 @@ namespace MemoryLib.Managers
         /// </summary>
         private readonly Card[,] _cards;
 
+        private static readonly Random rand = new();
+
         private readonly List<Card> _cardsList;
 
         /// <summary>
@@ -44,8 +46,6 @@ namespace MemoryLib.Managers
         private void InitializeGrid()
         {
             List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
-
-            Random rand = new();
 
             int CardSlotCount = X * Y;
 

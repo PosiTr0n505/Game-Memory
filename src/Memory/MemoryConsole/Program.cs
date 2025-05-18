@@ -2,6 +2,7 @@
 using MemoryConsole;
 using MemoryConsole.Display;
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 using Persistence;
 
@@ -9,7 +10,7 @@ using static System.Console;
 
 namespace MemoryConsole
 {
-    internal class Program
+    internal static class Program
     {
         static void Main()
         {
@@ -178,57 +179,9 @@ namespace MemoryConsole
             {
                 WriteLine($"{gameManager.Game.CurrentPlayer} : \n\n");
 
-                while (true)
-                {
-                    try
-                    {
-                        card1coordinates = ConsoleAsking.AskCoordinates("1", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+                card1coordinates = AskAndCheckCoordinates(gameManager, "1");
 
-                        if (gameManager.Game.Grid.IsCardFound(card1coordinates.Item1, card1coordinates.Item2))
-                        {
-                            WriteLine("You cannot select a card that is already found");
-                            continue;
-                        }
-
-                        break;
-
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
-
-                while (true)
-                {
-                    try
-                    {
-                        card2coordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-
-                        if (card1coordinates == card2coordinates)
-                        {
-                            WriteLine("You cannot select the same card twice. Please select a different card.");
-                            continue;
-                        }
-
-                        if (gameManager.Game.Grid.IsCardFound(card2coordinates.Item1, card2coordinates.Item2))
-                        {
-                            WriteLine("You cannot select a card that is already found");
-                            continue;
-                        }
-
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
+                card2coordinates = AskAndCheckCoordinates(gameManager, "2", card1coordinates);
 
                 gameManager.PlayRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
 
@@ -253,6 +206,68 @@ namespace MemoryConsole
 
             ReadAndEnter();
 
+        }
+
+        static (int, int) AskAndCheckCoordinates(GameManager gameManager, string i)
+        {
+            (int, int) cardcoordinates;
+            while (true)
+            {
+                try
+                {
+                    cardcoordinates = ConsoleAsking.AskCoordinates(i, gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+
+                    if (gameManager.Game.Grid.IsCardFound(cardcoordinates.Item1, cardcoordinates.Item2))
+                    {
+                        WriteLine("You cannot select a card that is already found");
+                        continue;
+                    }
+
+                    break;
+
+                }
+                catch (Exception e)
+                {
+                    WriteLine(e.Message);
+                    continue;
+                }
+            }
+            return cardcoordinates;
+        }
+
+        static (int, int) AskAndCheckCoordinates(GameManager gameManager, string i, (int, int) card1coordinates)
+        {
+            (int, int) cardcoordinates;
+            while (true)
+            {
+                try
+                {
+                    cardcoordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+
+                    if (card1coordinates == cardcoordinates)
+                    {
+                        WriteLine("You cannot select the same card twice. Please select a different card.");
+                        continue;
+                    }
+
+                    if (gameManager.Game.Grid.IsCardFound(cardcoordinates.Item1, cardcoordinates.Item2))
+                    {
+                        WriteLine("You cannot select a card that is already found");
+                        continue;
+                    }
+
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    WriteLine(e.Message);
+                    continue;
+                }
+            }
+            return cardcoordinates;
         }
 
         static void StartTwoPlayersGame()
