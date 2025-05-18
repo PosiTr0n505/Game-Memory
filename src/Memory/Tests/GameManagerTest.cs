@@ -54,17 +54,16 @@ namespace Tests
             Assert.False(card.IsFaceUp);
         }
 
-        //[Fact]
-        //public void GameOver_should_return_true_when_game_is_over()
-        //{
-        //    GameManager _gameManager = new(new Game("test1", "test2"));
-        //    _gameManager.StartGame();
+        [Fact]
+        public void GameOver_should_return_true_when_game_is_over()
+        {
+            GameManager _gameManager = new(new Game("test1", "test2", GridSize.Size1));
 
-        //    while (!_gameManager.IsGameOver())
-        //        _gameManager.SwitchPlayers();
+            while (!_gameManager.IsGameOver())
+                _gameManager.Game.ReduceCountByOnePair();
 
-        //    Assert.True(_gameManager.IsGameOver());
-        //}
+            Assert.True(_gameManager.IsGameOver());
+        }
 
         [Fact]
         public void GameManager_constructor_should_initialize_game_and_cardManager_correctly()
