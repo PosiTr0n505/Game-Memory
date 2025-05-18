@@ -129,7 +129,6 @@ package "Persistence" {
 "Game Management" ..> "Persistence" : sauvegarde/charge
 "Player Management" ..> "Card and Grid Management" : utilise GridSize
 "Card and Grid Management" ..> "Player Management" : Score vers Player
-"Player Management" ..> "Leaderboard Management" : Leaderboard
 
 @enduml
 ```
