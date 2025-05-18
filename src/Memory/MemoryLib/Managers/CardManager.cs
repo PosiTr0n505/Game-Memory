@@ -21,9 +21,5 @@ namespace MemoryLib.Managers
         {
             return card1.Id == card2.Id;
         }
-        public void MatchCard(Card card)
-        {
-            Console.WriteLine($"Card {card.Id} matched.");
-        }
     }
 }

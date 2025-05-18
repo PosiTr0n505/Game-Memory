@@ -9,6 +9,6 @@ namespace MemoryLib.Managers.Interface
         /// </summary>
         /// <param name="g">The grid size enumeration value.</param>
         /// <returns>A tuple containing the width and height as integers.</returns>
-        (int, int) GetGridSizeValues(GridSize g);
+        public (int, int) GetGridSizeValues(GridSize g);
     }
 }

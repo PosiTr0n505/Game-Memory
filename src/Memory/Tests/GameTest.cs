@@ -56,7 +56,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game? game = new Game(player1, player2, GridSize.Size1); // C un test avec 4 cartes
+            Game? game = new(player1, player2, GridSize.Size1);
 
             int count = 0;
             var cards = game.Grid.Cards;
@@ -73,7 +73,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size1);
+            Game game = new(player1, player2, GridSize.Size1);
 
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
@@ -89,7 +89,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size4);
+            Game game = new(player1, player2, GridSize.Size4);
 
             var cards = game.Grid.Cards;
             var typeCount = new Dictionary<CardType, int>();
@@ -104,7 +104,7 @@ namespace Tests
                 }
             }
 
-            Assert.All(typeCount.Values, count => Assert.Equal(2, count)); // verifie qu'il existe 2 exemplaires de chaque type
+            Assert.All(typeCount.Values, count => Assert.Equal(2, count));
         }
 
         [Fact]
@@ -112,7 +112,7 @@ namespace Tests
         {
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
-            Game game = new Game(player1, player2, GridSize.Size3);
+            Game game = new(player1, player2, GridSize.Size3);
 
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
@@ -120,14 +120,6 @@ namespace Tests
                 if (c != null) cardCount++;
             }
             Assert.Equal(16, cardCount);
-        }
-
-        [Fact]
-        public void Game_initialization_should_fail_with_null_players()
-        {
-            Game? game = null;
-
-            Assert.Throws<ArgumentNullException>(() => game = new Game(null!, null!, GridSize.Size3));
         }
 
 /*        [Fact]

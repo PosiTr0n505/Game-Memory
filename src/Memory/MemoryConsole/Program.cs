@@ -7,21 +7,21 @@ using Persistence;
 
 using static System.Console;
 
-namespace MyApp
+namespace MemoryConsole
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             int selectedIndex = 0;
-            string[] options = {
-        "Singleplayer Game",
+            string[] options = [
+        "Single Player Game",
         "Two Players Game",
         "Game Rules",
         "Leaderboard",
         "Credits",
         "Quit Game"
-            };
+            ];
 
             ConsoleColor defaultColor = ConsoleColor.White;
             ConsoleColor highlightColor = ConsoleColor.Green;
@@ -31,18 +31,18 @@ namespace MyApp
                 Console.Clear();
                 int width = Console.WindowWidth;
 
-                string Center(string text, int w)
+                static string Center(string text, int w)
                 {
                     int padding = Math.Max((w - text.Length) / 2, 0);
                     return new string(' ', padding) + text;
                 }
 
-                string[] asciiArt = new[]
-                {
+                string[] asciiArt =
+                [
             "╔╦╗╔═╗╔╦╗╔═╗╦═╗╦ ╦  ╔═╗╔═╗╔╦╗╔═╗",
             "║║║║╣ ║║║║ ║╠╦╝╚╦╝  ║ ╦╠═╣║║║║╣ ",
             "╩ ╩╚═╝╩ ╩╚═╝╩╚═ ╩   ╚═╝╩ ╩╩ ╩╚═╝"
-        };
+        ];
 
                 WriteLine();
 
@@ -116,7 +116,7 @@ namespace MyApp
                         switch (selectedIndex)
                         {
                             case 0:
-                                StartSingleplayerGame();
+                                StartSinglePlayerGame();
                                 break;
                             case 1:
                                 StartTwoPlayersGame();
@@ -127,7 +127,6 @@ namespace MyApp
                                 break;
                             case 3:
                                 ShowLeaderboard();
-                                ReadAndEnter();
                                 break;
                             case 4:
                                 ShowCredits();
@@ -149,7 +148,7 @@ namespace MyApp
             ReadLine();
         }
 
-        static void StartSingleplayerGame()
+        static void StartSinglePlayerGame()
         {
             Clear();
             WriteLine("Starting Single Player Game...\nEnter your Name\n");
@@ -231,7 +230,7 @@ namespace MyApp
                     }
                 }
 
-                gameManager.playRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
+                gameManager.PlayRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
 
                 WriteLine("Appuyez sur entrée pour continuer...");
                 ReadLine();
@@ -282,7 +281,7 @@ namespace MyApp
             GameManager gameManager = new(game);
 
             (int, int) card1coordinates;
-            (int, int) card2coordiantes;
+            (int, int) card2coordinates;
 
             gameManager.BoardChange += GridWriter.WriteGrid;
 
@@ -313,8 +312,8 @@ namespace MyApp
                 {
                     try
                     {
-                        card2coordiantes = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-                        if (card1coordinates == card2coordiantes)
+                        card2coordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+                        if (card1coordinates == card2coordinates)
                         {
                             WriteLine("You cannot select the same card twice. Please select a different card.");
                             continue;
@@ -331,7 +330,7 @@ namespace MyApp
                     }
                 }
 
-                gameManager.playRound(card1coordinates.Item1, card1coordinates.Item2, card2coordiantes.Item1, card2coordiantes.Item2);
+                gameManager.PlayRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
 
                 WriteLine("Appuyez sur entrée pour continuer...");
                 ReadLine();
@@ -448,8 +447,8 @@ namespace MyApp
             string Center(string text) =>
                 new string(' ', Math.Max((width - text.Length) / 2, 0)) + text;
 
-            string[] creditsText = new[]
-            {
+            string[] creditsText =
+        [    
     "CREDITS",
     "",
     "This game was proudly crafted by:",
@@ -460,7 +459,7 @@ namespace MyApp
     "Built with ❤️ using C# and .NET MAUI",
     "",
     "Thanks for playing!"
-};
+];
 
             Console.WriteLine("\n" + new string('─', width) + "\n");
             foreach (string line in creditsText)

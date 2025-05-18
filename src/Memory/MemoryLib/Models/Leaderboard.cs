@@ -7,7 +7,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente le tableau des scores, permettant d'ajouter des scores et de les récupérer selon différents critères.
     /// </summary>
-    public class Leaderboard
+    public class Leaderboard : IScoreManager
     {
         /// <summary>
         /// Liste interne des scores enregistrés.
@@ -66,6 +66,29 @@ namespace MemoryLib.Models
                 return new ReadOnlyCollection<Score>([.. _scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize)]);
 
             return new ReadOnlyCollection<Score>( [.. _scores.Where(s => s.Player.NameTag == playerName) ]);
+        }
+
+        public void ChangeScoreValueIfGreater(Player p, GridSize gs, int scoreValue)
+        {
+            var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
+            if (score != null)
+            {
+                score.ChangeScoreValueIfGreater(scoreValue);
+            }
+        }
+
+        public void IncrementGamesPlayed(Player p, GridSize gs)
+        {
+            var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
+            if (score != null)
+            {
+                score.IncrementGamesPlayed();
+            }
+        }
+
+        public void SaveScore(Score score)
+        {
+            _scores.Add(score);
         }
     }
 }

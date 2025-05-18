@@ -36,7 +36,6 @@ namespace MemoryLib.Models
         /// <param name="player2">Le deuxième joueur.</param>
         /// <param name="g">La taille de la grille à utiliser dans le jeu.</param>
         /// <exception >Lève une exception si l'un des joueurs est null.</exception>
-
         public Game(Player player1, Player player2, GridSize g)
         {
             if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
@@ -55,6 +54,27 @@ namespace MemoryLib.Models
             RemainingCardsCount = 0;
             Round = 0;
             CurrentPlayer = player1;
+            RemainingCardsCount = x * y;
+        }
+
+        public Game(string player1, string player2, GridSize g)
+        {
+            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
+                throw new ArgumentNullException("Player cannot be null");
+
+            Player1 = new Player(player1);
+            Player2 = new Player(player2);
+
+            GridSize = g;
+
+            IGridSizeManager gridSizeManager = new GridSizeManager();
+
+            (int x, int y) = gridSizeManager.GetGridSizeValues(g);
+
+            Grid = new GridManager(x, y);
+            RemainingCardsCount = 0;
+            Round = 0;
+            CurrentPlayer = Player1;
             RemainingCardsCount = x * y;
         }
 

@@ -4,22 +4,15 @@ using System.Data;
 
 namespace MemoryLib.Managers
 {
-    public class GameManager : IGameManager
+    public class GameManager(Game game) : IGameManager
     {
         public delegate void OnBoardChange(GameManager sender, IEnumerable<Card> cards);
         public event OnBoardChange? BoardChange;
 
-        public int Moves { get; private set; }
+        public int Moves { get; private set; } = 0;
         private int currentscore = 0;
-        public readonly Game Game;
-        private readonly ICardManager _cardManager;
-
-        public GameManager(Game game)
-        {
-            Game = game;
-            Moves = 0;
-            _cardManager = new CardManager();
-        }
+        public readonly Game Game = game;
+        private readonly CardManager _cardManager = new();
 
         public void IncrementMoves()
         {
@@ -32,11 +25,11 @@ namespace MemoryLib.Managers
             var card = Game.Grid.GetCard(x, y);
 
             if (card == null) return;
-
-            _cardManager.FlipCard(card);
+            if (card.IsFaceUp == true) _cardManager.UnFlipCard(card);
+            else _cardManager.FlipCard(card);
         }
 
-        public void playRound(int x1, int y1, int x2, int y2)
+        public void PlayRound(int x1, int y1, int x2, int y2)
         {
             Card c1, c2;
 
@@ -63,27 +56,12 @@ namespace MemoryLib.Managers
             BoardChange?.Invoke(this, Game.Grid.Cards);
         }
 
-        public bool IsGameOver()
-        {
-            return Game?.IsGameOver() ?? false;
-        }
+        public bool IsGameOver() => Game?.IsGameOver() ?? false;
 
-        public int UpdateScore(int score)
-        {
-            currentscore += score;
-            Console.WriteLine($"Score updated: {currentscore}");
-            return currentscore;
-        }
+        public int UpdateScore(int score) => currentscore += score;
 
-        public void SwitchPlayers()
-        {
-            Game?.SwitchPlayer();
-            Console.WriteLine("Switched players.");
-        }
+        public void SwitchPlayers() => Game?.SwitchPlayer();
 
-        public void HideCards()
-        {
-            Game.Grid.HideCards();
-        }
+        public void HideCards() => Game.Grid.HideCards();
     }
 }

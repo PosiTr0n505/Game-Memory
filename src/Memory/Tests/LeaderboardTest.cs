@@ -95,7 +95,6 @@ namespace Tests
             Leaderboard l = new(new StubLoadManager(), new StubSaveManager());
             Player p1 = new("Player1");
             Player p2 = new("Player2");
-            Player p3 = new("Player3");
 
             Score s1 = new(p1, 100, GridSize.Size6);
             Score s2 = new(p2, 150, GridSize.Size6);

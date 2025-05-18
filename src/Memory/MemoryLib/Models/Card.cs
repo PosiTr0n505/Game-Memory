@@ -27,7 +27,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
-        public bool IsFaceUp { get; set; }
+        public bool IsFaceUp { get; set; } = false;
 
         public bool IsFound { get; set; }
 
@@ -46,6 +46,36 @@ namespace MemoryLib.Models
         public override string ToString() => Id.ToString();
 
         /// <summary>
+        /// <summary>
+        /// Retourne une carte si elle est face cachée.
+        /// </summary>
+        /// <param name="card">La carte à retourner.</param>
+        public void FlipCard(Card card)
+        {
+            if (!card.IsFaceUp)
+                card.Flip();
+        }
+
+        /// <summary>
+        /// Affiche un message dans la console lorsque deux cartes sont matchées.
+        /// </summary>
+        /// <param name="card">La carte associée qui a été trouvée.</param>
+        public void MatchCard(Card card)
+        {
+            Console.WriteLine($"Card {card.Id} matched.");
+        }
+
+        /// <summary>
+        /// Retourne une carte si elle est face visible.
+        /// </summary>
+        /// <param name="card">La carte à remettre face cachée.</param>
+        public void UnFlipCard(Card card)
+        {
+            if (card.IsFaceUp)
+                card.Flip();
+        }
+
+        /// <summary>
         /// Vérifie si deux cartes sont égales en référence.
         /// </summary>
         /// <param name="other">L'autre carte à comparer.</param>
@@ -62,7 +92,7 @@ namespace MemoryLib.Models
         /// <returns>Retourne true si les objets sont égaux, sinon false<.</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(obj, null)) return false;
+            if (obj is null) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (obj.GetType() != this.GetType()) return false;
             return this.Equals((Card)obj);
