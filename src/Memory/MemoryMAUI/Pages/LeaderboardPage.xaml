@@ -1,85 +1,86 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.Pages.LeaderboardPage"
-             Title="Leaderboard">
+             Title="Leaderboard"
+             BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
 
-    <ContentPage.Resources>
-        <Style TargetType="Button" x:Key="GridButton">
-            <Setter Property="BackgroundColor"  Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"/>
-            
-        </Style>
-        <Style TargetType="Border" x:Key="GridBorder">
-            <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Stroke" Value="Black"/>
-            <Setter Property="BackgroundColor" Value="White"/>
-        </Style>
-    </ContentPage.Resources>
-        <VerticalStackLayout>
-        <Grid
-            Padding="20,40,0,10">
-            <Button
-                Text="Back"
-                BorderColor="Black"
-                BackgroundColor="white"
-                TextColor="Black"
-                VerticalOptions="Center"
-                HorizontalOptions="Start"
-                BorderWidth="2"/>
+    <Grid
+        ColumnDefinitions="*,3*,*"
+        RowDefinitions="120,Auto,Auto,*">
 
-            <Label
-            Text="Memory"
-            VerticalOptions="Center" 
+        <Button
+            Text="Cancel"
+            FontSize="18"
+            Padding="20, 10"
+            BorderColor="Black"
+            TextColor="White"
+            VerticalOptions="Center"
             HorizontalOptions="Center"
-            FontSize="Header"
-            />
-        </Grid>
+            Grid.Row="0"
+            Grid.Column="0"/>
+
+        <views:MemoryLabel
+            Grid.Column="1"/>
+
         <Label
             Text="Leaderboard"
             HorizontalOptions="Center"
-            VerticalTextAlignment="Center"
-            Padding="100, 20, 80, 100"
+            VerticalOptions="Start"
             FontSize="Large"
-        />
+            Grid.Row="1"
+            Grid.Column="1"
+            Padding="20"/>
 
-        <HorizontalStackLayout
-            HorizontalOptions="Center"
-            Spacing="10"
-            >
-            <Label
-                Text="Grid size: "
-                Padding="0, 6, 0, 0"
-                FontSize="Medium"/>
-
-            <Button Text="4x4" Style="{StaticResource GridButton}"/>
-            <Button Text="4x5" Style="{StaticResource GridButton}"/>
-            <Button Text="4x6" Style="{StaticResource GridButton}"/>
-            <Button Text="5x6" Style="{StaticResource GridButton}"/>
-            <Button Text="6x6" Style="{StaticResource GridButton}"/>
-            <Button Text="6x8" Style="{StaticResource GridButton}"/>
-               
+        <ScrollView
+            Orientation="Horizontal"
+            Grid.Row="2"
+            Grid.Column="1">
             
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="10"
+                Margin="0,0,0,20">
+            
+                <Label
+                    Text="Grid size: "
+                    Padding="0,6,0,0"
+                    FontSize="Medium"/>
+            
+                <Button Text="4x4"/>
+                <Button Text="4x5"/>
+                <Button Text="4x6"/>
+                <Button Text="5x6"/>
+                <Button Text="6x6"/>
+                <Button Text="6x8"/>
+            
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <ScrollView
+            Grid.Row="3" 
+            Grid.Column="1"
+            MaximumWidthRequest="800">
+
+            <VerticalStackLayout>
+
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
+                <views:LeadeboardCell/>
                 
-        </HorizontalStackLayout>
-        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="2*, *, *, 2*" Padding="0, 50, 0, 0">
+            </VerticalStackLayout>
 
-            <Border Style="{StaticResource GridBorder}" Grid.Row="0" Grid.Column="1">
-                <Label Text="Player"  HorizontalTextAlignment="Center"/>
-            </Border>
-
-            <Border Style="{StaticResource GridBorder}" Grid.Row="0" Grid.Column="2" >
-                <Label Text="Score" HorizontalTextAlignment="Center"/>
-            </Border>
-
-            <Border Style="{StaticResource GridBorder}" Grid.Row="1" Grid.Column="1" >
-                <Label Text="Player 1" HorizontalTextAlignment="Center"/>
-            </Border>
-
-            <Border Style="{StaticResource GridBorder}" Grid.Row="1" Grid.Column="2">
-                <Label Text="Score player 1" HorizontalTextAlignment="Center"/>
-            </Border>
-
-            
-        </Grid>
-    </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

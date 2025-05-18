@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.LeadeboardCell">
+
+    <ContentView.Resources>
+        <Style TargetType="Border" x:Key="GridBorder">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='Black', Light='White'}"/>
+            <Setter Property="MinimumWidthRequest" Value="200"/>
+        </Style>
+    </ContentView.Resources>
+
+    <Border Style="{StaticResource GridBorder}">
+        <Label Text="Player" 
+               HorizontalTextAlignment="Center"
+               Padding="10"/>
+    </Border>
+
+</ContentView>

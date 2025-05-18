@@ -5,6 +5,15 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryMAUI", "MemoryMAUI\MemoryMAUI.csproj", "{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryLib", "MemoryLib\MemoryLib.csproj", "{D2728CFF-C79D-417C-A490-E4F23FF44C2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryConsole", "MemoryConsole\MemoryConsole.csproj", "{E83F89A0-1462-2039-9A48-52566624DBF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2728CFF-C79D-417C-A490-E4F23FF44C2B} = {D2728CFF-C79D-417C-A490-E4F23FF44C2B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9CF47860-2CEA-F379-09D8-9AEF27965D12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +26,18 @@ Global
 		{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D2728CFF-C79D-417C-A490-E4F23FF44C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2728CFF-C79D-417C-A490-E4F23FF44C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2728CFF-C79D-417C-A490-E4F23FF44C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2728CFF-C79D-417C-A490-E4F23FF44C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83F89A0-1462-2039-9A48-52566624DBF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83F89A0-1462-2039-9A48-52566624DBF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83F89A0-1462-2039-9A48-52566624DBF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83F89A0-1462-2039-9A48-52566624DBF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

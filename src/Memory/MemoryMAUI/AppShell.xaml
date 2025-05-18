@@ -5,41 +5,41 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:MemoryMAUI.Pages"
     xmlns:local="clr-namespace:MemoryMAUI"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
 
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
+        Title="MainPage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:MemoryRulesPage}"
-        Route="MainPage"/>
+        Title="MemoryRulesPage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
-        Route="SingleplayerGamePage" />
+        Title="SingleplayerGamePage" />
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerPage}"
-        Route="SingleplayerGamePage" />
+        Title="SingleplayerPage" />
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
-        Route="TwoPlayersGamePage" />
+        Title="TwoPlayersGamePage" />
 
     <ShellContent
          ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
-         Route="TwoPlayersPage" />
+         Title="TwoPlayersPage" />
 
     <ShellContent
        ContentTemplate="{DataTemplate pages:CreditsPage}"
-       Route="CreditsPage" />
+       Title="CreditsPage" />
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
-        Route="LeaderboardPage" />
+        Title="LeaderboardPage" />
 
 </Shell>

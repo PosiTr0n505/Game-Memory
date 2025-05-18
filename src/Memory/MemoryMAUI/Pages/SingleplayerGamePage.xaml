@@ -6,7 +6,6 @@
              Title="SingleplayerGamePage">
 
     <Grid ColumnDefinitions="*" 
-          HeightRequest="{Binding Source={RelativeSource Self}, Path=Width}"
           BackgroundColor="{StaticResource Primary}">
     </Grid>
 </ContentPage>

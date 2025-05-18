@@ -1,0 +1,74 @@
+kind: pipeline
+type: docker
+name: CI_pipeline
+
+trigger:
+  event:
+    - pull_request
+  branch:
+    exclude :
+      - doc*
+
+steps:
+  - name: buildMAUI
+    image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dotnet9-maui:latest
+    commands:
+      - cd src/Memory/
+      - dotnet workload restore
+      - dotnet restore Memory.sln
+      - dotnet build Memory.sln -c Release --no-restore /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT -property:Aapt2ToolPath=$ANDROID_SDK_ROOT/build-tools/35.0.0
+      - dotnet publish MemoryMAUI/MemoryMAUI.csproj -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f:net9.0-android
+
+  - name: build_dotnet
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    commands:
+      - cd src/Memory/
+      - dotnet restore MemoryCI.sln
+      - dotnet build MemoryCI.sln -c Release --no-restore
+      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+
+  - name: tests
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    commands:
+      - cd src/Memory/
+      - dotnet restore MemoryCI.sln
+      - dotnet test MemoryCI.sln --no-restore
+    depends_on: [buildMAUI, build_dotnet]
+
+  - name: code-inspection
+    image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet9-maui
+    secrets: [ SONAR_TOKEN ]
+    settings:
+      project_key: MemoryDotnet
+      sonar_host: https://codefirst.iut.uca.fr/sonar/
+      sonar_token:
+        from_secret: SONAR_TOKEN
+    commands: 
+      - cd src/Memory/
+      - dotnet workload restore
+      - dotnet restore Memory.sln
+      - dotnet sonarscanner begin /k:$${PLUGIN_PROJECT_KEY} /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      
+      - dotnet build Memory.sln -c Release --no-restore
+      - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
+      - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
+      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+
+      - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+    depends_on: [buildMAUI, build_dotnet, tests]
+
+  - name: generate-and-deploy-docs
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+    failure: ignore
+    volumes:
+      - name: documentation
+        path: /Documentation
+    commands:
+      - /entrypoint.sh
+    when:
+      event:
+        - pull_request
+      branch:
+        - master
+    depends_on: [buildMAUI, build_dotnet, tests]
+ 
