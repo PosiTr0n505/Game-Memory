@@ -38,17 +38,20 @@ namespace MemoryLib.Models
         /// <exception >Lève une exception si l'un des joueurs est null.</exception>
         public Game(Player player1, Player player2, GridSize g)
         {
-            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
-                throw new ArgumentNullException("Player cannot be null");
+            if (player1 is null)
+                throw new ArgumentNullException(nameof(player1), "Player cannot be null");
+
+            if (player2 is null)
+                throw new ArgumentNullException(nameof(player2), "Player cannot be null");
+
 
             Player1 = player1;
             Player2 = player2;
 
             GridSize = g;
 
-            IGridSizeManager gridSizeManager = new GridSizeManager();
 
-            (int x, int y) = gridSizeManager.GetGridSizeValues(g);
+            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
@@ -59,17 +62,18 @@ namespace MemoryLib.Models
 
         public Game(string player1, string player2, GridSize g)
         {
-            if (ReferenceEquals(null, player1) || ReferenceEquals(null, player2))
-                throw new ArgumentNullException("Player cannot be null");
+            if (player1 is null)
+                throw new ArgumentNullException(nameof(player1), "Player cannot be null");
+
+            if (player2 is null)
+                throw new ArgumentNullException(nameof(player2), "Player cannot be null");
 
             Player1 = new Player(player1);
             Player2 = new Player(player2);
 
             GridSize = g;
 
-            IGridSizeManager gridSizeManager = new GridSizeManager();
-
-            (int x, int y) = gridSizeManager.GetGridSizeValues(g);
+            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;

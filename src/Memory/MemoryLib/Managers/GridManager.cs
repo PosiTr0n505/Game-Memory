@@ -31,9 +31,9 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Matrice des cartes de la grille.
         /// </summary>
-        private Card[,] _cards;
+        private readonly Card[,] _cards;
 
-        private List<Card> _cardsList;
+        private readonly List<Card> _cardsList;
 
         /// <summary>
         /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
@@ -43,21 +43,21 @@ namespace MemoryLib.Managers
 
         private void InitializeGrid()
         {
-            List<CardType> types = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+            List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
 
-            Random rand = new Random();
+            Random rand = new();
 
             int CardSlotCount = X * Y;
 
-            List<CardType> typesSelected = types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2).ToList();
-            List<Card> allCards = new();
+            List<CardType> typesSelected = [.. types.OrderBy(t => rand.Next()).Take(CardSlotCount / 2)];
+            List<Card> allCards = [];
 
             foreach (var type in typesSelected)
             {
                 allCards.Add(new Card(type));
                 allCards.Add(new Card(type));
             }
-            allCards = allCards.OrderBy(c => rand.Next()).ToList();
+            allCards = [.. allCards.OrderBy(c => rand.Next())];
             int index = 0;
             for (int i = 0; i < X; i++)
             {
@@ -74,11 +74,7 @@ namespace MemoryLib.Managers
             Y = y;
             _cards = new Card[x, y];
             InitializeGrid();
-            _cardsList = new List<Card>();
-            foreach (Card card in _cards)
-            {
-                _cardsList.Add(card);
-            }
+            _cardsList = [.. _cards];
             Cards = new ReadOnlyCollection<Card>(_cardsList);
         }
 

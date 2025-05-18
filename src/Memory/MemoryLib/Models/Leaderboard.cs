@@ -12,12 +12,12 @@ namespace MemoryLib.Models
         /// <summary>
         /// Liste interne des scores enregistrés.
         /// </summary>
-        private List<Score> _scores = [];
+        private readonly List<Score> _scores = [];
 
         public IEnumerable<Score> Scores => _scores.AsReadOnly();
 
-        private ILoadManager _loader;
-        private ISaveManager _saver;
+        private readonly ILoadManager _loader;
+        private readonly ISaveManager _saver;
 
         public Leaderboard(ILoadManager loader, ISaveManager saver)
         {
@@ -71,19 +71,13 @@ namespace MemoryLib.Models
         public void ChangeScoreValueIfGreater(Player p, GridSize gs, int scoreValue)
         {
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
-            if (score != null)
-            {
-                score.ChangeScoreValueIfGreater(scoreValue);
-            }
+            score?.ChangeScoreValueIfGreater(scoreValue);
         }
 
         public void IncrementGamesPlayed(Player p, GridSize gs)
         {
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
-            if (score != null)
-            {
-                score.IncrementGamesPlayed();
-            }
+            score?.IncrementGamesPlayed();
         }
 
         public void SaveScore(Score score)
