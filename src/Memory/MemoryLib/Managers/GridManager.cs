@@ -87,8 +87,6 @@ namespace MemoryLib.Managers
         /// <exception>Lève une exception si les coordonnées sont hors de portée de la grille.</exception>
         public void AddCard(Card card, int x, int y)
         {
-            if (x >= X || y >= Y)
-                throw new IndexOutOfRangeException("The coordinates are outside of the grid range");
             _cards[x, y] = card;
         }
 

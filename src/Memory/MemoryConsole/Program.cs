@@ -241,7 +241,7 @@ namespace MemoryConsole
             {
                 try
                 {
-                    cardcoordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
+                    cardcoordinates = ConsoleAsking.AskCoordinates(i, gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
 
                     if (card1coordinates == cardcoordinates)
                     {
