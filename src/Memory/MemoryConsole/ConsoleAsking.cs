@@ -8,7 +8,6 @@ namespace MemoryConsole
 {
     public class ConsoleAsking
     {
-        public ConsoleAsking() { }
         public static void AskOnePlayerName(out string playerName)
         {
             Write("Enter your name :    ");

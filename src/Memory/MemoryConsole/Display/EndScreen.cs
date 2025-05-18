@@ -4,7 +4,7 @@ using System;
 
 namespace MemoryConsole.Display
 {
-    internal class EndScreen
+    internal static class EndScreen
     {
         public static void DisplayEndScreen(Score score)
         {
@@ -23,19 +23,19 @@ namespace MemoryConsole.Display
 
             // Upper border
             Console.ForegroundColor = borderColor;
-            string border = new string('═', width - 2);
+            string border = new('═', width - 2);
             Console.SetCursorPosition(1, 1);
             Console.Write(border);
 
             // Title
-            string title = "FIN DE PARTIE";
+            string title = "End Game";
             Console.ForegroundColor = titleColor;
             Console.SetCursorPosition((width - title.Length) / 2, 3);
             Console.WriteLine(title);
 
             // Display player name and score
             Console.ForegroundColor = playerColor;
-            string playerName = $"Joueur : {score.Player.NameTag}";
+            string playerName = $"Player : {score.Player.NameTag}";
             Console.SetCursorPosition((width - playerName.Length) / 2, 6);
             Console.WriteLine(playerName);
 
@@ -46,7 +46,7 @@ namespace MemoryConsole.Display
             Console.WriteLine(scoreText);
 
             // Display Moves count
-            string movesText = $"Nombre de mouvements : {score.Player.MovesCount}";
+            string movesText = $"Moves Count : {score.Player.MovesCount}";
             Console.SetCursorPosition((width - movesText.Length) / 2, 9);
             Console.WriteLine(movesText);
 

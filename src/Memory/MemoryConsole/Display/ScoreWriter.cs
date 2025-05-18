@@ -4,9 +4,9 @@ using MemoryLib.Models;
 
 namespace MemoryConsole.Display
 {
-    internal class ScoreWriter
+    internal static class ScoreWriter
     {
-        public void OnScoreChange(Player player, int score)
+        public static void OnScoreChange(Player player, int score)
         {
             Write($"{player.NameTag} : {score}");
         }
