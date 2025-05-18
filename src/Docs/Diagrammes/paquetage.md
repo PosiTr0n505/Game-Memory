@@ -1,4 +1,3 @@
-```plantuml
 @startuml
 hide circle
 allowmixing
@@ -10,9 +9,16 @@ skinparam classFontColor #black
 skinparam classFontName Tahoma
 
 package "Game Management" {
+    interface IGameManager {
+        +incrementMoves(): void
+        +flipCard(x: int, y: int): void
+        +startGame(): void
+        +isGameOver(): bool
+        +updateScore(score: int): void
+        +switchPlayer(): void
+    }
+
     class GameManager {
-        -card1: Card
-        -card2: Card
         +flipCard(): void
         +startGame(): void
         +isGameFinished(): bool
@@ -20,9 +26,6 @@ package "Game Management" {
     }
 
     class Game {
-        -grid: Grid
-        -player1: Player
-        -player2: Player
         +currentPlayer: Player
         +rounds: int
         +remainingCardsCount: int
@@ -39,6 +42,13 @@ package "Game Management" {
 }
 
 package "Player Management" {
+    interface IScoreManager {
+        +getScore(): int
+        +saveScore(): void
+        +incrementGamesPlayed(score: Score): void
+        +changeBestScore(score: Score, best: int): void
+    }
+
     class Player {
         -nameTag: string
         -currentScore: int
@@ -51,29 +61,35 @@ package "Player Management" {
     }
 
     class Score {
-        -scoreValue: int
-        +calculateScore(): int
+        +ScoreValue: int
+        +gamesPlayed: int
     }
 
     class ScoreManager {
         +getScore(): int
-        +addScore(): void
+        +addScore(score: Score): void
         +saveScore(): void
+    }
+
+    class Leaderboard {
+        +addScore(player: Player, score: Score): void
+        +getTopScores(gridSize: int): List<Score>
     }
 }
 
 package "Card and Grid Management" {
-    class Deck {
-        -cards: List<Card>
-        +initializeDeck(): void
-        +shuffleDeck(): void
-        +drawCard(): Card
+    interface ICardManager {
+        +flipCard(card: Card): void
+        +unflipCard(card: Card): void
+        +compareCards(card1: Card, card2: Card): bool
+        +matchCard(card: Card): void
+    }
+
+    class CardManager {
     }
 
     class Card {
         -id: int
-        -image: string
-        -isMatched: bool
         -isFaceUp: bool
         +flipCard(): void
         +compareCard(card: Card): bool
@@ -81,27 +97,37 @@ package "Card and Grid Management" {
         +unflipCard(): void
     }
 
+    enum GridSize
+    enum CardType
+
     class Grid {
-        -cards: List<Card>
         +initializeGrid(): void
         +showGrid(): void
     }
-}
 
-package "Leaderboard Management" {
-    class Leaderboard {
-        -bestScores: List<Score>
-        +addScore(player: Player, score: Score): void
-        +getTopScores(): List<Score>
+    class Deck {
+        +initializeDeck(): void
+        +shuffleDeck(): void
+        +drawCard(): Card
     }
 }
 
-' Relations entre les paquets
-"Game Management" ..> "Player Management" : use
-"Game Management" ..> "Card and Grid Management" : access
-"Card and Grid Management" ..> "Leaderboard Management" : use
-"Player Management" ..> "Leaderboard Management" : access
+package "Persistence" {
+    interface ISaveManager {
+        +saveGame(game: Game): void
+    }
+
+    interface ILoadManager {
+        +loadGame(): Game
+    }
+}
+
+' Dépendances entre paquets (conformes au diagramme de classes d'origine)
+"Game Management" ..> "Player Management" : utilise
+"Game Management" ..> "Card and Grid Management" : utilise
+"Game Management" ..> "Persistence" : sauvegarde/charge
+"Player Management" ..> "Card and Grid Management" : utilise GridSize
+"Card and Grid Management" ..> "Player Management" : Score vers Player
+"Player Management" ..> "Leaderboard Management" : Leaderboard
 
 @enduml
-
-```
