@@ -123,11 +123,10 @@ package "Persistence" {
     }
 }
 
-' Dépendances entre paquets (conformes au diagramme de classes d'origine)
-"Game Management" ..> "Player Management" : utilise
-"Game Management" ..> "Card and Grid Management" : utilise
-"Game Management" ..> "Persistence" : sauvegarde/charge
-"Player Management" ..> "Card and Grid Management" : utilise GridSize
+"Game Management" ..> "Player Management" : use
+"Game Management" ..> "Card and Grid Management" : use
+"Game Management" ..> "Persistence" : Save/Load
+"Player Management" ..> "Card and Grid Management" : use
 "Card and Grid Management" ..> "Player Management" : Score vers Player
 
 @enduml
