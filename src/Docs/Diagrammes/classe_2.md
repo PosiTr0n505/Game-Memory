@@ -110,4 +110,49 @@ enum GridSize <<enum>>
 
 @enduml
 ```
-Le diagramme présente
+
+Le point central de notre diagramme de classe est le GameManager, qui permet de coordonner les données via les managers, notre diagramme est composé de plusieurs classes : Card, Score, Player etcc.. qui sont controlées par des interfaces.
+
+- Game Manager : Nous avons utilisé un manager pour séparer notre jeu en plusieurs entités (Card, Game...) pour éviter que Game ait trop de responsabilités dans le jeu.
+( ---> ) Il est lié à Game, CardManager, ScoreManager pour accéder aux différents états et comportements.
+( ...> ) Il est en dépendance avec ISaveManager, ILoadManager et IGameManager car il permet d'injecter la persistance...
+
+
+- Game : 
+
+Composé de deux joueurs (player1 et player2), des attributs rounds (nombre de tours du jeu), remainingCardsCount (nombre de cartes restantes), currentPlayer(joueur actif).
+Son rôle est de représenter une partie en cours.
+Liens : 
+Cardinalités 1...2 avec Player, car nous voulons exactement 1 ou 2 joueurs dans une partie.
+Lien avec IScoreManager pour se déléguer de la gestion du score.
+
+- CardManager :
+
+Son rôle est d'encapsuler toute la logique des cartes : les retourner, les associer, les comparer.
+Elle implémente l'interface ICardManager.
+Nous avons utilisé un Manager, car manipuler différentes cartes ne doit pas être de la responsabilité du GameManager mais d'un CardManager.
+
+- ScoreManager :
+
+Son rôle est de gérer l'actualisation et les récupération des scores pour plus tard, les transférer au Leaderboard.
+Elle implémente l'interface IScoreManager.
+Nous avons décidé de ne pas mettre son contenu dans Player, car le Player recoit les scores grâce à currentScore mais Player ne les calcule pas et ne les stocke pas.
+
+- Leaderboard :
+
+Son rôle est d'afficher les scores des différents joueurs par taille de grille.
+Contient une List<Score>, car nous devons ordonner les scores ou les parcourir pour les afficher dans le classement?
+Leaderboard est liée à GridSize qui permet de filtrer le leaderboard par différentes tailles de grilles. (4x4...)
+
+- Score : 
+
+Son rôle est de stocker le score d'un joueur via ScoreValue et le nombre de parties jouées d'un joueur via gamesPlayed, elle référence Player car chaque score appartient à un joueur.
+
+- Card :
+
+Contient les attributs id (identifiant d'une carte) et isFaceUp (état de la carte).
+Association vers CardType pour comparer les cartes et les faire matcher.
+<<enum>> pour CardType, pour éviter de dupliquer les valeurs
+Association vers GridSize pour savoir comment placer une carte dans une grille.
+<<enum>> pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.
+
