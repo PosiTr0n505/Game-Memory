@@ -9,20 +9,20 @@ skinparam classArrowColor #800000
 skinparam classFontColor black
 skinparam classFontName Tahoma
 
-package "GameCore" {
+package "Game Management" {
     class GameManager
     class Game
     interface IGameManager
 }
 
-package "PlayerSystem" {
+package "Player Management" {
     class Player
     class Score
     class Leaderboard
     interface IScoreManager
 }
 
-package "CardSystem" {
+package "Card Management" {
     class Card
     enum CardType
     enum GridSize
@@ -34,7 +34,7 @@ package "Persistence" {
     interface ILoadManager
 }
 
-' Dépendances (exactes selon le diagramme de classes fourni)
+
 GameManager --> Game
 GameManager ..> IGameManager
 GameManager --> CardManager
