@@ -13,7 +13,8 @@
     </ContentView.Resources>
 
     <Border Style="{StaticResource GridBorder}">
-        <Label Text="Player" 
+        <Label Text="qssqd"
+               x:Name="NameTag"
                HorizontalTextAlignment="Center"
                Padding="10"/>
     </Border>
