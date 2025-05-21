@@ -12,37 +12,47 @@
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
-        Title="MainPage"/>
+        Title="MainPage"
+        Route="mainpage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:MemoryRulesPage}"
-        Title="MemoryRulesPage"/>
+        Title="MemoryRulesPage"
+        Route="rulespages"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
-        Title="SingleplayerGamePage" />
+        Title="SingleplayerGamePage" 
+        Route="singleplayergamepage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerPage}"
-        Title="SingleplayerPage" />
+        Title="SingleplayerPage"
+        Route="singleplayerpage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
-        Title="TwoPlayersGamePage" />
+        Title="TwoPlayersGamePage" 
+        Route="twoplayersgamepage"/>
 
     <ShellContent
          ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
-         Title="TwoPlayersPage" />
+         Title="TwoPlayersPage" 
+         Route="twoplayerspage"/>
 
     <ShellContent
        ContentTemplate="{DataTemplate pages:CreditsPage}"
-       Title="CreditsPage" />
+       Title="CreditsPage"
+       Route="creditspage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
-        Title="LeaderboardPage" />
+        Title="LeaderboardPage" 
+        Route="leaderboardpage"/>
+
     //Shell.Current.GoToASync("credits") credits sera mis en route dans le shellcontent. 
     //await = attend que l'opération est terminée pour passer a la ligne d'apres
     // await nécessite de declarer la méthode async donc si il y a await il y a async. 
     // async est dans la décla de méthode (private async void....)
+    
 </Shell>
