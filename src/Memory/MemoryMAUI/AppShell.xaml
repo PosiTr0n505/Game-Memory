@@ -41,5 +41,8 @@
     <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
         Title="LeaderboardPage" />
-
+    //Shell.Current.GoToASync("credits") credits sera mis en route dans le shellcontent. 
+    //await = attend que l'opération est terminée pour passer a la ligne d'apres
+    // await nécessite de declarer la méthode async donc si il y a await il y a async. 
+    // async est dans la décla de méthode (private async void....)
 </Shell>

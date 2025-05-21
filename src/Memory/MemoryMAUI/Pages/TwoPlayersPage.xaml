@@ -19,6 +19,15 @@
             Grid.ColumnSpan="3"
             Grid.Row="0"/>
 
+        <Button
+                HeightRequest="60"
+                WidthRequest="120"
+                Margin="50,0"
+                HorizontalOptions="Start"
+                FontAttributes="Bold"
+                Text="Back"
+                Grid.Row="0"/>
+
         <VerticalStackLayout
             Grid.Column="0"
             Grid.Row="1"

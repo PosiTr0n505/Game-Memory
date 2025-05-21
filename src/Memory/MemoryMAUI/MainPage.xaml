@@ -34,23 +34,23 @@
             WidthRequest="250">
 
             <Button
-                 Text="Single player"/>
+                 Text="Single player" Clicked="NavigateToSingleplayerPage"/>
 
             <Button
-                Text="2 players"/>
+                Text="2 players" Clicked="NavigateToTwoplayersPage"/>
 
             <Button
-                Text="Game rules"/>
+                Text="Game rules" Clicked="NavigateToGamerulesPage"/>
 
             <Button
-                Text="Leaderboard"/>
+                Text="Leaderboard" Clicked="NavigateToLeaderboardPage"/>
 
             <Button
-                Text="Credits"/>
+                Text="Credits" Clicked="NavigateToCreditsPage"/>
 
             <Button
                 Text="Quit Game" 
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" Clicked="QuitButton_Clicked"/>
 
         </VerticalStackLayout>
 

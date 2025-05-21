@@ -15,6 +15,15 @@
             Grid.Column="1"
             Grid.Row="0"/>
         
+        <Button
+                HeightRequest="60"
+                WidthRequest="120"
+                Margin="50,0"
+                HorizontalOptions="Start"
+                FontAttributes="Bold"
+                Text="Back"
+                Grid.Row="0"/>
+
         <Label
             Text="Rules"
             Grid.Row="1"
