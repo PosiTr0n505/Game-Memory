@@ -1,36 +1,22 @@
 namespace MemoryMAUI.Resources.Views;
+
+
+using System;
+using System.Globalization;
 using MemoryLib.Models;
 
 public partial class LeadeboardCell : ContentView
 {
-	public static readonly BindableProperty NameTagProperty =
-		BindableProperty.Create(nameof(Title), typeof(string), typeof(LeadeboardCell), string.Empty);
-    public string Title
-    {
-        get => (string)GetValue(NameTagProperty);
-        set => SetValue(NameTagProperty, value);
-    }
+	Score score1 = new(new Player("Test"), 50, GridSize.Size3);
 
-    public static readonly BindableProperty MovesCountProperty =
-        BindableProperty.Create(nameof(NumberOfMoves), typeof(int), typeof(LeadeboardCell), 0);
-
-    public int NumberOfMoves
-    {
-        get => (int)GetValue(MovesCountProperty);
-        set => SetValue(NameTagProperty, value);
-    }
-
-    public static readonly BindableProperty GridSizeProperty =
-        BindableProperty.Create(nameof(GridSize), typeof(GridSize), typeof(LeadeboardCell), GridSize.Size1);
-
-    public GridSize GridSize
-    {
-        get => (GridSize)GetValue(GridSizeProperty);
-        set => SetValue(NameTagProperty, value);
-    }
+    private IValueConverter converter = new GridSizeToString();
 
     public LeadeboardCell()
 	{
 		InitializeComponent();
+		BindingContext = score1;
+		gridSizeLabel = converter.Convert();
 	}
+
+
 }

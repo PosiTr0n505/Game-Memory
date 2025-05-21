@@ -100,7 +100,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../MemoryLib/MemoryLib.csproj"/>
+		<ProjectReference Include="../MemoryLib/MemoryLib.csproj" />
 	</ItemGroup>
 	
 </Project>

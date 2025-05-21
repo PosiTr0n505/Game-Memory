@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MemoryMAUI.Resources.Views.LeadeboardCell">
+             xmlns:Lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             x:Class="MemoryMAUI.Resources.Views.LeadeboardCell"
+             x:DataType="Lib:Score">
 
     <ContentView.Resources>
         <Style TargetType="Border" x:Key="GridBorder">
@@ -13,10 +15,18 @@
     </ContentView.Resources>
 
     <Border Style="{StaticResource GridBorder}">
-        <Label Text="qssqd"
-               x:Name="NameTag"
-               HorizontalTextAlignment="Center"
-               Padding="10"/>
+        <Grid ColumnDefinitions="2*,*,*,*" Padding="10">
+            <Label Text="{Binding Player.NameTag}"
+                   HorizontalOptions="Center"
+                   Grid.Column="0"/>
+            <Label Text="{Binding ScoreValue}"
+                   Grid.Column="1"/>
+            <Label Text="{Binding GridSize}"
+                   Grid.Column="2"/>
+            <Label Text=""
+                   x:Name="gridSizeLabel"
+                   Grid.Column="3"/>
+        </Grid>
     </Border>
 
 </ContentView>
