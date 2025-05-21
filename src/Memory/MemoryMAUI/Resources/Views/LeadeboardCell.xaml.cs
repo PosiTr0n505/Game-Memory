@@ -1,21 +1,21 @@
 namespace MemoryMAUI.Resources.Views;
 
 
-using System;
+using MemoryMAUI.Converters;
 using System.Globalization;
 using MemoryLib.Models;
 
 public partial class LeadeboardCell : ContentView
 {
-	Score score1 = new(new Player("Test"), 50, GridSize.Size3);
+    private readonly Score? score;
 
-    private IValueConverter converter = new GridSizeToString();
+    private readonly GridSizeToString converter = new();
 
     public LeadeboardCell()
 	{
 		InitializeComponent();
-		BindingContext = score1;
-		gridSizeLabel = converter.Convert();
+
+        gridSizeLabel.Text = (string)converter.Convert(score!.GridSize, typeof(string), null, CultureInfo.CurrentCulture)!;
 	}
 
 

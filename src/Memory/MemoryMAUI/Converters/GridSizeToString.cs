@@ -2,7 +2,7 @@
 using MemoryLib.Managers;
 using MemoryLib.Models;
 
-
+namespace MemoryMAUI.Converters;
 public class GridSizeToString : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
