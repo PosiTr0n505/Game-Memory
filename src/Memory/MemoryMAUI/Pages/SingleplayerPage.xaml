@@ -60,12 +60,13 @@
                 RowDefinitions="*,*,2*,*"
                 ColumnDefinitions="*,*,*,*,*">
 
-                <Label Style="{StaticResource LabelUnderline}" 
+                <Label Style="{StaticResource LabelUnderline}"
                     Grid.Row="0"
                     VerticalOptions="Center"
                     Text="Name tag 1 :"/>
                 <Entry 
                 Style="{StaticResource EntryConfigPage}"
+                    
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Grid.Column="1"

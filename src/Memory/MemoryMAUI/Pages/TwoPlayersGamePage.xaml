@@ -4,8 +4,18 @@
              xmlns:pages="clr-namespace:MemoryMAUI.Pages"
              x:Class="MemoryMAUI.Pages.TwoPlayersGamePage"
              Title="TwoPlayersGamePage">
-    
+
     <Grid ColumnDefinitions="*" 
           BackgroundColor="{StaticResource Primary}">
+
+        <Button
+        HeightRequest="60"
+        WidthRequest="150"
+        Margin="50,0"
+        HorizontalOptions="Start"
+        FontAttributes="Bold"
+        Text="Back to homepage"
+        Grid.Row="0"/>
+        
     </Grid>
 </ContentPage>

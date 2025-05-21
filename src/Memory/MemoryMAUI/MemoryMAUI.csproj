@@ -64,6 +64,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MemoryLib\MemoryLib.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Resources\Views\LeadeboardCell.xaml.cs">
 	    <DependentUpon>LeadeboardCell.xaml</DependentUpon>
 	  </Compile>

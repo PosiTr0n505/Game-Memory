@@ -13,11 +13,11 @@
 
         <Button
                 HeightRequest="60"
-                WidthRequest="120"
+                WidthRequest="150"
                 Margin="50,0"
                 HorizontalOptions="Start"
                 FontAttributes="Bold"
-                Text="Cancel"
+                Text="Back to homepage"
                 Grid.Row="0"/>
 
         <views:MemoryLabel

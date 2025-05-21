@@ -11,15 +11,13 @@
         RowDefinitions="120,Auto,Auto,*">
 
         <Button
-            Text="Cancel"
-            FontSize="18"
-            Padding="20, 10"
-            BorderColor="Black"
-            TextColor="White"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Grid.Row="0"
-            Grid.Column="0"/>
+        HeightRequest="60"
+        WidthRequest="150"
+        Margin="50,0"
+        HorizontalOptions="Start"
+        FontAttributes="Bold"
+        Text="Back to homepage"
+        Grid.Row="0"/>
 
         <views:MemoryLabel
             Grid.Column="1"/>
