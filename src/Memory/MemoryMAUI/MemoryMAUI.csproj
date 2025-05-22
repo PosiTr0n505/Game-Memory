@@ -101,6 +101,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../MemoryLib/MemoryLib.csproj" />
+		<ProjectReference Include="../Persistence/Persistence.csproj" />
 	</ItemGroup>
 	
 </Project>

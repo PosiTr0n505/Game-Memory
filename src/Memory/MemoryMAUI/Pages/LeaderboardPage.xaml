@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.Pages.LeaderboardPage"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
              Title="Leaderboard"
              BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
 
@@ -58,29 +60,22 @@
             </HorizontalStackLayout>
         </ScrollView>
 
-        <ScrollView
+<!--        <ScrollView
             Grid.Row="3" 
             Grid.Column="1"
             MaximumWidthRequest="800">
+-->
 
-            <VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Scores}" MaximumHeightRequest="800"
+                          x:DataType="Pages:LeaderboardPage"
+                          Grid.Row="3" 
+                          Grid.Column="1">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <views:LeadeboardCell/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                
-            </VerticalStackLayout>
-
-        </ScrollView>
     </Grid>
 </ContentPage>

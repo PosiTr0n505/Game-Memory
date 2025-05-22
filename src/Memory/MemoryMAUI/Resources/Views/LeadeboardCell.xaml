@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             xmlns:converter="clr-namespace:MemoryMAUI.Converters"
              x:Class="MemoryMAUI.Resources.Views.LeadeboardCell"
              x:DataType="Lib:Score">
 
@@ -12,6 +13,7 @@
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='Black', Light='White'}"/>
             <Setter Property="MinimumWidthRequest" Value="200"/>
         </Style>
+        <converter:GridSizeToString x:Key="GridSizeToString"/>
     </ContentView.Resources>
 
     <Border Style="{StaticResource GridBorder}">
@@ -21,8 +23,7 @@
                    Grid.Column="0"/>
             <Label Text="{Binding ScoreValue}"
                    Grid.Column="1"/>
-            <Label Text=""
-                   x:Name="gridSizeLabel"
+            <Label Text="{Binding GridSize, Converter={StaticResource GridSizeToString}}"
                    Grid.Column="2"/>
             <Label Text="{Binding GamesPlayed}"
                    Grid.Column="3"/>
