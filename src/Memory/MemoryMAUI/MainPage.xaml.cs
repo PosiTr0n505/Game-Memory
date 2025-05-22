@@ -9,26 +9,25 @@ namespace MemoryMAUI
         {
             InitializeComponent();
         }
-
-        private void NavigateToSingleplayerPage(object sender, EventArgs e)
+        private async void NavigateToSingleplayerPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SingleplayerPage());
+            await Shell.Current.GoToAsync("///singleplayerpage");
         }
-        private void NavigateToTwoplayersPage(object sender, EventArgs e)
+        private async void NavigateToTwoplayersPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new TwoPlayersPage());
+            await Shell.Current.GoToAsync("///twoplayerspage");
         }
-        private void NavigateToGamerulesPage(object sender, EventArgs e)
+        private async void NavigateToGamerulesPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MemoryRulesPage());
+            await Shell.Current.GoToAsync("///gamerulespage");
         }
-        private void NavigateToLeaderboardPage(object sender, EventArgs e)
+        private async void NavigateToLeaderboardPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new LeaderboardPage());
+            await Shell.Current.GoToAsync("///leaderboardpage");
         }
-        private void NavigateToCreditsPage(object sender, EventArgs e)
+        private async void NavigateToCreditsPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CreditsPage());
+            await Shell.Current.GoToAsync("///creditspage");
         }
         private void QuitButton_Clicked(object sender, EventArgs e)
         {

@@ -22,7 +22,8 @@
                 HorizontalOptions="Start"
                 FontAttributes="Bold"
                 Text="Back"
-                Grid.Row="0"/>
+                Grid.Row="0"
+                Clicked="NavigateToMainpage"/>
 
         <VerticalStackLayout
         Grid.Column="0"
@@ -126,7 +127,8 @@
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="Start Game"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    Clicked="OnClickedStartGame"/>
             </Grid>
         </Border>
 

@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:MemoryMAUI.Pages"
-    xmlns:local="clr-namespace:MemoryMAUI"
+    xmlns:local="clr-namespace:MemoryMAUI;assembly=MemoryMAUI"
     Shell.FlyoutBehavior="Flyout"
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
@@ -18,7 +18,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate pages:MemoryRulesPage}"
         Title="MemoryRulesPage"
-        Route="rulespages"/>
+        Route="gamerulespage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
@@ -50,9 +50,4 @@
         Title="LeaderboardPage" 
         Route="leaderboardpage"/>
 
-    //Shell.Current.GoToASync("credits") credits sera mis en route dans le shellcontent. 
-    //await = attend que l'opération est terminée pour passer a la ligne d'apres
-    // await nécessite de declarer la méthode async donc si il y a await il y a async. 
-    // async est dans la décla de méthode (private async void....)
-    
 </Shell>

@@ -22,7 +22,8 @@
                 HorizontalOptions="Start"
                 FontAttributes="Bold"
                 Text="Back"
-                Grid.Row="0"/>
+                Grid.Row="0"
+                Clicked="NavigateToMainpage"/>
 
         <Label
             Text="Rules"
