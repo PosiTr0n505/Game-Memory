@@ -7,7 +7,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente le tableau des scores, permettant d'ajouter des scores et de les récupérer selon différents critères.
     /// </summary>
-    public class Leaderboard : IScoreManager
+    public class ScoreManager : IScoreManager
     {
         /// <summary>
         /// Liste interne des scores enregistrés.
@@ -32,7 +32,7 @@ namespace MemoryLib.Models
         /// </summary>
         /// <param name="loader"></param>
         /// <param name="saver"></param>
-        public Leaderboard(ILoadManager loader, ISaveManager saver)
+        public ScoreManager(ILoadManager loader, ISaveManager saver)
         {
             _loader = loader;
             _saver = saver;
@@ -41,7 +41,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Destructeur de la classe Leaderboard.
         /// </summary>
-        ~Leaderboard() 
+        ~ScoreManager() 
         {
             _saver.SaveScores(_scores);
         }

@@ -35,32 +35,19 @@
             Grid.Column="1"
             Padding="20"/>
 
-        <ScrollView
-            Orientation="Horizontal"
+        <Label
+            Text="Grid size: "
+            Padding="40,3,0,0"
+            FontSize="Medium"
             Grid.Row="2"
-            Grid.Column="1">
-            
-            <HorizontalStackLayout
-                HorizontalOptions="Center"
-                Spacing="10"
-                Margin="0,0,0,20">
-            
-                <Label
-                    Text="Grid size: "
-                    Padding="0,6,0,0"
-                    FontSize="Medium"/>
-            
-                <Button Text="4x4"/>
-                <Button Text="4x5"/>
-                <Button Text="4x6"/>
-                <Button Text="5x6"/>
-                <Button Text="6x6"/>
-                <Button Text="6x8"/>
-            
-            </HorizontalStackLayout>
-        </ScrollView>
+            Grid.Column="1"/>
+        
+        <views:GridButtons
+            Grid.Row="2"
+            Grid.Column="1"/>
 
-<!--        <ScrollView
+
+        <!--        <ScrollView
             Grid.Row="3" 
             Grid.Column="1"
             MaximumWidthRequest="800">

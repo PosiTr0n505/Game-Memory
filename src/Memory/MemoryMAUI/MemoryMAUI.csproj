@@ -67,6 +67,9 @@
 	  <Compile Update="Resources\Views\LeadeboardCell.xaml.cs">
 	    <DependentUpon>LeadeboardCell.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\Views\GridButtons.xaml.cs">
+	    <DependentUpon>GridButtons.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -97,11 +100,15 @@
 	  <MauiXaml Update="Resources\Views\LeadeboardCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\GridButtons.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="../MemoryLib/MemoryLib.csproj" />
-		<ProjectReference Include="../Persistence/Persistence.csproj" />
+		<ProjectReference Include="..\Persistence\MemoryPersistence.csproj" />
 	</ItemGroup>
 	
 </Project>
