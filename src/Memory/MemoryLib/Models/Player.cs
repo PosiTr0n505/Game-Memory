@@ -6,8 +6,14 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
-    public class Player : IEquatable<Player>
+    public class Player : IEquatable<Player>, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+
         /// <summary>
         /// Délégué pour notifier les changements de score.
         /// </summary>
@@ -27,27 +33,65 @@ namespace MemoryLib.Models
         /// </summary>
         /// <param name="name">Le nom du joueur. Ne peut pas être nul ou vide.</param>
         /// <exception>Lève une exception si le nom est nul ou vide.</exception>
-        public Player(string? name)
+        public Player(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            this.NameTag = name;
-            this.MovesCount = 0;
-            this.CurrentScore = 0;
+            NameTag = name;
+            MovesCount = 0;
+            CurrentScore = 0;
         }
         /// <summary>
         /// Obtient le nom du joueur.
         /// </summary>
-        public string NameTag { get; init; }
+        private string _nameTag;
+        public string NameTag
+        {
+            get => _nameTag;
+            set
+            {
+                if (_nameTag != value)
+                {
+                    _nameTag = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         /// <summary>
         /// Obtient ou définit le score actuel du joueur.
         /// </summary>
-        public int CurrentScore { get; private set; }
+        private int _currentScore;
+        public int CurrentScore
+        {
+            get => _currentScore;
+            private set
+            {
+                if (_currentScore != value)
+                {
+                    _currentScore = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         /// <summary>
         /// Obtient ou définit le nombre de mouvements effectués par le joueur.
         /// </summary>
-        public int MovesCount { get; private set; }
+        private int _movesCount;
+        public int MovesCount
+        {   
+            get => _movesCount;
+            private set
+            {
+                if (_movesCount != value)
+                {
+                    _movesCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Ajoute 1 au score actuel du joueur.
@@ -68,11 +112,7 @@ namespace MemoryLib.Models
         /// </summary>
         /// <param name="other">L'autre joueur à comparer.</param>
         /// <returns>true si les joueurs ont le même nom, sinon false.</returns>
-        public bool Equals(Player? other)
-        {
-            if (other is null) return false;
-            return NameTag.Equals(other.NameTag);
-        }
+        public bool Equals(Player? other) => other is not null && NameTag.Equals(other.NameTag);
 
         /// <summary>
         /// Compare l'objet actuel à un autre objet pour vérifier si les joueurs sont égaux.

@@ -6,7 +6,6 @@ namespace MemoryMAUI
     public partial class MainPage : ContentPage
     {
 
-        public Player player1 { get; private set; } = new Player ""player1"";
         public MainPage()
         {
            
