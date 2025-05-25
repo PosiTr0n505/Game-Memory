@@ -17,8 +17,9 @@
                 Margin="50,0"
                 HorizontalOptions="Start"
                 FontAttributes="Bold"
-                Text="Cancel"
-                Grid.Row="0"/>
+                Text="Back"
+                Grid.Row="0"
+                Clicked="NavigateToMainpage"/>
 
         <views:MemoryLabel
                  Grid.Column="1"

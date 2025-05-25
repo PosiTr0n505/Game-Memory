@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:MemoryMAUI.Pages"
-    xmlns:local="clr-namespace:MemoryMAUI"
+    xmlns:local="clr-namespace:MemoryMAUI;assembly=MemoryMAUI"
     Shell.FlyoutBehavior="Flyout"
     Title="MemoryMAUI"
     Shell.NavBarIsVisible="False">
@@ -12,34 +12,42 @@
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
-        Title="MainPage"/>
+        Title="MainPage"
+        Route="mainpage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:MemoryRulesPage}"
-        Title="MemoryRulesPage"/>
+        Title="MemoryRulesPage"
+        Route="gamerulespage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
-        Title="SingleplayerGamePage" />
+        Title="SingleplayerGamePage" 
+        Route="singleplayergamepage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:SingleplayerPage}"
-        Title="SingleplayerPage" />
+        Title="SingleplayerPage"
+        Route="singleplayerpage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
-        Title="TwoPlayersGamePage" />
+        Title="TwoPlayersGamePage" 
+        Route="twoplayersgamepage"/>
 
     <ShellContent
          ContentTemplate="{DataTemplate pages:TwoPlayersPage}"
-         Title="TwoPlayersPage" />
+         Title="TwoPlayersPage" 
+         Route="twoplayerspage"/>
 
     <ShellContent
        ContentTemplate="{DataTemplate pages:CreditsPage}"
-       Title="CreditsPage" />
+       Title="CreditsPage"
+       Route="creditspage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
-        Title="LeaderboardPage" />
+        Title="LeaderboardPage" 
+        Route="leaderboardpage"/>
 
 </Shell>
