@@ -12,7 +12,7 @@ namespace Tests
             
             Player player = new("Player1");
             Score score = new(player, 10, GridSize.Size2, 5);
-            var leaderboard = new Leaderboard(new StubLoadManager(), new StubSaveManager());
+            var leaderboard = new ScoreManager(new StubLoadManager(), new StubSaveManager());
 
             leaderboard.AddScore(score);
 

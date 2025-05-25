@@ -198,7 +198,7 @@ namespace MemoryConsole
 
             var score = new Score(gameManager.Game.CurrentPlayer, gameManager.Game.CurrentPlayer.CurrentScore, gameManager.Game.GridSize);
 
-            Leaderboard leaderboard = new(new StubLoadManager(), new StubSaveManager()); //j'ai mis la définition du STUB dans le constructeur pour eviter la dependance circulaire, je ne savais pas comment faire autrement
+            ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
 
             leaderboard.AddScore(score);
 
@@ -406,7 +406,7 @@ namespace MemoryConsole
         static void ShowLeaderboard()
         {
             Clear();
-            Leaderboard leaderboard = new(new StubLoadManager(), new StubSaveManager());
+            ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
 
             LeaderboardWriter.WriteLeaderboard(leaderboard.Scores);
 

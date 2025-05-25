@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.Pages.LeaderboardPage"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
              Title="Leaderboard"
              BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
 
     <Grid
         ColumnDefinitions="*,3*,*"
-        RowDefinitions="120,Auto,Auto,*">
+        RowDefinitions="120,Auto,Auto,Auto,Auto,*">
 
         <Button
                 HeightRequest="60"
@@ -32,54 +34,72 @@
             Grid.Column="1"
             Padding="20"/>
 
-        <ScrollView
+        <views:GridButtons
+                HorizontalOptions="Fill"
+                x:Name="GridButtons"
+                Grid.Column="1"
+                Grid.Row="2"
+                Grid.ColumnSpan="1"/>
+
+
+        <StackLayout
             Orientation="Horizontal"
-            Grid.Row="2"
+            HorizontalOptions="Center"
+            Grid.Row="3"
             Grid.Column="1">
-            
-            <HorizontalStackLayout
-                HorizontalOptions="Center"
-                Spacing="10"
-                Margin="0,0,0,20">
-            
-                <Label
-                    Text="Grid size: "
-                    Padding="0,6,0,0"
-                    FontSize="Medium"/>
-            
-                <Button Text="4x4"/>
-                <Button Text="4x5"/>
-                <Button Text="4x6"/>
-                <Button Text="5x6"/>
-                <Button Text="6x6"/>
-                <Button Text="6x8"/>
-            
-            </HorizontalStackLayout>
-        </ScrollView>
 
-        <ScrollView
-            Grid.Row="3" 
-            Grid.Column="1"
-            MaximumWidthRequest="800">
+            <Label Text="Search By Name : " 
+                   VerticalOptions="Center"
+                   FontSize="18"
+                   Padding="0,0,20,0"/>
 
-            <VerticalStackLayout>
+            <Entry Placeholder="Entrez un pseudo"
+                   x:Name="NameTagEntry"
+                   TextChanged="OnTextChanged"
+                   WidthRequest="200"
+                   HorizontalTextAlignment="Center"/>
 
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
-                <views:LeadeboardCell/>
+        </StackLayout>
+        
+
+        <Grid ColumnDefinitions="2*,*,*,*" 
+            Margin="0,40,0,0"
+                Padding="10"
+                Grid.Row="4"
+                Grid.Column="1">
                 
-            </VerticalStackLayout>
+            <Label Text="NameTag"
+                    HorizontalTextAlignment="Center"
+                    Grid.Column="0"/>
+            
+            <Label Text="Score"
+                   HorizontalTextAlignment="Center"
+                   Grid.Column="1"/>
+            
+            <Label Text="Grid Size"
+                   Grid.Column="2"
+                   HorizontalTextAlignment="Center"/>
+            
+            <Label Text="Games Played"
+                    HorizontalTextAlignment="Center"
+                    Grid.Column="3"/>
+                
+                
+        </Grid>
 
-        </ScrollView>
+
+        <CollectionView ItemsSource="{Binding Scores}" MaximumHeightRequest="800"
+                        x:DataType="Pages:LeaderboardPage"
+                        Grid.Row="5" 
+                        Grid.Column="1"
+                        Margin="0,20,0,0">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <views:LeadeboardCell/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </Grid>
 </ContentPage>

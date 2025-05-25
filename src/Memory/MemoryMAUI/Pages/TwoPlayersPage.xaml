@@ -107,18 +107,9 @@
                         Grid.ColumnSpan="4"
                         AlignItems="Center"
                         JustifyContent="Center">
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="4x4"></Button>
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="4x5"></Button>
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="4x6"></Button>
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="6x5"></Button>
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="6x6"></Button>
-                    <Button Style="{StaticResource GridBtn}"
-                                Text="6x8"></Button>
+                    
+                    <views:GridSizes/>
+                    
                 </FlexLayout>
                 <Label Style="{StaticResource LabelUnderline}"
                         VerticalOptions="Center"
