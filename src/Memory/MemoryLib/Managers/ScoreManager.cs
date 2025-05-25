@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using MemoryLib.Managers.Interface;
+using MemoryLib.Models;
 
-namespace MemoryLib.Models
+namespace MemoryLib.Managers
 {
     /// <summary>
     /// Représente le tableau des scores, permettant d'ajouter des scores et de les récupérer selon différents critères.
@@ -75,7 +76,7 @@ namespace MemoryLib.Models
         {
             // Si aucun filtre n'est fourni, retourne tous les scores
             if (string.IsNullOrWhiteSpace(playerName) && gridSize is null)
-                return Scores;
+                throw new ArgumentException("the playerName provided is not valid");
 
             var filteredScores = _scores.Where(s =>
                 (
