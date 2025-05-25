@@ -57,8 +57,11 @@ namespace MemoryLib.Models
         /// </summary>
         /// <param name="gridSize">La taille de la grille pour filtrer les scores.</param>
         /// <returns>Une collection en lecture seule des scores pour la taille de la grille spécifiée.</returns>
-        public IEnumerable<Score> GetScores(GridSize gridSize)
+        public IEnumerable<Score> GetScores(GridSize? gridSize)
         {
+            if (gridSize is null)
+                return Scores;
+
             return new ReadOnlyCollection<Score>([.. _scores
                 .Where(s => s.GridSize == gridSize)
                 .OrderByDescending(s => s.ScoreValue)]);

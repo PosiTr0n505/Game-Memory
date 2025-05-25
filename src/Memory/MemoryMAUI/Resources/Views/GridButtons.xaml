@@ -15,21 +15,41 @@
     </ContentView.Resources>
     
     <ScrollView
-        VerticalOptions="Center"
-        HorizontalOptions="Fill"
-        Padding="30,0"
+        Padding="0,0"
         Orientation="Horizontal">
 
         <HorizontalStackLayout
-         HorizontalOptions="Center"
-         VerticalOptions="Center"
-         Spacing="20"
-         Margin="0,0,0,20"
-         x:DataType="views:GridButtons"
-         x:Name="stackLayout">
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="20"
+            Margin="0,0,0,20">
 
+            <Label
+                Text="Grid size: "
+                Padding="0,8,0,0"
+                FontSize="18"/>
+
+            <HorizontalStackLayout
+                x:DataType="views:GridButtons"
+                BindableLayout.ItemsSource="{Binding Sizes}">
+
+                <BindableLayout.ItemTemplate>
+                    
+                    <DataTemplate x:DataType="lib:GridSize">
+                        
+                        <Button Text="{Binding ., Converter={StaticResource GridSizeToString}}"
+                                Clicked="ButtonClicked"/>
+                        
+                    </DataTemplate>
+                    
+                </BindableLayout.ItemTemplate>
+                
+            </HorizontalStackLayout>
+
+            <Button Text="Reset"
+                x:Name="ResetButton"
+                Clicked="ButtonClicked"/>
             
-
         </HorizontalStackLayout>
 
     </ScrollView>

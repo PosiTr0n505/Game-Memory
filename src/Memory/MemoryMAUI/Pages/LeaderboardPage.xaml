@@ -35,34 +35,21 @@
             Grid.Column="1"
             Padding="20"/>
 
-        <Label
-            Text="Grid size: "
-            Padding="40,3,0,0"
-            FontSize="Medium"
-            Grid.Row="2"
-            Grid.Column="1"/>
-        
         <views:GridButtons
             Grid.Row="2"
-            Grid.Column="1"/>
-
-
-        <!--        <ScrollView
-            Grid.Row="3" 
             Grid.Column="1"
-            MaximumWidthRequest="800">
--->
+            x:Name="GridButtons"/>
 
-                <CollectionView ItemsSource="{Binding Scores}" MaximumHeightRequest="800"
-                          x:DataType="Pages:LeaderboardPage"
-                          Grid.Row="3" 
-                          Grid.Column="1">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <views:LeadeboardCell/>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+        <CollectionView ItemsSource="{Binding Scores}" MaximumHeightRequest="800"
+                    x:DataType="Pages:LeaderboardPage"
+                    Grid.Row="3" 
+                    Grid.Column="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <views:LeadeboardCell/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </Grid>
 </ContentPage>

@@ -1,18 +1,39 @@
 using MemoryLib.Models;
 using Persistence;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MemoryMAUI.Pages;
 
-public partial class LeaderboardPage : ContentPage
+public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
 {
-	private readonly ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
 
-	public List<Score> Scores {  get; private set; }
+    private readonly ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
 
-	public LeaderboardPage()
+    private List<Score> _scores = [];
+
+    public List<Score> Scores
+    {
+        get => _scores;
+        private set
+        {
+            _scores = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private void OnGridSizeSelected(object? sender, GridSize? e)
+	{
+		Scores = [.. leaderboard.GetScores(e)];
+
+    }
+
+
+    public LeaderboardPage()
 	{
 		InitializeComponent();
-		Scores = [.. leaderboard.Scores];
+        Scores = [.. leaderboard.Scores];
+        GridButtons.GridSizeSelected += OnGridSizeSelected;
         BindingContext = this;
     }
 }
