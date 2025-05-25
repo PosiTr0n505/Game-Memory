@@ -1,6 +1,5 @@
-﻿using MemoryLib.Managers.Interface;
-using System.Collections.ObjectModel;
-
+﻿using System.Collections.ObjectModel;
+using MemoryLib.Managers.Interface;
 
 namespace MemoryLib.Models
 {
@@ -14,7 +13,6 @@ namespace MemoryLib.Models
         /// </summary>
         private readonly List<Score> _scores = [];
 
-
         /// <summary>
         /// Obtient une collection en lecture seule des scores enregistrés.
         /// </summary>
@@ -25,7 +23,6 @@ namespace MemoryLib.Models
         /// </summary>
         private readonly ILoadManager _loader;
         private readonly ISaveManager _saver;
-
 
         /// <summary>
         /// Constructeur de la classe Leaderboard.
@@ -38,10 +35,11 @@ namespace MemoryLib.Models
             _saver = saver;
             _scores = _loader.LoadScores();
         }
+
         /// <summary>
         /// Destructeur de la classe Leaderboard.
         /// </summary>
-        ~ScoreManager() 
+        ~ScoreManager()
         {
             _saver.SaveScores(_scores);
         }
@@ -62,10 +60,9 @@ namespace MemoryLib.Models
             if (gridSize is null)
                 return Scores;
 
-            return new ReadOnlyCollection<Score>([.. _scores
-                .Where(s => s.GridSize == gridSize)
-                .OrderByDescending(s => s.ScoreValue)]);
-
+            return new ReadOnlyCollection<Score>(
+                [.. _scores.Where(s => s.GridSize == gridSize).OrderByDescending(s => s.ScoreValue)]
+            );
         }
 
         /// <summary>
@@ -74,17 +71,22 @@ namespace MemoryLib.Models
         /// <param name="playerName">Le nom du joueur pour lequel récupérer les scores.</param>
         /// <param name="gridSize">La taille de la grille pour filtrer les scores.</param>
         /// <returns>Une collection des scores associés au joueur et à la taille de la grille.</returns>
-        /// <exception>Lève une exception si le nom du joueur est invalide.</exception>
         public IEnumerable<Score> GetScores(string playerName, GridSize? gridSize = null)
         {
-            if (string.IsNullOrWhiteSpace(playerName))
-                throw new ArgumentException("the playerName provided is not valid");
+            // Si aucun filtre n'est fourni, retourne tous les scores
+            if (string.IsNullOrWhiteSpace(playerName) && gridSize is null)
+                return Scores;
 
-            if (_scores.Exists(s => s.Player.NameTag == playerName) && gridSize != null)
-                return new ReadOnlyCollection<Score>([.. _scores.Where(s => s.Player.NameTag == playerName && s.GridSize == gridSize)]);
+            var filteredScores = _scores.Where(s =>
+                (
+                    string.IsNullOrWhiteSpace(playerName)
+                    || s.Player.NameTag.Contains(playerName, StringComparison.OrdinalIgnoreCase)
+                ) && (gridSize == null || s.GridSize == gridSize)
+            );
 
-            return new ReadOnlyCollection<Score>( [.. _scores.Where(s => s.Player.NameTag == playerName) ]);
+            return new ReadOnlyCollection<Score>([.. filteredScores]);
         }
+
         /// <summary>
         /// Récupère les scores associés à un joueur spécifique.
         /// </summary>
@@ -96,6 +98,7 @@ namespace MemoryLib.Models
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
             score?.ChangeScoreValueIfGreater(scoreValue);
         }
+
         /// <summary>
         /// Incrémente le nombre de jeux joués pour un joueur spécifique et une taille de grille donnée.
         /// </summary>
@@ -106,6 +109,7 @@ namespace MemoryLib.Models
             var score = _scores.FirstOrDefault(s => s.Player.Equals(p) && s.GridSize == gs);
             score?.IncrementGamesPlayed();
         }
+
         /// <summary>
         /// Ajoute un score à la liste des scores.
         /// </summary>

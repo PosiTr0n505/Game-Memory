@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.GridSizes"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             xmlns:converter="clr-namespace:MemoryMAUI.Converters">
+
+
+    <ContentView.Resources>
+
+        <Style TargetType="Button" BasedOn="{StaticResource GridBtn}"/>
+
+        <converter:GridSizeToString x:Key="GridSizeToString"/>
+
+    </ContentView.Resources>
+
+
+    <HorizontalStackLayout
+    x:DataType="views:GridSizes"
+    BindableLayout.ItemsSource="{Binding Sizes}">
+
+        <BindableLayout.ItemTemplate>
+
+            <DataTemplate x:DataType="lib:GridSize">
+
+                <Button Text="{Binding ., Converter={StaticResource GridSizeToString}}"/>
+
+            </DataTemplate>
+
+        </BindableLayout.ItemTemplate>
+
+    </HorizontalStackLayout>
+
+
+</ContentView>

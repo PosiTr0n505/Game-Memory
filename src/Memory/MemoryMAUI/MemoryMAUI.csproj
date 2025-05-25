@@ -67,8 +67,8 @@
 	  <Compile Update="Resources\Views\LeadeboardCell.xaml.cs">
 	    <DependentUpon>LeadeboardCell.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Resources\Views\GridButtons.xaml.cs">
-	    <DependentUpon>GridButtons.xaml</DependentUpon>
+	  <Compile Update="Resources\Views\GridButtonsLeaderboard.xaml.cs">
+	    <DependentUpon>GridButtonsLeaderboard.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -97,11 +97,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 
+	  <MauiXaml Update="Resources\Views\GridSizes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+
 	  <MauiXaml Update="Resources\Views\LeadeboardCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 
-	  <MauiXaml Update="Resources\Views\GridButtons.xaml">
+	  <MauiXaml Update="Resources\Views\GridButtonsLeaderboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
