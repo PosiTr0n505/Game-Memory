@@ -36,4 +36,9 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
         GridButtons.GridSizeSelected += OnGridSizeSelected;
         BindingContext = this;
     }
+
+    private async void NavigateToMainpage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
 }
