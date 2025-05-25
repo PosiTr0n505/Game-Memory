@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Persistence\MemoryPersistence.csproj" />
+    <ProjectReference Include="..\Persistence\MemoryStubPersistence.csproj" />
   </ItemGroup>
 
 </Project>
