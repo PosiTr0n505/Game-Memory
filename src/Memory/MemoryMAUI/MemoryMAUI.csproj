@@ -108,7 +108,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../MemoryLib/MemoryLib.csproj" />
-		<ProjectReference Include="..\Persistence\MemoryPersistence.csproj" />
+		<ProjectReference Include="..\Persistence\MemoryStubPersistence.csproj" />
 	</ItemGroup>
 	
 </Project>

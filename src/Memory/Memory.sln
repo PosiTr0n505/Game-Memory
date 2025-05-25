@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryMAUI", "MemoryMAUI\MemoryMAUI.csproj", "{F1E65BD2-4040-43CC-BC8B-09DDAB8E7343}"
-	ProjectSection(ProjectDependencies) = postProject
-		{727CFD8C-23B7-C991-64E7-E71059A345FA} = {727CFD8C-23B7-C991-64E7-E71059A345FA}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryLib", "MemoryLib\MemoryLib.csproj", "{D2728CFF-C79D-417C-A490-E4F23FF44C2B}"
 EndProject
@@ -17,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryConsole", "MemoryCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9CF47860-2CEA-F379-09D8-9AEF27965D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryPersistence", "Persistence\MemoryPersistence.csproj", "{727CFD8C-23B7-C991-64E7-E71059A345FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryStubPersistence", "Persistence\MemoryStubPersistence.csproj", "{3F4522DF-5C81-E843-4798-065B6DF62B38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +40,10 @@ Global
 		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF47860-2CEA-F379-09D8-9AEF27965D12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{727CFD8C-23B7-C991-64E7-E71059A345FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{727CFD8C-23B7-C991-64E7-E71059A345FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{727CFD8C-23B7-C991-64E7-E71059A345FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{727CFD8C-23B7-C991-64E7-E71059A345FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F4522DF-5C81-E843-4798-065B6DF62B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4522DF-5C81-E843-4798-065B6DF62B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4522DF-5C81-E843-4798-065B6DF62B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4522DF-5C81-E843-4798-065B6DF62B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
