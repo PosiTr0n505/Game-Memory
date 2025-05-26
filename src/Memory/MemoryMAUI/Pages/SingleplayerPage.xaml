@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             xmlns:models="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+            xmlns:utils="clr-namespace:MemoryLib.Utils;assembly=MemoryLib"
              x:Class="MemoryMAUI.Pages.SingleplayerPage"
              Title="SingleplayerPage"
              BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
+    <ContentPage.Resources>
+        <utils:EnumUtil x:TypeArguments="models:GridSize" x:Key="GridSizes"/>
+    </ContentPage.Resources>
 
     <Grid
     RowDefinitions="2*,5*,*"

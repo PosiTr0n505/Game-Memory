@@ -70,10 +70,11 @@
                         Text="Name tag 1 :"/>
                 <Entry 
                     Style="{StaticResource EntryConfigPage}"
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2"
-                        Grid.Column="1"
-                        Placeholder="Entrez votre pseudo"/>
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="1"
+                    Text="{Binding Player1.NameTag, Mode=TwoWay}"
+                    Placeholder="Entrez votre pseudo"/>
                 <!--  TextChanged="OnTextChanged"/> -->
                 <Label Style="{StaticResource LabelUnderline}"
                         VerticalOptions="Center"
@@ -84,6 +85,7 @@
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
                         Grid.Column="1"
+                        Text="{Binding Player2.NameTag, Mode=TwoWay}"
                         Placeholder="Entrez votre pseudo"/>
                 <!--  TextChanged="OnTextChanged"/>-->
 
@@ -132,7 +134,8 @@
                         Grid.Row="4"
                         Grid.Column="2"
                         Text="Start Game"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        Clicked="StartGameButton_Clicked"/>
             </Grid>
         </Border>
 
