@@ -31,7 +31,7 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Le modèle de jeu associé à ce gestionnaire.
         /// </summary>
-        public readonly Game Game = game;
+        public Game Game { get; private init; } = game;
 
 
         /// <summary>
