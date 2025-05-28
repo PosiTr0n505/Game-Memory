@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.GridButtons"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             xmlns:converter="clr-namespace:MemoryMAUI.Converters">
+
+    <ContentView.Resources>
+        
+        <Style TargetType="Button" BasedOn="{StaticResource GridBtn}"/>
+        
+        <converter:GridSizeToString x:Key="GridSizeToString"/>
+        
+    </ContentView.Resources>
+    
+    <ScrollView
+        Padding="0,0"
+        Orientation="Horizontal">
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="20"
+            Margin="0,0,0,20">
+
+            <Label
+                Text="Grid size: "
+                Padding="0,8,0,0"
+                FontSize="18"/>
+
+            <HorizontalStackLayout
+                x:DataType="views:GridButtons"
+                BindableLayout.ItemsSource="{Binding Sizes}">
+
+                <BindableLayout.ItemTemplate>
+                    
+                    <DataTemplate x:DataType="lib:GridSize">
+                        
+                        <Button Text="{Binding ., Converter={StaticResource GridSizeToString}}"
+                                Clicked="ButtonClicked"/>
+                        
+                    </DataTemplate>
+                    
+                </BindableLayout.ItemTemplate>
+                
+            </HorizontalStackLayout>
+
+            <Button Text="Reset"
+                x:Name="ResetButton"
+                Clicked="ButtonClicked"/>
+            
+        </HorizontalStackLayout>
+
+    </ScrollView>
+
+
+
+</ContentView>
