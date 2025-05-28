@@ -13,18 +13,25 @@
 
     <DataTemplate x:Key="CardTemplate" x:DataType="lib:Card">
         <Grid BackgroundColor="White">
+            
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="CardClicked"/>
+            </Grid.GestureRecognizers>
+
             <Image Source="{Binding IsVisible, Converter={StaticResource CardBooleanToImageSource}}" 
-                   ZIndex="200"
                    Aspect="AspectFit"
                    HorizontalOptions="Fill"
-                   VerticalOptions="Fill"/>
+                   VerticalOptions="Fill"
+                   ZIndex="-1">
+
+            </Image>
+
             <Label Text="{Binding Id}"
-                TextColor="Black"
-                FontSize="Medium"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"/>
+                   FontSize="200"
+                   TextColor="Red"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Opacity="0"/>
         </Grid>
     </DataTemplate>
 

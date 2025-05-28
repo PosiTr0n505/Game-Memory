@@ -1,8 +1,5 @@
 ﻿
-using MemoryLib.Managers.Interface;
-
 namespace MemoryLib.Models
-
 {
     /// <summary>
     /// Représente une carte dans un jeu de cartes, avec un identifiant de type CardType et un état face visible ou cachée.
@@ -11,17 +8,30 @@ namespace MemoryLib.Models
     /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
     /// </remarks>
     /// <param name="id"></param>
-    public class Card(CardType id) : IEquatable<Card>
+    public class Card(CardType id) : ObservableObject, IEquatable<Card>
     {
         /// <summary>
         /// Obtient l'identifiant unique de la carte.
         /// </summary>
         public CardType Id { get; private init; } = id;
 
+        private bool _isVisible = false;
+
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
-        public bool IsVisible { get; set; } = false;
+        public bool IsVisible
+        {
+            get 
+            {
+                return _isVisible;
+            }
+            set 
+            {
+                _isVisible = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte a été trouvée.
