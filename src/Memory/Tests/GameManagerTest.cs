@@ -30,11 +30,11 @@ namespace Tests
             game.Grid = grid;
             var gameManager = new GameManager(game);
 
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
 
             gameManager.FlipCard(0, 0);
 
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
         }
 
         [Fact]
@@ -47,11 +47,11 @@ namespace Tests
             game.Grid = grid;
             var gameManager = new GameManager(game);
             gameManager.FlipCard(0, 0);
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
 
             gameManager.FlipCard(0, 0);
 
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
         }
 
         [Fact]

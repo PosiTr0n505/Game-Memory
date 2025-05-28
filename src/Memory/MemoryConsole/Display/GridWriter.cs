@@ -52,7 +52,7 @@ namespace MemoryConsole.Display
                     {
                         Write("   ");
                     }
-                    else if (c.IsFound || c.IsFaceUp)
+                    else if (c.IsFound || c.IsVisible)
                     {
                         Write($" {c} ");
                     }

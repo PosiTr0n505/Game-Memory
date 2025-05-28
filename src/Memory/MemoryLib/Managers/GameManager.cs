@@ -56,7 +56,7 @@ namespace MemoryLib.Managers
             var card = Game.Grid.GetCard(x, y);
 
             if (card == null) return;
-            if (card.IsFaceUp == true) _cardManager.UnFlipCard(card);
+            if (card.IsVisible == true) _cardManager.UnFlipCard(card);
             else _cardManager.FlipCard(card);
         }
 

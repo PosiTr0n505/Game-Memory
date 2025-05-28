@@ -130,7 +130,7 @@ namespace MemoryLib.Managers
         {
             foreach(var card in _cards)
             {
-                card.IsFaceUp = false;
+                card.IsVisible = false;
             }
         }
 
@@ -144,7 +144,7 @@ namespace MemoryLib.Managers
             {
                 if (c == card)
                 {
-                    if (!c.IsFaceUp)
+                    if (!c.IsVisible)
                         c.Flip();
                     return;
                 }
@@ -163,7 +163,7 @@ namespace MemoryLib.Managers
             {
                 if (c == card)
                 {
-                    if (c.IsFaceUp)
+                    if (c.IsVisible)
                         c.Flip();
                     return;
                 }

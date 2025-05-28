@@ -21,7 +21,7 @@ namespace MemoryLib.Models
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte est face visible.
         /// </summary>
-        public bool IsFaceUp { get; set; } = false;
+        public bool IsVisible { get; set; } = false;
 
         /// <summary>
         /// Obtient ou définit un indicateur indiquant si la carte a été trouvée.
@@ -34,8 +34,10 @@ namespace MemoryLib.Models
         /// </summary>
         public void Flip()
         {
-            IsFaceUp = !IsFaceUp;
+            IsVisible = !IsVisible;
         }
+
+        public string Source { get; set; } = "Ressources/Images/hiddenCard.png";
 
         /// <summary>
         /// Renvoie une chaîne représentant l'identifiant de la carte.
@@ -50,7 +52,7 @@ namespace MemoryLib.Models
         /// <param name="card">La carte à retourner.</param>
         public static void FlipCard(Card card)
         {
-            if (!card.IsFaceUp)
+            if (!card.IsVisible)
                 card.Flip();
         }
 
@@ -69,7 +71,7 @@ namespace MemoryLib.Models
         /// <param name="card">La carte à remettre face cachée.</param>
         public static void UnFlipCard(Card card)
         {
-            if (card.IsFaceUp)
+            if (card.IsVisible)
                 card.Flip();
         }
 

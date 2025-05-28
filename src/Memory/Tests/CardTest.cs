@@ -12,7 +12,7 @@ namespace Tests
 
             cardManager.FlipCard(card);
 
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace Tests
             
             cardManager.FlipCard(card);
             
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Tests
 
             cardManager.UnFlipCard(card);
 
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Tests
 
             cardManager.UnFlipCard(card);
             
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
         }
 
         [Fact]

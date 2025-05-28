@@ -15,7 +15,7 @@
         NbRows="{Binding GameManager.Game.Grid.Y}"
         HorizontalSpacing="{StaticResource HorizontalSpacingBoard}"
         VerticalSpacing="{StaticResource VerticalSpacingBoard}"
-        BackgroundColor="Blue"
+        BackgroundColor="DarkSalmon"
         HorizontalOptions="Center" VerticalOptions="Center"
         Padding="10" Margin="50"/>
     
