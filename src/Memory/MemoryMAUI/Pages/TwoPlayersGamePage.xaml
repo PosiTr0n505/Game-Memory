@@ -8,31 +8,13 @@
              Title="TwoPlayersGamePage"
              x:DataType="pages:TwoPlayersGamePage">
 
-    <ContentPage.Resources>
-        <x:Double x:Key="VerticalSpacing">10</x:Double>
-        <x:Double x:Key="HorizontalSpacing">10</x:Double>
-
-        <DataTemplate x:Key="CardTemplate" x:DataType="lib:Card">
-            <Grid BackgroundColor="DarkSalmon">
-                <Label Text="{Binding Id}"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Fill"
-                        HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center"/>
-            </Grid>
-        </DataTemplate>
-        
-    </ContentPage.Resources>
-
     <mylayouts:MatrixLayout 
         BindableLayout.ItemsSource="{Binding GameManager.Game.Grid.Cards}" 
         BindableLayout.ItemTemplate="{StaticResource CardTemplate}" 
         NbColumns="{Binding GameManager.Game.Grid.X}"
         NbRows="{Binding GameManager.Game.Grid.Y}"
-        HorizontalSpacing="{StaticResource HorizontalSpacing}"
-        VerticalSpacing="{StaticResource VerticalSpacing}"
+        HorizontalSpacing="{StaticResource HorizontalSpacingBoard}"
+        VerticalSpacing="{StaticResource VerticalSpacingBoard}"
         BackgroundColor="Blue"
         HorizontalOptions="Center" VerticalOptions="Center"
         Padding="10" Margin="50"/>
