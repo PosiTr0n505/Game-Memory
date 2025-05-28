@@ -43,25 +43,11 @@
                 VerticalOptions="Center"
                 Grid.Row="2"
                 Text="Grid Size :"/>
-            <FlexLayout
+            <views:GridSizes
                 Grid.Row="2"
                 Grid.Column="1"
-                Grid.ColumnSpan="4"
-                AlignItems="Center"
-                JustifyContent="Center">
-                <Button Style="{StaticResource GridBtn}"
-                        Text="4x4"></Button>
-                <Button Style="{StaticResource GridBtn}"
-                        Text="4x5"></Button>
-                <Button Style="{StaticResource GridBtn}"
-                        Text="4x6"></Button>
-                <Button Style="{StaticResource GridBtn}"
-                        Text="6x5"></Button>
-                <Button Style="{StaticResource GridBtn}"
-                        Text="6x6"></Button>
-                <Button Style="{StaticResource GridBtn}"
-                        Text="6x8"></Button>
-            </FlexLayout>
+                Grid.ColumnSpan="4"/>
+
             <Label Style="{StaticResource LabelUnderline}"
                 VerticalOptions="Center"
                 Grid.Row="3"
