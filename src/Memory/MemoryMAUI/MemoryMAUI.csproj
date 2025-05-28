@@ -109,6 +109,10 @@
 	  <MauiXaml Update="Resources\Views\SinglePlayerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\TwoPlayersView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>

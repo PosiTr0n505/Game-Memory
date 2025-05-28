@@ -4,11 +4,9 @@
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.MainPage"
              Title="MainPage"
-             BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
+             BackgroundImageSource="{AppThemeBinding Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
     <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
-        </Style>
+
         <Style TargetType="Entry">
             <Setter Property="WidthRequest" Value="200"/>
             <Setter Property="HeightRequest" Value="10"/>
@@ -24,6 +22,17 @@
              Grid.ColumnSpan="3"
              Grid.Column="3"/>
 
+        <!--Faire <ContentView avec une proprite Border="{Binding..."-->
+        <views:SinglePlayerView 
+            Grid.Column="3"
+            Grid.ColumnSpan="5"
+            Grid.Row="1"/>
+        
+        <views:TwoPlayersView
+            Grid.Column="3"
+            Grid.ColumnSpan="5"
+            Grid.Row="1"/>
+
         <VerticalStackLayout
             Grid.Column="0"
             Grid.Row="1"
@@ -34,23 +43,23 @@
             WidthRequest="250">
 
             <Button
-                 Text="Single player"/>
+                 Text="Single player" Clicked="BindSinglePlayerView"/>
 
             <Button
-                Text="2 players"/>
+                Text="2 players" Clicked="BindTwoPlayersView"/>
 
             <Button
-                Text="Game rules"/>
+                Text="Game rules" Clicked="BindGamerulesPage"/>
 
             <Button
-                Text="Leaderboard"/>
+                Text="Leaderboard" Clicked="BindLeaderboardPage"/>
 
             <Button
-                Text="Credits"/>
+                Text="Credits" Clicked="BindCreditsPage"/>
 
             <Button
                 Text="Quit Game" 
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" Clicked="QuitButton_Clicked"/>
 
         </VerticalStackLayout>
 

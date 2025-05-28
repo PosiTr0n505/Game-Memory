@@ -1,13 +1,13 @@
 namespace MemoryMAUI.Resources.Views;
 
-public partial class SinglePlayerView : ContentView
+public partial class TwoPlayersView : ContentView
 {
-	public SinglePlayerView()
+	public TwoPlayersView()
 	{
 		InitializeComponent();
 	}
     private async void OnClickedStartGame(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///singleplayergamepage");
+        await Shell.Current.GoToAsync("///twoplayersgamepage");
     }
 }
