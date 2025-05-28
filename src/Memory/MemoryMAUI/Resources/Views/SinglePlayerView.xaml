@@ -38,7 +38,7 @@
              AlignItems="Center"
              JustifyContent="Center">
 
-                <!-- <views:GridSizes/> -->
+             <views:GridSizes/>
 
             </FlexLayout>
             <Label Style="{StaticResource LabelUnderline}"
