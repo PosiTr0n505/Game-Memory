@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.SinglePlayerView"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+    <Grid
+        RowDefinitions="2*,5*,*"
+        ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+        
+        <Button
+        HeightRequest="60"
+        WidthRequest="120"
+        Margin="50,0"
+        HorizontalOptions="Start"
+        FontAttributes="Bold"
+        Text="Back"
+        Grid.Row="0"
+        Clicked="NavigateToMainpage"/>
+
+        <Border
+     Stroke="#512BD4"
+     Grid.ColumnSpan="5"
+     Grid.Column="3"
+     Grid.Row="1">
+            <Grid
+         Margin="30"
+         RowDefinitions="*,*,2*,*"
+         ColumnDefinitions="*,*,*,*,*">
+
+                <Label Style="{StaticResource LabelUnderline}" 
+             Grid.Row="0"
+             VerticalOptions="Center"
+             Text="Name tag 1 :"/>
+                <Entry 
+         Style="{StaticResource EntryConfigPage}"
+             Grid.Row="0"
+             Grid.ColumnSpan="2"
+             Grid.Column="1"
+             Placeholder="Entrez votre pseudo"/>
+                <!--  TextChanged="OnTextChanged"/>-->
+
+                <Label Style="{StaticResource LabelUnderline}"
+             VerticalOptions="Center"
+             Grid.Row="1"
+             Text="Grid Size :"/>
+                <FlexLayout
+             Grid.Row="1"
+             Grid.Column="1"
+             Grid.ColumnSpan="4"
+             AlignItems="Center"
+             JustifyContent="Center">
+
+                    <views:GridSizes/>
+
+                </FlexLayout>
+                <Label Style="{StaticResource LabelUnderline}"
+             VerticalOptions="Center"
+             Grid.Row="2"
+             Text="Themes :"/>
+                <FlexLayout
+             Grid.Row="2"
+             Grid.Column="1"
+             Grid.ColumnSpan="4"
+             AlignItems="Center"
+             JustifyContent="Center">
+                    <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 1 :&#x0a; (Image)"></Button>
+                    <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 2 :&#x0a; (Image)"></Button>
+                    <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 3 :&#x0a; (Image)"></Button>
+                </FlexLayout>
+                <Button 
+             HeightRequest="40"
+             Grid.Row="3"
+             Grid.Column="2"
+             Text="Start Game"
+             HorizontalOptions="Center"
+             Clicked="OnClickedStartGame"/>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>
+
+    

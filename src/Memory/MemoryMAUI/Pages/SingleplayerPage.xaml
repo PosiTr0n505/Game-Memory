@@ -20,6 +20,9 @@
             Grid.ColumnSpan="3"
             Grid.Row="0"/>
 
+        <views:SinglePlayerView/>
+
+        
         <VerticalStackLayout
         Grid.Column="0"
         Grid.Row="1"

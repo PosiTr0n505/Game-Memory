@@ -101,5 +101,18 @@
 	  <MauiXaml Update="Resources\Views\LeadeboardCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\GridButtonsLeaderboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\SinglePlayerView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="../MemoryLib/MemoryLib.csproj" />
+		<ProjectReference Include="..\Persistence\MemoryStubPersistence.csproj" />
 	</ItemGroup>
 </Project>
