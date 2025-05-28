@@ -15,7 +15,7 @@
         <Grid BackgroundColor="White">
             
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="CardClicked"/>
+                <TapGestureRecognizer Tapped="GridCardClicked"/>
             </Grid.GestureRecognizers>
 
             <Image Source="{Binding IsVisible, Converter={StaticResource CardBooleanToImageSource}}" 

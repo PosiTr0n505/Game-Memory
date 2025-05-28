@@ -11,15 +11,15 @@
     <Grid>
         
         <mylayouts:MatrixLayout 
-        BindableLayout.ItemsSource="{Binding GameManager.Game.Grid.Cards}" 
-        BindableLayout.ItemTemplate="{StaticResource CardTemplate}" 
-        NbColumns="{Binding GameManager.Game.Grid.X}"
-        NbRows="{Binding GameManager.Game.Grid.Y}"
-        HorizontalSpacing="{StaticResource HorizontalSpacingBoard}"
-        VerticalSpacing="{StaticResource VerticalSpacingBoard}"
-        BackgroundColor="White"
-        HorizontalOptions="Center" VerticalOptions="Center"
-        Padding="10" Margin="50"/>
+            BindableLayout.ItemsSource="{Binding GameManager.Game.Grid.Cards}" 
+            BindableLayout.ItemTemplate="{StaticResource CardTemplate}" 
+            NbColumns="{Binding GameManager.Game.Grid.X}"
+            NbRows="{Binding GameManager.Game.Grid.Y}"
+            HorizontalSpacing="{StaticResource HorizontalSpacingBoard}"
+            VerticalSpacing="{StaticResource VerticalSpacingBoard}"
+            BackgroundColor="White"
+            HorizontalOptions="Center" VerticalOptions="Center"
+            Padding="10" Margin="50"/>
         
     </Grid>
     
