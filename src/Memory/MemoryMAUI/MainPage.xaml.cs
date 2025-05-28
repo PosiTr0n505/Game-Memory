@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using MemoryLib.Models;
+﻿using MemoryMAUI.Resources.Views;
 
 namespace MemoryMAUI
 {
@@ -10,14 +9,31 @@ namespace MemoryMAUI
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
-        private async void BindSinglePlayerView(object sender, EventArgs e)
+
+        private ContentView? _rightSideContentView = null;
+
+        public ContentView? RightSideContentView 
         {
-            await Shell.Current.GoToAsync("///singleplayerpage");
+            get
+            {
+                return _rightSideContentView;
+            }
+            set
+            {
+                _rightSideContentView = value;
+                OnPropertyChanged();
+            }
         }
-        private async void BindTwoPlayersView(object sender, EventArgs e)
+
+        private void BindSinglePlayerView(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///twoplayerspage");
+            RightSideContentView = new SinglePlayerView();
+        }
+        private void BindTwoPlayersView(object sender, EventArgs e)
+        {
+            RightSideContentView = new TwoPlayersView();
         }
         private async void BindGamerulesPage(object sender, EventArgs e)
         {

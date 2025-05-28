@@ -81,7 +81,7 @@
             </FlexLayout>
             <Button 
                 HeightRequest="40"
-                Grid.Row="3"
+                Grid.Row="4"
                  Grid.Column="2"
                 Text="Start Game"
                 HorizontalOptions="Center"
