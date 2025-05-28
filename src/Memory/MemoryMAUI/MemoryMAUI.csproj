@@ -101,6 +101,14 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 
+	  <MauiXaml Update="Resources\Views\CreditsPageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\GamerulesView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+
 	  <MauiXaml Update="Resources\Views\GridSizes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

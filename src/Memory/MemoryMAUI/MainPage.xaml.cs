@@ -35,17 +35,17 @@ namespace MemoryMAUI
         {
             RightSideContentView = new TwoPlayersView();
         }
-        private async void BindGamerulesPage(object sender, EventArgs e)
+        private  void BindGamerulesPage(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///gamerulespage");
+            RightSideContentView = new GamerulesView();
         }
-        private async void BindLeaderboardPage(object sender, EventArgs e)
+        private async void NavigateToLeaderboardPage(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("///leaderboardpage");
         }
-        private async void BindCreditsPage(object sender, EventArgs e)
+        private  void BindCreditsPage(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///creditspage");
+            RightSideContentView = new CreditsPageView();
         }
         private void QuitButton_Clicked(object sender, EventArgs e)
         {

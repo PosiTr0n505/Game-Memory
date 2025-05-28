@@ -8,6 +8,10 @@
 
     <ContentView.Resources>
         <converter:GridSizeToString x:Key="GridSizeToString"/>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light='Black', Dark='White'}"/>
+        </Style>
+
     </ContentView.Resources>
 
     <Border Style="{StaticResource LeaderboardCellStyle}">

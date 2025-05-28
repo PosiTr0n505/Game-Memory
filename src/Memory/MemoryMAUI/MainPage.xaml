@@ -25,8 +25,8 @@
              Grid.ColumnSpan="3"
              Grid.Column="3"/>
 
-        <!--Faire <ContentView avec une proprite Border="{Binding..."-->
         <Border
+            Stroke="Transparent"
             Grid.Column="3"
             Grid.ColumnSpan="5"
             Grid.Row="1"
@@ -51,12 +51,13 @@
                 Text="Game rules" Clicked="BindGamerulesPage"/>
 
             <Button
-                Text="Leaderboard" Clicked="BindLeaderboardPage"/>
+                Text="Leaderboard" Clicked="NavigateToLeaderboardPage"/>
 
             <Button
                 Text="Credits" Clicked="BindCreditsPage"/>
 
             <Button
+                BackgroundColor="#C85641"
                 Text="Quit Game" 
                 HorizontalOptions="Fill" Clicked="QuitButton_Clicked"/>
 

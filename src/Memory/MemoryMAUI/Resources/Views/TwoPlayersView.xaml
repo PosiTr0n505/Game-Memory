@@ -5,6 +5,8 @@
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
 
     <Border
+
+
         Stroke="#FFFFFF"
         Grid.ColumnSpan="5"
         Grid.Column="3"
@@ -12,50 +14,51 @@
         <Grid
             Margin="30"
             RowDefinitions="*,*,*,2*,*"
-            ColumnDefinitions="*,*,*,*,*">
+            ColumnDefinitions="*,*,*,*,*,*,*,*">
+            
 
-            <Label Style="{StaticResource LabelUnderline}" 
+            <Label Style="{StaticResource LabelBold}" 
                 Grid.Row="0"
                 VerticalOptions="Center"
-                Text="Name tag 1 :"/>
+                Text="Name tag 1 "/>
             <Entry 
             Style="{StaticResource EntryConfigPage}"
             Grid.Row="0"
-            Grid.ColumnSpan="2"
-            Grid.Column="1"
+            Grid.Column="2"
             Text="{Binding Player1.NameTag, Mode=TwoWay}"
-            Placeholder="Entrez votre pseudo"/>
+            Placeholder="Player1"/>
             <!--  TextChanged="OnTextChanged"/> -->
-            <Label Style="{StaticResource LabelUnderline}"
+            <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="1"
-                Text="Name tag 2 :"/>
+                Text="Name tag 2"/>
             <Entry 
             Style="{StaticResource EntryConfigPage}"
                 Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Grid.Column="1"
+                Grid.Column="2"
                 Text="{Binding Player2.NameTag, Mode=TwoWay}"
-                Placeholder="Entrez votre pseudo"/>
+                Placeholder="Player2"/>
             <!--  TextChanged="OnTextChanged"/>-->
 
-            <Label Style="{StaticResource LabelUnderline}"
+            <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="2"
-                Text="Grid Size :"/>
-            <views:GridSizes
-                Grid.Row="2"
-                Grid.Column="1"
-                Grid.ColumnSpan="4"/>
+                Text="Grid Size"/>
 
-            <Label Style="{StaticResource LabelUnderline}"
+                <views:GridSizes
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"/>
+
+
+            <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="3"
-                Text="Themes :"/>
+                Text="Themes "/>
             <FlexLayout
                 Grid.Row="3"
                 Grid.Column="1"
-                Grid.ColumnSpan="4"
+                Grid.ColumnSpan="3"
                 AlignItems="Center"
                 JustifyContent="Center">
                 <Button Style="{StaticResource ThemesBtn}"
@@ -66,9 +69,11 @@
                     Text="Thème 3 :&#x0a; (Image)"></Button>
             </FlexLayout>
             <Button 
+                BackgroundColor="#EEBE13"
                 HeightRequest="40"
+                WidthRequest="150"
                 Grid.Row="4"
-                 Grid.Column="2"
+                 Grid.Column="3"
                 Text="Start Game"
                 HorizontalOptions="Center"
                 Clicked="OnClickedStartGame"/>
