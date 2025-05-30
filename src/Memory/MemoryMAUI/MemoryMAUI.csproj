@@ -15,6 +15,7 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
+    
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MemoryMAUI</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -38,7 +39,11 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<ItemGroup>
+  <PropertyGroup>
+    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+  </PropertyGroup>
+
+  <ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -72,6 +77,9 @@
 	  </Compile>
 	  <Compile Update="Resources\Views\GridButtonsLeaderboard.xaml.cs">
 	    <DependentUpon>GridButtonsLeaderboard.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\Views\GridCardView.xaml.cs">
+	    <DependentUpon>GridCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -112,6 +120,10 @@
 	  </MauiXaml>
 
 	  <MauiXaml Update="Resources\Views\GridButtonsLeaderboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+
+	  <MauiXaml Update="Resources\Views\GridCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

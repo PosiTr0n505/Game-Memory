@@ -9,7 +9,7 @@
              x:DataType="pages:SingleplayerGamePage">
 
     <Grid>
-        
+        <!--
         <mylayouts:MatrixLayout 
             BindableLayout.ItemsSource="{Binding GameManager.Game.Grid.Cards}" 
             BindableLayout.ItemTemplate="{StaticResource CardTemplate}" 
@@ -20,6 +20,7 @@
             BackgroundColor="White"
             HorizontalOptions="Center" VerticalOptions="Center"
             Padding="10" Margin="50"/>
+        -->
         
     </Grid>
     

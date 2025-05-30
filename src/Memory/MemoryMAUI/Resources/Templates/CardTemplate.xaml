@@ -2,6 +2,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="MemoryMAUI.Resources.Templates.CardTemplate"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                    xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
                     xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
                     xmlns:converters="clr-namespace:MemoryMAUI.Converters">
 
@@ -10,29 +12,18 @@
     <x:Double x:Key="VerticalSpacingBoard">10</x:Double>
     <x:Double x:Key="HorizontalSpacingBoard">10</x:Double>
 
-
     <DataTemplate x:Key="CardTemplate" x:DataType="lib:Card">
-        <Grid BackgroundColor="White">
+        
+        <Grid>
             
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Tapped="GridCardClicked"/>
             </Grid.GestureRecognizers>
 
-            <Image Source="{Binding IsVisible, Converter={StaticResource CardBooleanToImageSource}}" 
-                   Aspect="AspectFit"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="Fill"
-                   ZIndex="-1">
-
-            </Image>
-
-            <Label Text="{Binding Id}"
-                   FontSize="200"
-                   TextColor="Red"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   Opacity="0"/>
+            <views:GridCardView/>
+            
         </Grid>
+        
     </DataTemplate>
 
 </ResourceDictionary>

@@ -128,7 +128,7 @@ namespace MemoryLib.Managers
         /// </summary>
         internal void HideCards()
         {
-            foreach(var card in _cards)
+            foreach(Card card in _cards)
             {
                 card.IsVisible = false;
             }
@@ -178,7 +178,7 @@ namespace MemoryLib.Managers
         /// <returns>True si les deux cartes sont la même instance, sinon false.</returns>
         public bool CompareCards(Card card1, Card card2)
         {
-            return card1 == card2;
+            return card1.Equals(card2);
         }
     }
 

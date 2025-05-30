@@ -37,7 +37,17 @@ namespace MemoryLib.Models
         /// Obtient ou définit un indicateur indiquant si la carte a été trouvée.
         /// </summary>
 
-        public bool IsFound { get; set; } = false;
+        private bool _isFound = false;
+        public bool IsFound 
+        {
+            get => _isFound;
+        
+            set 
+            {
+                _isFound = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
@@ -46,8 +56,6 @@ namespace MemoryLib.Models
         {
             IsVisible = !IsVisible;
         }
-
-        public string Source { get; set; } = "Ressources/Images/hiddenCard.png";
 
         /// <summary>
         /// Renvoie une chaîne représentant l'identifiant de la carte.
@@ -92,7 +100,7 @@ namespace MemoryLib.Models
         /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false<.</returns>
         public bool Equals(Card? other)
         {
-            return other is not null && ReferenceEquals(this, other);
+            return Id == other?.Id;
         }
 
         /// <summary>
