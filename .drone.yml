@@ -6,7 +6,7 @@ trigger:
   event:
     - pull_request
   branch:
-    exclude :
+    exclude:
       - doc*
 
 steps:
@@ -37,18 +37,18 @@ steps:
 
   - name: code-inspection
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet9-maui
-    secrets: [ SONAR_TOKEN ]
+    secrets: [SONAR_TOKEN]
     settings:
       project_key: MemoryDotnet
       sonar_host: https://codefirst.iut.uca.fr/sonar/
       sonar_token:
         from_secret: SONAR_TOKEN
-    commands: 
+    commands:
       - cd src/Memory/
       - dotnet workload restore
       - dotnet restore Memory.sln
-      - dotnet sonarscanner begin /k:$${PLUGIN_PROJECT_KEY} /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
-      
+      - dotnet sonarscanner begin /k:$${PLUGIN_PROJECT_KEY} /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+
       - dotnet build Memory.sln -c Release --no-restore
       - dotnet test Memory.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
@@ -70,4 +70,3 @@ steps:
       branch:
         - master
     depends_on: [buildMAUI, build_dotnet, tests]
- 
