@@ -100,8 +100,6 @@ interface ILoadManager <<interface>> {
 
 class GameManager
 GameManager ..|> IGameManager
-GameManager ..|> ISaveManager
-GameManager ..|> ILoadManager
 GameManager o--> "1" Game : "-/game"
 GameManager *--> "1" CardManager
 GameManager *--> "1" ScoreManager
@@ -121,6 +119,28 @@ class CardManager
 CardManager ..|> ICardManager
 CardManager *--> "0..*" Card : "+/Cards"
 CardManager *--> GridSize : "+/GridSize"
+
+class StubSaveManager
+class StubLoadManager
+
+class JsonSaveManager
+class JsonLoadManager
+
+class XmlSaveManager
+class XmlLoadManager
+
+StubSaveManager ..|> ISaveManager
+StubLoadManager ..|> ILoadManager
+
+JsonSaveManager ..|> ISaveManager
+JsonLoadManager ..|> ILoadManager
+
+XmlSaveManager ..|> ISaveManager
+XmlLoadManager ..|> ILoadManager
+
+GameManager ..> ISaveManager
+GameManager ..> ILoadManager
+
 
 ' DEPENDANCE
 CardManager ..> GridSize
@@ -187,7 +207,7 @@ Association vers CardType pour comparer les cartes et les faire matcher.<br>
 enum pour CardType, pour éviter de dupliquer les valeurs<br>
 Association vers GridSize pour savoir comment placer une carte dans une grille.<br>
 enum pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.<br>
-Card dépénd de CardType <br>
+Card dépénd de CardType <br><br>
 
 - ObservableObject : <br><br>
 
