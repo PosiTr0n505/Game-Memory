@@ -189,3 +189,6 @@ Association vers GridSize pour savoir comment placer une carte dans une grille.<
 enum pour GridSize pour permettre de filtrer logiquement les tailles de grilles pour le leaderboard par exemple.<br>
 Card dépénd de CardType <br>
 
+- ObservableObject : <br><br>
+
+Classe fournissant la gestion de notifications de changement de propriétés en implémentant l'interface INotifyPropertyChanged. Elle permet aux classes héritées de notifier automatiquement l'interface graphique ou d'autres observateurs lors de la modification de leurs propriétés.
