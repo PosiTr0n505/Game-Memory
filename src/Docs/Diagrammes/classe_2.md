@@ -211,4 +211,28 @@ Card dépénd de CardType <br><br>
 
 - ObservableObject : <br><br>
 
-Classe fournissant la gestion de notifications de changement de propriétés en implémentant l'interface INotifyPropertyChanged. Elle permet aux classes héritées de notifier automatiquement l'interface graphique ou d'autres observateurs lors de la modification de leurs propriétés.
+Classe fournissant la gestion de notifications de changement de propriétés en implémentant l'interface INotifyPropertyChanged. Elle permet aux classes héritées de notifier automatiquement l'interface graphique ou d'autres observateurs lors de la modification de leurs propriétés. <br><br>
+
+- XmlSaveManager: <br><br>
+
+Implémente l'interface `ISaveManager`. Ce manager est responsable de la sauvegarde des scores, les joueurs (avec leur nombre de coups joués par partie) et la taille de la grille choisie, à la fin de la partie, dans un fichier XML. <br><br>
+
+- XmlLoadManager: <br><br>
+
+Implémente l'interface `ILoadManager`. Il est responsable du chargement des données des joueurs pour les afficher dans une table de classement (Leaderboard). <br><br>
+
+- JsonSaveManager: <br><br>
+
+Implémente l'interface `ISaveManager`. Ce manager est chargé de sauvegarder les scores, les joueurs (avec leur nombre de coups joués) et la taille de la grille sélectionnée, à la fin de la partie, dans un fichier au format JSON. Il gère la conversion des données en respectant la structure JSON attendue.
+
+-JsonLoadManager: <br><br>
+
+Implémente l'interface `ILoadManager`. Il est responsable du chargement des données d'une partie à partir d'un fichier JSON, en faisant une conversion sur les informations pour restaurer l'état des joueurs, les scores et la configuration de la partie. <br><br>
+
+- StubSaveManager: <br><br>
+
+Implémente l'interface `ISaveManager`. Ce manager sert de version simplifiée pour la sauvegarde, utilisée principalement lors du développement et des tests. Il ne réalise pas de sauvegarde réelle, mais simule le comportement pour valider le fonctionnement du jeu sans dépendre d'un système de fichiers<br><br>
+
+- StubLoadManager:<br><br>
+
+Implémente l'interface `ILoadManager`. Ce manager propose une implémentation simulée pour le chargement des données, retournant des données prédéfinies ou simulées. Il facilite les tests et le développement en évitant la nécessité d'un fichier de sauvegarde réel.
