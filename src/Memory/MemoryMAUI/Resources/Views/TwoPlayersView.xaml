@@ -18,15 +18,15 @@
             
 
             <Label Style="{StaticResource LabelBold}" 
-                Grid.Row="0"
-                VerticalOptions="Center"
-                Text="Name tag 1 "/>
-            <Entry 
-            Style="{StaticResource EntryConfigPage}"
-            Grid.Row="0"
-            Grid.Column="2"
-            Text="{Binding Player1.NameTag, Mode=TwoWay}"
-            Placeholder="Player1"/>
+                   Grid.Row="0"
+                   VerticalOptions="Center"
+                   Text="Name tag 1 "/>
+            
+            <Entry Style="{StaticResource EntryConfigPage}"
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Placeholder="Player1"/>
+                
             <!--  TextChanged="OnTextChanged"/> -->
             <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
@@ -36,7 +36,6 @@
             Style="{StaticResource EntryConfigPage}"
                 Grid.Row="1"
                 Grid.Column="2"
-                Text="{Binding Player2.NameTag, Mode=TwoWay}"
                 Placeholder="Player2"/>
             <!--  TextChanged="OnTextChanged"/>-->
 
