@@ -11,7 +11,7 @@ namespace MemoryLib.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string propName = null) =>
+        private void OnPropertyChanged([CallerMemberName] string? propName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace MemoryLib.Models
         public Player(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            NameTag = name;
+            _nameTag = name;
             MovesCount = 0;
             CurrentScore = 0;
         }
