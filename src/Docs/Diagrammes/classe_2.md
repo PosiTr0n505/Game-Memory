@@ -48,6 +48,16 @@ class Card {
     -/ isFaceUp: bool
 }
 
+class ObservableObject {
+    + event PropertyChangedEventHandler PropertyChanged
+    + void OnPropertyChanged(string propertyName = null)
+}
+
+Player --|> ObservableObject
+Game --|> ObservableObject
+Card --|> ObservableObject
+
+
 Card *--> CardType : "+/CardType"
 
 class CardType <<enum>>
