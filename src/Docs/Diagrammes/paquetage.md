@@ -35,7 +35,32 @@ package "Card Management" {
 package "Persistence" {
     interface ISaveManager
     interface ILoadManager
+
+    package "JSONPersistence" {
+        class JsonSaveManager
+        class JsonLoadManager
+    }
+
+    package "XMLPersistence" {
+        class XmlSaveManager
+        class XmlLoadManager
+    }
+
+    package "STUBPersistence" {
+        class StubSaveManager
+        class StubLoadManager
+    }
 }
+
+JsonSaveManager ..|> ISaveManager
+JsonLoadManager ..|> ILoadManager
+
+XmlSaveManager ..|> ISaveManager
+XmlLoadManager ..|> ILoadManager
+
+StubSaveManager ..|> ISaveManager
+StubLoadManager ..|> ILoadManager
+
 
 ' Dépendances internes aux classes
 GameManager --> Game
@@ -61,6 +86,10 @@ Card --> CardType
 "Game Management" ..> "Card Management" : <<use>>
 "Game Management" ..> "Persistence" : <<use>>
 "Player Management" ..> "Card Management" : <<use>>
+"Persistence" ..> "JSONPersistence" : <<include>>
+"Persistence" ..> "XMLPersistence" : <<include>>
+"Persistence" ..> "STUBPersistence" : <<include>>
+
 ```
 
 Ce diagramme est divisé en 4 paquets : <br>
@@ -81,7 +110,7 @@ Le Player Management permet de gérer les joueurs ainsi que leurs scores.  <br>
 Il contient :   <br>
 ScoreManager qui gère les calculs et la persistance des scores. <br>
 IScoreManager est une interface pour la gestion des scores. <br>
-Leadrboard : représente un classement, stocke plusieurs objets Score. <br>
+Leaderboard : représente un classement, stocke plusieurs objets Score. <br>
 Score: encapsule un score individuel avec valeur et nombre de parties jouées. <br>
 Player : représente un joueur avec son nom, score courant et nombre de mouvements. <br>  <br>
 
