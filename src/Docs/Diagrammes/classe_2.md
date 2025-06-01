@@ -138,8 +138,8 @@ JsonLoadManager ..|> ILoadManager
 XmlSaveManager ..|> ISaveManager
 XmlLoadManager ..|> ILoadManager
 
-GameManager ..> ISaveManager
-GameManager ..> ILoadManager
+GameManager ..|> ISaveManager
+GameManager ..|> ILoadManager
 
 
 ' DEPENDANCE
