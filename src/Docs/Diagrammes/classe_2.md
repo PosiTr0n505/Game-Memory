@@ -225,7 +225,7 @@ Implémente l'interface `ILoadManager`. Il est responsable du chargement des don
 
 Implémente l'interface `ISaveManager`. Ce manager est chargé de sauvegarder les scores, les joueurs (avec leur nombre de coups joués) et la taille de la grille sélectionnée, à la fin de la partie, dans un fichier au format JSON. Il gère la conversion des données en respectant la structure JSON attendue.
 
--JsonLoadManager: <br><br>
+- JsonLoadManager: <br><br>
 
 Implémente l'interface `ILoadManager`. Il est responsable du chargement des données d'une partie à partir d'un fichier JSON, en faisant une conversion sur les informations pour restaurer l'état des joueurs, les scores et la configuration de la partie. <br><br>
 
