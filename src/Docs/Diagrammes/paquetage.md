@@ -125,8 +125,8 @@ La persistence permet de gérer la sauvegarde et le chargement des données. <br
 Elle contient les interfaces `ISaveManager` et `ILoadManager` qui définissent les contrats pour ces opérations.  
 
 Le paquet **Persistence** est subdivisé en trois sous-paquets :  
-- **JSONPersistence**, contenant `JsonSaveManager` et `JsonLoadManager`, qui assurent la persistance au format JSON.  
-- **XMLPersistence**, contenant `XmlSaveManager` et `XmlLoadManager`, qui assurent la persistance au format XML.  
-- **STUBPersistence**, contenant `StubSaveManager` et `StubLoadManager`, qui fournissent des implémentations factices utilisées pour le développement et les tests.
+- **JSONPersistence**: contenant `JsonSaveManager` et `JsonLoadManager`, qui assurent la persistance au format JSON.  
+- **XMLPersistence**: contenant `XmlSaveManager` et `XmlLoadManager`, qui assurent la persistance au format XML.  
+- **STUBPersistence**: contenant `StubSaveManager` et `StubLoadManager`, qui fournissent des implémentations factices utilisées pour le développement et les tests.
 
 Ces implémentations concrètes respectent les interfaces de sauvegarde et de chargement, permettant ainsi à `GameManager` de rester découplé des détails spécifiques de persistance.
