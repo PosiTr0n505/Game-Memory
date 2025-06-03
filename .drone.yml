@@ -24,7 +24,7 @@ steps:
     commands:
       - cd src/Memory/
       - dotnet --info
-      - dotnet restore -f net9.0
+      - dotnet restore MemoryCI.sln -f net9.0
       - dotnet build MemoryCI.sln -c Release --no-restore -f net9.0
       - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net9.0
 
