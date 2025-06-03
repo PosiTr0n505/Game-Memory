@@ -54,7 +54,7 @@ namespace MemoryMAUI
 #elif WINDOWS
             System.Environment.Exit(0);
 #else
-            Application.Current.Quit();
+            Application.Current?.Quit();
 #endif
         }
     }
