@@ -23,10 +23,9 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
-      - dotnet --info
-      - dotnet restore MemoryCI.sln -f net9.0
-      - dotnet build MemoryCI.sln -c Release --no-restore -f net9.0
-      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net9.0
+      - dotnet restore MemoryCI.sln
+      - dotnet build MemoryCI.sln -c Release --no-restore
+      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
 
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:9.0
@@ -71,4 +70,3 @@ steps:
       branch:
         - master
     depends_on: [buildMAUI, build_dotnet, tests]
- 
