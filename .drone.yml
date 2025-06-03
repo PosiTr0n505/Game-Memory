@@ -24,11 +24,11 @@ steps:
     commands:
       - cd src/Memory/
       - dotnet --info
-      - dotnet restore MemoryCI.sln
-      - dotnet build MemoryCI.sln -c Release --no-restore
-      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
+      - dotnet restore -f net9.0
+      - dotnet build MemoryCI.sln -c Release --no-restore -f net9.0
+      - dotnet publish MemoryCI.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release -f net9.0
 
-  - name: tests
+  - name: testsn
     image: mcr.microsoft.com/dotnet/sdk:9.0
     commands:
       - cd src/Memory/
