@@ -64,7 +64,7 @@ namespace MemoryLib.Models
             GridSize = g;
 
 
-            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
+            (int x, int y) = GridSizeManager.GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
@@ -95,7 +95,7 @@ namespace MemoryLib.Models
 
             GridSize = g;
 
-            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
+            (int x, int y) = GridSizeManager.GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;

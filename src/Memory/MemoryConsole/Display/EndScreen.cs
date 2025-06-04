@@ -52,7 +52,7 @@ namespace MemoryConsole.Display
 
             // Display grid size
             GridSizeManager gsm = new();
-            string sizeText = $"Grid Size : {gsm.GetGridSizeValues(score.GridSize)}";
+            string sizeText = $"Grid Size : {GridSizeManager.GetGridSizeValues(score.GridSize)}";
             Console.SetCursorPosition((width - sizeText.Length) / 2, 10);
             Console.WriteLine(sizeText);
 
@@ -74,7 +74,7 @@ namespace MemoryConsole.Display
         private static string GetMessageBasedOnScore(int score, GridSize g)
         {
             GridSizeManager gsm = new();
-            var item = gsm.GetGridSizeValues(g);
+            var item = GridSizeManager.GetGridSizeValues(g);
 
             if (score <= item.Item1 * item.Item2 + 3)
                 return "Perfection !";

@@ -35,7 +35,7 @@ namespace MemoryLib.Managers
         /// <param name="g">La taille de grille à interroger.</param>
         /// <returns>Un tuple contenant le nombre de lignes et le nombre de colonnes.</returns>
         /// <exception>Levée si la taille de grille fournie n'est pas valide.</exception>
-        public (int, int) GetGridSizeValues(GridSize g)
+        public static (int, int) GetGridSizeValues(GridSize g)
         {
             if (!_gridSizeValues.TryGetValue(g, out var sizeValues))
                 throw new ArgumentException($"Invalid GridSize: {g}");
