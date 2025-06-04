@@ -57,8 +57,9 @@
                 <Button Style="{StaticResource ThemesBtn}"
                  Text="Thème 3 :&#x0a; (Image)"></Button>
             </FlexLayout>
-            <Button 
-             BackgroundColor="#EEBE13"
+            <Button
+             BorderColor="Gray"
+             BackgroundColor="Blue"
                 HeightRequest="40"
                 WidthRequest="150"
                 Grid.Row="6"
