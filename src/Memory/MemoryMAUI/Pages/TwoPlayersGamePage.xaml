@@ -16,6 +16,6 @@
         FontAttributes="Bold"
         Text="Back to homepage"
         Grid.Row="0"/>
-        
+
     </Grid>
 </ContentPage>
