@@ -44,10 +44,10 @@
                 Grid.Row="2"
                 Text="Grid Size"/>
 
-                <views:GridSizes
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="5"/>
+            <views:GridSizes
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="6"/>
 
 
             <Label Style="{StaticResource LabelBold}"
