@@ -46,9 +46,6 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
         /// </summary>
-        /// <param name="x">Le nombre de lignes de la grille.</param>
-        /// <param name="y">Le nombre de colonnes de la grille.</param>
-
         private void InitializeGrid()
         {
             List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
@@ -117,7 +114,7 @@ namespace MemoryLib.Managers
         /// Efface la grille, mais cette méthode n'est pas encore implémentée.
         /// </summary>
         /// <param name="grid">La grille à effacer.</param>
-        /// <exception">A faire bientot</exception>
+        /// <exception>A faire bientot</exception>
         public void ClearGrid(GridManager grid)
         {
             throw new NotImplementedException();

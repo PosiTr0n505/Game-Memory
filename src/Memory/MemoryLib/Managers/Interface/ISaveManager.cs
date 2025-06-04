@@ -7,7 +7,7 @@ namespace MemoryLib.Managers.Interface
         /// <summary>
         /// Saves the current state of the game.
         /// </summary>
-        /// <param name="game">The game instance to be saved.</param>
+        /// <param name="scores">The list of scores to be saved.</param>
         void SaveScores(List<Score> scores);
     }
 }

@@ -64,7 +64,6 @@ namespace MemoryLib.Models
         public override string ToString() => Id.ToString();
 
         /// <summary>
-        /// <summary>
         /// Retourne une carte si elle est face cachée.
         /// </summary>
         /// <param name="card">La carte à retourner.</param>
@@ -97,7 +96,7 @@ namespace MemoryLib.Models
         /// Vérifie si deux cartes sont égales en référence.
         /// </summary>
         /// <param name="other">L'autre carte à comparer.</param>
-        /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false<.</returns>
+        /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false</returns>
         public bool Equals(Card? other)
         {
             return Id == other?.Id;
@@ -107,7 +106,7 @@ namespace MemoryLib.Models
         /// Vérifie si l'objet spécifié est égal à l'instance actuelle.
         /// </summary>
         /// <param name="obj">L'objet à comparer avec l'instance actuelle.</param>
-        /// <returns>Retourne true si les objets sont égaux, sinon false<.</returns>
+        /// <returns>Retourne true si les objets sont égaux, sinon false</returns>
         public override bool Equals(object? obj)
         {
             if (obj is null) return false;

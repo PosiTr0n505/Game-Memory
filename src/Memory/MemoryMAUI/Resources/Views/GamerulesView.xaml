@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.GamerulesView"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+
+    <Border 
+     Stroke="#FFFFFF"
+     Grid.ColumnSpan="5"
+     Grid.Column="3"
+     Grid.Row="1">
+        <Grid>
+
+            <Label
+                Style="{StaticResource LabelUnderline}"
+                Text="Rules"
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                FontSize="25"
+                Grid.Column="1"/>
+
+
+
+            <Label Text=" Memory is a game that is played turn by turn. &#x0a;
+
+Once the size of the grid and the theme of the cards have been chosen:  &#x0a;
+ The cards will be spread out on the game board. &#x0a;&#x0a;
+
+The game begins, get ready! : &#x0a;&#x0a;
+
+- The first player flips over two cards. &#x0a;
+ - If the images are identical, he wins the pair formed, adds 1 point to his score, and plays again. &#x0a; 
+-  If the images are different, he puts them back face down where they were, earns no points and it is the next player's turn. &#x0a;&#x0a;
+ 
+ The game proceeds according to these rules. &#x0a;&#x0a;
+
+The game ends when all the cards have been matched into pairs. &#x0a;
+ The player who wins the game is the one who has the most pairs (thus points),  &#x0a;
+ when they have all been collected."
+               HorizontalTextAlignment="Start"
+               VerticalOptions="Center"
+               Margin="10"
+               FontSize="17"
+               Grid.Column="1"
+               Grid.ColumnSpan="1"
+               Grid.RowSpan="3"
+               Grid.Row="2"/>
+        </Grid>
+    </Border>
+        
+
+</ContentView>

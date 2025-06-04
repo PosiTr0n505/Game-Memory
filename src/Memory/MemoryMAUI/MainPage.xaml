@@ -3,14 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              x:Class="MemoryMAUI.MainPage"
+             xmlns:pages="clr-namespace:MemoryMAUI"
              Title="MainPage"
-             BackgroundImageSource="{AppThemeBinding  Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}">
-    <ContentPage.Resources> 
-        
+             BackgroundImageSource="{AppThemeBinding Light='backgroundlighttheme.png', Dark='backgrounddarktheme.png'}"
+             x:DataType="pages:MainPage">
+    <ContentPage.Resources>
+
         <Style TargetType="Entry">
             <Setter Property="WidthRequest" Value="200"/>
             <Setter Property="HeightRequest" Value="10"/>
         </Style>
+        
     </ContentPage.Resources>
 
     <Grid
@@ -22,6 +25,13 @@
              Grid.ColumnSpan="3"
              Grid.Column="3"/>
 
+        <Border
+            Stroke="Transparent"
+            Grid.Column="3"
+            Grid.ColumnSpan="5"
+            Grid.Row="1"
+            Content="{Binding RightSideContentView}"/>
+
         <VerticalStackLayout
             Grid.Column="0"
             Grid.Row="1"
@@ -32,21 +42,22 @@
             WidthRequest="250">
 
             <Button
-                 Text="Single player" Clicked="NavigateToSingleplayerPage"/>
+                 Text="Single player" Clicked="BindSinglePlayerView"/>
 
             <Button
-                Text="2 players" Clicked="NavigateToTwoplayersPage"/>
+                Text="2 players" Clicked="BindTwoPlayersView"/>
 
             <Button
-                Text="Game rules" Clicked="NavigateToGamerulesPage"/>
+                Text="Game rules" Clicked="BindGamerulesPage"/>
 
             <Button
                 Text="Leaderboard" Clicked="NavigateToLeaderboardPage"/>
 
             <Button
-                Text="Credits" Clicked="NavigateToCreditsPage"/>
+                Text="Credits" Clicked="BindCreditsPage"/>
 
             <Button
+                BackgroundColor="#C85641"
                 Text="Quit Game" 
                 HorizontalOptions="Fill" Clicked="QuitButton_Clicked"/>
 

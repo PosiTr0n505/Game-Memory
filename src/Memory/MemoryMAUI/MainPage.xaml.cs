@@ -1,45 +1,62 @@
-﻿using MemoryMAUI.Pages;
+﻿using MemoryMAUI.Resources.Views;
 
 namespace MemoryMAUI
 {
     public partial class MainPage : ContentPage
     {
 
+
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
-        private async void NavigateToSingleplayerPage(object sender, EventArgs e)
+
+        private ContentView? _rightSideContentView = null;
+
+        public ContentView? RightSideContentView 
         {
-            await Shell.Current.GoToAsync("///singleplayerpage");
+            get
+            {
+                return _rightSideContentView;
+            }
+            set
+            {
+                _rightSideContentView = value;
+                OnPropertyChanged();
+            }
         }
-        private async void NavigateToTwoplayersPage(object sender, EventArgs e)
+
+        private void BindSinglePlayerView(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///twoplayerspage");
+            RightSideContentView = new SinglePlayerView();
         }
-        private async void NavigateToGamerulesPage(object sender, EventArgs e)
+        private void BindTwoPlayersView(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///gamerulespage");
+            RightSideContentView = new TwoPlayersView();
+        }
+        private  void BindGamerulesPage(object sender, EventArgs e)
+        {
+            RightSideContentView = new GamerulesView();
         }
         private async void NavigateToLeaderboardPage(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("///leaderboardpage");
         }
-        private async void NavigateToCreditsPage(object sender, EventArgs e)
+        private  void BindCreditsPage(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///creditspage");
+            RightSideContentView = new CreditsPageView();
         }
         private void QuitButton_Clicked(object sender, EventArgs e)
         {
-        #if ANDROID
+#if ANDROID
             Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
-        #elif WINDOWS
+#elif WINDOWS
             System.Environment.Exit(0);
-        #else
-            Application.Current.Quit();
-        #endif
+#else
+            Application.Current?.Quit();
+#endif
         }
-
     }
 
 }

@@ -8,6 +8,7 @@ namespace MemoryLib.Models
     /// </summary>
     public class Player : ObservableObject, IEquatable<Player>
     {
+
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.
         /// </summary>
@@ -16,9 +17,9 @@ namespace MemoryLib.Models
         public Player(string? name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            this.NameTag = name;
-            this.MovesCount = 0;
-            this.CurrentScore = 0;
+            NameTag = name;
+            MovesCount = 0;
+            CurrentScore = 0;
         }
         /// <summary>
         /// Obtient le nom du joueur.

@@ -4,14 +4,27 @@
 
     <Style TargetType="Label" x:Key="LabelUnderline" >
         <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light='White'}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
+
+    <Style TargetType="Label" x:Key="LabelBold" >
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light='White'}"/>
+    </Style>
+    
     <Style TargetType="Button" >
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
     </Style>
+    
     <Style TargetType="Button" x:Key="GridBtn">
         <Setter Property="HeightRequest" Value="30"/>
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="Margin" Value="5"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
     </Style>
     <Style TargetType="Button" x:Key="ThemesBtn">
         <Setter Property="HeightRequest" Value="100"/>
@@ -24,12 +37,13 @@
         <Setter Property="HeightRequest" Value="44"/>
     </Style>
 
-        <Style TargetType="Border" x:Key="LeaderboardCellStyle">
-            <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Stroke" Value="Black"/>
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='Black', Light='White'}"/>
-            <Setter Property="MinimumWidthRequest" Value="200"/>
-        </Style>
+    <Style TargetType="Border" x:Key="LeaderboardCellStyle">
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Stroke" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='Black', Light='White'}"/>
+        <Setter Property="MinimumWidthRequest" Value="200"/>
+    </Style>
+    
     
 
 </ResourceDictionary>

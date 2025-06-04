@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Resources.Views.SinglePlayerView"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+
+
+    <Border
+     Stroke="#FFFFFF"
+     Grid.ColumnSpan="5"
+     Grid.Column="3"
+     Grid.Row="1">
+        <Grid
+            Margin="30"
+            RowDefinitions="*,*,*,*,*,*,*"
+            ColumnDefinitions="*,*,*,*,*,*,*,*">
+
+            <Label Style="{StaticResource LabelBold}" 
+             Grid.Row="0"
+             VerticalOptions="Center"
+             Text="Name tag 1"/>
+            <Entry 
+             Style="{StaticResource EntryConfigPage}"
+             Grid.Row="0"
+             Grid.Column="2"
+             Placeholder="Player1"/>
+            <!--  TextChanged="OnTextChanged"/>-->
+
+            <Label Style="{StaticResource LabelBold}"
+             VerticalOptions="Center"
+             Grid.Row="1"
+             Grid.RowSpan="2"
+             Text="Grid Size"/>
+            <FlexLayout
+             Grid.Row="1"
+             Grid.RowSpan="2"
+             Grid.Column="1"
+             Grid.ColumnSpan="5">
+
+                <views:GridSizes/>
+
+            </FlexLayout>
+            <Label Style="{StaticResource LabelBold}"
+             VerticalOptions="Center"
+             Grid.Row="3"
+             Grid.RowSpan="2"
+             Text="Themes"/>
+            <FlexLayout
+             Grid.Row="3"
+             Grid.RowSpan="2"
+             Grid.Column="1"
+             Grid.ColumnSpan="5">
+                <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 1 :&#x0a; (Image)"></Button>
+                <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 2 :&#x0a; (Image)"></Button>
+                <Button Style="{StaticResource ThemesBtn}"
+                 Text="Thème 3 :&#x0a; (Image)"></Button>
+            </FlexLayout>
+            <Button 
+             BackgroundColor="#EEBE13"
+                HeightRequest="40"
+                WidthRequest="150"
+                Grid.Row="6"
+                 Grid.Column="3"
+                Text="Start Game"
+                HorizontalOptions="Center"
+                Clicked="OnClickedStartGame"/>
+        </Grid>
+    </Border>
+</ContentView>
+
+    
