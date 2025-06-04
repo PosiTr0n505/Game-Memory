@@ -11,7 +11,7 @@ namespace Tests
             Card card = new(CardType.A);
             CardManager cardManager = new();
             cardManager.FlipCard(card);
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
         }
 
         [Fact]
@@ -21,7 +21,7 @@ namespace Tests
             CardManager cardManager = new();
             cardManager.FlipCard(card);
             cardManager.FlipCard(card);
-            Assert.True(card.IsFaceUp);
+            Assert.True(card.IsVisible);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Tests
             CardManager cardManager = new();
             cardManager.FlipCard(card);
             cardManager.UnFlipCard(card);
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Tests
             Card card = new(CardType.A);
             CardManager cardManager = new();
             cardManager.UnFlipCard(card);
-            Assert.False(card.IsFaceUp);
+            Assert.False(card.IsVisible);
         }
 
         [Fact]

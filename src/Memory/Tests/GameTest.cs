@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using MemoryLib.Managers;
 using MemoryLib.Models;
 
 namespace Tests
@@ -33,7 +34,9 @@ namespace Tests
             Player player2 = new("Player 2");
             Game? game = new(player1, player2, GridSize.Size1);
 
-            for (int i=0; i<2; i++)
+            var size = GridSizeManager.GetGridSizeValues(GridSize.Size1);
+
+            for (int i=0; i < (size.Item1 * size.Item2) / 2 ; i++)
                 game.ReduceCountByOnePair();
 
             Assert.True(game.IsGameOver());
@@ -57,7 +60,7 @@ namespace Tests
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
             Game? game = new(player1, player2, GridSize.Size1);
-
+            var size = GridSizeManager.GetGridSizeValues(GridSize.Size1);
             int count = 0;
             var cards = game.Grid.Cards;
             foreach (var card in cards)
@@ -65,7 +68,7 @@ namespace Tests
                 if (card != null) count++;
             }
 
-            Assert.Equal(4, count);
+            Assert.Equal(size.Item1 * size.Item2, count);
         }
 
         [Fact]
@@ -75,13 +78,15 @@ namespace Tests
             Player player2 = new("Player 2");
             Game game = new(player1, player2, GridSize.Size1);
 
+            var size = GridSizeManager.GetGridSizeValues(GridSize.Size1);
+
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
             {
                 if (c != null) cardCount++;
             }
 
-            Assert.Equal(4, cardCount);
+            Assert.Equal(size.Item1 * size.Item2, cardCount);
         }
 
         [Fact]
@@ -113,13 +118,14 @@ namespace Tests
             Player player1 = new("Player 1");
             Player player2 = new("Player 2");
             Game game = new(player1, player2, GridSize.Size3);
+            var size = GridSizeManager.GetGridSizeValues(GridSize.Size3);
 
             int cardCount = 0;
             foreach (var c in game.Grid.Cards)
             {
                 if (c != null) cardCount++;
             }
-            Assert.Equal(16, cardCount);
+            Assert.Equal(size.Item1 * size.Item2, cardCount);
         }
 
 /*        [Fact]

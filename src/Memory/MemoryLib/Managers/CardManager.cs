@@ -14,7 +14,7 @@ namespace MemoryLib.Managers
         /// <param name="card">La carte à retourner.</param>
         public void FlipCard(Card card)
         {
-            if (!card.IsFaceUp)
+            if (!card.IsVisible)
                 card.Flip();
         }
         /// <summary>
@@ -23,7 +23,7 @@ namespace MemoryLib.Managers
         /// <param name="card">La carte à retourner face cachée.</param>
         public void UnFlipCard(Card card)
         {
-            if (card.IsFaceUp)
+            if (card.IsVisible)
                 card.Flip();
         }
         /// <summary>

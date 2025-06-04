@@ -31,7 +31,7 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Le modèle de jeu associé à ce gestionnaire.
         /// </summary>
-        public readonly Game Game = game;
+        public Game Game { get; private init; } = game;
 
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace MemoryLib.Managers
             var card = Game.Grid.GetCard(x, y);
 
             if (card == null) return;
-            if (card.IsFaceUp == true) _cardManager.UnFlipCard(card);
+            if (card.IsVisible == true) _cardManager.UnFlipCard(card);
             else _cardManager.FlipCard(card);
         }
 

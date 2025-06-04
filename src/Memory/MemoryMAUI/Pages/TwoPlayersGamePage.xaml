@@ -2,20 +2,99 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:MemoryMAUI.Pages"
+             xmlns:mylayouts="clr-namespace:MemoryMAUI.MyLayout"
              x:Class="MemoryMAUI.Pages.TwoPlayersGamePage"
-             Title="TwoPlayersGamePage">
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             Title="TwoPlayersGamePage"
+             x:DataType="pages:TwoPlayersGamePage">
 
-    <Grid ColumnDefinitions="*" 
-          BackgroundColor="{StaticResource Primary}">
+    <Grid RowDefinitions="Auto,4*,*"
+          ColumnDefinitions="*,4*,*">
 
-        <Button
-        HeightRequest="60"
-        WidthRequest="150"
-        Margin="50,0"
-        HorizontalOptions="Start"
-        FontAttributes="Bold"
-        Text="Back to homepage"
-        Grid.Row="0"/>
+        <Grid Grid.Column="0"
+              Grid.Row="1"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <FlexLayout AlignItems="Center"
+                        JustifyContent="Center"
+                        Direction="Column">
+
+                <Label Text="{Binding GameManager.Game.Player1.NameTag}"
+                       FontSize="30"
+                       Padding="10"/>
+            
+                <Label Text="{Binding GameManager.Game.Player1.CurrentScore, StringFormat='Score : {0}'}"
+                       FontSize="20"/>
+
+                <Label Text="{Binding GameManager.Game.Player1.MovesCount, StringFormat='Moves : {0}'}"
+                       FontSize="20"/>
+
+            </FlexLayout>
+
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="0"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <FlexLayout AlignItems="Center"
+                        JustifyContent="Center"
+                        Direction="Column">
+
+                <Label Text="Current Player :"
+                       FontSize="30"
+                       Margin="0,20,0,0"/>
+                
+                <Label Text="{Binding GameManager.Game.CurrentPlayer.NameTag}"
+                       FontSize="30"/>
+
+            </FlexLayout>
+
+        </Grid>
+
+        <mylayouts:MatrixLayout Grid.Column="1" Grid.Row="1"
+                BindableLayout.ItemsSource="{Binding GameManager.Game.Grid.Cards}" 
+                BindableLayout.ItemTemplate="{StaticResource CardTemplate}" 
+                NbColumns="{Binding GameManager.Game.Grid.X}"
+                NbRows="{Binding GameManager.Game.Grid.Y}"
+                HorizontalSpacing="{StaticResource HorizontalSpacingBoard}"
+                VerticalSpacing="{StaticResource VerticalSpacingBoard}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                Padding="0" Margin="0,70,0,0"/>
+
+        <Button Text="Continue"
+                Grid.Row="2"
+                Grid.Column="1"
+                WidthRequest="200"
+                HeightRequest="50"
+                Clicked="OnContinueButtonClicked"/>
+
+        <Grid Grid.Column="2"
+              Grid.Row="1"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <FlexLayout AlignItems="Center"
+                        JustifyContent="Center"
+                        Direction="Column">
+
+                <Label Text="{Binding GameManager.Game.Player2.NameTag}"
+                   FontSize="30"
+                   Padding="10"/>   
+
+                <Label Text="{Binding GameManager.Game.Player2.CurrentScore, StringFormat='Score : {0}'}"
+                       FontSize="20"/>
+
+                <Label Text="{Binding GameManager.Game.Player2.MovesCount, StringFormat='Moves : {0}'}"
+                        FontSize="20"/>
+
+            </FlexLayout>
+
+        </Grid>
 
     </Grid>
+
 </ContentPage>

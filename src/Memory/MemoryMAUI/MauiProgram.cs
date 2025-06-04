@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-
 using CommunityToolkit.Maui;
 using MemoryMAUI;
+
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace MemoryMAUI
 {
