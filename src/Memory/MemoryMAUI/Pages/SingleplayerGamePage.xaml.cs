@@ -5,7 +5,8 @@ using Persistence;
 
 
 namespace MemoryMAUI.Pages;
-
+[QueryProperty(nameof(PlayerName), "playerName")]
+//[QueryProperty(nameof(gridSize), "gridSize")]
 public partial class SingleplayerGamePage : ContentPage
 {
     private Card? _card1 = null;
@@ -18,13 +19,27 @@ public partial class SingleplayerGamePage : ContentPage
 
     private readonly Player _player;
 
-    public GameManager GameManager { get; }
+    private string playerName;
+    public string PlayerName
+    {
+        get => playerName;
+        set
+        {
+            playerName = value;
+            InitializeGame();
+        }
+    }
+    public GameManager? GameManager { get; private set; }
+
+    private void InitializeGame()
+    {
+        var player = new Player(PlayerName);
+        GameManager = new GameManager(new Game(player, player, GridSize.Size2));
+    }
+
 
     public SingleplayerGamePage()
     {
-        _player = new("dqdqd");
-        GameManager = new(new Game(_player, _player, GridSize.Size2));
-
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;

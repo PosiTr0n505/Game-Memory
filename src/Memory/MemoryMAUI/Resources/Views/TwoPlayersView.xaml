@@ -22,7 +22,8 @@
                    VerticalOptions="Center"
                    Text="Name tag 1 "/>
             
-            <Entry Style="{StaticResource EntryConfigPage}"
+            <Entry Text= "{Binding GMgr.Game.Player1.NameTag, Mode=TwoWay}" 
+                Style="{StaticResource EntryConfigPage}"
                    Grid.Row="0"
                    Grid.Column="2"
                    Placeholder="Player1"/>
@@ -32,7 +33,7 @@
                 VerticalOptions="Center"
                 Grid.Row="1"
                 Text="Name tag 2"/>
-            <Entry 
+            <Entry Text="{Binding GMgr.Game.Player2.NameTag, Mode=TwoWay}"
             Style="{StaticResource EntryConfigPage}"
                 Grid.Row="1"
                 Grid.Column="2"
