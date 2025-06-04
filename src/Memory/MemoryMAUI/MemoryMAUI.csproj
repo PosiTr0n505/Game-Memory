@@ -62,11 +62,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\MemoryLib\MemoryLib.csproj" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 	  <Compile Update="Resources\Views\LeadeboardCell.xaml.cs">
 	    <DependentUpon>LeadeboardCell.xaml</DependentUpon>
@@ -77,9 +73,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\CreditsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\SingleplayerGamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -90,14 +83,6 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Leaderboard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-
-	  <MauiXaml Update="Pages\TwoPlayersPage.xaml">
-		<Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-
-	  <MauiXaml Update="Pages\SingleplayerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 
