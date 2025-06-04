@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             x:Class="MemoryMAUI.Resources.Views.GridCardView"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             x:Name="Root">
+
+    <Grid>
+        
+        <Image Aspect="AspectFit"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               ZIndex="-1"
+               x:Name="CardImage"
+               Visual="Default">
+
+            <Image.Source>
+                <MultiBinding Converter="{StaticResource CardBooleanToImageSource}" Mode="OneWay">
+                    <Binding Path="IsVisible"/>
+                    <Binding Path="IsFound"/>
+                </MultiBinding>
+            </Image.Source>
+
+        </Image>
+
+        <Label Text="{Binding Id}"
+               x:Name="CardLabel"
+               FontSize="{Binding LabelFontSize, Source={x:Reference Root}}"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Opacity="{Binding LabelOpacity, Source={x:Reference Root}}"/>
+
+    </Grid>
+
+</ContentView>

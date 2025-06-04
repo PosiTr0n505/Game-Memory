@@ -6,22 +6,8 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
-    public class Player : IEquatable<Player>
+    public class Player : ObservableObject, IEquatable<Player>
     {
-        /// <summary>
-        /// Délégué pour notifier les changements de score.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="score"></param>
-        /// 
-        public delegate void OnScoreChangeNotify(Player player, int score);
-
-        /// <summary>
-        /// Événement déclenché lorsque le score du joueur change.
-        /// </summary>
-        
-        public event OnScoreChangeNotify? ScorePropertyChanged;
-
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.
         /// </summary>
@@ -39,24 +25,41 @@ namespace MemoryLib.Models
         /// </summary>
         public string NameTag { get; init; }
 
+        private int _currentScore;
+
         /// <summary>
         /// Obtient ou définit le score actuel du joueur.
         /// </summary>
-        public int CurrentScore { get; private set; }
+        public int CurrentScore 
+        {
+            get => _currentScore;
+            private set
+            {
+                _currentScore = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _movesCount;
 
         /// <summary>
         /// Obtient ou définit le nombre de mouvements effectués par le joueur.
         /// </summary>
-        public int MovesCount { get; private set; }
+        public int MovesCount 
+        {
+            get => _movesCount;
+            private set 
+            {
+                _movesCount = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Ajoute 1 au score actuel du joueur.
         /// </summary>
-        public void Add1ToScore()
-        {
-            CurrentScore++;
-            ScorePropertyChanged?.Invoke(this, CurrentScore);
-        }
+        public void Add1ToScore() => CurrentScore++;
+
 
         /// <summary>
         /// Ajoute 1 au nombre de mouvements effectués par le joueur.

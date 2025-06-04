@@ -42,7 +42,7 @@ namespace MemoryConsole.Display
             {
                 var score = sortedScores[i];
 
-                var gridValue = gsm.GetGridSizeValues(score.GridSize);
+                var gridValue = GridSizeManager.GetGridSizeValues(score.GridSize);
 
                 Console.WriteLine("│ {0,-4} │ {1,-15} │ {2,-7} │ {3,-8} │ {4,-13} │",
                     $"{i + 1}",

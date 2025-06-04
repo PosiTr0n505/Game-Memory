@@ -5,7 +5,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente le jeu de mémoire, comprenant deux joueurs, une grille de cartes, et la logique de gestion du jeu.
     /// </summary>
-    public class Game
+    public class Game : ObservableObject
     {
         public GridSize GridSize { get; init; }
 
@@ -19,10 +19,21 @@ namespace MemoryLib.Models
         /// </summary>
         public Player Player2 { get; }
 
+        private Player _currentPlayer;
+
         /// <summary>
         /// Obtient ou définit le joueur actuellement actif dans le jeu.
         /// </summary>
-        public Player CurrentPlayer { get; private set; }
+        public Player CurrentPlayer 
+        { 
+            get => _currentPlayer;
+
+            private set 
+            {
+                _currentPlayer = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Représente la grille de cartes du jeu.
@@ -48,10 +59,12 @@ namespace MemoryLib.Models
             Player1 = player1;
             Player2 = player2;
 
+            _currentPlayer = Player1;
+
             GridSize = g;
 
 
-            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
+            (int x, int y) = GridSizeManager.GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
@@ -78,9 +91,11 @@ namespace MemoryLib.Models
             Player1 = new Player(player1);
             Player2 = new Player(player2);
 
+            _currentPlayer = Player1;
+
             GridSize = g;
 
-            (int x, int y) = new GridSizeManager().GetGridSizeValues(g);
+            (int x, int y) = GridSizeManager.GetGridSizeValues(g);
 
             Grid = new GridManager(x, y);
             RemainingCardsCount = 0;
