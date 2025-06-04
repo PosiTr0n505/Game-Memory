@@ -14,14 +14,14 @@ namespace MemoryLib.Managers
         /// Dictionnaire statique interne associant chaque taille de grille à ses dimensions (lignes, colonnes).
         /// </summary>
         private readonly static Dictionary<GridSize, (int, int)> _gridSizeValues = new()
-            {
-                { GridSize.Size1, (2, 2) },
-                { GridSize.Size2, (3, 4) },
-                { GridSize.Size3, (4, 4) },
-                { GridSize.Size4, (5, 4) },
-                { GridSize.Size5, (6, 5) },
-                { GridSize.Size6, (7, 6) }
-            };
+        {
+            { GridSize.Size1, (3, 4) },
+            { GridSize.Size2, (5, 4) },
+            { GridSize.Size3, (4, 6) },
+            { GridSize.Size4, (5, 6) },
+            { GridSize.Size5, (6, 6) },
+            { GridSize.Size6, (6, 8) }
+        };
 
         /// <summary>
         /// Dictionnaire en lecture seule exposant les tailles de grille et leurs dimensions.
