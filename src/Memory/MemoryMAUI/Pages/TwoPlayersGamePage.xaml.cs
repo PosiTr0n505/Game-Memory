@@ -14,7 +14,18 @@ public partial class TwoPlayersGamePage : ContentPage
 
     private int _cardsClickedCount = 0;
 
-    private bool _waitContinuePressed = false;
+    private bool _waitContinuePressed;
+
+    public bool WaitContinuePressed 
+    {
+        get => _waitContinuePressed;
+
+        set 
+        {
+            _waitContinuePressed = value;
+            OnPropertyChanged();
+        }
+    }
 
     public GameManager GameManager { get; } = new(new Game("Player1", "Player2", GridSize.Size2));
 
@@ -22,6 +33,7 @@ public partial class TwoPlayersGamePage : ContentPage
     {
         InitializeComponent();
         BindingContext = this;
+        WaitContinuePressed = false;
         CardTemplate.OnCardClicked += OnCardClicked;
     }
 
@@ -32,7 +44,7 @@ public partial class TwoPlayersGamePage : ContentPage
         _waitContinuePressed = false;
     }
 
-    public void OnCardClicked(Grid sender, Card card)
+    public void OnCardClicked(View sender, Card card)
     {
         if (_waitContinuePressed)
         {

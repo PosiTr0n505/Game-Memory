@@ -1,7 +1,6 @@
 using MemoryLib.Managers;
 using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
-using Persistence;
 
 
 namespace MemoryMAUI.Pages;
@@ -14,7 +13,18 @@ public partial class SingleplayerGamePage : ContentPage
 
     private int _cardsClickedCount = 0;
 
-    private bool _waitContinuePressed = false;
+    private bool _waitContinuePressed;
+
+    public bool WaitContinuePressed
+    {
+        get => _waitContinuePressed;
+
+        set
+        {
+            _waitContinuePressed = value;
+            OnPropertyChanged();
+        }
+    }
 
     private readonly Player _player;
 
@@ -32,17 +42,21 @@ public partial class SingleplayerGamePage : ContentPage
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
+        if (!WaitContinuePressed)
+            return;
+
         GameManager.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
-    public void OnCardClicked(Grid sender, Card card)
+    public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
+            WaitContinuePressed = false;
             GameManager.HideCards();
+            return;
         }
 
         if (card.IsFound)
@@ -75,7 +89,7 @@ public partial class SingleplayerGamePage : ContentPage
             {
                 GameManager.SwitchPlayers();
             }
-            _waitContinuePressed = true;
+            WaitContinuePressed = true;
             _cardsClickedCount = 0;
         }
     }
