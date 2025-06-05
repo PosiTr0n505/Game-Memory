@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoryMAUI.Pages.EndgameTwoPlayersScreenPage"
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
+             xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
+             Title="EndgameTwoPlayersScreenPage">
+
+    <Grid RowDefinitions="*,*,*,*,*"
+          ColumnDefinitions="*,*,*,*,*,*,*">
+
+        <FlexLayout Grid.Row="2"
+                    Grid.Column="1"
+                    AlignItems="Center"
+                    JustifyContent="Center"
+                    Direction="Column">
+
+            <Label Text="{Binding GameManager.Game.Player1.NameTag}"
+                       FontSize="30"
+                       Padding="10"/>
+
+            <Label Text="{Binding GameManager.Game.Player1.CurrentScore, StringFormat='Score : {0}'}"
+                       FontSize="20"/>
+
+            <Label Text="{Binding GameManager.Game.Player1.MovesCount, StringFormat='Moves : {0}'}"
+                       FontSize="20"/>
+
+        </FlexLayout>
+
+        <Label 
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Text="Game Over ! &#x0a;The winner is : &#x0a;"
+            VerticalOptions="Start"
+            HorizontalOptions="Center"
+            FontSize="40"/>
+
+
+        <FlexLayout Grid.Row="2"
+                    Grid.Column="5"
+                    AlignItems="Center"
+                    JustifyContent="Center"
+                    Direction="Column">
+
+                <Label Text="{Binding GameManager.Game.Player2.NameTag}"
+                   FontSize="30"
+                   Padding="10"/>
+
+                <Label Text="{Binding GameManager.Game.Player2.CurrentScore, StringFormat='Score : {0}'}"
+                       FontSize="20"/>
+
+                <Label Text="{Binding GameManager.Game.Player2.MovesCount, StringFormat='Moves : {0}'}"
+                        FontSize="20"/>
+
+            </FlexLayout>
+
+    </Grid>
+</ContentPage>

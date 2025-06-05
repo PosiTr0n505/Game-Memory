@@ -30,4 +30,14 @@
         Title="LeaderboardPage" 
         Route="leaderboardpage"/>
 
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:EndgameSingleplayerScreenPage}"
+        Title="EndgameSingleplayerScreenPage" 
+        Route="endgamesingleplayerscreenpage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:EndgameTwoPlayersScreenPage}"
+        Title="EndgameTwoPlayersScreenPage" 
+        Route="endgametwoplayersscreenpage"/>
+
 </Shell>
