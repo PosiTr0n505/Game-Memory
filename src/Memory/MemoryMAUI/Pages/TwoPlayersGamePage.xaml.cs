@@ -5,24 +5,60 @@ using Persistence;
 
 
 namespace MemoryMAUI.Pages;
-
+[QueryProperty(nameof(Player1Name), "player1Name")]
+[QueryProperty(nameof(Player2Name), "player2Name")]
 public partial class TwoPlayersGamePage : ContentPage
 {
     private Card? _card1 = null;
-
     private Card? _card2 = null;
-
     private int _cardsClickedCount = 0;
-
     private bool _waitContinuePressed = false;
 
-    public GameManager GameManager { get; } = new(new Game("Player1", "Player2", GridSize.Size2));
+    private string player1Name;
+    public string Player1Name
+    {
+        get => player1Name;
+        set
+        {
+            player1Name = value;
+            InitializeGame();
+        }
+    }
+
+    private string player2Name;
+    public string Player2Name
+    {
+        get => player2Name;
+        set
+        {
+            player2Name = value;
+            InitializeGame();
+        }
+    }
+
+    private GameManager _gameManager;
+    public GameManager GameManager
+    {
+        get => _gameManager;
+        private set
+        {
+            _gameManager = value;
+            OnPropertyChanged();
+        }
+    }
 
     public TwoPlayersGamePage()
     {
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
+    }
+
+    private void InitializeGame()
+    {
+        var player1 = new Player(Player1Name);
+        var player2 = new Player(Player2Name);
+        GameManager = new GameManager(new Game(player1, player2, GridSize.Size2));
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)

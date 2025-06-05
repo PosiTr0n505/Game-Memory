@@ -5,23 +5,30 @@ namespace MemoryMAUI.Resources.Views;
 
 public partial class TwoPlayersView : ContentView
 {
-    public GameManager GMgr { get; private set; }
+    public string NameTag1 { get; set; }
+    public string NameTag2 { get; set; }
+    private GridSize gsize;
     public TwoPlayersView()
-	{
-        Player p1 = new("Player1");
-        Player p2 = new("Player2");
-        Game game = new(p1, p2, GridSize.Size1);
-        GMgr = new GameManager(game);
-
+    {
         InitializeComponent();
         BindingContext = this;
     }
     private async void OnClickedStartGame(object sender, EventArgs e)
     {
-        var player1Name = GMgr.Game.Player1.NameTag;
-        var player2Name = GMgr.Game.Player2.NameTag;
-        var gridSize = GMgr.Game.GridSize.ToString();
+        var player1Name = NameTag1.Trim();
+        var player2Name = NameTag2.Trim();
+        if (string.IsNullOrWhiteSpace(player1Name))
+        {
+            await Application.Current.MainPage.DisplayAlert("Alert", "Player 1's Name Tag is required and must not be empty or contain only spaces", "Ok");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(player2Name))
+        {
+            await Application.Current.MainPage.DisplayAlert("Alert", "Player 2's Name Tag is required and must not be empty or contain only spaces", "Ok");
+            return;
+        }
+        var gridSize = gsize;
 
-        await Shell.Current.GoToAsync($"///singleplayergamepage?p1Name={player1Name}&p2Name={player2Name}&gridSize={gridSize}");
+        await Shell.Current.GoToAsync($"///singleplayergamepage?player1Name={player1Name}&player2Name={player2Name}&gridSize={gridSize}");
     }
 }

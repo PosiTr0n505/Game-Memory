@@ -2,7 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MemoryMAUI.Resources.Views.SinglePlayerView"
-             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             x:DataType="views:SinglePlayerView">
 
 
     <Border
@@ -19,11 +20,12 @@
              Grid.Row="0"
              VerticalOptions="Center"
              Text="Name tag 1"/>
-            <Entry Text = "{Binding GMgr.Game.Player1.NameTag, Mode=TwoWay}"
-             Style="{StaticResource EntryConfigPage}"
-             Grid.Row="0"
-             Grid.Column="2"
-             Placeholder="Player1"/>
+            
+            <Entry Text = "{Binding NameTag}"
+            Style="{StaticResource EntryConfigPage}"
+            Grid.Row="0"
+            Grid.Column="2"
+            Placeholder="Player1"/>
             <!--  TextChanged="OnTextChanged"/>-->
 
             <Label Style="{StaticResource LabelBold}"

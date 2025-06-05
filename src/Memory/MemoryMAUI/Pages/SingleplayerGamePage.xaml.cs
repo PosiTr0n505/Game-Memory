@@ -6,7 +6,7 @@ using Persistence;
 
 namespace MemoryMAUI.Pages;
 [QueryProperty(nameof(PlayerName), "playerName")]
-//[QueryProperty(nameof(gridSize), "gridSize")]
+[QueryProperty(nameof(GSize), "gridSize")]
 public partial class SingleplayerGamePage : ContentPage
 {
     private Card? _card1 = null;
@@ -17,10 +17,8 @@ public partial class SingleplayerGamePage : ContentPage
 
     private bool _waitContinuePressed = false;
 
-    private readonly Player _player;
-
-    private string playerName;
-    public string PlayerName
+    private string? playerName;
+    public string? PlayerName
     {
         get => playerName;
         set
@@ -29,12 +27,41 @@ public partial class SingleplayerGamePage : ContentPage
             InitializeGame();
         }
     }
-    public GameManager? GameManager { get; private set; }
+
+    GridSize GridSize { get; set; }
+
+    private string? gSize;
+    public string? GSize
+    {
+        get => gSize;
+        set
+        {
+            gSize = value;
+            foreach (var size in Enum.GetValues(typeof(GridSize)))
+            {
+                if (size.ToString() == value)
+                {
+                    GridSize = (GridSize)size;
+                }
+            }
+        }
+    }
+
+    private GameManager _gameManager;
+    public GameManager GameManager
+    {
+        get => _gameManager;
+        private set
+        {
+            _gameManager = value;
+            OnPropertyChanged();
+        }
+    }
 
     private void InitializeGame()
     {
         var player = new Player(PlayerName);
-        GameManager = new GameManager(new Game(player, player, GridSize.Size2));
+        GameManager = new GameManager(new Game(player, player, GridSize));
     }
 
 
