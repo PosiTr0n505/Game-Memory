@@ -1,13 +1,12 @@
 using System.ComponentModel;
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using Persistence;
 
 namespace MemoryMAUI.Pages;
-
 public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
 {
-    private readonly ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
+    private readonly ScoreManager leaderboard;
 
     private GridSize? gridSize;
 
@@ -42,13 +41,15 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
         ];
     }
 
-    public LeaderboardPage()
+    public LeaderboardPage(ILoadManager loader, ISaveManager saver)
     {
-        InitializeComponent();
+        leaderboard = new(loader, saver);
         _scoresI = [.. leaderboard.Scores.OrderBy(s => s.ScoreValue)];
         Scores = _scoresI;
-        GridButtons.GridSizeSelected += OnGridSizeSelected;
+
+        InitializeComponent();
         BindingContext = this;
+        GridButtons.GridSizeSelected += OnGridSizeSelected;
     }
 
     private async void NavigateToMainpage(object sender, EventArgs e)
