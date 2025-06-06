@@ -1,16 +1,21 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using MemoryMAUI;
+using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
+using Persistence;
+using MemoryMAUI.Pages;
+using MemoryLib.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
 namespace MemoryMAUI
 {
     public static class MauiProgram
     {
+        private readonly static MauiAppBuilder builder = MauiApp.CreateBuilder();
+
         public static MauiApp CreateMauiApp()
         {
-            var builder = MauiApp.CreateBuilder();
+            
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
@@ -23,6 +28,10 @@ namespace MemoryMAUI
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton<ILoadManager, StubLoadManager>();
+            builder.Services.AddSingleton<ISaveManager, StubSaveManager>();
+            builder.Services.AddSingleton<LeaderboardPage>();
 
             return builder.Build();
         }
