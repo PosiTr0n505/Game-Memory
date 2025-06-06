@@ -5,9 +5,7 @@ using Persistence;
 
 
 namespace MemoryMAUI.Pages;
-[QueryProperty(nameof(Player1Name), "player1Name")]
-[QueryProperty(nameof(Player2Name), "player2Name")]
-public partial class TwoPlayersGamePage : ContentPage
+public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
     private Card? _card2 = null;
@@ -21,7 +19,6 @@ public partial class TwoPlayersGamePage : ContentPage
         set
         {
             player1Name = value;
-            InitializeGame();
         }
     }
 
@@ -32,9 +29,10 @@ public partial class TwoPlayersGamePage : ContentPage
         set
         {
             player2Name = value;
-            InitializeGame();
         }
     }
+
+    public GridSize GridSize { get; set; }
 
     private GameManager _gameManager;
     public GameManager GameManager
@@ -47,18 +45,36 @@ public partial class TwoPlayersGamePage : ContentPage
         }
     }
 
-    public TwoPlayersGamePage()
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        InitializeComponent();
-        BindingContext = this;
-        CardTemplate.OnCardClicked += OnCardClicked;
+        if (query.ContainsKey("player1Name"))
+            Player1Name = query["player1Name"] as string;
+        if (query.ContainsKey("player2Name"))
+            Player2Name = query["player2Name"] as string;
+
+        if (query.ContainsKey("gridSize"))
+        {
+            var gridSizeValue = query["gridSize"];
+            GridSize = (GridSize)gridSizeValue;
+        }
+        if (GridSize != GridSize.None)
+        {
+            InitializeGame();
+        }
     }
 
     private void InitializeGame()
     {
         var player1 = new Player(Player1Name);
         var player2 = new Player(Player2Name);
-        GameManager = new GameManager(new Game(player1, player2, GridSize.Size2));
+        GameManager = new GameManager(new Game(player1, player2, GridSize));
+    }
+
+    public TwoPlayersGamePage()
+    {
+        InitializeComponent();
+        BindingContext = this;
+        CardTemplate.OnCardClicked += OnCardClicked;
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)

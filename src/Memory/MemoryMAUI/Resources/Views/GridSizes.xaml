@@ -24,7 +24,8 @@
 
             <DataTemplate x:DataType="lib:GridSize">
 
-                <Button Text="{Binding ., Converter={StaticResource GridSizeToString}}"/>
+                <Button Text="{Binding ., Converter={StaticResource GridSizeToString}}"
+                        Clicked="OnGridSizeButtonClicked"/>
 
             </DataTemplate>
 

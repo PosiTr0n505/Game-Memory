@@ -39,7 +39,7 @@
              Grid.Column="1"
              Grid.ColumnSpan="5">
 
-                <views:GridSizes/>
+                <views:GridSizes x:Name="GridSizes" />
 
             </FlexLayout>
             <Label Style="{StaticResource LabelBold}"

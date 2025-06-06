@@ -1,51 +1,30 @@
 using MemoryLib.Managers;
-using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
+using MemoryMAUI.Converters;
+using MemoryMAUI.Resources.Templates;
 using Persistence;
+using System.Diagnostics;
 
 
 namespace MemoryMAUI.Pages;
-[QueryProperty(nameof(PlayerName), "playerName")]
-[QueryProperty(nameof(GSize), "gridSize")]
-public partial class SingleplayerGamePage : ContentPage
+public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
-
     private Card? _card2 = null;
-
     private int _cardsClickedCount = 0;
-
     private bool _waitContinuePressed = false;
 
-    private string? playerName;
-    public string? PlayerName
+    private string playerName;
+    public string PlayerName
     {
         get => playerName;
         set
         {
             playerName = value;
-            InitializeGame();
         }
     }
 
-    GridSize GridSize { get; set; }
-
-    private string? gSize;
-    public string? GSize
-    {
-        get => gSize;
-        set
-        {
-            gSize = value;
-            foreach (var size in Enum.GetValues(typeof(GridSize)))
-            {
-                if (size.ToString() == value)
-                {
-                    GridSize = (GridSize)size;
-                }
-            }
-        }
-    }
+    public GridSize GridSize { get; set; }
 
     private GameManager _gameManager;
     public GameManager GameManager
@@ -58,6 +37,20 @@ public partial class SingleplayerGamePage : ContentPage
         }
     }
 
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.ContainsKey("playerName"))
+            PlayerName = query["playerName"] as string;
+
+        if (query.ContainsKey("gridSize"))
+        {
+            var gridSizeValue = query["gridSize"];
+            GridSize = (GridSize)gridSizeValue;
+        }
+        if (GridSize != GridSize.None)
+            InitializeGame();
+    }
+
     private void InitializeGame()
     {
         var player = new Player(PlayerName);
@@ -65,11 +58,13 @@ public partial class SingleplayerGamePage : ContentPage
     }
 
 
+
     public SingleplayerGamePage()
     {
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
+
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)

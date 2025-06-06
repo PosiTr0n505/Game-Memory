@@ -45,7 +45,7 @@
                 Grid.Row="2"
                 Text="Grid Size"/>
 
-                <views:GridSizes
+            <views:GridSizes x:Name="GridSizes"
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.ColumnSpan="5"/>
