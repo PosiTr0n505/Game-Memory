@@ -1,33 +1,70 @@
 using MemoryLib.Managers;
-using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
+using MemoryMAUI.Converters;
+using MemoryMAUI.Resources.Templates;
 using Persistence;
+using System.Diagnostics;
 
 
 namespace MemoryMAUI.Pages;
-
-public partial class SingleplayerGamePage : ContentPage
+public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
-
     private Card? _card2 = null;
-
     private int _cardsClickedCount = 0;
-
     private bool _waitContinuePressed = false;
 
-    private readonly Player _player;
+    private string playerName;
+    public string PlayerName
+    {
+        get => playerName;
+        set
+        {
+            playerName = value;
+        }
+    }
 
-    public GameManager GameManager { get; }
+    public GridSize GridSize { get; set; }
+
+    private GameManager _gameManager;
+    public GameManager GameManager
+    {
+        get => _gameManager;
+        private set
+        {
+            _gameManager = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.ContainsKey("playerName"))
+            PlayerName = query["playerName"] as string;
+
+        if (query.ContainsKey("gridSize"))
+        {
+            var gridSizeValue = query["gridSize"];
+            GridSize = (GridSize)gridSizeValue;
+        }
+        if (GridSize != GridSize.None)
+            InitializeGame();
+    }
+
+    private void InitializeGame()
+    {
+        var player = new Player(PlayerName);
+        GameManager = new GameManager(new Game(player, player, GridSize));
+    }
+
+
 
     public SingleplayerGamePage()
     {
-        _player = new("dqdqd");
-        GameManager = new(new Game(_player, _player, GridSize.Size2));
-
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
+
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)

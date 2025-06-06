@@ -15,6 +15,19 @@ public class GridSizeToString : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is string strValue)
+        {
+            var parts = strValue.Split('x');
+            if (parts.Length == 2 && int.TryParse(parts[0], out int width) && int.TryParse(parts[1], out int height))
+            {
+                foreach (var gridSize in GridSizeManager.Values)
+                {
+                    if (gridSize.Value.Item1 == width && gridSize.Value.Item2 == height)
+                        return gridSize.Key;
+                }
+            }
+        }
+        throw new ArgumentException($"Invalid grid size string: {value}. Unable to convert back.");
     }
+
 }
