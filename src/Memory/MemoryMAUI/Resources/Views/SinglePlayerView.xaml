@@ -20,13 +20,12 @@
              Grid.Row="0"
              VerticalOptions="Center"
              Text="Name tag 1"/>
-            
+
             <Entry Text = "{Binding NameTag}"
             Style="{StaticResource EntryConfigPage}"
             Grid.Row="0"
             Grid.Column="2"
             Placeholder="Player1"/>
-            <!--  TextChanged="OnTextChanged"/>-->
 
             <Label Style="{StaticResource LabelBold}"
              VerticalOptions="Center"
