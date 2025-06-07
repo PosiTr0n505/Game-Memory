@@ -4,16 +4,25 @@ using MemoryLib.Models;
 
 namespace MemoryMAUI.Pages;
 
-public partial class EndgameSingleplayerScreenPage : ContentPage
+public partial class EndgameSingleplayerScreenPage : ContentPage, IQueryAttributable
 {
-    private readonly Player _player;
+    public Player? Player { get; set; }
 
-    public GameManager GameManager { get; }
     public EndgameSingleplayerScreenPage()
-	{
-        _player = new("dqdqd");
-        GameManager = new(new Game(_player, _player, GridSize.Size2));
+    {
         InitializeComponent();
         BindingContext = this;
+    }
+    private async void NavigateToMainMenu(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("player", out var playerObj) && playerObj is Player player)
+        {
+            Player = player;
+            OnPropertyChanged(nameof(Player));
+        }
     }
 }

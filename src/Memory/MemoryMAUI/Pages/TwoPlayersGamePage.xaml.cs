@@ -140,7 +140,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                     { nameof(player2), player2 }
                 };
 
-                AppShell.Current.GoToAsync("///", navigationParameter);
+                Shell.Current.GoToAsync("///endgametwoplayersscreenpage", navigationParameter);
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;

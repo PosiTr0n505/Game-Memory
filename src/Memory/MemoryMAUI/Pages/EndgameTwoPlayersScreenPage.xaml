@@ -5,10 +5,22 @@
              xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
              xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
              xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
-             Title="EndgameTwoPlayersScreenPage">
+             Title="EndgameTwoPlayersScreenPage"
+             BackgroundImageSource="backgroundlighttheme.png">
 
     <Grid RowDefinitions="*,*,*,*,*"
           ColumnDefinitions="*,*,*,*,*,*,*">
+
+        <Label 
+            Grid.Row="0"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Text="Game Over"
+            FontSize="40"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            HorizontalTextAlignment="Center"/>
+
 
         <FlexLayout Grid.Row="2"
                     Grid.Column="1"
@@ -16,28 +28,40 @@
                     JustifyContent="Center"
                     Direction="Column">
 
-            <Label Text="{Binding GameManager.Game.Player1.NameTag}"
+
+            <Label Text="{Binding Player1.NameTag}"
                        FontSize="30"
                        Padding="10"/>
 
-            <Label Text="{Binding GameManager.Game.Player1.CurrentScore, StringFormat='Score : {0}'}"
+            <Label Text="{Binding Player1.CurrentScore, StringFormat='Score : {0}'}"
                        FontSize="20"/>
 
-            <Label Text="{Binding GameManager.Game.Player1.MovesCount, StringFormat='Moves : {0}'}"
+            <Label Text="{Binding Player1.MovesCount, StringFormat='Moves : {0}'}"
                        FontSize="20"/>
+
+
 
         </FlexLayout>
 
+        <Button 
+                Grid.Row="4"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Text="Back to Main Menu"
+                HorizontalOptions="Center"
+                Clicked="NavigateToMainMenu"
+                HeightRequest="35"/>
+
+        
         <Label 
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="2"
             Grid.ColumnSpan="3"
-            Text="Game Over ! &#x0a;The winner is : &#x0a;"
+            Text="{Binding Winner.NameTag, StringFormat='The winner is : {0}'}"
             VerticalOptions="Start"
             HorizontalOptions="Center"
             FontSize="40"/>
-
 
         <FlexLayout Grid.Row="2"
                     Grid.Column="5"
@@ -45,14 +69,14 @@
                     JustifyContent="Center"
                     Direction="Column">
 
-                <Label Text="{Binding GameManager.Game.Player2.NameTag}"
+                <Label Text="{Binding Player2.NameTag}"
                    FontSize="30"
                    Padding="10"/>
 
-                <Label Text="{Binding GameManager.Game.Player2.CurrentScore, StringFormat='Score : {0}'}"
+                <Label Text="{Binding Player2.CurrentScore, StringFormat='Score : {0}'}"
                        FontSize="20"/>
 
-                <Label Text="{Binding GameManager.Game.Player2.MovesCount, StringFormat='Moves : {0}'}"
+                <Label Text="{Binding Player2.MovesCount, StringFormat='Moves : {0}'}"
                         FontSize="20"/>
 
             </FlexLayout>
