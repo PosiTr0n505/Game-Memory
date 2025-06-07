@@ -15,11 +15,11 @@ namespace MemoryLib.Managers
         /// </summary>
         private readonly static Dictionary<GridSize, (int, int)> _gridSizeValues = new()
         {
-            { GridSize.Size1, (3, 4) },
-            { GridSize.Size2, (5, 4) },
+            { GridSize.Size1, (4, 3) },
+            { GridSize.Size2, (6, 3) },
             { GridSize.Size3, (4, 6) },
-            { GridSize.Size4, (5, 6) },
-            { GridSize.Size5, (6, 6) },
+            { GridSize.Size4, (7, 4) },
+            { GridSize.Size5, (8, 4) },
             { GridSize.Size6, (6, 8) }
         };
 
