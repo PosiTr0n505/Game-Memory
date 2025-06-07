@@ -81,10 +81,15 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 
     public void OnCardClicked(View sender, Card card)
     {
+        if (GameManager is null)
+        {
+            return;
+        }
+
         if (WaitContinuePressed)
         {
             WaitContinuePressed = false;
-            GameManager?.HideCards();
+            GameManager.HideCards();
             return;
         }
 
@@ -105,9 +110,9 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 
         if (_cardsClickedCount == 2)
         {
-            GameManager?.Game.CurrentPlayer.Add1ToMovesCount();
+            GameManager.Game.CurrentPlayer.Add1ToMovesCount();
             _card2 = card;
-            if (GameManager!.Game.Grid.CompareCards(_card1!, _card2!))
+            if (GameManager.Game.Grid.CompareCards(_card1!, _card2!))
             {
                 _card1!.IsFound = true;
                 _card2.IsFound = true;
@@ -120,7 +125,8 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             }
             if (GameManager.IsGameOver())
             {
-                _scoreManager.SaveScore(new(GameManager.Game.CurrentPlayer, GameManager.Game.CurrentPlayer.MovesCount, GameManager.Game.GridSize));
+                var player = GameManager.Game.CurrentPlayer;
+                _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
             }
             WaitContinuePressed = true;
             _cardsClickedCount = 0;

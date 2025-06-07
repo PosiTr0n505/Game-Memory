@@ -2,6 +2,7 @@ using MemoryLib.Managers;
 using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
 using MemoryStubPersistence;
+using MemoryLib.Managers.Interface;
 
 
 namespace MemoryMAUI.Pages;
@@ -67,8 +68,11 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         GameManager = new GameManager(new Game(player1, player2, GridSize));
     }
 
-    public TwoPlayersGamePage()
+    private readonly IScoreManager _scoreManager;
+
+    public TwoPlayersGamePage(IScoreManager scoreManager)
     {
+        _scoreManager = scoreManager;
         InitializeComponent();
         BindingContext = this;
         WaitContinuePressed = false;
@@ -77,7 +81,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager?.HideCards();
+        GameManager!.HideCards();
         _cardsClickedCount = 0;
         _waitContinuePressed = false;
     }
@@ -87,7 +91,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (_waitContinuePressed)
         {
             _waitContinuePressed = false;
-            GameManager?.HideCards();
+            GameManager!.HideCards();
         }
 
         if (card.IsFound)
@@ -105,11 +109,11 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (_cardsClickedCount == 1)
             _card1 = card;
 
-        if (_cardsClickedCount == 2)
+        if (_cardsClickedCount == 2 && GameManager is not null)
         {
-            GameManager?.Game.CurrentPlayer.Add1ToMovesCount();
+            GameManager.Game.CurrentPlayer.Add1ToMovesCount();
             _card2 = card;
-            if (GameManager is not null && GameManager.Game.Grid.CompareCards(_card1!, _card2!))
+            if (GameManager.Game.Grid.CompareCards(_card1!, _card2!))
             {
                 _card1!.IsFound = true;
                 _card2.IsFound = true;
@@ -118,7 +122,16 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             }
             else 
             {
-                GameManager?.SwitchPlayers();
+                GameManager.SwitchPlayers();
+            }
+            if (GameManager.IsGameOver())
+            {
+                var player1 = GameManager.Game.Player1;
+                var player2 = GameManager.Game.Player2;
+                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
+                // var winnerScore = (player1.CurrentScore > player2.CurrentScore) ? player1 : player2;
+
+                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;
