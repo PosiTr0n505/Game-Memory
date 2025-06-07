@@ -81,9 +81,12 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager!.HideCards();
+        if (!WaitContinuePressed)
+            return;
+
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
