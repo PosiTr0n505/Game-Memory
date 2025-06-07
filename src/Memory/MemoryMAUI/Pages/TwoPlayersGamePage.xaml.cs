@@ -129,7 +129,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 var player1 = GameManager.Game.Player1;
                 var player2 = GameManager.Game.Player2;
                 var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
-                // var winnerScore = (player1.CurrentScore > player2.CurrentScore) ? player1 : player2;
 
                 _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
             }
