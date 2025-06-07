@@ -49,13 +49,7 @@ namespace MemoryMAUI
         }
         private void QuitButton_Clicked(object sender, EventArgs e)
         {
-#if ANDROID
-            Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
-#elif WINDOWS
-            System.Environment.Exit(0);
-#else
             Application.Current?.Quit();
-#endif
         }
     }
 

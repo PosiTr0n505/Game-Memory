@@ -6,7 +6,7 @@ using System.Data;
 
 namespace MemoryConsole
 {
-    public class ConsoleAsking
+    public static class ConsoleAsking
     {
         public static void AskOnePlayerName(out string playerName)
         {
