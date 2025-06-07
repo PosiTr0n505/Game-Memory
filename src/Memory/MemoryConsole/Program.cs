@@ -138,7 +138,6 @@ namespace MemoryConsole
                                 return;
                         }
                         break;
-
                 }
             }
         }
@@ -307,42 +306,9 @@ namespace MemoryConsole
             {
                 WriteLine($"{gameManager.Game.CurrentPlayer} : \n\n");
 
-                while (true)
-                {
-                    try
-                    {
-                        card1coordinates = ConsoleAsking.AskCoordinates("1", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-                        break;
+                card1coordinates = AskAndCheckCoordinates(gameManager, "1");
 
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
-
-                while (true)
-                {
-                    try
-                    {
-                        card2coordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-                        if (card1coordinates == card2coordinates)
-                        {
-                            WriteLine("You cannot select the same card twice. Please select a different card.");
-                            continue;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
+                card2coordinates = AskAndCheckCoordinates(gameManager, "2", card1coordinates);
 
                 gameManager.PlayRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
 

@@ -11,8 +11,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
 
-    private string player1Name;
-    public string Player1Name
+    private string? player1Name;
+    public string? Player1Name
     {
         get => player1Name;
         set
@@ -21,8 +21,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private string player2Name;
-    public string Player2Name
+    private string? player2Name;
+    public string? Player2Name
     {
         get => player2Name;
         set
@@ -33,8 +33,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     public GridSize GridSize { get; set; }
 
-    private GameManager _gameManager;
-    public GameManager GameManager
+    private GameManager? _gameManager;
+    public GameManager? GameManager
     {
         get => _gameManager;
         private set
@@ -46,17 +46,17 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.ContainsKey("player1Name"))
-            Player1Name = query["player1Name"] as string;
-        if (query.ContainsKey("player2Name"))
-            Player2Name = query["player2Name"] as string;
+        if (query.TryGetValue("player1Name", out object? value) && value is string player1NameValue)
+            Player1Name = player1NameValue;
 
+        if (query.TryGetValue("player2Name", out value) && value is string player2NameValue)
+            Player2Name = player2NameValue;
 
-        if (query.ContainsKey("gridSize"))
+        if (query.TryGetValue("gridSize", out value))
         {
-            var gridSizeValue = query["gridSize"];
-            GridSize = (GridSize)gridSizeValue;
+            GridSize = (GridSize)value;
         }
+
         if (GridSize != GridSize.None)
         {
             InitializeGame();
@@ -93,7 +93,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager.HideCards();
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
         _waitContinuePressed = false;
     }
@@ -103,7 +103,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (_waitContinuePressed)
         {
             _waitContinuePressed = false;
-            GameManager.HideCards();
+            GameManager?.HideCards();
         }
 
         if (card.IsFound)
@@ -123,9 +123,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
         if (_cardsClickedCount == 2)
         {
-            GameManager.Game.CurrentPlayer.Add1ToMovesCount();
+            GameManager?.Game.CurrentPlayer.Add1ToMovesCount();
             _card2 = card;
-            if (GameManager.Game.Grid.CompareCards(_card1!, _card2!))
+            if (GameManager is not null && GameManager.Game.Grid.CompareCards(_card1!, _card2!))
             {
                 _card1!.IsFound = true;
                 _card2.IsFound = true;
@@ -134,7 +134,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             }
             else 
             {
-                GameManager.SwitchPlayers();
+                GameManager?.SwitchPlayers();
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;

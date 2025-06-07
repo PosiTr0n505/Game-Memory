@@ -66,9 +66,6 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private readonly Player _player;
-
-
     public SingleplayerGamePage()
     {
         InitializeComponent();
@@ -81,7 +78,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         if (!WaitContinuePressed)
             return;
 
-        GameManager.HideCards();
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
         WaitContinuePressed = false;
     }
@@ -91,7 +88,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         if (WaitContinuePressed)
         {
             WaitContinuePressed = false;
-            GameManager.HideCards();
+            GameManager?.HideCards();
             return;
         }
 

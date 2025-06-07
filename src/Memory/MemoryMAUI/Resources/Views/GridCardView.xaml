@@ -12,7 +12,8 @@
                HorizontalOptions="Center"
                VerticalOptions="Center"
                ZIndex="-1"
-               x:Name="CardImage">
+               x:Name="CardImage"
+               x:DataType="lib:Card">
 
             <Image.Source>
                 <MultiBinding Converter="{StaticResource CardBooleanToImageSource}" Mode="OneWay">
