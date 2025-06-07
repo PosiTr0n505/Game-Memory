@@ -5,7 +5,7 @@ using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 using MemoryStubPersistence;
-
+using System.Text;
 using static System.Console;
 
 namespace MemoryConsole
@@ -375,15 +375,15 @@ namespace MemoryConsole
 
             int i = 1;
 
-            string gridSizeDisplay = "";
+            StringBuilder gridSizeDisplay = new();
 
             foreach (var size in GridSizeManager.Values)
             {
-                gridSizeDisplay += $"{i}. {size.Value}   ";
+                gridSizeDisplay.Append($"{i}. {size.Value}   ");
                 ++i;
             }
 
-            gridSizeDisplay += "\n7. Search by NameTag";
+            gridSizeDisplay.Append("\n7. Search by NameTag");
 
             WriteLine(gridSizeDisplay);
 
