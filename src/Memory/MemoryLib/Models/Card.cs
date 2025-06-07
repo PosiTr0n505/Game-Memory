@@ -8,7 +8,7 @@ namespace MemoryLib.Models
     /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
     /// </remarks>
     /// <param name="id"></param>
-    public class Card(CardType id) : ObservableObject, IEquatable<Card>
+    public sealed class Card(CardType id) : ObservableObject, IEquatable<Card>
     {
         /// <summary>
         /// Obtient l'identifiant unique de la carte.

@@ -35,9 +35,8 @@ public partial class GridCardView : ContentView
 
     private void OnCardVisibilityChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName is nameof(Card.IsVisible))
-            if (sender is Card card)
-                LabelOpacity = (card.IsVisible || card.IsFound) ? 1 : 0;
+        if (e.PropertyName is nameof(Card.IsVisible) && sender is Card card)
+            LabelOpacity = (card.IsVisible || card.IsFound) ? 1 : 0;
     }
 
     protected override void OnBindingContextChanged()

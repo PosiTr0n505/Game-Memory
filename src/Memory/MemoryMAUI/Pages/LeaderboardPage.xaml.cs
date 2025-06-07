@@ -4,13 +4,13 @@ using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 
 namespace MemoryMAUI.Pages;
-public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
+public partial class LeaderboardPage : ContentPage
 {
     private readonly ScoreManager leaderboard;
 
     private GridSize? gridSize;
 
-    private readonly List<Score> _scoresI = [];
+    private readonly List<Score> _scoresI;
 
     private List<Score> _scores = [];
 

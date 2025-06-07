@@ -17,10 +17,10 @@ namespace MemoryLib.Managers
         {
             { GridSize.Size1, (4, 3) },
             { GridSize.Size2, (6, 3) },
-            { GridSize.Size3, (4, 6) },
+            { GridSize.Size3, (6, 4) },
             { GridSize.Size4, (7, 4) },
             { GridSize.Size5, (8, 4) },
-            { GridSize.Size6, (6, 8) }
+            { GridSize.Size6, (8, 6) }
         };
 
         /// <summary>

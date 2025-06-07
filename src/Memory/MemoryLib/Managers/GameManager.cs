@@ -8,7 +8,6 @@ namespace MemoryLib.Managers
     /// la gestion des tours, et la notification des changements sur le plateau.
     /// </summary>
     public class GameManager(Game game) : IGameManager
-
     {
         /// <summary>
         /// Délégué pour notifier les changements sur le plateau.

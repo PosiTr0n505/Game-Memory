@@ -7,7 +7,6 @@ namespace Persistence
     {
         public void SaveScores(List<Score> scores)
         {
-            return;
         }
     }
 }

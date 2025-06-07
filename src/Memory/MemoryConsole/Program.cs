@@ -227,7 +227,6 @@ namespace MemoryConsole
                 catch (Exception e)
                 {
                     WriteLine(e.Message);
-                    continue;
                 }
             }
             return cardcoordinates;
@@ -253,16 +252,11 @@ namespace MemoryConsole
                         WriteLine("You cannot select a card that is already found");
                         continue;
                     }
-
-                    else
-                    {
-                        break;
-                    }
+                    break;
                 }
                 catch (Exception e)
                 {
                     WriteLine(e.Message);
-                    continue;
                 }
             }
             return cardcoordinates;

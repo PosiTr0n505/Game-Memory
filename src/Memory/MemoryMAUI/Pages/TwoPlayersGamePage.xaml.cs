@@ -11,25 +11,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
 
-    private string? player1Name;
-    public string? Player1Name
-    {
-        get => player1Name;
-        set
-        {
-            player1Name = value;
-        }
-    }
+    public string? Player1Name{ get; set; }
 
-    private string? player2Name;
-    public string? Player2Name
-    {
-        get => player2Name;
-        set
-        {
-            player2Name = value;
-        }
-    }
+    public string? Player2Name{ get; set; }
 
     public GridSize GridSize { get; set; }
 

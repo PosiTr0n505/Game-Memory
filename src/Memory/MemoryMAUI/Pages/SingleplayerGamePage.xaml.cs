@@ -10,15 +10,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
 
-    private string? playerName;
-    public string? PlayerName
-    {
-        get => playerName;
-        set
-        {
-            playerName = value;
-        }
-    }
+    public string? PlayerName { get; set; }
 
     public GridSize GridSize { get; set; }
 

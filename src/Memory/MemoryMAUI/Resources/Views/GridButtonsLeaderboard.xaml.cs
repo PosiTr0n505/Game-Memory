@@ -5,7 +5,9 @@ namespace MemoryMAUI.Resources.Views;
 
 public partial class GridButtons : ContentView
 {
-	public event EventHandler<GridSize?>? GridSizeSelected;
+    public delegate void GridSizeSelectedEventHandler(object? sender, GridSize? gridSize);
+
+    public event GridSizeSelectedEventHandler? GridSizeSelected;
 
     public IReadOnlyCollection<GridSize> Sizes { get; private init; } = [.. GridSizeManager.Values.Keys];
 
@@ -26,7 +28,6 @@ public partial class GridButtons : ContentView
         if (sender is Button button && button.BindingContext is GridSize selectedSize)
         {
             GridSizeSelected?.Invoke(this, selectedSize);
-            return;
         }
 
     }
