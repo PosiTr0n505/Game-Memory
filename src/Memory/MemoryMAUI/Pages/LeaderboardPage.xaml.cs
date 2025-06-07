@@ -6,11 +6,11 @@ using MemoryLib.Models;
 namespace MemoryMAUI.Pages;
 public partial class LeaderboardPage : ContentPage
 {
-    private readonly IScoreManager leaderboard;
+    private readonly ScoreManager leaderboard;
 
     private GridSize? gridSize;
 
-    private readonly List<Score> _scoresI;
+    private List<Score> _scoresI;
 
     private List<Score> _scores = [];
 
@@ -46,7 +46,7 @@ public partial class LeaderboardPage : ContentPage
         ];
     }
 
-    public LeaderboardPage(IScoreManager scoreManager)
+    public LeaderboardPage(ScoreManager scoreManager)
     {
         leaderboard = scoreManager;
         _scoresI = [.. leaderboard.Scores.OrderBy(s => s.ScoreValue)];
@@ -55,6 +55,12 @@ public partial class LeaderboardPage : ContentPage
         InitializeComponent();
         BindingContext = this;
         GridButtons.GridSizeSelected += OnGridSizeSelected;
+        leaderboard.ScoresAdded += LeaderboardPage_ScoresAdded;
+    }
+
+    private void LeaderboardPage_ScoresAdded()
+    {
+        _scoresI = [.. leaderboard.Scores];
     }
 
     private async void NavigateToMainpage(object sender, EventArgs e)

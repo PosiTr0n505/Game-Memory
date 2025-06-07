@@ -59,9 +59,9 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private readonly IScoreManager _scoreManager;
+    private readonly ScoreManager _scoreManager;
 
-    public SingleplayerGamePage(IScoreManager scoreManager)
+    public SingleplayerGamePage(ScoreManager scoreManager)
     {
         _scoreManager = scoreManager;
         InitializeComponent();
@@ -122,13 +122,23 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             else
             {
                 GameManager.SwitchPlayers();
+                _waitContinuePressed = true;
             }
             if (GameManager.IsGameOver())
             {
                 var player = GameManager.Game.CurrentPlayer;
+
                 _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player), player }
+                };
+
+                Shell.Current.GoToAsync("///endgamesingleplayerscreenpage", navigationParameter);
+                return;
             }
-            WaitContinuePressed = true;
+            
             _cardsClickedCount = 0;
         }
     }

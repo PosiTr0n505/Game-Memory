@@ -4,7 +4,6 @@ using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
 using MemoryStubPersistence;
 using MemoryMAUI.Pages;
-using MemoryLib.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MemoryMAUI
@@ -29,9 +28,12 @@ namespace MemoryMAUI
             builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddTransient<SingleplayerGamePage>();
+            builder.Services.AddTransient<TwoPlayersGamePage>();
+
             builder.Services.AddSingleton<ILoadManager, StubLoadManager>();
             builder.Services.AddSingleton<ISaveManager, StubSaveManager>();
-            builder.Services.AddSingleton<IScoreManager, ScoreManager>();
+            builder.Services.AddSingleton<ScoreManager>();
             builder.Services.AddSingleton<LeaderboardPage>();
 
             return builder.Build();

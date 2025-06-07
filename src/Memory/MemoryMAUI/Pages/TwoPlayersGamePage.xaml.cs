@@ -81,17 +81,21 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager!.HideCards();
+        if (!WaitContinuePressed)
+            return;
+
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
-            GameManager!.HideCards();
+            WaitContinuePressed = false;
+            GameManager?.HideCards();
+            return;
         }
 
         if (card.IsFound)
@@ -124,13 +128,23 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             {
                 GameManager.SwitchPlayers();
             }
+	    
             if (GameManager.IsGameOver())
             {
                 var player1 = GameManager.Game.Player1;
                 var player2 = GameManager.Game.Player2;
-                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
 
-                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+                _scoreManager.SaveScore(new(player1, player1.MovesCount, GameManager.Game.GridSize));
+
+                _scoreManager.SaveScore(new(player2, player2.MovesCount, GameManager.Game.GridSize));
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player1), player1 },
+                    { nameof(player2), player2 }
+                };
+
+                Shell.Current.GoToAsync("///endgametwoplayersscreenpage", navigationParameter);
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;
