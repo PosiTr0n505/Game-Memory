@@ -88,10 +88,11 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
-            GameManager!.HideCards();
+            WaitContinuePressed = false;
+            GameManager?.HideCards();
+            return;
         }
 
         if (card.IsFound)
