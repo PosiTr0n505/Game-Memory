@@ -131,6 +131,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 var player2 = GameManager.Game.Player2;
                 var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
 
+                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+
                 var navigationParameter = new Dictionary<string, object>
                 {
                     { nameof(player1), player1 },
@@ -138,16 +140,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 };
 
                 AppShell.Current.GoToAsync("///", navigationParameter);
-
-                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
-            }
-            if (GameManager.IsGameOver())
-            {
-                var player1 = GameManager.Game.Player1;
-                var player2 = GameManager.Game.Player2;
-                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
-
-                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;
