@@ -10,7 +10,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
-    private bool _waitContinuePressed = false;
 
     private string player1Name;
     public string Player1Name
@@ -64,7 +63,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private bool _waitContinuePressed;
+    private bool _waitContinuePressed = false;
 
     public bool WaitContinuePressed
     {

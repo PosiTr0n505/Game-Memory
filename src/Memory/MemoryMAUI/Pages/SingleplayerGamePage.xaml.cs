@@ -12,7 +12,6 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
-    private bool _waitContinuePressed = false;
 
     private string playerName;
     public string PlayerName
@@ -37,6 +36,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
+    private void InitializeGame()
+    {
+        var player = new Player(PlayerName);
+        GameManager = new GameManager(new Game(player, player, GridSize));
+    }
+
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.ContainsKey("playerName"))
@@ -51,7 +56,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             InitializeGame();
     }
 
-    private bool _waitContinuePressed;
+    private bool _waitContinuePressed = false;
 
     public bool WaitContinuePressed
     {
