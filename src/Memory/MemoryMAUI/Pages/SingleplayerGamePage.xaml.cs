@@ -12,7 +12,6 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
-    private bool _waitContinuePressed = false;
 
     private string playerName;
     public string PlayerName
@@ -37,6 +36,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
+    private void InitializeGame()
+    {
+        var player = new Player(PlayerName);
+        GameManager = new GameManager(new Game(player, player, GridSize));
+    }
+
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.ContainsKey("playerName"))
@@ -51,12 +56,20 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             InitializeGame();
     }
 
-    private void InitializeGame()
+    private bool _waitContinuePressed = false;
+
+    public bool WaitContinuePressed
     {
-        var player = new Player(PlayerName);
-        GameManager = new GameManager(new Game(player, player, GridSize));
+        get => _waitContinuePressed;
+
+        set
+        {
+            _waitContinuePressed = value;
+            OnPropertyChanged();
+        }
     }
 
+    private readonly Player _player;
 
 
     public SingleplayerGamePage()
@@ -69,17 +82,21 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
+        if (!WaitContinuePressed)
+            return;
+
         GameManager.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
-    public void OnCardClicked(Grid sender, Card card)
+    public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
+            WaitContinuePressed = false;
             GameManager.HideCards();
+            return;
         }
 
         if (card.IsFound)
@@ -112,7 +129,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             {
                 GameManager.SwitchPlayers();
             }
-            _waitContinuePressed = true;
+            WaitContinuePressed = true;
             _cardsClickedCount = 0;
         }
     }

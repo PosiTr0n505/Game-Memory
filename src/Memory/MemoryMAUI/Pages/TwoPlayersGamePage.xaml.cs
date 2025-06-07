@@ -10,7 +10,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
-    private bool _waitContinuePressed = false;
 
     private string player1Name;
     public string Player1Name
@@ -52,6 +51,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (query.ContainsKey("player2Name"))
             Player2Name = query["player2Name"] as string;
 
+
         if (query.ContainsKey("gridSize"))
         {
             var gridSizeValue = query["gridSize"];
@@ -60,6 +60,19 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (GridSize != GridSize.None)
         {
             InitializeGame();
+        }
+    }
+
+    private bool _waitContinuePressed = false;
+
+    public bool WaitContinuePressed
+    {
+        get => _waitContinuePressed;
+
+        set
+        {
+            _waitContinuePressed = value;
+            OnPropertyChanged();
         }
     }
 
@@ -74,6 +87,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     {
         InitializeComponent();
         BindingContext = this;
+        WaitContinuePressed = false;
         CardTemplate.OnCardClicked += OnCardClicked;
     }
 
@@ -84,7 +98,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         _waitContinuePressed = false;
     }
 
-    public void OnCardClicked(Grid sender, Card card)
+    public void OnCardClicked(View sender, Card card)
     {
         if (_waitContinuePressed)
         {
