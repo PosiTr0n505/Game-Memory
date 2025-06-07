@@ -1,4 +1,5 @@
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 using MemoryMAUI.Resources.Templates;
 
@@ -58,8 +59,11 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    public SingleplayerGamePage()
+    private readonly IScoreManager _scoreManager;
+
+    public SingleplayerGamePage(IScoreManager scoreManager)
     {
+        _scoreManager = scoreManager;
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
@@ -113,6 +117,10 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             else
             {
                 GameManager.SwitchPlayers();
+            }
+            if (GameManager.IsGameOver())
+            {
+                _scoreManager.SaveScore(new(GameManager.Game.CurrentPlayer, GameManager.Game.CurrentPlayer.MovesCount, GameManager.Game.GridSize));
             }
             WaitContinuePressed = true;
             _cardsClickedCount = 0;

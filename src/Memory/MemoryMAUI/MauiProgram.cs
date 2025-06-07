@@ -2,7 +2,7 @@
 using CommunityToolkit.Maui;
 using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
-using Persistence;
+using MemoryStubPersistence;
 using MemoryMAUI.Pages;
 using MemoryLib.Models;
 
@@ -31,6 +31,7 @@ namespace MemoryMAUI
 
             builder.Services.AddSingleton<ILoadManager, StubLoadManager>();
             builder.Services.AddSingleton<ISaveManager, StubSaveManager>();
+            builder.Services.AddSingleton<IScoreManager, ScoreManager>();
             builder.Services.AddSingleton<LeaderboardPage>();
 
             return builder.Build();

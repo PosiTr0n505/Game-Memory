@@ -1,12 +1,13 @@
 ﻿using MemoryLib.Models;
 using MemoryLib.Managers.Interface;
 
-namespace Persistence
+namespace MemoryStubPersistence
 {
     public class StubSaveManager : ISaveManager
     {
         public void SaveScores(List<Score> scores)
         {
+            // Does nothing because its the STUB
         }
     }
 }

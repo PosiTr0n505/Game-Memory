@@ -6,7 +6,7 @@ using MemoryLib.Models;
 namespace MemoryMAUI.Pages;
 public partial class LeaderboardPage : ContentPage
 {
-    private readonly ScoreManager leaderboard;
+    private readonly IScoreManager leaderboard;
 
     private GridSize? gridSize;
 
@@ -26,6 +26,11 @@ public partial class LeaderboardPage : ContentPage
 
     private void OnGridSizeSelected(object? sender, GridSize? e)
     {
+        if (e is null)
+        {
+            NameTagEntry.Text = "";
+        }
+
         gridSize = e;
 
         var nameTag = NameTagEntry.Text;
@@ -41,9 +46,9 @@ public partial class LeaderboardPage : ContentPage
         ];
     }
 
-    public LeaderboardPage(ILoadManager loader, ISaveManager saver)
+    public LeaderboardPage(IScoreManager scoreManager)
     {
-        leaderboard = new(loader, saver);
+        leaderboard = scoreManager;
         _scoresI = [.. leaderboard.Scores.OrderBy(s => s.ScoreValue)];
         Scores = _scoresI;
 

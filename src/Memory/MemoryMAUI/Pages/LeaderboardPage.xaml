@@ -12,8 +12,7 @@
         ColumnDefinitions="*,3*,*"
         RowDefinitions="120,Auto,Auto,Auto,Auto,*">
 
-        <Button
-                HeightRequest="60"
+        <Button HeightRequest="60"
                 WidthRequest="120"
                 Margin="50,0"
                 HorizontalOptions="Start"
@@ -26,7 +25,6 @@
             Grid.Column="1"/>
 
         <Label
-            Style="{StaticResource LabelUnderline}"
             Text="Leaderboard"
             HorizontalOptions="Center"
             VerticalOptions="Start"
@@ -73,7 +71,7 @@
                     HorizontalTextAlignment="Center"
                     Grid.Column="0"/>
             
-            <Label Text="Score"
+            <Label Text="Moves Count"
                    HorizontalTextAlignment="Center"
                    Grid.Column="1"/>
             

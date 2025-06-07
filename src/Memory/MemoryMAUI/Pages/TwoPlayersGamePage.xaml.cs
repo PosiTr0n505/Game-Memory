@@ -1,7 +1,7 @@
 using MemoryLib.Managers;
 using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
-using Persistence;
+using MemoryStubPersistence;
 
 
 namespace MemoryMAUI.Pages;

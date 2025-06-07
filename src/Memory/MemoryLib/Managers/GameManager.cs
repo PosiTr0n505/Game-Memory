@@ -7,7 +7,7 @@ namespace MemoryLib.Managers
     /// Gère la logique principale du jeu, incluant les mouvements, le retournement des cartes, 
     /// la gestion des tours, et la notification des changements sur le plateau.
     /// </summary>
-    public class GameManager(Game game) : IGameManager
+    public class GameManager : IGameManager
     {
         /// <summary>
         /// Délégué pour notifier les changements sur le plateau.
@@ -30,13 +30,18 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Le modèle de jeu associé à ce gestionnaire.
         /// </summary>
-        public Game Game { get; private init; } = game;
+        public Game Game { get; private init; }
 
+        public GameManager(Game game)
+        {
+            Game = game;
+            _cardManager = new();
+        }
 
         /// <summary>
         /// Incrémente le compteur de mouvements et met à jour le nombre de mouvements du joueur courant.
         /// </summary>
-        private readonly CardManager _cardManager = new();
+        private readonly CardManager _cardManager;
 
         public void IncrementMoves()
         {
@@ -55,7 +60,7 @@ namespace MemoryLib.Managers
             var card = Game.Grid.GetCard(x, y);
 
             if (card == null) return;
-            if (card.IsVisible == true) _cardManager.UnFlipCard(card);
+            if (card.IsVisible) _cardManager.UnFlipCard(card);
             else _cardManager.FlipCard(card);
         }
 
