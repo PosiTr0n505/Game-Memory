@@ -35,8 +35,6 @@ namespace MemoryConsole.Display
 
             Console.WriteLine("├──────┼─────────────────┼─────────┼──────────┼───────────────┤");
 
-            var gsm = new GridSizeManager();
-
             // Affichage des scores
             for (int i = 0; i < sortedScores.Count && i < max; i++)
             {

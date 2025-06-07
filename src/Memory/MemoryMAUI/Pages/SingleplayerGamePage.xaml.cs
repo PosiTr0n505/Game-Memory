@@ -1,9 +1,7 @@
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using MemoryMAUI.Converters;
 using MemoryMAUI.Resources.Templates;
-using Persistence;
-using System.Diagnostics;
 
 
 namespace MemoryMAUI.Pages;
@@ -13,20 +11,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
 
-    private string playerName;
-    public string PlayerName
-    {
-        get => playerName;
-        set
-        {
-            playerName = value;
-        }
-    }
+    public string? PlayerName { get; set; }
 
     public GridSize GridSize { get; set; }
 
-    private GameManager _gameManager;
-    public GameManager GameManager
+    private GameManager? _gameManager;
+    public GameManager? GameManager
     {
         get => _gameManager;
         private set
@@ -44,12 +34,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.ContainsKey("playerName"))
-            PlayerName = query["playerName"] as string;
+        if (query.TryGetValue("playerName", out var value))
+            PlayerName = value as string;
 
-        if (query.ContainsKey("gridSize"))
+        if (query.TryGetValue("gridSize", out value))
         {
-            var gridSizeValue = query["gridSize"];
+            var gridSizeValue = value;
             GridSize = (GridSize)gridSizeValue;
         }
         if (GridSize != GridSize.None)
@@ -69,15 +59,14 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private readonly Player _player;
+    private readonly IScoreManager _scoreManager;
 
-
-    public SingleplayerGamePage()
+    public SingleplayerGamePage(IScoreManager scoreManager)
     {
+        _scoreManager = scoreManager;
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
-
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
@@ -85,13 +74,18 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         if (!WaitContinuePressed)
             return;
 
-        GameManager.HideCards();
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
         WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
     {
+        if (GameManager is null)
+        {
+            return;
+        }
+
         if (WaitContinuePressed)
         {
             WaitContinuePressed = false;
@@ -128,6 +122,11 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             else
             {
                 GameManager.SwitchPlayers();
+            }
+            if (GameManager.IsGameOver())
+            {
+                var player = GameManager.Game.CurrentPlayer;
+                _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
             }
             WaitContinuePressed = true;
             _cardsClickedCount = 0;

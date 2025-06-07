@@ -12,6 +12,8 @@ namespace MemoryLib.Managers.Interface
     /// </summary>
     public interface IScoreManager
     {
+        public IEnumerable<Score> Scores { get; }
+
         /// <summary>
         /// Updates the score value if the provided value is greater than the current score.
         /// </summary>

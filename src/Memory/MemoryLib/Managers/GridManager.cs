@@ -41,14 +41,12 @@ namespace MemoryLib.Managers
 
         private static readonly Random rand = new();
 
-        private readonly List<Card> _cardsList;
-
         /// <summary>
         /// Initialise une nouvelle instance de la grille avec les dimensions spécifiées.
         /// </summary>
         private void InitializeGrid()
         {
-            List<CardType> types = [.. Enum.GetValues<CardType>().Cast<CardType>()];
+            List<CardType> types = [.. Enum.GetValues<CardType>()];
 
             int CardSlotCount = X * Y;
 
@@ -78,8 +76,11 @@ namespace MemoryLib.Managers
         /// <param name="y">Le nombre de colonnes de la grille.</param>
         public GridManager(int x, int y) 
         {
+            List<Card> _cardsList;
+
             X = x;
             Y = y;
+
             _cards = new Card[x, y];
             InitializeGrid();
             _cardsList = [.. _cards];
@@ -153,7 +154,6 @@ namespace MemoryLib.Managers
         /// Retourne la carte spécifiée face cachée si elle est face visible.
         /// </summary>
         /// <param name="card">La carte à retourner face cachée.</param>
-
         public void UnFlipCard(Card card)
         {
             foreach (var c in _cards)

@@ -1,6 +1,6 @@
 ﻿using MemoryLib.Managers;
 using MemoryLib.Models;
-using Persistence;
+using MemoryStubPersistence;
 
 namespace Tests
 {
