@@ -70,6 +70,23 @@ public partial class TwoPlayersGamePage : ContentPage
             {
                 GameManager.SwitchPlayers();
             }
+	    
+            if (GameManager.IsGameOver())
+            {
+                var player1 = GameManager.Game.Player1;
+                var player2 = GameManager.Game.Player2;
+                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player1), player1 },
+                    { nameof(player2), player2 }
+                };
+
+                AppShell.Current.GoToAsync("///", navigationParameter);
+
+                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+            }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;
         }
