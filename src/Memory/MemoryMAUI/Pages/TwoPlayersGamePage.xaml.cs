@@ -5,29 +5,84 @@ using Persistence;
 
 
 namespace MemoryMAUI.Pages;
-
-public partial class TwoPlayersGamePage : ContentPage
+public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
-
     private Card? _card2 = null;
-
     private int _cardsClickedCount = 0;
+    private bool _waitContinuePressed = false;
+
+    private string player1Name;
+    public string Player1Name
+    {
+        get => player1Name;
+        set
+        {
+            player1Name = value;
+        }
+    }
+
+    private string player2Name;
+    public string Player2Name
+    {
+        get => player2Name;
+        set
+        {
+            player2Name = value;
+        }
+    }
+
+    public GridSize GridSize { get; set; }
+
+    private GameManager _gameManager;
+    public GameManager GameManager
+    {
+        get => _gameManager;
+        private set
+        {
+            _gameManager = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.ContainsKey("player1Name"))
+            Player1Name = query["player1Name"] as string;
+        if (query.ContainsKey("player2Name"))
+            Player2Name = query["player2Name"] as string;
+
+
+        if (query.ContainsKey("gridSize"))
+        {
+            var gridSizeValue = query["gridSize"];
+            GridSize = (GridSize)gridSizeValue;
+        }
+        if (GridSize != GridSize.None)
+        {
+            InitializeGame();
+        }
+    }
 
     private bool _waitContinuePressed;
 
-    public bool WaitContinuePressed 
+    public bool WaitContinuePressed
     {
         get => _waitContinuePressed;
 
-        set 
+        set
         {
             _waitContinuePressed = value;
             OnPropertyChanged();
         }
     }
 
-    public GameManager GameManager { get; } = new(new Game("Player1", "Player2", GridSize.Size2));
+    private void InitializeGame()
+    {
+        var player1 = new Player(Player1Name);
+        var player2 = new Player(Player2Name);
+        GameManager = new GameManager(new Game(player1, player2, GridSize));
+    }
 
     public TwoPlayersGamePage()
     {

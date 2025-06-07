@@ -6,6 +6,7 @@ namespace MemoryLib.Models
     /// </summary>
     public enum GridSize
     {
+        None = 0,
         Size1,
         Size2,
         Size3,
