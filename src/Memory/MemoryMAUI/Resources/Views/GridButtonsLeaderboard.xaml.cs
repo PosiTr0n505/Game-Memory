@@ -5,6 +5,8 @@ namespace MemoryMAUI.Resources.Views;
 
 public partial class GridButtons : ContentView
 {
+    private Button? _selectedButton;
+
     public delegate void GridSizeSelectedEventHandler(object? sender, GridSize? gridSize);
 
     public event GridSizeSelectedEventHandler? GridSizeSelected;
@@ -27,6 +29,13 @@ public partial class GridButtons : ContentView
 
         if (sender is Button button && button.BindingContext is GridSize selectedSize)
         {
+            if (_selectedButton != null)
+            {
+                var primaryColor = (Color)Application.Current.Resources["PrimaryDark"];
+                _selectedButton.BackgroundColor = primaryColor;
+            }
+            button.BackgroundColor = Colors.DarkGreen;
+            _selectedButton = button;
             GridSizeSelected?.Invoke(this, selectedSize);
         }
 

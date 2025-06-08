@@ -32,7 +32,10 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         var player = new Player(PlayerName);
         GameManager = new GameManager(new Game(player, player, GridSize));
     }
-
+    private async void NavigateToMainMenu(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("playerName", out var value))
