@@ -142,6 +142,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
                 _scoreManager.SaveScore(new(winner, winner.MovesCount, GameManager.Game.GridSize));
 
+                player1.IncrementGamesPlayed();
+                player2.IncrementGamesPlayed();
+
                 var navigationParameter = new Dictionary<string, object>
                 {
                     { nameof(player1), player1 },

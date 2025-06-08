@@ -9,6 +9,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
     private Card? _card2 = null;
+
     private int _cardsClickedCount = 0;
 
     public string? PlayerName { get; set; }
@@ -130,13 +131,14 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             if (GameManager.IsGameOver())
             {
                 var player = GameManager.Game.CurrentPlayer;
-
+                
                 _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
 
                 var navigationParameter = new Dictionary<string, object>
                 {
                     { nameof(player), player }
                 };
+
                 CardTemplate.OnCardClicked -= OnCardClicked;
                 Shell.Current.GoToAsync("endgamesingleplayerscreenpage", navigationParameter);
             }

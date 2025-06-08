@@ -4,6 +4,9 @@ using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
 using MemoryStubPersistence;
 using MemoryMAUI.Pages;
+using MemoryLib.Models;
+using MemoryJSONPersistence;
+using MemoryXMLPersistence;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MemoryMAUI

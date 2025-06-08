@@ -48,6 +48,11 @@ namespace MemoryLib.Managers
             _saver.SaveScores(_scores);
         }
 
+        public void SaveScores()
+        {
+            _saver.SaveScores(_scores);
+        }
+
         /// <summary>
         /// Ajoute un score à la liste des scores du tableau.
         /// </summary>
