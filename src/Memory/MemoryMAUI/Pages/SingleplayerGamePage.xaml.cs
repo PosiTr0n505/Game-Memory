@@ -122,7 +122,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             else
             {
                 GameManager.SwitchPlayers();
-                _waitContinuePressed = true;
+                WaitContinuePressed = true;
             }
             if (GameManager.IsGameOver())
             {
