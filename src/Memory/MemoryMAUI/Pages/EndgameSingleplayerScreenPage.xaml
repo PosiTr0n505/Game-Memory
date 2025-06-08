@@ -43,7 +43,8 @@
                     Text="Back to Main Menu"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    Clicked="NavigateToMainMenu"/>
+                    Clicked="NavigateToMainMenu"
+                    Margin="20"/>
 
             </FlexLayout>
 
