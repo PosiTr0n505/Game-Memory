@@ -109,7 +109,6 @@ dotnet run --project src/Memory/MemoryMAUI/MemoryMAUI.csproj
 ## 🗂️ Categories
 
 * 🎮 **Game**
-* 📱 **Mobile App**
 * 🧠 **Puzzle**
 * 👨‍🏫 **Educational**
 * 🧪 **Project SAE**
