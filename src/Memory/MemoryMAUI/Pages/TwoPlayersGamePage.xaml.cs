@@ -28,7 +28,10 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             OnPropertyChanged();
         }
     }
-
+    private async void NavigateToMainMenu(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("player1Name", out object? value) && value is string player1NameValue)
