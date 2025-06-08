@@ -125,10 +125,18 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             }
             if (GameManager.IsGameOver())
             {
-                var player = GameManager.Game.CurrentPlayer;
-                _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
+                var player = GameManager.Game.Player1;
+
+                var navigationParameter = new Dictionary<string, object>
+            {
+                { nameof(player), player }
+            };
+
+                Shell.Current.GoToAsync("///endgamesingleplayerscreenpage", navigationParameter);
+                return;
             }
-            WaitContinuePressed = true;
+
+            _waitContinuePressed = true;
             _cardsClickedCount = 0;
         }
     }
