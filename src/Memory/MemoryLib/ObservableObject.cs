@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace MemoryLib
 {
+    [DataContract]
     public abstract class ObservableObject : INotifyPropertyChanged
     {
+        [IgnoreDataMember]
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null!)

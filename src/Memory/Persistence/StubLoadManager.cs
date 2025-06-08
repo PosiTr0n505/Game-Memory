@@ -2,7 +2,7 @@
 
 using MemoryLib.Managers.Interface;
 
-namespace Persistence
+namespace MemoryStubPersistence
 {
     public class StubLoadManager : ILoadManager
     {

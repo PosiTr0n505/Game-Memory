@@ -47,9 +47,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.ContainsKey("player1Name"))
-            Player1Name = query["player1Name"] as string;
+            Player1Name = (string)query["player1Name"];
         if (query.ContainsKey("player2Name"))
-            Player2Name = query["player2Name"] as string;
+            Player2Name = (string)query["player2Name"];
 
 
         if (query.ContainsKey("gridSize"))

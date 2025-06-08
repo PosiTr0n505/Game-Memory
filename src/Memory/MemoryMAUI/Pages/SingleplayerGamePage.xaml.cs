@@ -1,4 +1,5 @@
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 using MemoryMAUI.Converters;
 using MemoryMAUI.Resources.Templates;
@@ -12,6 +13,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
+    private readonly ISaveManager _saver;
 
     private string playerName;
     public string PlayerName
@@ -45,7 +47,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.ContainsKey("playerName"))
-            PlayerName = query["playerName"] as string;
+            PlayerName = (string)query["playerName"];
 
         if (query.ContainsKey("gridSize"))
         {
@@ -77,8 +79,31 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
-
+        _saver = App.Current.Handler.MauiContext.Services.GetService<ISaveManager>()!;
     }
+
+    private void SaveGameScore()
+    {
+        try
+        {
+            var player = GameManager.Game.CurrentPlayer;
+
+            var score = new Score(
+                player,
+                player.CurrentScore,
+                GridSize,
+                player.GamesPlayed
+            );
+
+            _saver.SaveScores([score]);
+            Console.WriteLine("Score saved successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error while saving score: " + ex);
+        }
+    }
+
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
@@ -124,6 +149,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
                 _card2.IsFound = true;
                 GameManager.Game.CurrentPlayer.Add1ToScore();
                 GameManager.Game.ReduceCountByOnePair();
+                if (GameManager.Game.IsGameOver())
+                {
+                    GameManager.Game.CurrentPlayer.IncrementGamesPlayed();
+                    SaveGameScore();
+                    return;
+                }
             }
             else
             {

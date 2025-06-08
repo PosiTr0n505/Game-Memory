@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace MemoryLib.Models
 {
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
+    [DataContract(Name = "Player")]
     public class Player : ObservableObject, IEquatable<Player>
     {
 
@@ -21,9 +23,13 @@ namespace MemoryLib.Models
             MovesCount = 0;
             CurrentScore = 0;
         }
+
+        private Player() => NameTag = "Temp";
+
         /// <summary>
         /// Obtient le nom du joueur.
         /// </summary>
+        [DataMember(Order = 1)]
         public string NameTag { get; init; }
 
         private int _currentScore;
@@ -55,6 +61,25 @@ namespace MemoryLib.Models
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Nombre de jeux joués par le joueur.
+        /// </summary>
+        private int _gamesPlayed = 0;
+        public int GamesPlayed
+        {
+            get => _gamesPlayed;
+            private set
+            {
+                _gamesPlayed = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Ajoute 1 au nombres de jeux joués par le joueur.
+        /// </summary>
+        public void IncrementGamesPlayed() => GamesPlayed++;
 
         /// <summary>
         /// Ajoute 1 au score actuel du joueur.

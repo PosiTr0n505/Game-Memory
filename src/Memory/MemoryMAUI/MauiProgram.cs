@@ -5,6 +5,8 @@ using MemoryLib.Managers.Interface;
 using Persistence;
 using MemoryMAUI.Pages;
 using MemoryLib.Models;
+using MemoryJSONPersistence;
+using MemoryXMLPersistence;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MemoryMAUI
@@ -29,9 +31,19 @@ namespace MemoryMAUI
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddSingleton<ILoadManager, StubLoadManager>();
-            builder.Services.AddSingleton<ISaveManager, StubSaveManager>();
+        #if USE_JSON
+            var saveFilePath = Path.Combine(FileSystem.AppDataDirectory, "scores.json");
+            builder.Services.AddSingleton<ILoadManager>(_ => new JsonLoadManager(saveFilePath));
+            builder.Services.AddSingleton<ISaveManager>(_ => new JsonSaveManager(saveFilePath));
+        #else
+            var saveFilePath = Path.Combine(FileSystem.AppDataDirectory, "scores.xml");
+            builder.Services.AddSingleton<ILoadManager>(_ => new XmlLoadManager(saveFilePath));
+            builder.Services.AddSingleton<ISaveManager>(_ => new XmlSaveManager(saveFilePath));
+        #endif
+
+
             builder.Services.AddSingleton<LeaderboardPage>();
+            builder.Services.AddTransient<SingleplayerGamePage>();
 
             return builder.Build();
         }
