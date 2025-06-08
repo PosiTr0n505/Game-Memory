@@ -44,8 +44,13 @@ dotnet restore
 ```sh
 dotnet build src/Memory/Memory.sln
 ```
+4. **Publish the projet**
 
-4. **Run the application**
+```sh
+dotnet publish -f net9.0-windows10.0.19041.0 -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -p:UseMonoRuntime=false -p:WindowsPackageType=None
+```
+
+5. **Run the application**
 
 ```sh
 dotnet run --project src/Memory/Memory.sln
