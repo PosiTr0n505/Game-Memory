@@ -42,7 +42,7 @@ dotnet restore
 3. **Build the project**
 
 ```sh
-dotnet build
+dotnet build src/Memory/Memory.sln
 ```
 
 4. **Run the application**
