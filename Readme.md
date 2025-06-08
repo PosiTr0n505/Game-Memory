@@ -1,5 +1,4 @@
-
-[![Build Status](https://codefirst.iut.uca.fr/api/badges/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory/status.svg?ref=refs/heads/master)](https://codefirst.iut.uca.fr/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory)
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory/status.svg?ref=refs/heads/116-enhanceui)](https://codefirst.iut.uca.fr/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory)
 [![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=alert_status&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
 [![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=code_smells&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
 [![Duplicated Lines (%)](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=duplicated_lines_density&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
