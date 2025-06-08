@@ -28,7 +28,10 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             OnPropertyChanged();
         }
     }
-
+    private async void NavigateToMainMenu(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("player1Name", out object? value) && value is string player1NameValue)
@@ -68,9 +71,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         GameManager = new GameManager(new Game(player1, player2, GridSize));
     }
 
-    private readonly IScoreManager _scoreManager;
+    private readonly ScoreManager _scoreManager;
 
-    public TwoPlayersGamePage(IScoreManager scoreManager)
+    public TwoPlayersGamePage(ScoreManager scoreManager)
     {
         _scoreManager = scoreManager;
         InitializeComponent();
@@ -81,17 +84,21 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager!.HideCards();
+        if (!WaitContinuePressed)
+            return;
+
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
-            GameManager!.HideCards();
+            WaitContinuePressed = false;
+            GameManager?.HideCards();
+            return;
         }
 
         if (card.IsFound)
@@ -122,17 +129,31 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             }
             else 
             {
+                _waitContinuePressed = true;
                 GameManager.SwitchPlayers();
             }
+	    
             if (GameManager.IsGameOver())
             {
                 var player1 = GameManager.Game.Player1;
                 var player2 = GameManager.Game.Player2;
-                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
 
-                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+                var winner = (player1.CurrentScore > player2.CurrentScore) ? player1 : player2;
+
+                _scoreManager.SaveScore(new(winner, winner.MovesCount, GameManager.Game.GridSize));
+
+                player1.IncrementGamesPlayed();
+                player2.IncrementGamesPlayed();
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player1), player1 },
+                    { nameof(player2), player2 }
+                };
+                CardTemplate.OnCardClicked -= OnCardClicked;
+                Shell.Current.GoToAsync("endgametwoplayersscreenpage", navigationParameter);
             }
-            _waitContinuePressed = true;
+
             _cardsClickedCount = 0;
         }
     }

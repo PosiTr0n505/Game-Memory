@@ -55,7 +55,14 @@ public partial class TwoPlayersView : ContentView
             return;
         }
 
+        if (player1Name.Equals(player2Name))
+        {
+            await mainPage.DisplayAlert("Alert", "Player 1's Name Tag and Player 2's Name Tag cannot be equal", "Ok");
+            return;
+        }
+
         var gridSize = Gsize;
+
         if (gridSize == GridSize.None)
         {
             await mainPage.DisplayAlert("Alert", "Please select a grid size", "Ok");
@@ -68,6 +75,6 @@ public partial class TwoPlayersView : ContentView
             { "player2Name", player2Name },
             { "gridSize", gridSize }
         };
-        await Shell.Current.GoToAsync("///twoplayersgamepage", navigationParameter);
+        await Shell.Current.GoToAsync("twoplayersgamepage", navigationParameter);
     }
 }

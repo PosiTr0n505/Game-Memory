@@ -1,4 +1,5 @@
 ﻿using MemoryLib.Managers.Interface;
+using System.Runtime.Serialization;
 namespace MemoryLib.Models
 {
     /// <summary>
@@ -22,6 +23,7 @@ namespace MemoryLib.Models
             GamesPlayed = gp;
         }
 
+        private Score() : this(new Player("Temp"), 0, GridSize.Size1, 0) { }
         /// <summary>
         /// Obtient le joueur associé à ce score.
         /// </summary>

@@ -15,6 +15,13 @@
     <Grid RowDefinitions="Auto,4*,*"
           ColumnDefinitions="*,4*,*">
 
+        <Button
+                    Text="Back to Main Menu"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Clicked="NavigateToMainMenu"
+                    WidthRequest="150"/>
+
         <Grid Grid.Column="1"
               Grid.Row="0"
               HorizontalOptions="Center"
@@ -61,8 +68,6 @@
               Grid.Row="1"
               HorizontalOptions="Center"
               VerticalOptions="Center">
-
-            
 
         </Grid>
 

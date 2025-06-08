@@ -9,6 +9,10 @@ namespace MemoryLib.Managers
     /// </summary>
     public class ScoreManager : IScoreManager
     {
+        public delegate void ScoresAddedEventHandler();
+
+        public event ScoresAddedEventHandler? ScoresAdded;
+
         /// <summary>
         /// Liste interne des scores enregistrés.
         /// </summary>
@@ -40,6 +44,11 @@ namespace MemoryLib.Managers
         /// Destructeur de la classe Leaderboard.
         /// </summary>
         ~ScoreManager()
+        {
+            _saver.SaveScores(_scores);
+        }
+
+        public void SaveScores()
         {
             _saver.SaveScores(_scores);
         }
@@ -116,7 +125,21 @@ namespace MemoryLib.Managers
         /// <param name="score"></param>
         public void SaveScore(Score score)
         {
-            _scores.Add(score);
+            Score? s = _scores.FirstOrDefault(s => s.Player.NameTag == score.Player.NameTag);
+
+            if (s is not null)
+            {
+                s.IncrementGamesPlayed();
+                s.ChangeScoreValueIfGreater(score.ScoreValue);
+                ScoresAdded?.Invoke();
+            }
+
+            else
+            {
+                _scores.Add(score);
+                ScoresAdded?.Invoke();
+            }
+                
         }
     }
 }

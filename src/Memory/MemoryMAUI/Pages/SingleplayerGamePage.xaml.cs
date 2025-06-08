@@ -9,6 +9,7 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 {
     private Card? _card1 = null;
     private Card? _card2 = null;
+
     private int _cardsClickedCount = 0;
 
     public string? PlayerName { get; set; }
@@ -31,7 +32,10 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         var player = new Player(PlayerName);
         GameManager = new GameManager(new Game(player, player, GridSize));
     }
-
+    private async void NavigateToMainMenu(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///mainpage");
+    }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("playerName", out var value))
@@ -59,9 +63,9 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private readonly IScoreManager _scoreManager;
+    private readonly ScoreManager _scoreManager;
 
-    public SingleplayerGamePage(IScoreManager scoreManager)
+    public SingleplayerGamePage(ScoreManager scoreManager)
     {
         _scoreManager = scoreManager;
         InitializeComponent();
@@ -122,13 +126,23 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             else
             {
                 GameManager.SwitchPlayers();
+                WaitContinuePressed = true;
             }
             if (GameManager.IsGameOver())
             {
                 var player = GameManager.Game.CurrentPlayer;
+                
                 _scoreManager.SaveScore(new(player, player.MovesCount, GameManager.Game.GridSize));
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player), player }
+                };
+
+                CardTemplate.OnCardClicked -= OnCardClicked;
+                Shell.Current.GoToAsync("endgamesingleplayerscreenpage", navigationParameter);
             }
-            WaitContinuePressed = true;
+            
             _cardsClickedCount = 0;
         }
     }
