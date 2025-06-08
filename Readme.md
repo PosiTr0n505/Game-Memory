@@ -48,7 +48,7 @@ dotnet build src/Memory/Memory.sln
 4. **Run the application**
 
 ```sh
-dotnet run --project src/Memory/MemoryMAUI/MemoryMAUI.csproj
+dotnet run --project src/Memory/Memory.sln
 ```
 ---
 
