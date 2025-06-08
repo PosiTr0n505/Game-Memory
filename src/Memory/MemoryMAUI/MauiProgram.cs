@@ -32,14 +32,19 @@ namespace MemoryMAUI
 #endif
 
         #if USE_JSON
-            var saveFilePath = Path.Combine(FileSystem.AppDataDirectory, "scores.json");
-            builder.Services.AddSingleton<ILoadManager>(_ => new JsonLoadManager(saveFilePath));
-            builder.Services.AddSingleton<ISaveManager>(_ => new JsonSaveManager(saveFilePath));
-        #else
-            var saveFilePath = Path.Combine(FileSystem.AppDataDirectory, "scores.xml");
-            builder.Services.AddSingleton<ILoadManager>(_ => new XmlLoadManager(saveFilePath));
-            builder.Services.AddSingleton<ISaveManager>(_ => new XmlSaveManager(saveFilePath));
-        #endif
+
+            builder.Services.AddSingleton<ILoadManager>(s =>
+                new JsonLoadManager(Path.Combine(FileSystem.AppDataDirectory, "scores.json")));
+
+            builder.Services.AddSingleton<ISaveManager>(s =>
+                new JsonSaveManager(Path.Combine(FileSystem.AppDataDirectory, "scores.json")));
+#else
+            string savePath = Path.Combine(FileSystem.AppDataDirectory, "scores.xml");
+
+            builder.Services.AddSingleton<ILoadManager>(_ => new XmlLoadManager(savePath));
+            builder.Services.AddSingleton<ISaveManager>(_ => new XmlSaveManager(savePath));
+#endif
+
 
 
             builder.Services.AddSingleton<LeaderboardPage>();

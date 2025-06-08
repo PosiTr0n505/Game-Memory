@@ -1,7 +1,9 @@
-﻿using MemoryLib.Managers.Interface;
+﻿using MemoryLib;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using System.Runtime.Serialization.Json;
 using Microsoft.VisualBasic;
+using System.ComponentModel.Design.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace MemoryJSONPersistence
 {
@@ -17,19 +19,19 @@ namespace MemoryJSONPersistence
 
         public void SaveScores(List<Score> newScores)
         {
-            var serializer = new DataContractJsonSerializer(typeof(List<Score>), new DataContractJsonSerializerSettings
+            var serializer = new DataContractJsonSerializer(typeof(List<SerializableScore>), new DataContractJsonSerializerSettings
             {
                 UseSimpleDictionaryFormat = true
             });
 
-            List<Score> finalScores = [];
+            List<SerializableScore> finalScores = [];
 
             if (File.Exists(_saveFile))
             {
                 using FileStream readStream = File.OpenRead(_saveFile);
                 try
                 {
-                    finalScores = serializer.ReadObject(readStream) as List<Score> ?? [];
+                    finalScores = serializer.ReadObject(readStream) as List<SerializableScore> ?? [];
                 }
                 catch
                 {
@@ -39,20 +41,27 @@ namespace MemoryJSONPersistence
 
             foreach (var newScore in newScores)
             {
-                var existing = finalScores.FirstOrDefault(s =>
-                    s.Player.Equals(newScore.Player) &&
-                    s.GridSize == newScore.GridSize);
-
-                if (existing == null || newScore.ScoreValue > existing.ScoreValue)
+                var dto = new SerializableScore
                 {
-                    finalScores.Remove(existing);
-                    finalScores.Add(newScore);
+                    NameTag = newScore.Player.NameTag,
+                    ScoreValue = newScore.ScoreValue,
+                    GridSize = newScore.GridSize,
+                    GamesPlayed = newScore.GamesPlayed
+                };
+
+                var existing = finalScores.FirstOrDefault(s =>
+                    s.NameTag == dto.NameTag &&
+                    s.GridSize == dto.GridSize);
+
+                if (existing == null || dto.ScoreValue > existing.ScoreValue)
+                {
+                    if (existing != null) finalScores.Remove(existing);
+                    finalScores.Add(dto);
                 }
             }
 
             using FileStream writeStream = File.Create(_saveFile);
             serializer.WriteObject(writeStream, finalScores);
-            Console.WriteLine("Saving to: " + _saveFile);
         }
     }
 }

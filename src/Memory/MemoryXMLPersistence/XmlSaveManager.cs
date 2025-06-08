@@ -1,4 +1,5 @@
-﻿using MemoryLib.Managers.Interface;
+﻿using MemoryLib;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -16,19 +17,19 @@ namespace MemoryXMLPersistence
 
         public void SaveScores(List<Score> newScores)
         {
-            var serializer = new DataContractSerializer(typeof(List<Score>), new DataContractSerializerSettings
+            var serializer = new DataContractSerializer(typeof(List<SerializableScore>), new DataContractSerializerSettings
             {
                 PreserveObjectReferences = true
             });
 
-            List<Score> finalScores = [];
+            List<SerializableScore> finalScores = [];
 
             if (File.Exists(_saveFile))
             {
                 using FileStream readStream = File.OpenRead(_saveFile);
                 try
                 {
-                    finalScores = serializer.ReadObject(readStream) as List<Score> ?? [];
+                    finalScores = serializer.ReadObject(readStream) as List<SerializableScore> ?? [];
                 }
                 catch
                 {
@@ -38,14 +39,22 @@ namespace MemoryXMLPersistence
 
             foreach (var newScore in newScores)
             {
-                var existing = finalScores.FirstOrDefault(s =>
-                    s.Player.Equals(newScore.Player) &&
-                    s.GridSize == newScore.GridSize);
-
-                if (existing == null || newScore.ScoreValue > existing.ScoreValue)
+                var dto = new SerializableScore
                 {
-                    finalScores.Remove(existing);
-                    finalScores.Add(newScore);
+                    NameTag = newScore.Player.NameTag,
+                    ScoreValue = newScore.ScoreValue,
+                    GridSize = newScore.GridSize,
+                    GamesPlayed = newScore.GamesPlayed
+                };
+
+                var existing = finalScores.FirstOrDefault(s =>
+                    s.NameTag == dto.NameTag &&
+                    s.GridSize == dto.GridSize);
+
+                if (existing == null || dto.ScoreValue > existing.ScoreValue)
+                {
+                    if (existing != null) finalScores.Remove(existing);
+                    finalScores.Add(dto);
                 }
             }
 

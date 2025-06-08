@@ -13,32 +13,27 @@ namespace MemoryLib.Models
     /// <param name="scoreValue">La valeur du score.</param>
     /// <param name="gs">La taille de la grille associée au score.</param>
     /// <param name="gp">Le nombre de jeux joués (par défaut à 0).</param>
-    [DataContract(Name = "Score")]
     public sealed class Score(Player p, int scoreValue, GridSize gs, int gp = 0) : IEquatable<Score>
     {
         private Score() : this(new Player("Temp"), 0, GridSize.Size1, 0) { }
         /// <summary>
         /// Obtient le joueur associé à ce score.
         /// </summary>
-        [DataMember(Order = 0)]
         public Player Player { get; } = p;
 
         /// <summary>
         /// Obtient ou définit la valeur du score.
         /// </summary>
-        [DataMember(Order = 1)]
         public int ScoreValue { get; private set; } = scoreValue;
 
         /// <summary>
         /// Obtient la taille de la grille associée à ce score.
         /// </summary>
-        [DataMember(Order = 2)]
         public GridSize GridSize { get; } = gs;
 
         /// <summary>
         /// Obtient ou définit le nombre de jeux joués par le joueur.
         /// </summary>
-        [DataMember(Order = 3)]
         public int GamesPlayed { get; private set; } = gp;
 
         /// <summary>
