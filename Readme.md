@@ -20,9 +20,38 @@ Use your memory to match them up!
 
 ## 🚀 Installation
 
-Install our project with:
+## Prerequisites
 
-...
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) installed
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) with the **.NET MAUI** workload enabled
+- (Optional) An Android/iOS emulator or a physical device for mobile testing
+
+## Installation Steps
+
+1. **Clone the repository**
+
+```sh
+git clone https://codefirst.iut.uca.fr/git/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory.git
+cd SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory
+```
+2. **Open the project**
+
+   - Open the project folder in Visual Studio 2022.
+
+3. **Restore dependencies**
+
+   - Visual Studio will automatically restore NuGet packages when opening the project.
+   - Alternatively, you can run:
+```sh
+dotnet restore
+``` 
+
+4. **Run the application**
+
+   - Select the target platform (Android, Windows, iOS, MacCatalyst) in Visual Studio.
+   - Click **Start** or press `F5`.
+
+---
 
 > 🛠 Make sure .NET MAUI is properly installed and configured on your system.
 
@@ -67,6 +96,8 @@ Install our project with:
 ## Acknowledgements
 
 * 🧑‍💻 PICHOT-MOISE Matheo
+
+---
 
 ## 🐞 Known Issues
 
