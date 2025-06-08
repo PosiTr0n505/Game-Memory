@@ -58,12 +58,21 @@
                 Grid.ColumnSpan="3"
                 AlignItems="Center"
                 JustifyContent="Center">
+
+                <ImageButton Style="{StaticResource ThemesBtn}"
+             Source="eldenringhiddencard.png"
+             Clicked="EldenRingButtonClicked"/>
+
+                <ImageButton Style="{StaticResource ThemesBtn}"
+                             Source="pokemonhiddencard.png"
+                             Clicked="PokemonButtonClicked"/>
+
                 <Button Style="{StaticResource ThemesBtn}"
-                    Text="Thème 1 :&#x0a; (Image)"></Button>
-                <Button Style="{StaticResource ThemesBtn}"
-                    Text="Thème 2 :&#x0a; (Image)"></Button>
-                <Button Style="{StaticResource ThemesBtn}"
-                    Text="Thème 3 :&#x0a; (Image)"></Button>
+                        Text="Custom Theme"
+                        WidthRequest="150"
+                        BackgroundColor="Transparent"
+                        Clicked="CustomThemeButtonClicked"/>
+
             </FlexLayout>
             
             <Button 

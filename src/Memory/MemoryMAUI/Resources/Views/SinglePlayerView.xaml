@@ -42,23 +42,35 @@
                 <views:GridSizes x:Name="GridSizes" />
 
             </FlexLayout>
+            
             <Label Style="{StaticResource LabelBold}"
-             VerticalOptions="Center"
-             Grid.Row="3"
-             Grid.RowSpan="2"
-             Text="Themes"/>
+                VerticalOptions="Center"
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                Text="Themes"/>
+            
             <FlexLayout
-             Grid.Row="3"
-             Grid.RowSpan="2"
-             Grid.Column="1"
-             Grid.ColumnSpan="5">
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="5">
+
+                <ImageButton Style="{StaticResource ThemesBtn}"
+                             Source="eldenringhiddencard.png"
+                             Clicked="EldenRingButtonClicked"/>
+
+                <ImageButton Style="{StaticResource ThemesBtn}"
+                             Source="pokemonhiddencard.png"
+                             Clicked="PokemonButtonClicked"/>
+
                 <Button Style="{StaticResource ThemesBtn}"
-                 Text="Thème 1 :&#x0a; (Image)"></Button>
-                <Button Style="{StaticResource ThemesBtn}"
-                 Text="Thème 2 :&#x0a; (Image)"></Button>
-                <Button Style="{StaticResource ThemesBtn}"
-                 Text="Thème 3 :&#x0a; (Image)"></Button>
+                        Text="Custom Theme"
+                        WidthRequest="150"
+                        BackgroundColor="Transparent"
+                        Clicked="CustomThemeButtonClicked"/>
+
             </FlexLayout>
+            
             <Button
              BorderColor="Gray"
              BackgroundColor="Blue"
