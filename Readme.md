@@ -1,4 +1,15 @@
 
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory/status.svg)](https://codefirst.iut.uca.fr/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory)
+[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=alert_status&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=your-org_memory-game&metric=code_smells)
+[![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=code_smells&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Duplicated Lines (%)](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=duplicated_lines_density&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Lines of Code](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=ncloc&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Maintainability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=sqale_rating&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Reliability Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=reliability_rating&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Security Rating](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=security_rating&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+[![Vulnerabilities](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=vulnerabilities&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
+
+
 # 🧠 Memory Game 
 
 A grid filled with face-down card pairs awaits your discovery.  
