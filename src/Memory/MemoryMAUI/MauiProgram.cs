@@ -28,13 +28,22 @@ namespace MemoryMAUI
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddTransient<SingleplayerGamePage>();
-            builder.Services.AddTransient<TwoPlayersGamePage>();
-
             builder.Services.AddSingleton<ILoadManager, StubLoadManager>();
             builder.Services.AddSingleton<ISaveManager, StubSaveManager>();
             builder.Services.AddSingleton<ScoreManager>();
             builder.Services.AddSingleton<LeaderboardPage>();
+
+            builder.Services.AddTransient<SingleplayerGamePage>();
+            Routing.RegisterRoute("singleplayergamepage", typeof(SingleplayerGamePage));
+
+            builder.Services.AddTransient<TwoPlayersGamePage>();
+            Routing.RegisterRoute("twoplayersgamepage", typeof(TwoPlayersGamePage));
+
+            builder.Services.AddTransient<EndgameSingleplayerScreenPage>();
+            Routing.RegisterRoute("endgamesingleplayerscreenpage", typeof(EndgameSingleplayerScreenPage));
+
+            builder.Services.AddTransient<EndgameTwoPlayersScreenPage>();
+            Routing.RegisterRoute("endgametwoplayersscreenpage", typeof(EndgameTwoPlayersScreenPage));
 
             return builder.Build();
         }

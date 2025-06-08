@@ -16,28 +16,9 @@
         Route="mainpage"/>
 
     <ShellContent
-        ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
-        Title="SingleplayerGamePage" 
-        Route="singleplayergamepage"/>
-
-    <ShellContent
-        ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
-        Title="TwoPlayersGamePage" 
-        Route="twoplayersgamepage"/>
-
-    <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
         Title="LeaderboardPage" 
         Route="leaderboardpage"/>
 
-    <ShellContent
-        ContentTemplate="{DataTemplate pages:EndgameSingleplayerScreenPage}"
-        Title="EndgameSingleplayerScreenPage" 
-        Route="endgamesingleplayerscreenpage"/>
-
-    <ShellContent
-        ContentTemplate="{DataTemplate pages:EndgameTwoPlayersScreenPage}"
-        Title="EndgameTwoPlayersScreenPage" 
-        Route="endgametwoplayersscreenpage"/>
 
 </Shell>

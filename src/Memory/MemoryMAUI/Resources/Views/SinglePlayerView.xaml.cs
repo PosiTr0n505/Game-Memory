@@ -58,7 +58,7 @@ public partial class SinglePlayerView : ContentView
             { "gridSize", gridSize }
         };
 
-        await Shell.Current.GoToAsync("///singleplayergamepage", navigationParameter);
+        await Shell.Current.GoToAsync("singleplayergamepage", navigationParameter);
 
     }
 }

@@ -134,9 +134,8 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
                 {
                     { nameof(player), player }
                 };
-
-                Shell.Current.GoToAsync("///endgamesingleplayerscreenpage", navigationParameter);
-                return;
+                CardTemplate.OnCardClicked -= OnCardClicked;
+                Shell.Current.GoToAsync("endgamesingleplayerscreenpage", navigationParameter);
             }
             
             _cardsClickedCount = 0;

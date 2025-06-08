@@ -68,9 +68,9 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         GameManager = new GameManager(new Game(player1, player2, GridSize));
     }
 
-    private readonly IScoreManager _scoreManager;
+    private readonly ScoreManager _scoreManager;
 
-    public TwoPlayersGamePage(IScoreManager scoreManager)
+    public TwoPlayersGamePage(ScoreManager scoreManager)
     {
         _scoreManager = scoreManager;
         InitializeComponent();
@@ -126,6 +126,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             }
             else 
             {
+                _waitContinuePressed = true;
                 GameManager.SwitchPlayers();
             }
 	    
@@ -134,19 +135,19 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 var player1 = GameManager.Game.Player1;
                 var player2 = GameManager.Game.Player2;
 
-                _scoreManager.SaveScore(new(player1, player1.MovesCount, GameManager.Game.GridSize));
+                var winner = (player1.CurrentScore > player2.CurrentScore) ? player1 : player2;
 
-                _scoreManager.SaveScore(new(player2, player2.MovesCount, GameManager.Game.GridSize));
+                _scoreManager.SaveScore(new(winner, winner.MovesCount, GameManager.Game.GridSize));
 
                 var navigationParameter = new Dictionary<string, object>
                 {
                     { nameof(player1), player1 },
                     { nameof(player2), player2 }
                 };
-
-                Shell.Current.GoToAsync("///endgametwoplayersscreenpage", navigationParameter);
+                CardTemplate.OnCardClicked -= OnCardClicked;
+                Shell.Current.GoToAsync("endgametwoplayersscreenpage", navigationParameter);
             }
-            _waitContinuePressed = true;
+
             _cardsClickedCount = 0;
         }
     }

@@ -75,6 +75,6 @@ public partial class TwoPlayersView : ContentView
             { "player2Name", player2Name },
             { "gridSize", gridSize }
         };
-        await Shell.Current.GoToAsync("///twoplayersgamepage", navigationParameter);
+        await Shell.Current.GoToAsync("twoplayersgamepage", navigationParameter);
     }
 }
