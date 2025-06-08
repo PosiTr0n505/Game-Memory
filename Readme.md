@@ -1,6 +1,6 @@
 
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory/status.svg)](https://codefirst.iut.uca.fr/2025_SAE_1A/SAE_1A_G7_JABBOUR_HALILOU_PERRIER_Memory)
-[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=alert_status&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=your-org_memory-game&metric=code_smells)
+[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=alert_status&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
 [![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=code_smells&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
 [![Duplicated Lines (%)](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=duplicated_lines_density&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
 [![Lines of Code](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=MemoryDotnet&metric=ncloc&token=57cbc68b7ab086fb472b8eee00b1e9f020daa26c)](https://codefirst.iut.uca.fr/sonar/dashboard?id=MemoryDotnet)
@@ -64,10 +64,23 @@ Install our project with:
 
 ---
 
+## Acknowledgements
+
+* 🧑‍💻 PICHOT-MOISE Matheo
+
 ## 🐞 Known Issues
 
 * ⚙️ **Doxygen**: The documentation is present throughout the codebase, but there are issues generating Doxygen output.
 * 📉 **Sonar**: Code coverage is below 95%, and there are still more than 5 code smells to address.
 
 ---
+
+## 🗂️ Categories
+
+* 🎮 **Game**
+* 📱 **Mobile App**
+* 🧠 **Puzzle**
+* 👨‍🏫 **Educational**
+* 🧪 **Project SAE**
+* 🛠️ **Student Project**
 
