@@ -13,28 +13,36 @@ namespace MemoryLib.Models
     /// <param name="scoreValue">La valeur du score.</param>
     /// <param name="gs">La taille de la grille associée au score.</param>
     /// <param name="gp">Le nombre de jeux joués (par défaut à 0).</param>
-    public sealed class Score(Player p, int scoreValue, GridSize gs, int gp = 0) : IEquatable<Score>
+    public sealed class Score : IEquatable<Score>
     {
+        public Score(Player p, int scoreValue, GridSize gs, int gp = 0)
+        {
+            Player = p;
+            ScoreValue = scoreValue;
+            GridSize = gs;
+            GamesPlayed = gp;
+        }
+
         private Score() : this(new Player("Temp"), 0, GridSize.Size1, 0) { }
         /// <summary>
         /// Obtient le joueur associé à ce score.
         /// </summary>
-        public Player Player { get; } = p;
+        public Player Player { get; }
 
         /// <summary>
         /// Obtient ou définit la valeur du score.
         /// </summary>
-        public int ScoreValue { get; private set; } = scoreValue;
+        public int ScoreValue { get; private set; }
 
         /// <summary>
         /// Obtient la taille de la grille associée à ce score.
         /// </summary>
-        public GridSize GridSize { get; } = gs;
+        public GridSize GridSize { get; }
 
         /// <summary>
         /// Obtient ou définit le nombre de jeux joués par le joueur.
         /// </summary>
-        public int GamesPlayed { get; private set; } = gp;
+        public int GamesPlayed { get; private set; }
 
         /// <summary>
         /// Incrémente le nombre de jeux joués de 1.

@@ -12,7 +12,7 @@ namespace MemoryLib.Managers
         /// <summary>
         /// Liste interne des scores enregistrés.
         /// </summary>
-        private readonly List<Score> _scores = [];
+        private readonly List<Score> _scores;
 
         /// <summary>
         /// Obtient une collection en lecture seule des scores enregistrés.
@@ -22,7 +22,6 @@ namespace MemoryLib.Managers
         /// <summary>
         ///  Gestionnaire de chargement et de sauvegarde des scores.
         /// </summary>
-        private readonly ILoadManager _loader;
         private readonly ISaveManager _saver;
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace MemoryLib.Managers
         /// <param name="saver"></param>
         public ScoreManager(ILoadManager loader, ISaveManager saver)
         {
-            _loader = loader;
+            ILoadManager _loader = loader;
             _saver = saver;
             _scores = _loader.LoadScores();
         }

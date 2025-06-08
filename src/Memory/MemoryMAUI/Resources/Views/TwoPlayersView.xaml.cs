@@ -6,11 +6,11 @@ namespace MemoryMAUI.Resources.Views;
 
 public partial class TwoPlayersView : ContentView
 {
-    public string NameTag1 { get; set; }
-    public string NameTag2 { get; set; }
+    public string? NameTag1 { get; set; }
+    public string? NameTag2 { get; set; }
 
     private GridSize _gsize;
-    public GridSize gsize
+    public GridSize Gsize
     {
         get => _gsize;
         set
@@ -26,7 +26,7 @@ public partial class TwoPlayersView : ContentView
     private void OnGridSizeSelected(object? sender, GridSize? selectedGridSize)
     {
         if (selectedGridSize.HasValue)
-            gsize = selectedGridSize.Value;
+            Gsize = selectedGridSize.Value;
     }
     public TwoPlayersView()
     {
@@ -38,23 +38,30 @@ public partial class TwoPlayersView : ContentView
     {
         var player1Name = NameTag1?.Trim();
         var player2Name = NameTag2?.Trim();
+
+        var mainPage = Application.Current?.Windows[0].Page;
+
+        if (mainPage is null)
+            return;
+
         if (string.IsNullOrWhiteSpace(player1Name))
         {
-            await Application.Current.MainPage.DisplayAlert("Alert", "Player 1's Name Tag is required and must not be empty or contain only spaces", "Ok");
+            await mainPage.DisplayAlert("Alert", "Player 1's Name Tag is required and must not be empty or contain only spaces", "Ok");
             return;
         }
         if (string.IsNullOrWhiteSpace(player2Name))
         {
-            await Application.Current.MainPage.DisplayAlert("Alert", "Player 2's Name Tag is required and must not be empty or contain only spaces", "Ok");
+            await mainPage.DisplayAlert("Alert", "Player 2's Name Tag is required and must not be empty or contain only spaces", "Ok");
             return;
         }
 
-        var gridSize = gsize;
-        if(gridSize == GridSize.None)
+        var gridSize = Gsize;
+        if (gridSize == GridSize.None)
         {
-            await Application.Current.MainPage.DisplayAlert("Alert", "Please select a grid size", "Ok");
+            await mainPage.DisplayAlert("Alert", "Please select a grid size", "Ok");
             return;
         }
+
         var navigationParameter = new Dictionary<string, object>
         {
             { "player1Name", player1Name },

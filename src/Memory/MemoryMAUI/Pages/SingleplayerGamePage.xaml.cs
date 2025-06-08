@@ -1,10 +1,7 @@
 using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using MemoryMAUI.Converters;
 using MemoryMAUI.Resources.Templates;
-using Persistence;
-using System.Diagnostics;
 
 
 namespace MemoryMAUI.Pages;
@@ -15,20 +12,12 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
     private int _cardsClickedCount = 0;
     private readonly ISaveManager _saver;
 
-    private string playerName;
-    public string PlayerName
-    {
-        get => playerName;
-        set
-        {
-            playerName = value;
-        }
-    }
+    public string? PlayerName { get; set; }
 
     public GridSize GridSize { get; set; }
 
-    private GameManager _gameManager;
-    public GameManager GameManager
+    private GameManager? _gameManager;
+    public GameManager? GameManager
     {
         get => _gameManager;
         private set
@@ -49,9 +38,9 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         if (query.ContainsKey("playerName"))
             PlayerName = (string)query["playerName"];
 
-        if (query.ContainsKey("gridSize"))
+        if (query.TryGetValue("gridSize", out value))
         {
-            var gridSizeValue = query["gridSize"];
+            var gridSizeValue = value;
             GridSize = (GridSize)gridSizeValue;
         }
         if (GridSize != GridSize.None)
@@ -71,11 +60,11 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         }
     }
 
-    private readonly Player _player;
+    private readonly IScoreManager _scoreManager;
 
-
-    public SingleplayerGamePage()
+    public SingleplayerGamePage(IScoreManager scoreManager)
     {
+        _scoreManager = scoreManager;
         InitializeComponent();
         BindingContext = this;
         CardTemplate.OnCardClicked += OnCardClicked;
@@ -96,11 +85,9 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             );
 
             _saver.SaveScores([score]);
-            Console.WriteLine("Score saved successfully.");
         }
-        catch (Exception ex)
+        catch
         {
-            Console.WriteLine("Error while saving score: " + ex);
         }
     }
 
@@ -110,13 +97,18 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
         if (!WaitContinuePressed)
             return;
 
-        GameManager.HideCards();
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
         WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
     {
+        if (GameManager is null)
+        {
+            return;
+        }
+
         if (WaitContinuePressed)
         {
             WaitContinuePressed = false;
@@ -160,7 +152,20 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
             {
                 GameManager.SwitchPlayers();
             }
-            WaitContinuePressed = true;
+            if (GameManager.IsGameOver())
+            {
+                var player = GameManager.Game.Player1;
+
+                var navigationParameter = new Dictionary<string, object>
+            {
+                { nameof(player), player }
+            };
+
+                Shell.Current.GoToAsync("///endgamesingleplayerscreenpage", navigationParameter);
+                return;
+            }
+
+            _waitContinuePressed = true;
             _cardsClickedCount = 0;
         }
     }

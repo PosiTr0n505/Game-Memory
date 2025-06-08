@@ -7,7 +7,7 @@ namespace MemoryLib.Models
     /// <summary>
     /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
     /// </summary>
-    public class Player : ObservableObject, IEquatable<Player>
+    public sealed class Player : ObservableObject, IEquatable<Player>
     {
 
         /// <summary>

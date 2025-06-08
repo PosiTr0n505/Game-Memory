@@ -6,23 +6,9 @@ namespace MemoryMAUI.Resources.Views;
 
 public partial class GridSizes : ContentView
 {
-    public event EventHandler<GridSize?> GridSizeSelected;
+    public event EventHandler<GridSize?>? GridSizeSelected;
+
     public IReadOnlyCollection<GridSize> Sizes { get; private init; } = [.. GridSizeManager.Values.Keys];
-
-    public static readonly BindableProperty SelectedGridSizeProperty =
-        BindableProperty.Create(
-            nameof(SelectedGridSize),
-            typeof(GridSize),
-            typeof(GridSizes),
-            default(GridSize),
-            BindingMode.TwoWay
-        );
-
-    public GridSize SelectedGridSize
-    {
-        get => (GridSize)GetValue(SelectedGridSizeProperty);
-        set => SetValue(SelectedGridSizeProperty, value);
-    }
 
     public GridSizes()
     {
@@ -37,6 +23,4 @@ public partial class GridSizes : ContentView
             GridSizeSelected?.Invoke(this, selectedSize);
         }
     }
-
-    //public void OnGridSizeSelected(GridSize selected) => SelectedGridSize = selected;
 }

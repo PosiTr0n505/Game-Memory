@@ -4,13 +4,13 @@ using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
 
 namespace MemoryMAUI.Pages;
-public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
+public partial class LeaderboardPage : ContentPage
 {
-    private readonly ScoreManager leaderboard;
+    private readonly IScoreManager leaderboard;
 
     private GridSize? gridSize;
 
-    private readonly List<Score> _scoresI = [];
+    private readonly List<Score> _scoresI;
 
     private List<Score> _scores = [];
 
@@ -26,6 +26,11 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
 
     private void OnGridSizeSelected(object? sender, GridSize? e)
     {
+        if (e is null)
+        {
+            NameTagEntry.Text = "";
+        }
+
         gridSize = e;
 
         var nameTag = NameTagEntry.Text;
@@ -41,9 +46,9 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
         ];
     }
 
-    public LeaderboardPage(ILoadManager loader, ISaveManager saver)
+    public LeaderboardPage(IScoreManager scoreManager)
     {
-        leaderboard = new(loader, saver);
+        leaderboard = scoreManager;
         _scoresI = [.. leaderboard.Scores.OrderBy(s => s.ScoreValue)];
         Scores = _scoresI;
 

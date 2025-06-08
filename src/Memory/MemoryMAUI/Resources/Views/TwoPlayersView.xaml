@@ -2,21 +2,20 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MemoryMAUI.Resources.Views.TwoPlayersView"
-             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             x:DataType="views:TwoPlayersView">
 
     <Border
-
-
         Stroke="#FFFFFF"
         Grid.ColumnSpan="5"
         Grid.Column="3"
         Grid.Row="1">
+        
         <Grid
             Margin="30"
             RowDefinitions="*,*,*,2*,*"
             ColumnDefinitions="*,*,*,*,*,*,*,*">
             
-
             <Label Style="{StaticResource LabelBold}" 
                    Grid.Row="0"
                    VerticalOptions="Center"
@@ -33,7 +32,7 @@
                 Grid.Row="1"
                 Text="Name tag 2"/>
             <Entry Text = "{Binding NameTag2}"
-            Style="{StaticResource EntryConfigPage}"
+                Style="{StaticResource EntryConfigPage}"
                 Grid.Row="1"
                 Grid.Column="2"
                 Placeholder="Player2"/>
@@ -48,11 +47,11 @@
                     Grid.Column="1"
                     Grid.ColumnSpan="5"/>
 
-
             <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="3"
                 Text="Themes "/>
+            
             <FlexLayout
                 Grid.Row="3"
                 Grid.Column="1"
@@ -66,6 +65,7 @@
                 <Button Style="{StaticResource ThemesBtn}"
                     Text="Thème 3 :&#x0a; (Image)"></Button>
             </FlexLayout>
+            
             <Button 
                 BorderColor="Gray"
                 BackgroundColor="Blue"

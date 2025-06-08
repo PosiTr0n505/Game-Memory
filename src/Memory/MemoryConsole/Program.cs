@@ -4,8 +4,8 @@ using MemoryConsole.Display;
 using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using Persistence;
-
+using MemoryStubPersistence;
+using System.Text;
 using static System.Console;
 
 namespace MemoryConsole
@@ -138,7 +138,6 @@ namespace MemoryConsole
                                 return;
                         }
                         break;
-
                 }
             }
         }
@@ -228,7 +227,6 @@ namespace MemoryConsole
                 catch (Exception e)
                 {
                     WriteLine(e.Message);
-                    continue;
                 }
             }
             return cardcoordinates;
@@ -254,16 +252,11 @@ namespace MemoryConsole
                         WriteLine("You cannot select a card that is already found");
                         continue;
                     }
-
-                    else
-                    {
-                        break;
-                    }
+                    break;
                 }
                 catch (Exception e)
                 {
                     WriteLine(e.Message);
-                    continue;
                 }
             }
             return cardcoordinates;
@@ -307,42 +300,9 @@ namespace MemoryConsole
             {
                 WriteLine($"{gameManager.Game.CurrentPlayer} : \n\n");
 
-                while (true)
-                {
-                    try
-                    {
-                        card1coordinates = ConsoleAsking.AskCoordinates("1", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-                        break;
+                card1coordinates = AskAndCheckCoordinates(gameManager, "1");
 
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
-
-                while (true)
-                {
-                    try
-                    {
-                        card2coordinates = ConsoleAsking.AskCoordinates("2", gameManager.Game.Grid.X, gameManager.Game.Grid.Y);
-                        if (card1coordinates == card2coordinates)
-                        {
-                            WriteLine("You cannot select the same card twice. Please select a different card.");
-                            continue;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLine(e.Message);
-                        continue;
-                    }
-                }
+                card2coordinates = AskAndCheckCoordinates(gameManager, "2", card1coordinates);
 
                 gameManager.PlayRound(card1coordinates.Item1, card1coordinates.Item2, card2coordinates.Item1, card2coordinates.Item2);
 
@@ -415,15 +375,15 @@ namespace MemoryConsole
 
             int i = 1;
 
-            string gridSizeDisplay = "";
+            StringBuilder gridSizeDisplay = new();
 
             foreach (var size in GridSizeManager.Values)
             {
-                gridSizeDisplay += $"{i}. {size.Value}   ";
+                gridSizeDisplay.Append($"{i}. {size.Value}   ");
                 ++i;
             }
 
-            gridSizeDisplay += "\n7. Search by NameTag";
+            gridSizeDisplay.Append("\n7. Search by NameTag");
 
             WriteLine(gridSizeDisplay);
 

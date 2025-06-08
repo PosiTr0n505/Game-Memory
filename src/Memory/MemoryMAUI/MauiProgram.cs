@@ -2,7 +2,7 @@
 using CommunityToolkit.Maui;
 using MemoryLib.Managers;
 using MemoryLib.Managers.Interface;
-using Persistence;
+using MemoryStubPersistence;
 using MemoryMAUI.Pages;
 using MemoryLib.Models;
 using MemoryJSONPersistence;

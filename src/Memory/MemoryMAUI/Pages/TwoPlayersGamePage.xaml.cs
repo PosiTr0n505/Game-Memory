@@ -1,7 +1,8 @@
 using MemoryLib.Managers;
 using MemoryMAUI.Resources.Templates;
 using MemoryLib.Models;
-using Persistence;
+using MemoryStubPersistence;
+using MemoryLib.Managers.Interface;
 
 
 namespace MemoryMAUI.Pages;
@@ -10,31 +11,16 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
+    private readonly ISaveManager _saver;
 
-    private string player1Name;
-    public string Player1Name
-    {
-        get => player1Name;
-        set
-        {
-            player1Name = value;
-        }
-    }
+    public string? Player1Name{ get; set; }
 
-    private string player2Name;
-    public string Player2Name
-    {
-        get => player2Name;
-        set
-        {
-            player2Name = value;
-        }
-    }
+    public string? Player2Name{ get; set; }
 
     public GridSize GridSize { get; set; }
 
-    private GameManager _gameManager;
-    public GameManager GameManager
+    private GameManager? _gameManager;
+    public GameManager? GameManager
     {
         get => _gameManager;
         private set
@@ -51,12 +37,14 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (query.ContainsKey("player2Name"))
             Player2Name = (string)query["player2Name"];
 
+        if (query.TryGetValue("player2Name", out value) && value is string player2NameValue)
+            Player2Name = player2NameValue;
 
-        if (query.ContainsKey("gridSize"))
+        if (query.TryGetValue("gridSize", out value))
         {
-            var gridSizeValue = query["gridSize"];
-            GridSize = (GridSize)gridSizeValue;
+            GridSize = (GridSize)value;
         }
+
         if (GridSize != GridSize.None)
         {
             InitializeGame();
@@ -83,8 +71,12 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         GameManager = new GameManager(new Game(player1, player2, GridSize));
     }
 
-    public TwoPlayersGamePage()
+    private readonly IScoreManager _scoreManager;
+
+    public TwoPlayersGamePage(IScoreManager scoreManager)
     {
+        _scoreManager = scoreManager;
+        _saver = App.Current.Handler.MauiContext.Services.GetService<ISaveManager>()!;
         InitializeComponent();
         BindingContext = this;
         WaitContinuePressed = false;
@@ -93,17 +85,21 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        GameManager.HideCards();
+        if (!WaitContinuePressed)
+            return;
+
+        GameManager?.HideCards();
         _cardsClickedCount = 0;
-        _waitContinuePressed = false;
+        WaitContinuePressed = false;
     }
 
     public void OnCardClicked(View sender, Card card)
     {
-        if (_waitContinuePressed)
+        if (WaitContinuePressed)
         {
-            _waitContinuePressed = false;
-            GameManager.HideCards();
+            WaitContinuePressed = false;
+            GameManager?.HideCards();
+            return;
         }
 
         if (card.IsFound)
@@ -121,7 +117,7 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         if (_cardsClickedCount == 1)
             _card1 = card;
 
-        if (_cardsClickedCount == 2)
+        if (_cardsClickedCount == 2 && GameManager is not null)
         {
             GameManager.Game.CurrentPlayer.Add1ToMovesCount();
             _card2 = card;
@@ -131,10 +127,33 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 _card2.IsFound = true;
                 GameManager.Game.CurrentPlayer.Add1ToScore();
                 GameManager.Game.ReduceCountByOnePair();
+                if (GameManager.Game.IsGameOver())
+                {
+                    GameManager.Game.CurrentPlayer.IncrementGamesPlayed();
+                    SaveGameScore();
+                    return;
+                }
             }
             else 
             {
                 GameManager.SwitchPlayers();
+            }
+	    
+            if (GameManager.IsGameOver())
+            {
+                var player1 = GameManager.Game.Player1;
+                var player2 = GameManager.Game.Player2;
+                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
+
+                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(player1), player1 },
+                    { nameof(player2), player2 }
+                };
+
+                Shell.Current.GoToAsync("///endgametwoplayersscreenpage", navigationParameter);
             }
             _waitContinuePressed = true;
             _cardsClickedCount = 0;
