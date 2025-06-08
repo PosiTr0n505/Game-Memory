@@ -1,17 +1,16 @@
 using System.ComponentModel;
 using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 using MemoryLib.Models;
-using Persistence;
 
 namespace MemoryMAUI.Pages;
-
-public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
+public partial class LeaderboardPage : ContentPage
 {
-    private readonly ScoreManager leaderboard = new(new StubLoadManager(), new StubSaveManager());
+    private readonly ScoreManager leaderboard;
 
     private GridSize? gridSize;
 
-    private readonly List<Score> _scoresI = [];
+    private List<Score> _scoresI;
 
     private List<Score> _scores = [];
 
@@ -27,6 +26,11 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
 
     private void OnGridSizeSelected(object? sender, GridSize? e)
     {
+        if (e is null)
+        {
+            NameTagEntry.Text = "";
+        }
+
         gridSize = e;
 
         var nameTag = NameTagEntry.Text;
@@ -42,13 +46,21 @@ public partial class LeaderboardPage : ContentPage, INotifyPropertyChanged
         ];
     }
 
-    public LeaderboardPage()
+    public LeaderboardPage(ScoreManager scoreManager)
     {
-        InitializeComponent();
+        leaderboard = scoreManager;
         _scoresI = [.. leaderboard.Scores.OrderBy(s => s.ScoreValue)];
         Scores = _scoresI;
-        GridButtons.GridSizeSelected += OnGridSizeSelected;
+
+        InitializeComponent();
         BindingContext = this;
+        GridButtons.GridSizeSelected += OnGridSizeSelected;
+        leaderboard.ScoresAdded += LeaderboardPage_ScoresAdded;
+    }
+
+    private void LeaderboardPage_ScoresAdded()
+    {
+        _scoresI = [.. leaderboard.Scores];
     }
 
     private async void NavigateToMainpage(object sender, EventArgs e)

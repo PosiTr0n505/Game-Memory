@@ -16,18 +16,9 @@
         Route="mainpage"/>
 
     <ShellContent
-        ContentTemplate="{DataTemplate pages:SingleplayerGamePage}"
-        Title="SingleplayerGamePage" 
-        Route="singleplayergamepage"/>
-
-    <ShellContent
-        ContentTemplate="{DataTemplate pages:TwoPlayersGamePage}"
-        Title="TwoPlayersGamePage" 
-        Route="twoplayersgamepage"/>
-
-    <ShellContent
         ContentTemplate="{DataTemplate pages:LeaderboardPage}"
         Title="LeaderboardPage" 
         Route="leaderboardpage"/>
+
 
 </Shell>

@@ -2,58 +2,56 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MemoryMAUI.Resources.Views.TwoPlayersView"
-             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             x:DataType="views:TwoPlayersView">
 
     <Border
-
-
         Stroke="#FFFFFF"
         Grid.ColumnSpan="5"
         Grid.Column="3"
         Grid.Row="1">
+        
         <Grid
             Margin="30"
             RowDefinitions="*,*,*,2*,*"
             ColumnDefinitions="*,*,*,*,*,*,*,*">
             
-
             <Label Style="{StaticResource LabelBold}" 
                    Grid.Row="0"
                    VerticalOptions="Center"
                    Text="Name tag 1 "/>
-            
-            <Entry Style="{StaticResource EntryConfigPage}"
+
+            <Entry Text = "{Binding NameTag1}" 
+                Style="{StaticResource EntryConfigPage}"
                    Grid.Row="0"
                    Grid.Column="2"
                    Placeholder="Player1"/>
                 
-            <!--  TextChanged="OnTextChanged"/> -->
             <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="1"
                 Text="Name tag 2"/>
-            <Entry 
-            Style="{StaticResource EntryConfigPage}"
+            <Entry Text = "{Binding NameTag2}"
+                Style="{StaticResource EntryConfigPage}"
                 Grid.Row="1"
                 Grid.Column="2"
                 Placeholder="Player2"/>
-            <!--  TextChanged="OnTextChanged"/>-->
 
             <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="2"
                 Text="Grid Size"/>
 
-                <views:GridSizes
+            <views:GridSizes x:Name="GridSizes"
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.ColumnSpan="5"/>
-
 
             <Label Style="{StaticResource LabelBold}"
                 VerticalOptions="Center"
                 Grid.Row="3"
                 Text="Themes "/>
+            
             <FlexLayout
                 Grid.Row="3"
                 Grid.Column="1"
@@ -67,8 +65,10 @@
                 <Button Style="{StaticResource ThemesBtn}"
                     Text="Thème 3 :&#x0a; (Image)"></Button>
             </FlexLayout>
+            
             <Button 
-                BackgroundColor="#EEBE13"
+                BorderColor="Gray"
+                BackgroundColor="Blue"
                 HeightRequest="40"
                 WidthRequest="150"
                 Grid.Row="4"

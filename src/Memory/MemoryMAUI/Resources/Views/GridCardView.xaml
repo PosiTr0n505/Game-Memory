@@ -9,11 +9,11 @@
     <Grid>
         
         <Image Aspect="AspectFit"
-               HorizontalOptions="Fill"
-               VerticalOptions="Fill"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
                ZIndex="-1"
                x:Name="CardImage"
-               Visual="Default">
+               x:DataType="lib:Card">
 
             <Image.Source>
                 <MultiBinding Converter="{StaticResource CardBooleanToImageSource}" Mode="OneWay">
@@ -24,7 +24,9 @@
 
         </Image>
 
-        <Label Text="{Binding Id}"
+        <Label HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{Binding Id}"
                x:Name="CardLabel"
                FontSize="{Binding LabelFontSize, Source={x:Reference Root}}"
                TextColor="White"

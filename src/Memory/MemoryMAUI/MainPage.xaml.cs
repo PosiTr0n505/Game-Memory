@@ -1,13 +1,17 @@
 ﻿using MemoryMAUI.Resources.Views;
+using MemoryLib.Managers;
+using MemoryLib.Managers.Interface;
 
 namespace MemoryMAUI
 {
     public partial class MainPage : ContentPage
     {
+        private readonly ScoreManager _scoreManager;
 
-
-        public MainPage()
+        public MainPage(ScoreManager scoreManager)
         {
+            _scoreManager = scoreManager;
+
             InitializeComponent();
             BindingContext = this;
         }
@@ -49,13 +53,8 @@ namespace MemoryMAUI
         }
         private void QuitButton_Clicked(object sender, EventArgs e)
         {
-#if ANDROID
-            Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
-#elif WINDOWS
-            System.Environment.Exit(0);
-#else
+            _scoreManager.SaveScores();
             Application.Current?.Quit();
-#endif
         }
     }
 

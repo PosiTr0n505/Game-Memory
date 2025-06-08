@@ -9,10 +9,14 @@ namespace MemoryLib.Managers
     /// </summary>
     public class ScoreManager : IScoreManager
     {
+        public delegate void ScoresAddedEventHandler();
+
+        public event ScoresAddedEventHandler? ScoresAdded;
+
         /// <summary>
         /// Liste interne des scores enregistrés.
         /// </summary>
-        private readonly List<Score> _scores = [];
+        private readonly List<Score> _scores;
 
         /// <summary>
         /// Obtient une collection en lecture seule des scores enregistrés.
@@ -22,7 +26,6 @@ namespace MemoryLib.Managers
         /// <summary>
         ///  Gestionnaire de chargement et de sauvegarde des scores.
         /// </summary>
-        private readonly ILoadManager _loader;
         private readonly ISaveManager _saver;
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace MemoryLib.Managers
         /// <param name="saver"></param>
         public ScoreManager(ILoadManager loader, ISaveManager saver)
         {
-            _loader = loader;
+            ILoadManager _loader = loader;
             _saver = saver;
             _scores = _loader.LoadScores();
         }
@@ -41,6 +44,11 @@ namespace MemoryLib.Managers
         /// Destructeur de la classe Leaderboard.
         /// </summary>
         ~ScoreManager()
+        {
+            _saver.SaveScores(_scores);
+        }
+
+        public void SaveScores()
         {
             _saver.SaveScores(_scores);
         }
@@ -117,7 +125,21 @@ namespace MemoryLib.Managers
         /// <param name="score"></param>
         public void SaveScore(Score score)
         {
-            _scores.Add(score);
+            Score? s = _scores.FirstOrDefault(s => s.Player.NameTag == score.Player.NameTag);
+
+            if (s is not null)
+            {
+                s.IncrementGamesPlayed();
+                s.ChangeScoreValueIfGreater(score.ScoreValue);
+                ScoresAdded?.Invoke();
+            }
+
+            else
+            {
+                _scores.Add(score);
+                ScoresAdded?.Invoke();
+            }
+                
         }
     }
 }

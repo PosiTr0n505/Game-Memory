@@ -2,7 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MemoryMAUI.Resources.Views.SinglePlayerView"
-             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views">
+             xmlns:views="clr-namespace:MemoryMAUI.Resources.Views"
+             x:DataType="views:SinglePlayerView">
 
 
     <Border
@@ -10,6 +11,7 @@
      Grid.ColumnSpan="5"
      Grid.Column="3"
      Grid.Row="1">
+        
         <Grid
             Margin="30"
             RowDefinitions="*,*,*,*,*,*,*"
@@ -19,12 +21,12 @@
              Grid.Row="0"
              VerticalOptions="Center"
              Text="Name tag 1"/>
-            <Entry 
-             Style="{StaticResource EntryConfigPage}"
-             Grid.Row="0"
-             Grid.Column="2"
-             Placeholder="Player1"/>
-            <!--  TextChanged="OnTextChanged"/>-->
+
+            <Entry Text = "{Binding NameTag}"
+            Style="{StaticResource EntryConfigPage}"
+            Grid.Row="0"
+            Grid.Column="2"
+            Placeholder="Player1"/>
 
             <Label Style="{StaticResource LabelBold}"
              VerticalOptions="Center"
@@ -35,9 +37,9 @@
              Grid.Row="1"
              Grid.RowSpan="2"
              Grid.Column="1"
-             Grid.ColumnSpan="5">
+             Grid.ColumnSpan="6">
 
-                <views:GridSizes/>
+                <views:GridSizes x:Name="GridSizes" />
 
             </FlexLayout>
             <Label Style="{StaticResource LabelBold}"
@@ -57,8 +59,9 @@
                 <Button Style="{StaticResource ThemesBtn}"
                  Text="Thème 3 :&#x0a; (Image)"></Button>
             </FlexLayout>
-            <Button 
-             BackgroundColor="#EEBE13"
+            <Button
+             BorderColor="Gray"
+             BackgroundColor="Blue"
                 HeightRequest="40"
                 WidthRequest="150"
                 Grid.Row="6"
