@@ -7,16 +7,11 @@ namespace MemoryJSONPersistence
 {
     public class JsonLoadManager : ILoadManager
     {
-        private readonly string _saveFile;
-
-        public JsonLoadManager(string saveFilePath)
-        {
-            _saveFile = saveFilePath;
-        }
+        private readonly string _savePath = Path.Combine(AppContext.BaseDirectory, "scores.json");
 
         public List<Score> LoadScores()
         {
-            if (!File.Exists(_saveFile)) 
+            if (!File.Exists(_savePath)) 
                 return [];
 
             var serializer = new DataContractJsonSerializer(typeof(List<SerializableScore>), new DataContractJsonSerializerSettings
@@ -26,7 +21,8 @@ namespace MemoryJSONPersistence
 
             try
             {
-                using FileStream stream = File.OpenRead(_saveFile);
+                using FileStream stream = File.OpenRead(_savePath);
+
                 var dataTransfer = serializer.ReadObject(stream) as List<SerializableScore> ?? [];
 
                 var validData = dataTransfer.Where(dto => !string.IsNullOrWhiteSpace(dto.NameTag)).ToList();
@@ -37,10 +33,10 @@ namespace MemoryJSONPersistence
                     dto.GridSize,
                     dto.GamesPlayed
                 ))];
-                            }
+             }
             catch
             {
-                return [];
+                throw;
             }
         }
     }

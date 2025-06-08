@@ -11,7 +11,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     private Card? _card1 = null;
     private Card? _card2 = null;
     private int _cardsClickedCount = 0;
-    private readonly ISaveManager _saver;
 
     public string? Player1Name{ get; set; }
 
@@ -74,29 +73,10 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
     public TwoPlayersGamePage(ScoreManager scoreManager)
     {
         _scoreManager = scoreManager;
-        _saver = App.Current.Handler.MauiContext.Services.GetService<ISaveManager>()!;
         InitializeComponent();
         BindingContext = this;
         WaitContinuePressed = false;
         CardTemplate.OnCardClicked += OnCardClicked;
-    }
-
-    private void SaveGameScore(Player player)
-    {
-        try
-        {
-            var score = new Score(
-                player,
-                player.CurrentScore,
-                GameManager.Game.GridSize,
-                player.GamesPlayed
-            );
-
-            _saver.SaveScores([score]);
-        }
-        catch
-        {
-        }
     }
 
     private void OnContinueButtonClicked(object sender, EventArgs e)
@@ -157,12 +137,10 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
                 var winner = (player1.CurrentScore > player2.CurrentScore) ? player1 : player2;
 
-                _scoreManager.SaveScore(new(winner, winner.MovesCount, GameManager.Game.GridSize))
+                _scoreManager.SaveScore(new(winner, winner.MovesCount, GameManager.Game.GridSize));
 
                 player1.IncrementGamesPlayed();
                 player2.IncrementGamesPlayed();
-                SaveGameScore(winner);
-
 
                 var navigationParameter = new Dictionary<string, object>
                 {

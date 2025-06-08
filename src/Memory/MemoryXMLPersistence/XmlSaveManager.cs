@@ -8,36 +8,15 @@ namespace MemoryXMLPersistence
 {
     public class XmlSaveManager : ISaveManager
     {
-        private readonly string _saveFile;
+        private readonly string _savePath = Path.Combine(AppContext.BaseDirectory, "scores.xml");
 
-        public XmlSaveManager(string saveFilePath)
+        public void SaveScores(List<Score> Scores)
         {
-            _saveFile = saveFilePath;
-        }
-
-        public void SaveScores(List<Score> newScores)
-        {
-            var serializer = new DataContractSerializer(typeof(List<SerializableScore>), new DataContractSerializerSettings
-            {
-                PreserveObjectReferences = true
-            });
+            var serializer = new DataContractSerializer(typeof(List<SerializableScore>));
 
             List<SerializableScore> finalScores = [];
 
-            if (File.Exists(_saveFile))
-            {
-                using FileStream readStream = File.OpenRead(_saveFile);
-                try
-                {
-                    finalScores = serializer.ReadObject(readStream) as List<SerializableScore> ?? [];
-                }
-                catch
-                {
-                    finalScores = [];
-                }
-            }
-
-            foreach (var newScore in newScores)
+            foreach (var newScore in Scores)
             {
                 var dto = new SerializableScore
                 {
@@ -47,25 +26,15 @@ namespace MemoryXMLPersistence
                     GamesPlayed = newScore.GamesPlayed
                 };
 
-                var existing = finalScores.FirstOrDefault(s =>
-                    s.NameTag == dto.NameTag &&
-                    s.GridSize == dto.GridSize);
-
-                if (existing == null || dto.ScoreValue > existing.ScoreValue)
-                {
-                    if (existing != null) finalScores.Remove(existing);
-                    finalScores.Add(dto);
-                }
+                finalScores.Add(dto);
             }
 
-            var settings = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            var settings = new XmlWriterSettings { Indent = true };
 
-            using TextWriter wr = File.CreateText(_saveFile);
-            using XmlWriter xmlWriter = XmlWriter.Create(wr, settings);
+            using FileStream writeStream = File.Create(_savePath);
+            using XmlWriter xmlWriter = XmlWriter.Create(writeStream, settings);
             serializer.WriteObject(xmlWriter, finalScores);
+
         }
     }
 }

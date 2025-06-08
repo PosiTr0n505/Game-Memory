@@ -7,28 +7,20 @@ namespace MemoryXMLPersistence
 {
     public class XmlLoadManager : ILoadManager
     {
-        private readonly string _saveFile;
-
-        public XmlLoadManager(string saveFilePath)
-        {
-            _saveFile = saveFilePath;
-        }
+        private readonly string _savePath = Path.Combine(AppContext.BaseDirectory, "scores.xml");
 
         public List<Score> LoadScores()
         {
-            if (!File.Exists(_saveFile))
+            if (!File.Exists(_savePath))
             {
                 return [];
             }
 
-            var serializer = new DataContractSerializer(typeof(List<SerializableScore>), new DataContractSerializerSettings
-            {
-                PreserveObjectReferences = true
-            });
+            var serializer = new DataContractSerializer(typeof(List<SerializableScore>));
 
             try
             {
-                using FileStream stream = File.OpenRead(_saveFile);
+                using FileStream stream = File.OpenRead(_savePath);
                 var dataTransfer = serializer.ReadObject(stream) as List<SerializableScore> ?? [];
 
                 var validData = dataTransfer.Where(dto => !string.IsNullOrWhiteSpace(dto.NameTag)).ToList();
@@ -42,7 +34,7 @@ namespace MemoryXMLPersistence
             }
             catch
             {
-                return [];
+                throw;
             }
         }
     }
