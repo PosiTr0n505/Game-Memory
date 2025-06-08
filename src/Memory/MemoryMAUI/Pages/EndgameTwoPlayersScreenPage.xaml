@@ -6,7 +6,8 @@
              xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
              xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
              Title="EndgameTwoPlayersScreenPage"
-             BackgroundImageSource="backgroundlighttheme.png">
+             BackgroundImageSource="backgroundlighttheme.png"
+             x:DataType="Pages:EndgameTwoPlayersScreenPage">
 
     <Grid RowDefinitions="*,*,*,*,*"
           ColumnDefinitions="*,*,*,*,*,*,*">
