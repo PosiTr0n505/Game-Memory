@@ -49,6 +49,7 @@ namespace MemoryMAUI
 
             builder.Services.AddSingleton<LeaderboardPage>();
             builder.Services.AddTransient<SingleplayerGamePage>();
+            builder.Services.AddTransient<TwoPlayersGamePage>();
 
             return builder.Build();
         }
