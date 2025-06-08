@@ -6,16 +6,20 @@
              xmlns:Pages="clr-namespace:MemoryMAUI.Pages"
              xmlns:lib="clr-namespace:MemoryLib.Models;assembly=MemoryLib"
              Title="EndgameSingleplayerScreenPage"
-             BackgroundImageSource="backgroundlighttheme.png">
+             BackgroundImageSource="backgroundlighttheme.png"
+             x:DataType="Pages:EndgameSingleplayerScreenPage">
+    
     <Grid>
 
-        <Grid 
+        <Grid RowDefinitions="*,*"
               HorizontalOptions="Center"
               VerticalOptions="Center">
 
             <FlexLayout AlignItems="Center"
                         JustifyContent="Center"
-                        Direction="Column">
+                        Direction="Column"
+                        Grid.Row="0">
+                
                 <Label Text="Game Over !" FontSize="40" HorizontalOptions="Center"/>
 
                 <Label Text="{Binding Player.NameTag}"
@@ -28,9 +32,17 @@
                 <Label Text="{Binding Player.MovesCount, StringFormat='Moves : {0}'}"
                        FontSize="20"/>
 
+            </FlexLayout>
+
+            <FlexLayout AlignItems="End"
+                        JustifyContent="Center"
+                        Grid.Row="1"
+                        Margin="0,0,0,30">
+
                 <Button
                     Text="Back to Main Menu"
                     HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     Clicked="NavigateToMainMenu"/>
 
             </FlexLayout>
