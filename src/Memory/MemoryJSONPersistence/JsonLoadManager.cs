@@ -38,7 +38,7 @@ namespace MemoryJSONPersistence
                     dto.GamesPlayed
                 ))];
                             }
-            catch (Exception ex)
+            catch
             {
                 return [];
             }

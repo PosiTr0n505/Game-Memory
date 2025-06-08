@@ -35,8 +35,8 @@ public partial class SingleplayerGamePage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.ContainsKey("playerName"))
-            PlayerName = (string)query["playerName"];
+        if (query.TryGetValue("playerName", out var value))
+            PlayerName = value as string;
 
         if (query.TryGetValue("gridSize", out value))
         {

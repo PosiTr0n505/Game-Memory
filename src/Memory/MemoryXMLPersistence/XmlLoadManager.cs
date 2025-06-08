@@ -40,7 +40,7 @@ namespace MemoryXMLPersistence
                     dto.GamesPlayed
                 ))];
             }
-            catch (Exception ex)
+            catch
             {
                 return [];
             }

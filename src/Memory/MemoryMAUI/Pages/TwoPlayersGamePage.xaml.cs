@@ -32,10 +32,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.ContainsKey("player1Name"))
-            Player1Name = (string)query["player1Name"];
-        if (query.ContainsKey("player2Name"))
-            Player2Name = (string)query["player2Name"];
+        if (query.TryGetValue("player1Name", out object? value) && value is string player1NameValue)
+            Player1Name = player1NameValue;
 
         if (query.TryGetValue("player2Name", out value) && value is string player2NameValue)
             Player2Name = player2NameValue;
@@ -83,6 +81,24 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
         CardTemplate.OnCardClicked += OnCardClicked;
     }
 
+    private void SaveGameScore(Player player)
+    {
+        try
+        {
+            var score = new Score(
+                player,
+                player.CurrentScore,
+                GameManager.Game.GridSize,
+                player.GamesPlayed
+            );
+
+            _saver.SaveScores([score]);
+        }
+        catch
+        {
+        }
+    }
+
     private void OnContinueButtonClicked(object sender, EventArgs e)
     {
         if (!WaitContinuePressed)
@@ -127,14 +143,8 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
                 _card2.IsFound = true;
                 GameManager.Game.CurrentPlayer.Add1ToScore();
                 GameManager.Game.ReduceCountByOnePair();
-                if (GameManager.Game.IsGameOver())
-                {
-                    GameManager.Game.CurrentPlayer.IncrementGamesPlayed();
-                    SaveGameScore();
-                    return;
-                }
             }
-            else 
+            else
             {
                 GameManager.SwitchPlayers();
             }
@@ -143,9 +153,11 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             {
                 var player1 = GameManager.Game.Player1;
                 var player2 = GameManager.Game.Player2;
-                var winnerMovesCount = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
+                var winner = (player1.MovesCount > player2.MovesCount) ? player1 : player2;
 
-                _scoreManager.SaveScore(new(winnerMovesCount, winnerMovesCount.MovesCount, GameManager.Game.GridSize));
+                player1.IncrementGamesPlayed();
+                player2.IncrementGamesPlayed();
+                SaveGameScore(winner);
 
                 var navigationParameter = new Dictionary<string, object>
                 {
@@ -159,4 +171,6 @@ public partial class TwoPlayersGamePage : ContentPage, IQueryAttributable
             _cardsClickedCount = 0;
         }
     }
+    
+
 }
