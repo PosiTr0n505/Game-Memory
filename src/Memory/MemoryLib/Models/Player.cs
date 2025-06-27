@@ -5,16 +5,16 @@ using System.Runtime.Serialization;
 namespace MemoryLib.Models
 {
     /// <summary>
-    /// Représente un joueur dans le jeu, avec un nom, un score actuel et un nombre de mouvements.
+    /// Represents a player in the game, with a name, current score, and number of moves.
     /// </summary>
     public sealed class Player : ObservableObject, IEquatable<Player>
     {
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="Player"/> avec un nom donné.
+        /// Initialize a new instance of the <see cref="Player"/> class with a given name.
         /// </summary>
-        /// <param name="name">Le nom du joueur. Ne peut pas être nul ou vide.</param>
-        /// <exception>Lève une exception si le nom est nul ou vide.</exception>
+        /// <param name="name">The name tag of the player. Cannot be null or empty space.</param>
+        /// <exception>Throw an exception if the name tag is null or empty.</exception>
         public Player(string? name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
@@ -26,14 +26,14 @@ namespace MemoryLib.Models
         private Player() => NameTag = "Temp";
 
         /// <summary>
-        /// Obtient le nom du joueur.
+        /// Get the name tag of the player.
         /// </summary>
         public string NameTag { get; init; }
 
         private int _currentScore;
 
         /// <summary>
-        /// Obtient ou définit le score actuel du joueur.
+        /// Gets or sets the current score of the player.
         /// </summary>
         public int CurrentScore 
         {
@@ -48,7 +48,7 @@ namespace MemoryLib.Models
         private int _movesCount;
 
         /// <summary>
-        /// Obtient ou définit le nombre de mouvements effectués par le joueur.
+        /// Gets or sets the number of moves made by the player.
         /// </summary>
         public int MovesCount 
         {
@@ -61,7 +61,7 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Nombre de jeux joués par le joueur.
+        /// Number of games played by the player.
         /// </summary>
         private int _gamesPlayed = 0;
         public int GamesPlayed
@@ -75,26 +75,26 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Ajoute 1 au nombres de jeux joués par le joueur.
+        /// Increment the number of games played by the player by 1.
         /// </summary>
         public void IncrementGamesPlayed() => GamesPlayed++;
 
         /// <summary>
-        /// Ajoute 1 au score actuel du joueur.
+        /// Increment the player's current score by 1.
         /// </summary>
         public void Add1ToScore() => CurrentScore++;
 
 
         /// <summary>
-        /// Ajoute 1 au nombre de mouvements effectués par le joueur.
+        /// Increment the player's moves count by 1.
         /// </summary>
         public void Add1ToMovesCount() => MovesCount += 1;
 
         /// <summary>
-        /// Compare deux joueurs pour vérifier si leurs noms sont identiques.
+        /// Compares two players to check if their names are the same.
         /// </summary>
-        /// <param name="other">L'autre joueur à comparer.</param>
-        /// <returns>true si les joueurs ont le même nom, sinon false.</returns>
+        /// <param name="other">The other player to compare to</param>
+        /// <returns>True is the players have the same name tags, else false.</returns>
         public bool Equals(Player? other)
         {
             if (other is null) return false;
@@ -102,10 +102,10 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Compare l'objet actuel à un autre objet pour vérifier si les joueurs sont égaux.
+        /// Compares the current object with another object to check if they are equal players.
         /// </summary>
-        /// <param name="obj">L'objet à comparer avec l'instance actuelle.</param>
-        /// <returns>true si les deux objets sont égaux, sinon false.</returns>
+        /// <param name="obj">The other object to compare with the current one.</param>
+        /// <returns>True if both objects are equal, else false.</returns>
         public override bool Equals(object? obj)
         {
             if (obj is null) return false;
@@ -116,15 +116,15 @@ namespace MemoryLib.Models
 
 
         /// <summary>
-        /// Calcule le code de hachage de l'objet actuel en fonction de son nom.
+        /// Gets the hash code of the current object based on its name tag.
         /// </summary>
-        /// <returns>Le code de hachage du nom du joueur.</returns>
+        /// <returns>The hash code of the name tag of the player</returns>
         public override int GetHashCode() => NameTag.GetHashCode();
 
-        /// <summary>
-        /// Retourne une chaîne de caractères représentant le joueur, y compris son nom, son score actuel et le nombre de mouvements.
+        /// <summary>    
+        /// Returns a string representation of the player, including their name tag, current score, and moves count.
         /// </summary>
-        /// <returns>score et moves du joueur</returns>
+        /// <returns>Score and moves count of the player.</returns>
         public override string ToString()
         {
             return NameTag + $" (score : {CurrentScore}, moves : {MovesCount})" ;

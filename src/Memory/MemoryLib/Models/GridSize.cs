@@ -2,7 +2,7 @@
 namespace MemoryLib.Models
 {
     /// <summary>
-    /// Représente les tailles possibles de la grille dans le jeu.
+    /// Represents the possible grid sizes in the game.
     /// </summary>
     public enum GridSize
     {

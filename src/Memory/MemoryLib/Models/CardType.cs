@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MemoryLib.Models
 {
     /// <summary>
-    /// Représente les différents types de cartes disponibles dans le jeu allant de A à Z.
+    /// Represents the different types of cards available in the game from A to Z.
     /// </summary>
     public enum CardType
     {

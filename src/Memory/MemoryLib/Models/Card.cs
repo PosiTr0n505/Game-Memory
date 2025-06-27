@@ -2,16 +2,16 @@
 namespace MemoryLib.Models
 {
     /// <summary>
-    /// Représente une carte dans un jeu de cartes, avec un identifiant de type CardType et un état face visible ou cachée.
+    /// Represents a card in a card game, with an identifier of type CardType and a face-up or face-down state.
     /// </summary>
     /// <remarks>
-    /// Initialise une nouvelle instance de la classe Card avec un identifiant de type CardType.
+    /// Initialize a new instance of the Card class with a CardType identifier.
     /// </remarks>
     /// <param name="id"></param>
     public sealed class Card : ObservableObject, IEquatable<Card>
     {
         /// <summary>
-        /// Obtient l'identifiant unique de la carte.
+        /// Get the Id of the card.
         /// </summary>
         public CardType Id { get; private init; }
 
@@ -23,7 +23,7 @@ namespace MemoryLib.Models
         private bool _isVisible = false;
 
         /// <summary>
-        /// Obtient ou définit un indicateur indiquant si la carte est face visible.
+        /// Get or define a flag indicating whether the card is face up.
         /// </summary>
         public bool IsVisible
         {
@@ -39,7 +39,7 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Obtient ou définit un indicateur indiquant si la carte a été trouvée.
+        /// Get or define a flag indicating whether the card has been found.
         /// </summary>
 
         private bool _isFound = false;
@@ -55,7 +55,7 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Retourne la carte, changeant son état de face cachée à face visible ou inversement.
+        /// Returns the card, changing it's state from face down to face up or vice versa.
         /// </summary>
         public void Flip()
         {
@@ -63,15 +63,15 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Renvoie une chaîne représentant l'identifiant de la carte.
+        /// Returns a string representing the Id of the card.
         /// </summary>
-        /// <returns>La chaîne de caractères représentant l'identifiant de la carte.</returns>
+        /// <returns>The string that carries the Id of the card.</returns>
         public override string ToString() => Id.ToString();
 
         /// <summary>
-        /// Retourne une carte si elle est face cachée.
+        /// Returns a card if it is face down.
         /// </summary>
-        /// <param name="card">La carte à retourner.</param>
+        /// <param name="card">The card that should be returned</param>
         public static void FlipCard(Card card)
         {
             if (!card.IsVisible)
@@ -79,18 +79,18 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Affiche un message dans la console lorsque deux cartes sont matchées.
+        /// Display a console message when two cards are matched.
         /// </summary>
-        /// <param name="card">La carte associée qui a été trouvée.</param>
+        /// <param name="card">The card that was found</param>
         public static void MatchCard(Card card)
         {
             Console.WriteLine($"Card {card.Id} matched.");
         }
 
         /// <summary>
-        /// Retourne une carte si elle est face visible.
+        /// Returns a card if it is face up.
         /// </summary>
-        /// <param name="card">La carte à remettre face cachée.</param>
+        /// <param name="card">The card to unflip and place as face down.</param>
         public static void UnFlipCard(Card card)
         {
             if (card.IsVisible)
@@ -98,20 +98,20 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Vérifie si deux cartes sont égales en référence.
+        /// Checks if two cards are equal by reference.
         /// </summary>
-        /// <param name="other">L'autre carte à comparer.</param>
-        /// <returns>Retourne true si les deux cartes sont identiques en référence, sinon false</returns>
+        /// <param name="other">The second card used to compare</param>
+        /// <returns>Returns true if the two cards have the same reference, else returns false</returns>
         public bool Equals(Card? other)
         {
             return Id == other?.Id;
         }
 
         /// <summary>
-        /// Vérifie si l'objet spécifié est égal à l'instance actuelle.
+        /// Check if the specified object is equal to the current instance.
         /// </summary>
-        /// <param name="obj">L'objet à comparer avec l'instance actuelle.</param>
-        /// <returns>Retourne true si les objets sont égaux, sinon false</returns>
+        /// <param name="obj">The object that will be compared with the current instance.</param>
+        /// <returns>True if the objects are equal, else False.</returns>
         public override bool Equals(object? obj)
         {
             if (obj is null) return false;
@@ -121,9 +121,9 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Calcule un code de hachage pour l'objet actuel.
+        /// Get the hash code for the current instance.
         /// </summary>
-        /// <returns>Le code de hachage de l'identifiant de la carte.</returns>
+        /// <returns>The hash code of the Id of the card.</returns>
         public override int GetHashCode() => Id.GetHashCode();
     }
 }

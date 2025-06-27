@@ -3,26 +3,26 @@ using MemoryLib.Managers.Interface;
 namespace MemoryLib.Models
 {
     /// <summary>
-    /// Représente le jeu de mémoire, comprenant deux joueurs, une grille de cartes, et la logique de gestion du jeu.
+    /// Represents a memory game with two players, a grid of cards, and game management logic.
     /// </summary>
     public class Game : ObservableObject
     {
         public GridSize GridSize { get; init; }
 
         /// <summary>
-        /// Obtient le premier joueur du jeu.
+        /// Get the first player
         /// </summary>
         public Player Player1 { get; }
 
         /// <summary>
-        /// Obtient le deuxième joueur du jeu.
+        /// Get the second player
         /// </summary>
         public Player Player2 { get; }
 
         private Player _currentPlayer;
 
         /// <summary>
-        /// Obtient ou définit le joueur actuellement actif dans le jeu.
+        /// Get the active player in the game.
         /// </summary>
         public Player CurrentPlayer 
         { 
@@ -36,17 +36,17 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Représente la grille de cartes du jeu.
+        /// Represents the grid of the game, containing the cards and their positions.
         /// </summary>
         public GridManager Grid { get; set; }
 
         /// <summary>
-        /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
+        /// Initialize an instance of a game with the selected players and a defined grid size.
         /// </summary>
-        /// <param name="player1">Le premier joueur.</param>
-        /// <param name="player2">Le deuxième joueur.</param>
-        /// <param name="g">La taille de la grille à utiliser dans le jeu.</param>
-        /// <exception >Lève une exception si l'un des joueurs est null.</exception>
+        /// <param name="player1">Player 1</param>
+        /// <param name="player2">Player 2</param>
+        /// <param name="g">The grid size used for the game.</param>
+        /// <exception >Throws an exception if one of the players is null.</exception>
         public Game(Player player1, Player player2, GridSize g)
         {
             if (player1 is null)
@@ -74,12 +74,12 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Initialise une nouvelle instance du jeu avec des joueurs personnalisés et une taille de grille spécifiée.
+        /// Initialize an instance of a game with the selected players and a defined grid size.
         /// </summary>
-        /// <param name="player1">Le premier joueur.</param>
-        /// <param name="player2">Le deuxième joueur.</param>
-        /// <param name="g">La taille de la grille à utiliser dans le jeu.</param>
-        /// <exception >Lève une exception si l'un des joueurs est null.</exception>
+        /// <param name="player1">Player 1</param>
+        /// <param name="player2">Player 2</param>
+        /// <param name="g">The grid size used for the game.</param>
+        /// <exception >Throws an exception if one of the players is null.</exception>
         public Game(string player1, string player2, GridSize g)
         {
             if (player1 is null)
@@ -107,12 +107,12 @@ namespace MemoryLib.Models
         private int Round { get; set; }
 
         /// <summary>
-        /// Nombre de cartes restantes à découvrir dans le jeu.
+        /// Remaining cards count that were not found in the game.
         /// </summary>
         public int RemainingCardsCount { get; set; }
 
         /// <summary>
-        /// Change le joueur actif et passe au joueur suivant.
+        /// Change current player to the other player.
         /// </summary>
 
         public void SwitchPlayer()
@@ -125,20 +125,19 @@ namespace MemoryLib.Models
         }
 
         /// <summary>
-        /// Incrémente le nombre de rounds joués.
+        /// Increment the round count by one.
         /// </summary>
         public void AddRoundCount() => Round++;
 
         /// <summary>
-        /// Réduit le nombre de cartes restantes de deux lorsque deux cartes sont découvertes et correspondantes.
+        /// Reduce the remaining cards count by one pair (2 cards).
         /// </summary>
         public void ReduceCountByOnePair() => RemainingCardsCount -= 2;
 
         /// <summary>
-        /// Vérifie si le jeu est terminé (c'est-à-dire si toutes les cartes ont été trouvées).
+        /// Check if the game is over (i.e., all cards have been found).
         /// </summary>
-        /// <returns>Retourne true si le jeu est terminé sinon false.</returns>
-
+        /// <returns>Returns true if game is over and false if not.</returns>
         public bool IsGameOver() => RemainingCardsCount <= 0;
     }
 }

@@ -19,6 +19,7 @@ namespace MemoryJSONPersistence
             var serializableScores = new List<SerializableScore>();
             foreach (var score in scores)
             {
+
                 serializableScores.Add(new SerializableScore
                 {
                     NameTag = score.Player.NameTag,
