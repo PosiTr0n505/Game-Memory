@@ -4,31 +4,30 @@ using MemoryLib.Models;
 namespace MemoryLib.Managers
 {
     /// <summary>
-    /// Gère la logique principale du jeu, incluant les mouvements, le retournement des cartes, 
-    /// la gestion des tours, et la notification des changements sur le plateau.
+    /// Manages the main game logic, including moves, card flipping, turn management, and board change notifications.
     /// </summary>
     public class GameManager : IGameManager
     {
         /// <summary>
-        /// Délégué pour notifier les changements sur le plateau.
+        /// Delegate used to notify board changes.
         /// </summary>
-        /// <param name="sender">L'instance du gestionnaire de jeu qui déclenche l'événement.</param>
-        /// <param name="cards">La collection des cartes actuelles sur le plateau.</param>
+        /// <param name="sender">The instance of the game manager that triggers the event.</param>
+        /// <param name="cards">The collection of cards on the board at this instant.</param>
         public delegate void OnBoardChange(GameManager sender, IEnumerable<Card> cards);
 
         /// <summary>
-        /// Événement déclenché lorsque le plateau de jeu change (par exemple, après un tour).
+        /// Event triggered when the game board changes (e.g., after a turn).
         /// </summary>
         public event OnBoardChange? BoardChange;
 
         /// <summary>
-        /// Obtient le nombre total de mouvements effectués dans la partie.
+        /// Gets the total number of moves made in the game.
         /// </summary>
         public int Moves { get; private set; } = 0;
         private int currentscore = 0;
 
         /// <summary>
-        /// Le modèle de jeu associé à ce gestionnaire.
+        /// The game model associated with this manager.
         /// </summary>
         public Game Game { get; private init; }
 
@@ -39,7 +38,7 @@ namespace MemoryLib.Managers
         }
 
         /// <summary>
-        /// Incrémente le compteur de mouvements et met à jour le nombre de mouvements du joueur courant.
+        /// Increments the move counter and updates the current player's move count.
         /// </summary>
         private readonly CardManager _cardManager;
 
@@ -50,10 +49,10 @@ namespace MemoryLib.Managers
         }
 
         /// <summary>
-        /// Retourne une carte à la position spécifiée. Si la carte est face visible, elle est retournée face cachée, et pareil pour la deuxième.
+        /// Returns a card at the specified position. If the card is face up, it is flipped face down, and vice versa.
         /// </summary>
-        /// <param name="x">La coordonnée X de la carte sur la grille.</param>
-        /// <param name="y">La coordonnée Y de la carte sur la grille.</param>
+        /// <param name="x">The X coordinate of the card on the grid.</param>
+        /// <param name="y">The Y coordinate of the card on the grid.</param>
 
         public void FlipCard(int x, int y)
         {
@@ -65,13 +64,13 @@ namespace MemoryLib.Managers
         }
 
         /// <summary>
-        /// Exécute un tour de jeu en retournant deux cartes spécifiées et en regardant leur correspondance.
-        /// Met à jour le score et les états des cartes, puis notifie les changements sur le plateau.
+        /// Starts a new round by flipping two cards and checking if they match.
+        /// Updates the score and card states, then notifies board changes.
         /// </summary>
-        /// <param name="x1">Coordonnée X de la première carte.</param>
-        /// <param name="y1">Coordonnée Y de la première carte.</param>
-        /// <param name="x2">Coordonnée X de la deuxième carte.</param>
-        /// <param name="y2">Coordonnée Y de la deuxième carte.</param>
+        /// <param name="x1">The X coordinate of the first card on the grid.</param>
+        /// <param name="y1">The Y coordinate of the first card on the grid.</param>
+        /// <param name="x2">The X coordinate of the second card on the grid.</param>
+        /// <param name="y2">The Y coordinate of the second card on the grid.</param>
         public void PlayRound(int x1, int y1, int x2, int y2)
         {
             Card c1, c2;
@@ -100,25 +99,25 @@ namespace MemoryLib.Managers
         }
 
         /// <summary>
-        /// Indique si la partie est terminée.
+        /// Indicates if the game is over.
         /// </summary>
-        /// <returns>True si la partie est terminée sinon false.</returns>
+        /// <returns>True if the game is over, else false.</returns>
         public bool IsGameOver() => Game?.IsGameOver() ?? false;
 
         /// <summary>
-        /// Met à jour le score courant en ajoutant la valeur spécifiée.
+        /// Updates the current score by adding the specified value.
         /// </summary>
-        /// <param name="score">Le score à ajouter.</param>
-        /// <returns>Le nouveau score total.</returns>
+        /// <param name="score">The score we wanna add.</param>
+        /// <returns>The updated total score.</returns>
         public int UpdateScore(int score) => currentscore += score;
 
         /// <summary>
-        /// Change le joueur actif.
+        /// Changes the active player to the next player in the game.
         /// </summary>
         public void SwitchPlayers() => Game?.SwitchPlayer();
 
         /// <summary>
-        /// Cache toutes les cartes du plateau (retourne face cachée).
+        /// Hides all cards on the board by flipping them face down.
         /// </summary>
         public void HideCards() => Game.Grid.HideCards();
     }
